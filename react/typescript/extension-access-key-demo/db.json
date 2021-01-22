@@ -1,0 +1,19 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "A simple post",
+      "author": "Anthony Mouse"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "A simple comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "Anthony Mouse"
+  }
+}

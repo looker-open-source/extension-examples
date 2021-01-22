@@ -1,0 +1,36 @@
+{
+  "label": "Extension Access Key Demo",
+  "category_label": "Applications",
+  "branding": {
+    "image_uri": "https://marketplace-api.looker.com/app-icons/icon_kitchensink.svg",
+    "tagline": "How to add an access key to an Extension.",
+    "brand_color": "#FF7A00"
+  },
+  "models": [
+    {
+      "name": "extension-accesskey-demo",
+      "connection_constant": "CONNECTION_NAME"
+    }
+  ],
+  "constants": {
+    "CONNECTION_NAME": {
+      "description": "Connection Description",
+      "label": "Connection Name",
+      "value_constraint": "connection"
+    }
+  },
+  "user_attributes": {
+    "show_configuration_editor": {
+      "label": "Show configuration editor",
+      "type": "yesno",
+      "default_value": "no"
+    },
+    "access_key": {
+      "label": "Extension access key",
+      "type": "string",
+      "required": true,
+      "value_is_hidden": true,
+      "hidden_value_domain_whitelist": "http://127.0.0.1:3000/*"
+    }
+  }
+}
