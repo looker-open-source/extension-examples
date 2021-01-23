@@ -1,0 +1,8 @@
+.DS_STORE
+node_modules
+.npmrc
+dist
+.cache
+.vscode
+.idea
+yarn-error.log
