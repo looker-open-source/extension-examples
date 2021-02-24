@@ -52,7 +52,6 @@ export const HelloWorld = () => {
           </Text>
         </Space>
       </ComponentsProvider>
-      )}
     </>
   )
 }
