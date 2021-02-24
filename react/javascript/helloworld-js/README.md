@@ -1,6 +1,6 @@
-# Looker Extension Hello World (JavaScript)
+# Looker Extension Hello World (React & JavaScript)
 
-This repository demonstrates a bare bones Looker extension using Javascript
+This repository demonstrates a bare bones Looker extension using Javascript.
 
 It uses [React](https://reactjs.org/) and Javascript for writing your extension, the [React Extension SDK](https://github.com/looker-open-source/extension-sdk-react) for interacting with Looker, [Looker Components](https://components.looker.com) for UI, and [Webpack](https://webpack.js.org/) for building your code.
 
@@ -16,7 +16,7 @@ It uses [React](https://reactjs.org/) and Javascript for writing your extension,
 2. Navigate (`cd`) to the template directory on your system
 
    ```
-   cd extension-examples
+   cd extension-examples/react/javascript/helloworld-js
    ```
 
 3. Install the dependencies with [Yarn](https://yarnpkg.com/).
