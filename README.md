@@ -16,12 +16,12 @@ Custom applications and tools created with the extension framework can be access
 ## Examples
 We currently have examples for:
 * [React](https://github.com/looker-open-source/extension-examples/tree/master/react)
-    * [Typescript](https://github.com/looker-open-source/extension-examples/tree/master/react/typescript)
-    * [Javascript](https://github.com/looker-open-source/extension-examples/tree/master/javascript)
-    * [Typescript & Redux](https://github.com/looker-open-source/extension-examples/tree/master/react/typescript/looks-query-redux)
-* [Vanilla (no react)](https://github.com/looker-open-source/extension-examples/tree/master/vanilla)
-    * [Javascript](https://github.com/looker-open-source/extension-examples/tree/master/vanilla/counter-js)
-    * [Typescript](https://github.com/looker-open-source/extension-examples/tree/master/vanilla/counter-ts)
+    * [Typescript](https://github.com/looker-open-source/extension-examples/tree/main/react/typescript)
+    * [Javascript](https://github.com/looker-open-source/extension-examples/tree/main/javascript)
+    * [Typescript & Redux](https://github.com/looker-open-source/extension-examples/tree/main/react/typescript/looks-query-redux)
+* [Vanilla (no react)](https://github.com/looker-open-source/extension-examples/tree/main/vanilla)
+    * [Javascript](https://github.com/looker-open-source/extension-examples/tree/main/vanilla/counter)
+    * [Typescript](https://github.com/looker-open-source/extension-examples/tree/main/vanilla/counter-ts)
 
 There are different types of examples present. Each language/framework has a very simple "Hello World" style example that is meant to be used as a template or starting point to make your initial configuration easier.
 
