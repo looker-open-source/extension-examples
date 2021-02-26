@@ -15,19 +15,19 @@ Custom applications and tools created with the extension framework can be access
 
 ## Examples
 We currently have examples for:
-* React
-    * Typescript
-    * Javascript
-    * Typescript & Redux
+* [React](https://github.com/looker-open-source/extension-examples/tree/master/react)
+    * [Typescript](https://github.com/looker-open-source/extension-examples/tree/master/react/typescript)
+    * [Javascript](https://github.com/looker-open-source/extension-examples/tree/master/javascript)
+    * [Typescript & Redux](https://github.com/looker-open-source/extension-examples/tree/master/react/typescript/looks-query-redux)
 * Vanilla (no react)
-    * Javascript
-    * Typescript
+    * [Javascript](https://github.com/looker-open-source/extension-examples/tree/master/vanilla/counter-js)
+    * [Typescript](https://github.com/looker-open-source/extension-examples/tree/master/vanilla/counter-ts)
 
 There are different types of examples present. Each language/framework has a very simple "Hello World" style example that is meant to be used as a template or starting point to make your initial configuration easier.
 
-For React & Typescript, there are some more complex examples present including a "Kitchen Sink" example intended to be a reference implementation for nearly all possible Extension functionality. It should not be used as a starting point or template, rather as an encyclopedia.
+For React & Typescript, there are some more complex examples present including a "[Kitchen Sink](https://github.com/looker-open-source/extension-examples/tree/master/react/typescript/kitchensink)" example intended to be a reference implementation for nearly all possible Extension functionality. It should not be used as a starting point or template, rather as an encyclopedia.
 
-For those seeking to build monetized or otherwise gated extensions, the react/typescript/access-key-demo extension will be of interest!
+For those seeking to build monetized or otherwise gated extensions, the [access-key-demo]((https://github.com/looker-open-source/extension-examples/tree/master/react/typescript/access-key-demo)) extension will be of interest!
 
 ## Running the examples
 Each example directory has a README.md that details how to run that specific example. You should follow the specific examples for each, but the general workflow is:
