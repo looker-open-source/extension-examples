@@ -24,10 +24,11 @@
 
  */
 
-const base = require('../../webpack.base.config')(__dirname)
+const base = require('./webpack.base.config')
 
 module.exports = {
   ...base,
+  mode: 'development',
   devServer: {
     historyApiFallback: true,
     publicPath: 'http://localhost:8080/',
