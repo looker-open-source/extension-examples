@@ -27,7 +27,7 @@ There are different types of examples present. Each language/framework has a ver
 
 For React & Typescript, there are some more complex examples present including a "[Kitchen Sink](https://github.com/looker-open-source/extension-examples/tree/master/react/typescript/kitchensink)" example intended to be a reference implementation for nearly all possible Extension functionality. It should not be used as a starting point or template, rather as an encyclopedia.
 
-For those seeking to build monetized or otherwise gated extensions, the [access-key-demo]((https://github.com/looker-open-source/extension-examples/tree/master/react/typescript/access-key-demo)) extension will be of interest!
+For those seeking to build monetized or otherwise gated extensions, the [access-key-demo](https://github.com/looker-open-source/extension-examples/tree/master/react/typescript/access-key-demo) extension will be of interest!
 
 ## Running the examples
 Each example directory has a README.md that details how to run that specific example. You should follow the specific examples for each, but the general workflow is:
