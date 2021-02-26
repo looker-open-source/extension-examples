@@ -19,7 +19,7 @@ We currently have examples for:
     * [Typescript](https://github.com/looker-open-source/extension-examples/tree/master/react/typescript)
     * [Javascript](https://github.com/looker-open-source/extension-examples/tree/master/javascript)
     * [Typescript & Redux](https://github.com/looker-open-source/extension-examples/tree/master/react/typescript/looks-query-redux)
-* Vanilla (no react)
+* [Vanilla (no react)](https://github.com/looker-open-source/extension-examples/tree/master/vanilla)
     * [Javascript](https://github.com/looker-open-source/extension-examples/tree/master/vanilla/counter-js)
     * [Typescript](https://github.com/looker-open-source/extension-examples/tree/master/vanilla/counter-ts)
 
