@@ -4,8 +4,8 @@
   "description": "",
   "main": "dist/bundle.js",
   "scripts": {
-    "start": "webpack-dev-server --hot --disable-host-check --port 8080",
-    "start-no-hot": "webpack-dev-server --no-inline --no-hot --port 8080",
+    "start": "webpack serve --hot --disable-host-check --port 8080",
+    "start-no-hot": "webpack serve --no-inline --no-hot --port 8080",
     "build": "export BABEL_ENV=build && tsc --skipLibCheck --noEmit && webpack --mode=production --config webpack.prod.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,6 +13,9 @@
   "license": "MIT",
   "engines": {
     "node": ">=10"
+  },
+  "resolutions": {
+    "@babel/runtime": "^7.12.5"
   },
   "dependencies": {
     "@looker/components": "^0.9.13",
@@ -35,9 +38,10 @@
     "react-router-dom": "^5.1.2",
     "styled-components": "^4.4.1",
     "styled-system": "^5.1.2",
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.9",
-    "webpack-dev-server": "^3.8.1"
+    "webpack": "^5.10.0",
+    "webpack-bundle-analyzer": "^4.2.0",
+    "webpack-cli": "^4.2.0",
+    "webpack-dev-server": "^3.10.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.4",
