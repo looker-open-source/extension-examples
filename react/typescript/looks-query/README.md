@@ -42,7 +42,7 @@ It uses [React](https://reactjs.org/) and [TypeScript](https://www.typescriptlan
 
     To run without hot module replacement run `yarn start-no-hot`
 
-5) Now log in to Looker and create a new project.
+5. Now log in to Looker and create a new project.
 
    This is found under **Develop** => **Manage LookML Projects** => **New LookML Project**.
 
