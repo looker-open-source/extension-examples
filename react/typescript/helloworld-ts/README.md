@@ -33,7 +33,7 @@ It uses [React](https://reactjs.org/) and [Typescript](https://typescriptlang.or
    yarn start
    ```
 
-   THe extension is now running and serving the JavaScript locally at http://localhost:8080/bundle.js.
+   The extension is now running and serving the JavaScript locally at http://localhost:8080/bundle.js.
 
 5) Log in to Looker and create a new project.
 
