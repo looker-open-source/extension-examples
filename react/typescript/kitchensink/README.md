@@ -15,9 +15,18 @@ This version of the Kitchen sink requires Looker 7.9 or above.
 
 ## Getting Started for Development
 
-1. Clone or download a copy of this template to your development machine
+1. Clone or download a copy of this template to your development machine, if you haven't already cloned the entire repo.
+
+   ```
+   # cd ~/ Optional. your user directory is usually a good place to git clone to.
+   git clone git@github.com:looker-open-source/extension-examples.git
+   ```
 
 2. Navigate (`cd`) to the template directory on your system
+
+   ```
+   cd extension-examples/react/typescript/kitchensink
+   ```
 
 3. Install the dependencies with [Yarn](https://yarnpkg.com/).
 
@@ -35,7 +44,7 @@ This version of the Kitchen sink requires Looker 7.9 or above.
 
    Great! Your extension is now running and serving the JavaScript at http://localhost:8080/bundle.js.
 
-   > **Note well:** The webpack development server also supports https. To use, add the parameter --https to the start command
+   > **Note** The webpack development server also supports https. To use, add the parameter --https to the start command
    > `"start": "webpack serve --disable-host-check --https"`
    > Should you decide to use https, you should visit the bundle URL you are running as there will likely be a certificate warning. The development server runs with a self-signed SSL certificate, so you will need to accept this to allow your browser to connect to it.
 
@@ -50,25 +59,25 @@ This version of the Kitchen sink requires Looker 7.9 or above.
 
    You'll want to select "Blank Project" as your "Starting Point". You'll now have a new project with no files.
 
-   1. In your copy of the extension project you have `manifest.lkml` file.
+   1. In your copy of the extension project you have a `manifest.lkml` file.
 
    You can either drag & upload this file into your Looker project, or create a `manifest.lkml` with the same content. Change the `id`, `label`, or `url` as needed.
 
    ```
    application: kitchensink {
-     label: "Kitchen sink"
-     url: "http://localhost:8080/bundle.js"
-     entitlements: {
-        local_storage: yes
-        navigation: yes
-        new_window: yes
-        allow_forms: yes
-        allow_same_origin: yes
-        core_api_methods: ["all_connections","search_folders", "run_inline_query", "me", "all_looks", "run_look"]
-        external_api_urls: ["http://127.0.0.1:3000", "http://localhost:3000", "https://*.googleapis.com", "https://*.github.com", "https://REPLACE_ME.auth0.com"]
-        oauth2_urls: ["https://accounts.google.com/o/oauth2/v2/auth", "https://github.com/login/oauth/authorize", "https://dev-5eqts7im.auth0.com/authorize", "https://dev-5eqts7im.auth0.com/login/oauth/token", "https://github.com/login/oauth/access_token"]
-     }
-   }
+    label: "Kitchen sink"
+    url: "http://localhost:8080/bundle.js"
+    entitlements: {
+      local_storage: yes
+      navigation: yes
+      new_window: yes
+      use_form_submit: yes
+      use_embeds: yes
+      core_api_methods: ["all_connections","search_folders", "run_inline_query", "me", "all_looks", "run_look"]
+      external_api_urls: ["http://127.0.0.1:3000", "http://localhost:3000", "https://*.googleapis.com", "https://*.github.com", "https://REPLACE_ME.auth0.com"]
+      oauth2_urls: ["https://accounts.google.com/o/oauth2/v2/auth", "https://github.com/login/oauth/authorize", "https://dev-5eqts7im.auth0.com/authorize", "https://dev-5eqts7im.auth0.com/login/oauth/token", "https://github.com/login/oauth/access_token"]
+    }
+  }
    ```
 
 The manifest includes a reference to the `oauth2_url https://REPLACE_ME.auth0.com`. This URL needs to be obtained from Auth0 and is explained later in this document.
@@ -86,8 +95,24 @@ The manifest includes a reference to the `oauth2_url https://REPLACE_ME.auth0.co
 8. Commit your changes and deploy your them to production through the Project UI.
 
 9. Reload the page and click the `Browse` dropdown menu. You should see your extension in the list.
-   - The extension will load the JavaScript from the `url` you provided in the `application` definition/
-   - Reloading the extension page will bring in any new code changes from the extension template (webpack's hot reloading is not currently supported).
+   - The extension will load the JavaScript from the `url` provided in the `application` definition. By default, this is http://localhost:8080/bundle.js. If you change the port your server runs on in the package.json, you will need to also update it in the manifest.lkml.
+  - Refreshing the extension page will bring in any new code changes from the extension template, although some changes will hot reload.
+
+10. Use with an access key requires a bit more setup. First, create a .env file in the `extension-examples/react/typescript/access-key-demo` directory with the following entries. Use a password generator to create the values. These values should be set prior to starting the development and data servers. **Do NOT store the .env file in your source code repository.**
+
+```
+CUSTOM_CLIENT_SECRET=
+GOOGLE_CLIENT_ID=
+GOOGLE_API_KEY=
+GITHUB_CLIENT_ID=
+AUTH0_CLIENT_ID=
+AUTH0_BASE_URL=
+POSTS_SERVER_URL=http://127.0.0.1:3000
+```
+
+POSTS_SERVER_URL is the URL of the data server.
+
+See the "External API Functions" section for more information on CUSTOM_CLIENT_SECRET and other variables.
 
 ## Extension Entitlements
 
@@ -152,25 +177,10 @@ yarn data-server
 
 An error message will be displayed if the server is not running OR if the required entitlements are not defined.
 
-#### Client and API key setup
-
-Create a .env file with the following entries. The values are explained later in the document. These values should be set prior to starting the development and data servers. Do NOT store the .env file in your source code repository.
-
-```
-CUSTOM_CLIENT_SECRET=
-GOOGLE_CLIENT_ID=
-GOOGLE_API_KEY=
-GITHUB_CLIENT_ID=
-AUTH0_CLIENT_ID=
-AUTH0_BASE_URL=
-POSTS_SERVER_URL=http://127.0.0.1:3000
-```
-
-POSTS_SERVER_URL is the URL of the data server.
 
 ##### Custom API setup
 
-The custom client secret can be any value. It is NOT used in the extension but is used by the demo data server to validate whether a user is authorized the data server (note that the implemention is exceedingly simplistic and is just used for demo purposes). The client secret should be added to the `.env` file so that the data server can do a simple check.
+The custom client secret in .env can be any value. It is NOT used in the extension but is used by the demo data server to validate whether a user is authorized the data server (note that the implemention is exceedingly simplistic and is just used for demo purposes). The client secret should be added to the `.env` file so that the data server can do a simple check.
 
 ```
 CUSTOM_CLIENT_SECRET=
@@ -351,6 +361,8 @@ const auth0Signin = async () => {
 
 ## Code Splitting
 
+Code-Splitting is a feature that can create *multiple* bundles rather than just one bundle.js, which can then be dynamically loaded on the fly. This can drastically reduce bundle size, and in turn, app performance. For more info on React & code splitting, see the [React Docs](https://reactjs.org/docs/code-splitting.html).
+
 Code splitting relies on `React.lazy` and `Suspense` to render dynamic imports of a component. The name of the generated JavaScript file can be influenced by specifying a webpackChunkName comment. Note that the `Suspense` component is rendered by the `KitchenSink` component.
 
 Example:
@@ -431,8 +443,8 @@ The process above requires your local development server to be running to load t
         local_storage: yes
         navigation: yes
         new_window: yes
-        allow_forms: yes
-        allow_same_origin: yes
+        use_form_submit: yes
+        use_embeds: yes
         core_api_methods: ["all_connections","search_folders", "run_inline_query", "me", "all_looks", "run_look"]
         external_api_urls: ["http://127.0.0.1:3000", "http://localhost:3000", "https://*.googleapis.com", "https://*.github.com", "https://REPLACE_ME.auth0.com"]
         oauth2_urls: ["https://accounts.google.com/o/oauth2/v2/auth", "https://github.com/login/oauth/authorize", "https://dev-5eqts7im.auth0.com/authorize", "https://dev-5eqts7im.auth0.com/login/oauth/token", "https://github.com/login/oauth/access_token"]
@@ -444,7 +456,7 @@ Note that the additional JavaScript files generated during the production build 
 
 ## Notes
 
-- The template uses Looker's component library and styled components. Neither of these libraries are required so you may remove and replace them with a component library of your own choice,
+- This template uses Looker's [component library](https://components.looker.com) and [styled components](https://styled-components.com/). Neither of these libraries are required, and you may remove and replace them with a component library of your own choice or simply build your UI from scratch.
 
 ## Related Projects
 
