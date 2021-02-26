@@ -53,6 +53,7 @@ It uses [React](https://reactjs.org/) and Javascript for writing your extension,
     entitlements: {
     core_api_methods: ["me"]
    }
+   }
    ```
 
 6. Create a `model` LookML file in your project. The name doesn't matter but the convention is to name it the same as the project— in this case, helloworld-js.
