@@ -8,9 +8,9 @@ The Looker extension framework is a development framework that significantly red
  * External platforms for your customers, such as customer portals for Powered By Looker (PBL) applications built with data in Looker
  * Targeted internal tools
  * Applications to embed in external applications
-<center>
- <img src="https://docs.looker.com/assets/images/dev-ef-full-screen-712.png" width="50%"/>
-</center>
+
+![extension image](https://docs.looker.com/assets/images/dev-ef-full-screen-712.png )
+
 Custom applications and tools created with the extension framework can be accessed from within Looker, allowing Looker to handle functions such as authentication, access control and permission management, and API access. This also lets you leverage other common developer resources, such as third-party API endpoints, within Looker.
 
 ## Examples
