@@ -86,12 +86,17 @@ The process above requires your local development server to be running to load t
 1. In your extension project directory on your development machine you can build the extension with `yarn build`.
 2. Drag and drop the generated `dist/bundle.js` file into the Looker project interface
 3. Modify your `manifest.lkml` to use `file` instead of `url`:
-    ```
-    application: my-great-extension {
-      label: "My Great Extension"
-      file: "bundle.js"
+
+   ```
+   application: look-runner {
+    label: "Look Runner"
+    url: "http://localhost:8080/bundle.js"
+    entitlements: {
+      core_api_methods: ["run_inline_query", "me", "all_looks", "run_look"]
     }
-    ```
+  }
+   ```
+
 ## Notes
 
 - Webpack's module splitting is not currently supported.
