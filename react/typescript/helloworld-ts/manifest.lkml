@@ -7,3 +7,4 @@ application: helloworld-ts {
   entitlements: {
   core_api_methods: ["me"]
 }
+}
