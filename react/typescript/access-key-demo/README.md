@@ -1,30 +1,41 @@
 # Looker Extension Access Key Demo Template (React & TypeScript)
 
-This repository demonstrates how to write a Looker extension that needs an access key to run.
+This repository demonstrates how to write a Looker extension that needs an access key to run. This is useful for building monetized extensions.
 
-It uses [React](https://reactjs.org/) and [TypeScript](https://www.typescriptlang.org/) for writing your extension, the [React Extension SDK](https://github.com/looker-open-source/extension-sdk-react) for interacting with Looker, and [Webpack](https://webpack.js.org/) for building your code.
-
+It uses [React](https://reactjs.org/) and [Typescript](https://typescriptlang.org) for writing your extension, the [React Extension SDK](https://github.com/looker-open-source/extension-sdk-react) for interacting with Looker, [Looker Components](https://components.looker.com) for UI, and [Webpack](https://webpack.js.org/) for building your code.
 This version of the template requires Looker 7.10 or above.
 
 ## Getting Started for Development
 
-1. Clone or download a copy of this template to your development machine
+1. Clone or download a copy of this template to your development machine, if you haven't already cloned the entire repo.
+
+   ```
+   # cd ~/ Optional, your user directory is usually a good place to git clone to.
+   git clone git@github.com:looker-open-source/extension-examples.git
+   ```
 
 2. Navigate (`cd`) to the template directory on your system
 
+   ```
+   cd extension-examples/react/typescript/access-key-demo
+   ```
+
 3. Install the dependencies with [Yarn](https://yarnpkg.com/).
 
-```
-yarn install
-```
+    ```
+    yarn install
+    ```
 
-You may need to update your Node version or use a [Node version manager](https://github.com/nvm-sh/nvm) to change your Node version.
+   > You may need to update your Node version or use a [Node version manager](https://github.com/nvm-sh/nvm) to change your Node version.
 
 4. Start the development server
 
-```
-yarn start
-```
+    ```
+    yarn start
+    ```
+
+  The extension is now running and serving the JavaScript locally at http://localhost:8080/bundle.js. Nice!
+
 
 5. Log in to Looker and create a new project.
 
@@ -42,17 +53,18 @@ yarn start
     label: "Extension Access Key Demo"
     url: "http://localhost:8080/bundle.js"
     entitlements: {
-      allow_forms: yes
+      use_form_submit: yes
       core_api_methods: ["me", "all_user_attributes", "delete_user_attribute", "create_user_attribute"]
       external_api_urls: ["http://127.0.0.1:3000", "http://localhost:3000"]
     }
   }
 ```
 
-6. Create a `model` LookML file in the project. The convention is to give the model name the same name as the extension.
+6. Create a `model` LookML file in your project. The name doesn't matter but the convention is to name it the same as the project— in this case, access-key-demo.
 
 - Add a connection in this model. It can be any connection, it doesn't matter which.
 - [Configure the model you created](https://docs.looker.com/data-modeling/getting-started/create-projects#configuring_a_model) so that it has access to the connection.
+We do this because Looker permissions data access via models— In order to grant / limit access to an extension, it must be associated with a model.
 
 7. Connect your new project to Git. You can do this multiple ways:
 
@@ -63,27 +75,23 @@ yarn start
 
 9. Reload the page and click the `Browse` dropdown menu. You should see the extension in the list.
 
-- The extension will load the JavaScript from the `url` you provided in the `application` definition/
-- Reloading the extension page will bring in any new code changes from the extension template although hot reload is supported.
+- The extension will load the JavaScript from the `url` provided in the `application` definition. By default, this is http://localhost:8080/bundle.js. If you change the port your server runs on in the package.json, you will need to also update it in the manifest.lkml.
+- Refreshing the extension page will bring in any new code changes from the extension template, although some changes will hot reload.
 
-10. The demonstration requires that a data server be running to validate the access key. Note that this is just sample code to demonstrate concepts. It is by no means production grade code. To start the server run the command:
-
-```
-yarn start-server
-```
-
-#### Access key setup
-
-Create a .env file with the following entries. Use a password generator to create the values. These values should be set prior to starting the development and data servers. Do NOT store the .env file in your source code repository.
+10. Use with an access key requires a bit more setup. First, create a .env file in the `extension-examples/react/typescript/access-key-demo` directory with the following entries. Use a password generator to create the values. These values should be set prior to starting the development and data servers. **Do NOT store the .env file in your source code repository.**
 
 ```
 ACCESS_KEY=
 JWT_TOKEN_SECRET=
 ```
 
-## Run the extension
+11. This access key demo requires a data server to be running in order to validate the access key. Note that this is just sample code to demonstrate concepts— It is by no means production grade code. To start the demo data server, run the following command from the `extension-examples/react/typescript/access-key-demo` directory:
 
-Use the browse menu to navigate to the extension. The access check will fail because it has not been added. Click the Configure button and enter the ACCESS_KEY added to the .env file. Navigate back to the Home page. The access key check should now work. Click the Verify JWT to validate the JWT token.
+```
+yarn start-server
+```
+
+12. Use the browse menu to navigate to the extension. The access check will fail because it has not yet been configured. Click the Configure button and enter the ACCESS_KEY that you previously set in the .env file. Navigate back to the Home page. The access key check should now work. Click the Verify JWT to validate the JWT token.
 
 ## Production Deployment
 
@@ -98,7 +106,7 @@ The process above requires your local development server to be running to load t
     label: "Extension Access Key Demo"
     file: "bundle.js"
     entitlements: {
-      allow_forms: yes
+      use_form_submit: yes
       core_api_methods: ["me", "all_user_attributes", "delete_user_attribute", "create_user_attribute"]
       external_api_urls: ["http://127.0.0.1:3000", "http://localhost:3000"]
     }
@@ -107,8 +115,8 @@ The process above requires your local development server to be running to load t
 
 ## Notes
 
-- Webpack's module splitting is not currently supported.
-- The template uses Looker's component library and styled components. Neither of these libraries are required so you may remove and replace them with a component library of your own choice,
+- Webpack's module splitting is not currently supported in this template.
+- This template uses Looker's [component library](https://components.looker.com) and [styled components](https://styled-components.com/). Neither of these libraries are required, and you may remove and replace them with a component library of your own choice or simply build your UI from scratch.
 
 ## Production Implementation Details
 
@@ -126,14 +134,14 @@ The process above requires your local development server to be running to load t
 
   #### Manifest file
 
-  Note that the manifest.lkml is slightlyt different from the manifest described above as it contains a LookML constant for the connection and two user attributes. Note that you should also change the data server external api url to point to the URL of your access check server.
+  Note that the manifest.lkml is slightly different from the manifest described above, as it contains a LookML constant for the connection and two user attributes. Note that you should also change the data server external_api_url to point to the URL of your deployed access check server.
 
   #### Marketplace json file
 
-  The marketplace.json contains the data needed by Looker's Marketplace to install an extension in a Looker instance. Note the connection constant which causes the installation process to prompt for a connection. Note the two user attributes, show_configuration_editor and access_key. The installation process will prompt for values for these which will be stored in user attributes for the Looker instance.
+  The marketplace.json contains the data needed by Looker's Marketplace to install an extension in a Looker instance. Note the connection constant which causes the installation process to prompt for a connection. Also note the two user attributes, show_configuration_editor and access_key. The installation process will prompt for values for these which will be stored in user attributes for the Looker instance.
 
-  - `show_configuration_editor` - When no, access to the coniguration dialog is disabled. In most cases, you should probably only configure the access key through the marketplace.
-  - `access_key` - the access key. Note that even though the access key does not have to be re-entered on the Marketplace update configuration or update version views, the secret ket remains safely in the Looker server and is never loaded in the browser once it has been created.
+  - `show_configuration_editor` - When no, access to the coniguration dialog is disabled. In most cases, you should probably set this to "no" and only configure the access key through the marketplace.
+  - `access_key` - The access key. Note that even though the access key does not have to be re-entered on the Marketplace when updating configuration or version, the secret key remains safely in the Looker server and is never loaded in the browser once it has been created.
 
 ## Related Projects
 
