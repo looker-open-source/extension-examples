@@ -8,7 +8,7 @@
     "clean": "rm -rf dist",
     "analyze": "export ANALYZE_MODE=static && yarn build",
     "build": "export BABEL_ENV=build && webpack --config webpack.prod.js",
-    "develop": "webpack serve --hot --port 8081 --disable-host-check --config webpack.develop.js",
+    "start": "webpack serve --hot --port 8080 --disable-host-check --config webpack.develop.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Looker",

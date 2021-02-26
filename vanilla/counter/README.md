@@ -4,26 +4,38 @@ This repository demonstrates a very basic extension (no react).
 
 ## Getting Started for Development
 
-1. Navigate (`cd`) to the directory on your system
+1. Clone or download a copy of this template to your development machine, if you haven't already cloned the entire repo.
+
+   ```
+   # cd ~/ Optional. your user directory is usually a good place to git clone to.
+   git clone git@github.com:looker-open-source/extension-examples.git
+   ```
+
+2. Navigate (`cd`) to the template directory on your system
+
+   ```
+   cd extension-examples/vanilla/counter
+   ```
+
 2. Install the dependencies with [Yarn](https://yarnpkg.com/).
 
    ```
-   yarn
+   yarn install
    ```
 
 3. Start the development server
 
    ```
-   yarn develop
+   yarn start
    ```
 
    The develop server is now running and serving the JavaScript at http://localhost:8080/bundle.js.
 
-4. Log in to Looker and create a new project.
+4. Now log in to Looker and create a new project.
 
    This is found under **Develop** => **Manage LookML Projects** => **New LookML Project**.
 
-   Select a "Blank Project" as the starting point.
+   You'll want to select "Blank Project" as your "Starting Point". You'll now have a new project with no files.
 
 5. Create a `manifest` file
 
@@ -34,7 +46,6 @@ This repository demonstrates a very basic extension (no react).
     application: extension-counter {
         label: "Extension Counter"
         url: "http://localhost:8080/bundle.js"
-        # file: "bundle.js"
         entitlements: {
           core_api_methods: ["me"]
         }
@@ -59,7 +70,7 @@ This repository demonstrates a very basic extension (no react).
 
 9. Reload the page and click the `Browse` dropdown menu. You should see the extension label in the list.
 
-   - The extension will load the JavaScript from the `url` you provided in the `application` definition.
+   - The extension will load the JavaScript from the `url` you provided in the `application` definition. By default, this is http://localhost:8080/bundle.js. If you change the port your server runs on in the package.json, you will need to also update it in the manifest.lkml.
    - Reloading the extension page will bring in any new code changes from the extension template.
 
 ## Deployment
@@ -74,7 +85,6 @@ The process above requires that the development server to be running to load the
     project_name: "extension-counter"
     application: extension-counter {
         label: "Extension Counter"
-        # url: "http://localhost:8080/bundle.js"
         file: "bundle.js"
         entitlements: {
           core_api_methods: ["me"]
