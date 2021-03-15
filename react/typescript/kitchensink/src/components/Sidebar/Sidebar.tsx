@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import { Box, MenuGroup, MenuItem, MenuItemProps } from '@looker/components'
+import { Box, MenuList, MenuItem, MenuItemProps } from '@looker/components'
 import * as React from 'react'
 import { Link as RouterLink, LinkProps } from 'react-router-dom'
 import styled from 'styled-components'
@@ -36,7 +36,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   return (
     <Box display="flex" flexDirection="column">
-      <MenuGroup type="none">
+      <MenuList type="none">
         <StyledRouterLink to={ROUTES.HOME_ROUTE}>
           <MenuItem icon="Home" current={route === ROUTES.HOME_ROUTE}>
             Home
@@ -105,7 +105,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             Configure
           </MenuItem>
         </StyledRouterLink>
-      </MenuGroup>
+      </MenuList>
     </Box>
   )
 }
