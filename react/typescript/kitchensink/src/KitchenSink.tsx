@@ -25,7 +25,7 @@
 import React, { useEffect, useState, useContext, Suspense } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { intersects } from 'semver'
-import { Looker40SDK } from '@looker/sdk/lib/4.0/methods'
+import { Looker40SDK } from '@looker/sdk'
 import {
   ComponentsProvider,
   Layout,
@@ -211,13 +211,6 @@ export const KitchenSink: React.FC<KitchenSinkProps> = ({
                         <MiscFunctions />
                       </Route>
                     )}
-                    <Route path={ROUTES.CONFIG_ROUTE}>
-                      <Configure
-                        configurationData={configurationData}
-                        updateConfigurationData={updateConfigurationData}
-                        canPersistContextData={canPersistContextData}
-                      />
-                    </Route>
                     <Route>
                       <Home />
                     </Route>

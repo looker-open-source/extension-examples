@@ -29,6 +29,6 @@ const EmbedExplore = lazy<any>(
   async () => import(/* webpackChunkName: "embed_explore" */ './EmbedExplore')
 )
 
-export const AsyncEmbedExplore: React.FC<EmbedProps> = ({ id }) => (
-  <EmbedExplore id={id} />
+export const AsyncEmbedExplore: React.FC<EmbedProps> = (props) => (
+  <EmbedExplore {...props} />
 )

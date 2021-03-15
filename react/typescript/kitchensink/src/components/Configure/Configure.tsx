@@ -32,8 +32,9 @@ import {
   Heading,
   SpaceVertical,
   ValidationMessages,
+  FieldTextArea,
 } from '@looker/components'
-import { Looker40SDK } from '@looker/sdk/lib/4.0/methods'
+import { Looker40SDK } from '@looker/sdk'
 import {
   ExtensionContext2,
   ExtensionContextData2,
@@ -134,6 +135,18 @@ const Configure: React.FC<ConfigureProps> = ({
 
   const changeLookId = (event: React.ChangeEvent<HTMLInputElement>) => {
     localConfigurationData.lookId = validateValue(event.currentTarget.value)
+    setLocalConfigurationData({ ...localConfigurationData })
+  }
+
+  const changeThoughtForTheDay = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    localConfigurationData.thoughtForTheDay = event.currentTarget.value
+    setLocalConfigurationData({ ...localConfigurationData })
+  }
+
+  const changeImageData = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    localConfigurationData.imageData = event.currentTarget.value
     setLocalConfigurationData({ ...localConfigurationData })
   }
 
@@ -249,6 +262,21 @@ const Configure: React.FC<ConfigureProps> = ({
           value={localConfigurationData.lookId}
           onChange={changeLookId}
         />
+        <FieldTextArea
+          label="Thought for the day"
+          name="thoughtForTheDay"
+          value={localConfigurationData.thoughtForTheDay || ''}
+          onChange={changeThoughtForTheDay}
+        />
+        <FieldTextArea
+          label="Image data"
+          name="imageData"
+          value={localConfigurationData.imageData || ''}
+          onChange={changeImageData}
+        />
+        {localConfigurationData.imageData && (
+          <img src={localConfigurationData.imageData} />
+        )}
         <Button disabled={!!validationMessages}>Update configuration</Button>
       </Form>
       {canPersistContextData && (

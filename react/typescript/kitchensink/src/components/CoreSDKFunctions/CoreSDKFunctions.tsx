@@ -28,7 +28,7 @@ import { useLocation } from 'react-router-dom'
 import { Heading, Box, ButtonOutline, TextArea } from '@looker/components'
 import { SandboxStatus } from '../SandboxStatus'
 import { getCoreSDK2 } from '@looker/extension-sdk-react'
-import { Looker40SDK } from '@looker/sdk/lib/4.0/methods'
+import { Looker40SDK } from '@looker/sdk'
 
 const CoreSDKFunctions = () => {
   const [imageData, setImageData] = useState<string>()

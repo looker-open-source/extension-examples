@@ -36,7 +36,7 @@ import {
   Form,
   Text,
 } from '@looker/components'
-import { Looker40SDK } from '@looker/sdk/lib/4.0/methods'
+import { Looker40SDK } from '@looker/sdk'
 import {
   ExtensionContext2,
   ExtensionContextData2,
@@ -250,7 +250,9 @@ export const DataServerDemo: React.FC<DataServerDemoProps> = ({
           <Button disabled={title.length === 0}>Create Post</Button>
         </Form>
       </Box>
-      <DataTable columns={postsColumns}>{postsItems}</DataTable>
+      <DataTable columns={postsColumns} caption="Posts">
+        {postsItems}
+      </DataTable>
     </>
   )
 }

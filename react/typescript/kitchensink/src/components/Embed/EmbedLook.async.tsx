@@ -29,6 +29,6 @@ const EmbedLook = lazy<any>(
   async () => import(/* webpackChunkName: "embed_look" */ './EmbedLook')
 )
 
-export const AsyncEmbedLook: React.FC<EmbedProps> = ({ id }) => (
-  <EmbedLook id={id} />
+export const AsyncEmbedLook: React.FC<EmbedProps> = (props) => (
+  <EmbedLook {...props} />
 )

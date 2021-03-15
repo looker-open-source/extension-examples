@@ -29,6 +29,6 @@ const Configure = lazy<any>(
   async () => import(/* webpackChunkName: "configure" */ './Configure')
 )
 
-export const AsyncConfigure: React.FC<ConfigureProps> = ({
-  configurationData,
-}) => <Configure configurationData={configurationData} />
+export const AsyncConfigure: React.FC<ConfigureProps> = (props) => (
+  <Configure {...props} />
+)

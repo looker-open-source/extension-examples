@@ -24,7 +24,7 @@
 
 import React, { useCallback, useContext } from 'react'
 import { LookerEmbedSDK, LookerEmbedLook } from '@looker/embed-sdk'
-import { Looker40SDK } from '@looker/sdk/lib/4.0/methods'
+import { Looker40SDK } from '@looker/sdk'
 import {
   ExtensionContext2,
   ExtensionContextData2,

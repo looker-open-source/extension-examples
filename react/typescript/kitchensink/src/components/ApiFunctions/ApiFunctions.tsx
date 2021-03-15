@@ -25,7 +25,7 @@
 import React, { useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Heading, Box, ButtonOutline, TextArea } from '@looker/components'
-import { Looker40SDK } from '@looker/sdk/lib/4.0/methods'
+import { Looker40SDK } from '@looker/sdk'
 import {
   ExtensionContext2,
   ExtensionContextData2,

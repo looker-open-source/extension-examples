@@ -30,6 +30,6 @@ const EmbedDashboard = lazy<any>(
     import(/* webpackChunkName: "embed_dashboard" */ './EmbedDashboard')
 )
 
-export const AsyncEmbedDashboard: React.FC<EmbedProps> = ({ id }) => (
-  <EmbedDashboard id={id} />
+export const AsyncEmbedDashboard: React.FC<EmbedProps> = (props) => (
+  <EmbedDashboard {...props} />
 )

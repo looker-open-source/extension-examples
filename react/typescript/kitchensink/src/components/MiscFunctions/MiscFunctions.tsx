@@ -31,7 +31,7 @@ import {
   SpaceVertical,
   TextArea,
 } from '@looker/components'
-import { Looker40SDK } from '@looker/sdk/lib/4.0/methods'
+import { Looker40SDK } from '@looker/sdk'
 import {
   ExtensionContext2,
   ExtensionContextData2,
@@ -69,6 +69,15 @@ const MiscFunctions: React.FC<MiscFunctionsProps> = () => {
     createAndSubmitForm()
   }
 
+  const openWindowClick = () => {
+    try {
+      window.open('https://example.com', '_blank')
+      updateMessages('Attempt to open window succeded. This should not happen!')
+    } catch (err) {
+      updateMessages('Attempt to open window failed. As expected!')
+    }
+  }
+
   const clearMessagesClick = () => {
     setMessages('')
   }
@@ -100,6 +109,13 @@ const MiscFunctions: React.FC<MiscFunctionsProps> = () => {
           </Paragraph>
           <ButtonOutline mt="small" onClick={navigateAwayClick}>
             Change extension window location
+          </ButtonOutline>
+          <Paragraph>
+            The extension framework prevents you from opening windows directly.
+            Clicking the button below attempts to this and should fail.
+          </Paragraph>
+          <ButtonOutline mt="small" onClick={openWindowClick}>
+            Attempt to open window directly (should fail)
           </ButtonOutline>
           <ButtonOutline mt="small" onClick={clearMessagesClick}>
             Clear messages

@@ -39,13 +39,14 @@ const Home: React.FC<HomeProps> = () => {
         </Paragraph>
         <Paragraph>
           The <b>Api Functions view</b> demonstrates the basic capabilties of
-          the extension, for example navigation and local storage access.
+          the extension framework, for example navigation and local storage
+          access.
         </Paragraph>
         <Paragraph>
-          The <b>Core Functions view</b> demonstrates using the Looker core SDK.
+          The <b>Core Functions view</b> demonstrates using the Looker SDK.
         </Paragraph>
         <Paragraph>
-          The <b>Embed Dashbbord view</b> demonstrates using the embed SDK to
+          The <b>Embed Dashboard view</b> demonstrates using the embed SDK to
           display an embedded dashboard in an extension.
         </Paragraph>
         <Paragraph>
@@ -66,16 +67,16 @@ const Home: React.FC<HomeProps> = () => {
         </Paragraph>
         <Paragraph>
           The <b>Miscellaneous view</b> demonstrates unclassifiable
-          functionality of the extension layout. An example is how the framework
-          handles an attempt to navigate away from the initial extension page
-          (it reloads the extension). It also shows a specialized logout button
-          for <b>Spartan</b> extensions (extensions that run without the Looker
-          chrome).
+          functionality of the extension framework. An example is how the
+          framework handles an attempt to navigate away from the initial
+          extension page (it reloads the extension). It also shows a specialized
+          logout button for <b>Spartan</b> extensions (extensions that run
+          without the Looker chrome).
         </Paragraph>
         <Paragraph>
           The <b>Configuration view</b> demonstrates how to use the extension
           context API to save configuration data. Basically views can be hidden
-          or shown. Default ids can be overridden for embedded views.
+          or shown. Default artifact ids can be overridden for embedded views.
         </Paragraph>
       </SpaceVertical>
     </>
