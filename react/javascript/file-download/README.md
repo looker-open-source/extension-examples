@@ -1,10 +1,10 @@
 # Looker Extension File Download Demo (React & JavaScript)
 
-This repository demonstrates a file download Looker extension.
+This example makes use of the use_downloads entitlement, added in Looker 21.6. You must be running Looker 21.6+ in order to use this entitlement.
 
 ## Getting Started for Development
 
-1. Clone the Looler extension examples repo.
+1. Clone the Looker extension examples repo.
 
    ```
    # cd ~/ Optional, your user directory is usually a good place to git clone to.
@@ -39,7 +39,7 @@ This repository demonstrates a file download Looker extension.
 
    1. The extension folder has a `manifest.lkml` file.
 
-   Either drag & upload this file into your Looker project, or create a `manifest.lkml` with the same content. Change the `id`, `label`, or `url` as needed.
+   Either drag & upload this file into your Looker project, or create a `manifest.lkml` with the same content. Change the `id`, `label`, or `url` as needed. Note that the `use_downloads` entitlement is available in Looker 21.6+.
 
    ```
    project_name: "filedownload"
