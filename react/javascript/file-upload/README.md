@@ -4,7 +4,7 @@ This repository demonstrates a file upload Looker extension.
 
 ## Getting Started for Development
 
-1. Clone the Looler extension examples repo.
+1. Clone the Looker extension examples repo.
 
    ```
    # cd ~/ Optional, your user directory is usually a good place to git clone to.
