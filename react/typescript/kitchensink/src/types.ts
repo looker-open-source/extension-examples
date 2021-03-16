@@ -38,4 +38,6 @@ export interface ConfigurationData {
   dashboardId: number | string
   exploreId: string
   lookId: number | string
+  thoughtForTheDay?: string
+  imageData?: string
 }

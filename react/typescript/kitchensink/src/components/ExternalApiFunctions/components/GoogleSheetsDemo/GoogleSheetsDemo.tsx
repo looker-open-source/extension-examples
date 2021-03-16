@@ -30,7 +30,7 @@ import {
   DataTableItem,
   DataTableCell,
 } from '@looker/components'
-import { Looker40SDK } from '@looker/sdk/lib/4.0/methods'
+import { Looker40SDK } from '@looker/sdk'
 import {
   ExtensionContext2,
   ExtensionContextData2,
@@ -168,7 +168,11 @@ export const GoogleSheetsDemo: React.FC<GoogleSheetsDemoProps> = ({
 
   return (
     <>
-      {sheetData && <DataTable columns={sheetColumns}>{sheetItems}</DataTable>}
+      {sheetData && (
+        <DataTable columns={sheetColumns} caption="Sheet items">
+          {sheetItems}
+        </DataTable>
+      )}
     </>
   )
 }
