@@ -1,6 +1,6 @@
 # Looker Extension Map in IFRAME Demo (React & JavaScript)
 
-This repository demonstrates using google maps in an IFRAME. The demo uses the [Google Maps Embed SDK and which requires an API key](https://developers.google.com/maps/documentation/embed/embedding-map).
+This repository demonstrates using google maps in an IFRAME. The demo uses the [Google Maps Embed SDK and which requires an API key](https://developers.google.com/maps/documentation/embed/embedding-map). Note that Looker 21.6+ requires that the `use_iframes` entitlement be set in the extension project manifest in order for the IFRAME to be created successfully. If the entitlement is not set, the extension will be reloaded whenever the extension attempts to create the IFRAME.
 
 ## Getting Started for Development
 
