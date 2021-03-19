@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2020 Looker Data Sciences, Inc.
+ * Copyright (c) 2019 Looker Data Sciences, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,40 +22,33 @@
  * THE SOFTWARE.
  */
 
-const path = require('path')
-const webpack = require('webpack')
-const env_config = require('./env_config')
-
-const PATHS = {
-  app: path.join(__dirname, 'src/index.js'),
-}
+const commonConfig = require('./webpack.config')
 
 module.exports = {
-  entry: {
-    app: PATHS.app,
-  },
+  ...commonConfig,
   output: {
-    path: __dirname + '/dist',
-    filename: 'bundle.js',
+    ...commonConfig.output,
+    publicPath: 'http://localhost:8080/',
   },
-  mode: 'production',
+  mode: 'development',
   module: {
     rules: [
+      ...commonConfig.module.rules,
       {
-        test: /\.(js|jsx)$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-        include: /src/,
-        sideEffects: false,
-      },
-      {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        test: /\.(js|jsx)?$/,
+        use: 'react-hot-loader/webpack',
+        include: /node_modules/,
       },
     ],
   },
-  resolve: {
-    extensions: ['.jsx', '.js'],
+  devServer: {
+    index: 'index.html',
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+      'Access-Control-Allow-Headers':
+        'X-Requested-With, content-type, Authorization',
+    },
   },
-  plugins: [new webpack.DefinePlugin(env_config())],
+  plugins: [...commonConfig.plugins],
 }

@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2020 Looker Data Sciences, Inc.
+ * Copyright (c) 2019 Looker Data Sciences, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,12 +22,12 @@
  * THE SOFTWARE.
  */
 
-const dotenv = require('dotenv')
+const commonConfig = require('./webpack.config')
 
-module.exports = () => {
-  dotenv.config()
-  return Object.keys(process.env).reduce((accum, current) => {
-    accum[`process.env.${current}`] = JSON.stringify(process.env[current])
-    return accum
-  }, {})
+module.exports = {
+  ...commonConfig,
+  mode: 'production',
+  optimization: {
+    chunkIds: 'named',
+  },
 }
