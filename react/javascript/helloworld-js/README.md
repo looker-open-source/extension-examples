@@ -14,7 +14,7 @@ This example demonstrates a bare bones Looker extension using Javascript.
 2. Navigate (`cd`) to the example directory on your system
 
    ```
-   cd extension-examples/react/javascript/helloworl-js
+   cd extension-examples/react/javascript/helloworld-js
    ```
 
 3. Install the dependencies with [Yarn](https://yarnpkg.com/).

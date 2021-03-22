@@ -1,7 +1,7 @@
 {
-  "name": "extension-filedownload",
+  "name": "helloworld-js",
   "version": "0.1.0",
-  "description": "Looker Extension File Download Demo",
+  "description": "Looker Extension Hello World JavaScript Demo",
   "main": "dist/bundle.js",
   "scripts": {
     "analyze": "export ANALYZE_MODE=static && yarn build",
