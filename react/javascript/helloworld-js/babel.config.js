@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2020 Looker Data Sciences, Inc.
+ * Copyright (c) 2019 Looker Data Sciences, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -31,9 +31,9 @@ module.exports = (api) => {
         '@babel/env',
         {
           targets: {
-            browsers: 'Last 2 Chrome versions, Firefox ESR',
-            node: '8.9',
+            esmodules: true,
           },
+          modules: false,
         },
       ],
       [
@@ -45,7 +45,13 @@ module.exports = (api) => {
     ],
     env: {
       build: {
-        ignore: ['**/*.test.js', '**/*.test.jsx', '__snapshots__', '__tests__'],
+        ignore: [
+          '**/*.d.ts',
+          '**/*.test.js',
+          '**/*.test.jsx',
+          '__snapshots__',
+          '__tests__',
+        ],
       },
     },
     ignore: ['node_modules'],

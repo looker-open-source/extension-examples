@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2020 Looker Data Sciences, Inc.
+ * Copyright (c) 2019 Looker Data Sciences, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,8 +23,9 @@
  */
 
 const path = require('path')
-const webpack = require('webpack')
-const env_config = require('./env_config')
+
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin
 
 const PATHS = {
   app: path.join(__dirname, 'src/index.js'),
@@ -37,9 +38,7 @@ module.exports = {
   output: {
     path: __dirname + '/dist',
     filename: 'bundle.js',
-    publicPath: 'http://localhost:8080/',
   },
-  mode: 'development',
   module: {
     rules: [
       {
@@ -47,30 +46,18 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/,
         include: /src/,
-      },
-      {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
-      },
-      {
-        test: /\.(js|jsx)?$/,
-        use: 'react-hot-loader/webpack',
-        include: /node_modules/,
+        sideEffects: false,
       },
     ],
   },
   resolve: {
     extensions: ['.jsx', '.js'],
+    fallback: { buffer: false },
   },
-  devServer: {
-    index: 'index.html',
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
-      'Access-Control-Allow-Headers':
-        'X-Requested-With, content-type, Authorization',
-    },
-  },
-  devtool: 'inline-source-map',
-  plugins: [new webpack.DefinePlugin(env_config())],
+  devtool: 'source-map',
+  plugins: [
+    new BundleAnalyzerPlugin({
+      analyzerMode: process.env.ANALYZE_MODE || 'disabled',
+    }),
+  ],
 }
