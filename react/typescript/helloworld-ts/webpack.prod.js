@@ -22,34 +22,12 @@
  * THE SOFTWARE.
  */
 
-const path = require('path')
-
-const PATHS = {
-  app: path.join(__dirname, 'src/index.tsx'),
-}
+const commonConfig = require("./webpack.config");
 
 module.exports = {
-  entry: {
-    app: PATHS.app,
+  ...commonConfig,
+  mode: "production",
+  optimization: {
+    chunkIds: "named",
   },
-  output: {
-    path: __dirname + '/dist',
-    filename: 'bundle.js',
-  },
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx|ts|tsx)$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-        include: /src/,
-        sideEffects: false,
-      },
-    ],
-  },
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
-    fallback: { buffer: false },
-  },
-  devtool: 'source-map',
-}
+};
