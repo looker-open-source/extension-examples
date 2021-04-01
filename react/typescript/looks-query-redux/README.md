@@ -105,8 +105,8 @@ The process above requires your local development server to be running to load t
 
 ## Related Projects
 
-- [Looker extension sdk react](https://github.com/looker-open-source/sdk-codegen/tree/main/packages/extension-sdk-react)
-- [Looker extension SDK](https://github.com/looker-open-source/sdk-codegen/tree/main/packages/extension-sdk)
+- [Looker Extension SDK React](https://github.com/looker-open-source/sdk-codegen/tree/main/packages/extension-sdk-react)
+- [Looker Extension SDK](https://github.com/looker-open-source/sdk-codegen/tree/main/packages/extension-sdk)
 - [Looker SDK](https://github.com/looker-open-source/sdk-codegen/tree/main/packages/sdk)
 - [Looker Embed SDK](https://github.com/looker-open-source/embed-sdk)
 - [Looker Components](https://components.looker.com/)
