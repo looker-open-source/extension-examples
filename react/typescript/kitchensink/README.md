@@ -9,7 +9,7 @@ To remove code splitting you will need to modify `KitchenSink.tsx`. Instructions
 This repository demonstrates functionality that is available to the Extension SDK. It can be used as a starting point for developing
 your own extensions.
 
-It uses [React](https://reactjs.org/) and [TypeScript](https://www.typescriptlang.org/) for writing your extension, the [React Extension SDK](https://github.com/looker-open-source/extension-sdk-react) for interacting with Looker, and [Webpack](https://webpack.js.org/) for building your code.
+It uses [React](https://reactjs.org/) and [TypeScript](https://www.typescriptlang.org/) for writing your extension, the [React Extension SDK](https://github.com/looker-open-source/sdk-codegen/tree/main/packages/extension-sdk-react) for interacting with Looker, and [Webpack](https://webpack.js.org/) for building your code.
 
 This version of the Kitchen sink requires Looker 7.9 or above.
 
@@ -98,7 +98,8 @@ The manifest includes a reference to the `oauth2_url https://REPLACE_ME.auth0.co
 
 9. Reload the page and click the `Browse` dropdown menu. You should see your extension in the list.
    - The extension will load the JavaScript from the `url` provided in the `application` definition. By default, this is http://localhost:8080/bundle.js. If you change the port your server runs on in the package.json, you will need to also update it in the manifest.lkml.
-  - Refreshing the extension page will bring in any new code changes from the extension template, although some changes will hot reload.
+
+- Refreshing the extension page will bring in any new code changes from the extension template, although some changes will hot reload.
 
 10. Use with an access key requires a bit more setup. First, create a .env file in the `extension-examples/react/typescript/access-key-demo` directory with the following entries. Use a password generator to create the values. These values should be set prior to starting the development and data servers. **Do NOT store the .env file in your source code repository.**
 
@@ -178,7 +179,6 @@ yarn data-server
 ```
 
 An error message will be displayed if the server is not running OR if the required entitlements are not defined.
-
 
 ##### Custom API setup
 
@@ -363,7 +363,7 @@ const auth0Signin = async () => {
 
 ## Code Splitting
 
-Code-Splitting is a feature that can create *multiple* bundles rather than just one bundle.js, which can then be dynamically loaded on the fly. This can drastically reduce bundle size, and in turn, app performance. For more info on React & code splitting, see the [React Docs](https://reactjs.org/docs/code-splitting.html).
+Code-Splitting is a feature that can create _multiple_ bundles rather than just one bundle.js, which can then be dynamically loaded on the fly. This can drastically reduce bundle size, and in turn, app performance. For more info on React & code splitting, see the [React Docs](https://reactjs.org/docs/code-splitting.html).
 
 Code splitting relies on `React.lazy` and `Suspense` to render dynamic imports of a component. The name of the generated JavaScript file can be influenced by specifying a webpackChunkName comment. Note that the `Suspense` component is rendered by the `KitchenSink` component.
 
@@ -464,11 +464,9 @@ Note that the additional JavaScript files generated during the production build 
 
 ## Related Projects
 
-- [Looker React extension template](https://github.com/looker-open-source/extension-template-react)
-- [Looker React/Redux extension template ](https://github.com/looker-open-source/extension-template-redux)
-- [Looker extension SDK](https://www.npmjs.com/package/@looker/extension-sdk)
-- [Looker extension SDK for React](https://www.npmjs.com/package/@looker/extension-sdk-react)
-- [Looker SDK](https://www.npmjs.com/package/@looker/sdk)
+- [Looker extension sdk react](https://github.com/looker-open-source/sdk-codegen/tree/main/packages/extension-sdk-react)
+- [Looker extension SDK](https://github.com/looker-open-source/sdk-codegen/tree/main/packages/extension-sdk)
+- [Looker SDK](https://github.com/looker-open-source/sdk-codegen/tree/main/packages/sdk)
 - [Looker Embed SDK](https://github.com/looker-open-source/embed-sdk)
 - [Looker Components](https://components.looker.com/)
 - [Styled components](https://www.styled-components.com/docs)

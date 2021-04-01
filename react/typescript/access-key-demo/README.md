@@ -2,7 +2,7 @@
 
 This repository demonstrates how to write a Looker extension that needs an access key to run. This is useful for building monetized extensions.
 
-It uses [React](https://reactjs.org/) and [Typescript](https://typescriptlang.org) for writing your extension, the [React Extension SDK](https://github.com/looker-open-source/extension-sdk-react) for interacting with Looker, [Looker Components](https://components.looker.com) for UI, and [Webpack](https://webpack.js.org/) for building your code.
+It uses [React](https://reactjs.org/) and [Typescript](https://typescriptlang.org) for writing your extension, the [React Extension SDK]((https://github.com/looker-open-source/sdk-codegen/tree/main/packages/extension-sdk-react) for interacting with Looker, [Looker Components](https://components.looker.com) for UI, and [Webpack](https://webpack.js.org/) for building your code.
 This version of the template requires Looker 7.10 or above.
 
 ## Getting Started for Development
@@ -22,20 +22,19 @@ This version of the template requires Looker 7.10 or above.
 
 3. Install the dependencies with [Yarn](https://yarnpkg.com/).
 
-    ```
-    yarn install
-    ```
+   ```
+   yarn install
+   ```
 
    > You may need to update your Node version or use a [Node version manager](https://github.com/nvm-sh/nvm) to change your Node version.
 
 4. Start the development server
 
-    ```
-    yarn start
-    ```
+   ```
+   yarn start
+   ```
 
-  The extension is now running and serving the JavaScript locally at http://localhost:8080/bundle.js. Nice!
-
+The extension is now running and serving the JavaScript locally at http://localhost:8080/bundle.js. Nice!
 
 5. Log in to Looker and create a new project.
 
@@ -64,7 +63,7 @@ This version of the template requires Looker 7.10 or above.
 
 - Add a connection in this model. It can be any connection, it doesn't matter which.
 - [Configure the model you created](https://docs.looker.com/data-modeling/getting-started/create-projects#configuring_a_model) so that it has access to the connection.
-We do this because Looker permissions data access via models— In order to grant / limit access to an extension, it must be associated with a model.
+  We do this because Looker permissions data access via models— In order to grant / limit access to an extension, it must be associated with a model.
 
 7. Connect your new project to Git. You can do this multiple ways:
 
@@ -145,11 +144,9 @@ The process above requires your local development server to be running to load t
 
 ## Related Projects
 
-- [Looker React extension template](https://github.com/looker-open-source/extension-template-react)
-- [Looker React/Redux extension template ](https://github.com/looker-open-source/extension-template-redux)
-- [Looker extension SDK](https://www.npmjs.com/package/@looker/extension-sdk)
-- [Looker extension SDK for React](https://www.npmjs.com/package/@looker/extension-sdk-react)
-- [Looker SDK](https://www.npmjs.com/package/@looker/sdk)
+- [Looker extension sdk react](https://github.com/looker-open-source/sdk-codegen/tree/main/packages/extension-sdk-react)
+- [Looker extension SDK](https://github.com/looker-open-source/sdk-codegen/tree/main/packages/extension-sdk)
+- [Looker SDK](https://github.com/looker-open-source/sdk-codegen/tree/main/packages/sdk)
 - [Looker Embed SDK](https://github.com/looker-open-source/embed-sdk)
 - [Looker Components](https://components.looker.com/)
 - [Styled components](https://www.styled-components.com/docs)

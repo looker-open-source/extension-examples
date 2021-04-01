@@ -2,8 +2,7 @@
 
 This repository serves as a template for creating a new Looker Extension using React and Redux.
 
-
-It uses [React](https://reactjs.org/) and [TypeScript](https://www.typescriptlang.org/) for writing your extension, the [React Extension SDK](https://github.com/looker-open-source/extension-sdk-react) for interacting with Looker, and [Webpack](https://webpack.js.org/) for building your code.
+It uses [React](https://reactjs.org/) and [Typescript](https://typescriptlang.org) for writing your extension, the [React Extension SDK]((https://github.com/looker-open-source/sdk-codegen/tree/main/packages/extension-sdk-react) for interacting with Looker, [Looker Components](https://components.looker.com) for UI, and [Webpack](https://webpack.js.org/) for building your code.
 
 ## Getting Started for Development
 
@@ -22,25 +21,27 @@ It uses [React](https://reactjs.org/) and [TypeScript](https://www.typescriptlan
 
 3. Install the dependencies with [Yarn](https://yarnpkg.com/).
 
-    ```
-    yarn install
-    ```
+   ```
+   yarn install
+   ```
 
-    > You may need to update your Node version or use a [Node version manager](https://github.com/nvm-sh/nvm) to change your Node version.
-4.  Start the development server
-    ```
-    yarn start
-    ```
+   > You may need to update your Node version or use a [Node version manager](https://github.com/nvm-sh/nvm) to change your Node version.
 
-    Great! Your extension is now running and serving the JavaScript at http://localhost:8080/bundle.js.
+4. Start the development server
 
-    > __Note:__ The webpack development server also supports https. To use, add the parameter --https to the start command
-    `"start": "webpack-dev-server --hot --disable-host-check --https"`
-    Should you decide to use https, you should visit the bundle URL you are running as there will likely be a certificate warning. The development server runs with a self-signed SSL certificate, so you will need to accept this to allow your browser to connect to it.
+   ```
+   yarn start
+   ```
 
-    The default yarn start command runs with hot module replacement working. Some changes will cause a full reload of the extension iframe. When this happens the extension framework connection will break. You should see an error. You will need to do a full page reload of the outer page.
+   Great! Your extension is now running and serving the JavaScript at http://localhost:8080/bundle.js.
 
-    To run without hot module replacement run `yarn start-no-hot`
+   > **Note:** The webpack development server also supports https. To use, add the parameter --https to the start command
+   > `"start": "webpack-dev-server --hot --disable-host-check --https"`
+   > Should you decide to use https, you should visit the bundle URL you are running as there will likely be a certificate warning. The development server runs with a self-signed SSL certificate, so you will need to accept this to allow your browser to connect to it.
+
+   The default yarn start command runs with hot module replacement working. Some changes will cause a full reload of the extension iframe. When this happens the extension framework connection will break. You should see an error. You will need to do a full page reload of the outer page.
+
+   To run without hot module replacement run `yarn start-no-hot`
 
 5) Now log in to Looker and create a new project.
 
@@ -59,9 +60,8 @@ It uses [React](https://reactjs.org/) and [TypeScript](https://www.typescriptlan
     entitlements: {
       core_api_methods: ["run_inline_query", "me", "all_looks", "run_look"]
     }
-  }
+   }
    ```
-
 
 6. Create a `model` LookML file in your project. The name doesn't matter. The model and connection won't be used, and in the future this step may be eliminated.
 
@@ -77,7 +77,8 @@ It uses [React](https://reactjs.org/) and [TypeScript](https://www.typescriptlan
 
 9. Reload the page and click the `Browse` dropdown menu. You should see your extension in the list.
    - The extension will load the JavaScript from the `url` provided in the `application` definition. By default, this is http://localhost:8080/bundle.js. If you change the port your server runs on in the package.json, you will need to also update it in the manifest.lkml.
-  - Refreshing the extension page will bring in any new code changes from the extension template, although some changes will hot reload.
+
+- Refreshing the extension page will bring in any new code changes from the extension template, although some changes will hot reload.
 
 ## Deployment
 
@@ -94,7 +95,7 @@ The process above requires your local development server to be running to load t
     entitlements: {
       core_api_methods: ["run_inline_query", "me", "all_looks", "run_look"]
     }
-  }
+   }
    ```
 
 ## Notes
@@ -104,9 +105,9 @@ The process above requires your local development server to be running to load t
 
 ## Related Projects
 
-- [Looker React extension template](https://github.com/looker-open-source/extension-template-react)
-- [Looker kitchensink extension template ](https://github.com/looker-open-source/extension-template-kitchensink)
-- [Looker extension SDK for React](https://www.npmjs.com/package/@looker/extension-sdk-react)
-- [Looker SDK](https://www.npmjs.com/package/@looker/sdk)
+- [Looker extension sdk react](https://github.com/looker-open-source/sdk-codegen/tree/main/packages/extension-sdk-react)
+- [Looker extension SDK](https://github.com/looker-open-source/sdk-codegen/tree/main/packages/extension-sdk)
+- [Looker SDK](https://github.com/looker-open-source/sdk-codegen/tree/main/packages/sdk)
+- [Looker Embed SDK](https://github.com/looker-open-source/embed-sdk)
 - [Looker Components](https://components.looker.com/)
 - [Styled components](https://www.styled-components.com/docs)

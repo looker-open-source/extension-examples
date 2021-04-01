@@ -2,7 +2,7 @@
 
 This repository demonstrates a bare bones Looker extension using Typescript.
 
-It uses [React](https://reactjs.org/) and [Typescript](https://typescriptlang.org) for writing your extension, the [React Extension SDK](https://github.com/looker-open-source/extension-sdk-react) for interacting with Looker, [Looker Components](https://components.looker.com) for UI, and [Webpack](https://webpack.js.org/) for building your code.
+It uses [React](https://reactjs.org/) and [Typescript](https://typescriptlang.org) for writing your extension, the [React Extension SDK](https://github.com/looker-open-source/sdk-codegen/tree/main/packages/extension-sdk-react) for interacting with Looker, [Looker Components](https://components.looker.com) for UI, and [Webpack](https://webpack.js.org/) for building your code.
 
 ## Getting Started for Development
 
@@ -60,7 +60,7 @@ It uses [React](https://reactjs.org/) and [Typescript](https://typescriptlang.or
 
 - Add a connection in this model.
 - [Configure the model you created](https://docs.looker.com/data-modeling/getting-started/create-projects#configuring_a_model) so that it has access to the selected connection.
-We do this because Looker permissions data access via models— In order to grant / limit access to an extension, it must be associated with a model.
+  We do this because Looker permissions data access via models— In order to grant / limit access to an extension, it must be associated with a model.
 
 7. Connect the project to Git. This can be done in multiple ways:
 
@@ -109,11 +109,9 @@ The process above describes how to run the extension for development. Once you'r
 
 ## Related Projects
 
-- [Looker React extension template](https://github.com/looker-open-source/extension-template-react)
-- [Looker React/Redux extension template ](https://github.com/looker-open-source/extension-template-redux)
-- [Looker extension SDK](https://www.npmjs.com/package/@looker/extension-sdk)
-- [Looker extension SDK for React](https://www.npmjs.com/package/@looker/extension-sdk-react)
-- [Looker SDK](https://www.npmjs.com/package/@looker/sdk)
+- [Looker extension sdk react](https://github.com/looker-open-source/sdk-codegen/tree/main/packages/extension-sdk-react)
+- [Looker extension SDK](https://github.com/looker-open-source/sdk-codegen/tree/main/packages/extension-sdk)
+- [Looker SDK](https://github.com/looker-open-source/sdk-codegen/tree/main/packages/sdk)
 - [Looker Embed SDK](https://github.com/looker-open-source/embed-sdk)
 - [Looker Components](https://components.looker.com/)
 - [Styled components](https://www.styled-components.com/docs)
