@@ -224,3 +224,5 @@ export const KitchenSink: React.FC<KitchenSinkProps> = ({
     </>
   )
 }
+
+export default KitchenSink
