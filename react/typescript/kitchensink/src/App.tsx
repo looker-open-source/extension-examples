@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  */
 
-import React, { useState } from 'react'
-import { KitchenSink } from './KitchenSink'
+import React, { useState, Suspense } from 'react'
+import { AsyncKitchenSink as KitchenSink } from './KitchenSink.async'
 import { ExtensionProvider2 } from '@looker/extension-sdk-react'
 import { hot } from 'react-hot-loader/root'
 import { Looker40SDK } from '@looker/sdk'
@@ -39,7 +39,9 @@ export const App: React.FC<{}> = hot(() => {
 
   return (
     <ExtensionProvider2 onRouteChange={onRouteChange} type={Looker40SDK}>
-      <KitchenSink route={route} routeState={routeState} />
+      <Suspense fallback={<></>}>
+        <KitchenSink route={route} routeState={routeState} />
+      </Suspense>
     </ExtensionProvider2>
   )
 })

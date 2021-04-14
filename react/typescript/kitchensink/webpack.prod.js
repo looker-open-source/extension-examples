@@ -28,5 +28,24 @@ module.exports = {
   ...commonConfig,
   optimization: {
     chunkIds: 'named',
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name(module) {
+            // break out vendors into their own vendor bundles.
+            // looker gets special treatment as combined component
+            // package large.
+            const context = module.context.includes('/@looker/')
+              ? module.context.replace('/@looker/', '/@looker-')
+              : module.context
+            const packageName = context.match(
+              /[\\/]node_modules[\\/](.*?)([\\/]|$)/
+            )[1]
+            return `vendor.${packageName.replace('@', '')}`
+          },
+        },
+      },
+    },
   },
 }
