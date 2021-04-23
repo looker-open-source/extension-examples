@@ -198,6 +198,20 @@ const ApiFunctions: React.FC<ApiFunctionsProps> = () => {
     }
   }
 
+  const writeToClipboardClick = async () => {
+    try {
+      await extensionSDK.clipboardWrite(
+        'https://trends.google.com/trends/trendingsearches/daily?geo=US'
+      )
+      updateMessages(
+        `Google's "I'm feeling lucky" search has been written to the clipboard. Paste into the browser URL to confirm.`
+      )
+    } catch (error) {
+      updateMessages(error)
+      console.error(error)
+    }
+  }
+
   const clearMessagesClick = () => {
     setMessages('')
   }
@@ -246,6 +260,9 @@ const ApiFunctions: React.FC<ApiFunctionsProps> = () => {
           </ButtonOutline>
           <ButtonOutline mt="small" onClick={resetUserAttributeClick}>
             Reset User Attribute
+          </ButtonOutline>
+          <ButtonOutline mt="small" onClick={writeToClipboardClick}>
+            Write to clipboard
           </ButtonOutline>
           <ButtonOutline mt="small" onClick={clearMessagesClick}>
             Clear messages
