@@ -1,6 +1,6 @@
 {
-  "name": "extension-template-kitchensink",
-  "version": "0.10.2",
+  "name": "extension-kitchensink",
+  "version": "0.11.0",
   "description": "Looker Extension SDK functionality demonstration",
   "main": "dist/bundle.js",
   "scripts": {
@@ -20,12 +20,16 @@
     "node": ">=10"
   },
   "dependencies": {
-    "@looker/components": "^0.18.0",
+    "@looker/components": "^1.1.3",
+    "@looker/icons": "1.1.3",
     "@looker/embed-sdk": "^1.6.0",
     "@looker/extension-sdk": "^21.4.2",
     "@looker/extension-sdk-react": "^21.4.2",
     "@looker/sdk": "^21.4.1",
     "@looker/sdk-rtl": "^21.0.12",
+    "@styled-icons/material": "10.28.0",
+    "@styled-icons/material-outlined": "10.28.0",
+    "@styled-icons/material-rounded": "10.28.0",
     "axios": "^0.21.1",
     "date-fns": "^2.12.0",
     "jsonwebtoken": "^8.5.1",

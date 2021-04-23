@@ -1273,6 +1273,13 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+"@babel/runtime@^7.10.5", "@babel/runtime@^7.12.13":
+  version "7.13.17"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.13.17.tgz#8966d1fc9593bf848602f0662d6b4d0069e3a7ec"
+  integrity sha512-NCdgJEelPTSh+FEFylhnP1ylq848l1z9t9N0j1Lfbcw0+KXGjsTvUmkxy+voLLXB5SOKMbLLx4jxYliGrYQseA==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/runtime@^7.12.0", "@babel/runtime@^7.13.6":
   version "7.13.10"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.13.10.tgz#47d42a57b6095f4468da440388fdbad8bebf0d7d"
@@ -1380,7 +1387,7 @@
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.2.tgz#8f03a22a04de437254e8ce8cc84ba39689288752"
   integrity sha512-HyYEUDeIj5rRQU2Hk5HTB2uHsbRQpF70nvMhVzi+VJR0X+xNEhjPui4/kBf3VeH/wqD28PT4sVOm8qqLjBrSZg==
 
-"@emotion/is-prop-valid@^0.8.1", "@emotion/is-prop-valid@^0.8.8":
+"@emotion/is-prop-valid@^0.8.1", "@emotion/is-prop-valid@^0.8.7", "@emotion/is-prop-valid@^0.8.8":
   version "0.8.8"
   resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-0.8.8.tgz#db28b1c4368a259b60a97311d6a952d4fd01ac1a"
   integrity sha512-u5WtneEAr5IDG2Wv65yhunPSMLIpuKsbuOktRojfrEiEvRyC85LgPMZI63cr7NUqT8ZIGdSVg8ZKGxIug4lXcA==
@@ -1416,27 +1423,30 @@
     debug "^2.2.0"
     es6-promise "^4.2.8"
 
-"@looker/components-providers@^0.18.0":
-  version "0.18.0"
-  resolved "https://registry.yarnpkg.com/@looker/components-providers/-/components-providers-0.18.0.tgz#faa8669cbf6b595145c56514bff742aa3120d0a2"
-  integrity sha512-ACmGkoEc6jseJkZ3C9rjpzqJAX6LDgrxw2Ocjaj5pXYMUjBbXnSbBTvY86P+Qpb8MOjv3bi6Sx+Rpy2VOQEDSA==
+"@looker/components-providers@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@looker/components-providers/-/components-providers-1.1.3.tgz#76a5b5ae0850eaffd1661f70be8fe622bc7fe0e9"
+  integrity sha512-EXIEZReWfQgT7CDF7svZsItK8P2GBFpZbASgcsaGr5ZGVDtI8Oey51PDcqSZNVIy6Ko2Fby8aAibngDgQ/W3TA==
   dependencies:
-    "@looker/design-tokens" "^0.18.0"
+    "@looker/design-tokens" "^1.1.3"
     i18next "19.9.1"
     lodash "^4.17.20"
     react-helmet-async "^1.0.7"
     react-i18next "11.8.8"
     tabbable "^5.1.6"
 
-"@looker/components@^0.18.0":
-  version "0.18.0"
-  resolved "https://registry.yarnpkg.com/@looker/components/-/components-0.18.0.tgz#7dbeede0efeba3eb866436ab25f2df9f92ca0627"
-  integrity sha512-fiv+FslQqXkzqeClICcXM4RVaR6dGxPxBiLLOniuXcrkMLijak+J2MVhtOrb+TtasPnfYIOCsU5YB7//eyi1EA==
+"@looker/components@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@looker/components/-/components-1.1.3.tgz#6d7d3d18e1367d0b6d9543f6dab21c7c8e952bd0"
+  integrity sha512-uojW5ufnWY/zt4ick6nkE0Z2Y2SLHH6+g9txgwGkKzZuGwNM+kOZA/aPF9Bi1jbCQroPGREWdN1/4PGHzpnDSA==
   dependencies:
-    "@looker/components-providers" "^0.18.0"
-    "@looker/design-tokens" "^0.18.0"
-    "@looker/icons" "^0.18.0"
+    "@looker/components-providers" "^1.1.3"
+    "@looker/design-tokens" "^1.1.3"
     "@popperjs/core" "^2.6.0"
+    "@styled-icons/material" "^10.28.0"
+    "@styled-icons/material-outlined" "^10.28.0"
+    "@styled-icons/material-rounded" "^10.28.0"
+    "@styled-icons/styled-icon" "^10.6.3"
     d3-color "^2.0.0"
     d3-hsv "^0.1.0"
     date-fns "^2.17.0"
@@ -1451,10 +1461,10 @@
     styled-system "^5.1.5"
     uuid "^8.3.2"
 
-"@looker/design-tokens@^0.18.0":
-  version "0.18.0"
-  resolved "https://registry.yarnpkg.com/@looker/design-tokens/-/design-tokens-0.18.0.tgz#274a9aea7dfbc1b09c933a2a68a2f8e13032b858"
-  integrity sha512-GNPkdR8urzZMGMwEPQVmmjKTO7vzFNArC9G9vVtmbu65zWeUHybiTQd6Tdtg+N4SHRH7f8lzYUAbfu88BBe7Kg==
+"@looker/design-tokens@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@looker/design-tokens/-/design-tokens-1.1.3.tgz#620ef2be3de589b64b92e76f379f194a97a3d46f"
+  integrity sha512-Is9GoNsXCWSvf32AQclBh8ynVs6F+RfJ22t6jBwYAvRpnLOb8VV+wqGjY1t2lZFSTTPEnM4JOr6I9H2EPgDLBA==
   dependencies:
     "@styled-system/props" "^5.1.5"
     "@styled-system/should-forward-prop" "5.1.5"
@@ -1495,10 +1505,12 @@
     request-promise-native "^1.0.8"
     semver "^7.3.4"
 
-"@looker/icons@^0.18.0":
-  version "0.18.0"
-  resolved "https://registry.yarnpkg.com/@looker/icons/-/icons-0.18.0.tgz#e5eeb620d7d57c79b07cff4b7077d75bb9beaa44"
-  integrity sha512-Dm4cKumTL6+a4yUJV5TnVpluLAK6TY4jsHUS8BBYMYzgnYS0D2gBqCe//u/xCipaAx2hKUhx8KO+R0X/HIq0hg==
+"@looker/icons@1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@looker/icons/-/icons-1.1.3.tgz#9693c031752eb0e327a9c6e3806781a9b4dedc5b"
+  integrity sha512-/RamQ6ZycMfcggQ7v1Dj9jF7Y/k9yEW4GrsvM3Zch4D2qWMVE0B0LamKhnGkaUF4P06XZO5m20jKbUJjABTiSA==
+  dependencies:
+    "@styled-icons/styled-icon" "^10.6.3"
 
 "@looker/sdk-rtl@^21.0.12":
   version "21.0.12"
@@ -1547,6 +1559,38 @@
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.14.0.tgz#9fb3a3cf3132328151f353de4632e01e52102bea"
   integrity sha512-9NET910DNaIPngYnLLPeg+Ogzqsi9uM4mSboU5y6p8S5DzMTVEsJZrawi+BoDNUVBa2DhJqQYUFvMDfgU062LQ==
+
+"@styled-icons/material-outlined@10.28.0", "@styled-icons/material-outlined@^10.28.0":
+  version "10.28.0"
+  resolved "https://registry.yarnpkg.com/@styled-icons/material-outlined/-/material-outlined-10.28.0.tgz#57d34c7a417bb79cf930bf1302aa8b463de1bcad"
+  integrity sha512-TXCYrBeR5YXDziNMDAO6ZpKVjWvWaWmhBvF/vTvL6sME5zazk9sToyRJ6i/+DZGNH8wD7+635e8hkZAYPp++/A==
+  dependencies:
+    "@babel/runtime" "^7.12.13"
+    "@styled-icons/styled-icon" "^10.6.0"
+
+"@styled-icons/material-rounded@10.28.0", "@styled-icons/material-rounded@^10.28.0":
+  version "10.28.0"
+  resolved "https://registry.yarnpkg.com/@styled-icons/material-rounded/-/material-rounded-10.28.0.tgz#d73fd9d2c981ca51b206e7fec7e5159486e2fbd9"
+  integrity sha512-qNnsrkdAwSaiakh7xPVVucP0XnDQ0UwaODpQ1cxASZ6+7XPJHsOxYd+VTTSn3h99Unzp4QJltrBaz//Ky6zSGw==
+  dependencies:
+    "@babel/runtime" "^7.12.13"
+    "@styled-icons/styled-icon" "^10.6.0"
+
+"@styled-icons/material@10.28.0", "@styled-icons/material@^10.28.0":
+  version "10.28.0"
+  resolved "https://registry.yarnpkg.com/@styled-icons/material/-/material-10.28.0.tgz#9437b6a0acffcefb578247f349c2972403334244"
+  integrity sha512-+401y79/qclNEMVbkAy98sJbBazeX/0k0DuPsULikAa+GDmmfzwk+xi9HloQa1Gsyc9/Zbnc5Hf7rFiJcukfbA==
+  dependencies:
+    "@babel/runtime" "^7.12.13"
+    "@styled-icons/styled-icon" "^10.6.0"
+
+"@styled-icons/styled-icon@^10.6.0", "@styled-icons/styled-icon@^10.6.3":
+  version "10.6.3"
+  resolved "https://registry.yarnpkg.com/@styled-icons/styled-icon/-/styled-icon-10.6.3.tgz#eae0e5e18fd601ac47e821bb9c2e099810e86403"
+  integrity sha512-/A95L3peioLoWFiy+/eKRhoQ9r/oRrN/qzbSX4hXU1nGP2rUXcX3LWUhoBNAOp9Rw38ucc/4ralY427UUNtcGQ==
+  dependencies:
+    "@babel/runtime" "^7.10.5"
+    "@emotion/is-prop-valid" "^0.8.7"
 
 "@styled-system/background@^5.1.2":
   version "5.1.2"
