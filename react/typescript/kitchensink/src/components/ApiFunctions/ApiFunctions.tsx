@@ -204,7 +204,7 @@ const ApiFunctions: React.FC<ApiFunctionsProps> = () => {
         'https://trends.google.com/trends/trendingsearches/daily?geo=US'
       )
       updateMessages(
-        "Googles I'm feeling lucky search has been written to the clipboard. Paste into the browser URL to confirm."
+        `Google's "I'm feeling lucky" search has been written to the clipboard. Paste into the browser URL to confirm.`
       )
     } catch (error) {
       updateMessages(error)
