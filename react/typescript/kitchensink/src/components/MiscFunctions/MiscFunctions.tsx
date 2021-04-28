@@ -86,6 +86,9 @@ const MiscFunctions: React.FC<MiscFunctionsProps> = () => {
     extensionSDK.spartanLogout()
   }
 
+  const hostType = extensionSDK.lookerHostData?.hostType
+  const spartanMode = !hostType || hostType === 'spartan'
+
   return (
     <>
       <Heading mt="xlarge">Miscellaneous Functions</Heading>
@@ -120,9 +123,11 @@ const MiscFunctions: React.FC<MiscFunctionsProps> = () => {
           <ButtonOutline mt="small" onClick={clearMessagesClick}>
             Clear messages
           </ButtonOutline>
-          <ButtonOutline mt="small" onClick={logout}>
-            Logout of Looker (only in spartan mode)
-          </ButtonOutline>
+          {spartanMode && (
+            <ButtonOutline mt="small" onClick={logout}>
+              Logout of Looker (only in spartan mode)
+            </ButtonOutline>
+          )}
         </SpaceVertical>
         <Box width="50%" p="small" maxWidth="40vw">
           <TextArea height="60vh" readOnly value={messages} />

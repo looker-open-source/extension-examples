@@ -1480,24 +1480,24 @@
   dependencies:
     "@looker/chatty" "^2.3.0"
 
-"@looker/extension-sdk-react@^21.4.2":
-  version "21.4.2"
-  resolved "https://registry.yarnpkg.com/@looker/extension-sdk-react/-/extension-sdk-react-21.4.2.tgz#8024fd84004c47a43b7e28868f73233ee19334c7"
-  integrity sha512-wqd6yqiCEXS4i6ibm5lh/4EYt8JpMGYMT2R3Afo1OoKd6VXQVrYWi22PQwjcvjpYbxyx64mD9nFTGm0VgMfimw==
+"@looker/extension-sdk-react@^21.4.5":
+  version "21.4.5"
+  resolved "https://registry.yarnpkg.com/@looker/extension-sdk-react/-/extension-sdk-react-21.4.5.tgz#48b62f7ae7b8f3cb91e84059c672c997d45405f0"
+  integrity sha512-R1LSWCSAVa8X/T6akgjd+TCeO27838Nc7MukPuanwqGHIFy0qjOLVMDQWkWDLvYc/5BQetMKdOuLq4w5WWCcYw==
   dependencies:
-    "@looker/extension-sdk" "^21.4.2"
-    "@looker/sdk" "^21.4.1"
+    "@looker/extension-sdk" "^21.4.5"
+    "@looker/sdk" "^21.4.3"
     "@looker/sdk-rtl" "^21.0.12"
     history "^4.9.0"
     lodash "^4.17.20"
 
-"@looker/extension-sdk@^21.4.2":
-  version "21.4.2"
-  resolved "https://registry.yarnpkg.com/@looker/extension-sdk/-/extension-sdk-21.4.2.tgz#41153d07cc841eeba872cce6fba6323682a8d5af"
-  integrity sha512-mI38maLZvtJHO/hFAVYt03F3sh0O3N8D3aIaAkZIxSFBd69iPxFxGkViOilycdWITrP/kqUCMCJF4bshaJFQuQ==
+"@looker/extension-sdk@^21.4.5":
+  version "21.4.5"
+  resolved "https://registry.yarnpkg.com/@looker/extension-sdk/-/extension-sdk-21.4.5.tgz#cd900d5b49eb281ea3e644b11f9f0e5266702115"
+  integrity sha512-FDTJgBYqe+VfT3yumOw1ygsMo4wvSmd+qGufHxOtuz6Ccs8auhnEVU1hEHbmMdhfcr3ZbhImOdE9a6YkCFQhHQ==
   dependencies:
     "@looker/chatty" "^2.3.0"
-    "@looker/sdk" "^21.4.1"
+    "@looker/sdk" "^21.4.3"
     "@looker/sdk-rtl" "^21.0.12"
     deepmerge "^4.2.2"
     readable-stream "^3.4.0"
@@ -1522,10 +1522,10 @@
     request "^2.88.0"
     request-promise-native "^1.0.8"
 
-"@looker/sdk@^21.4.1":
-  version "21.4.1"
-  resolved "https://registry.yarnpkg.com/@looker/sdk/-/sdk-21.4.1.tgz#4f4a96d97e4033294770b2686aaa5e2f0077718a"
-  integrity sha512-xYM8zobdQYnbfcJZ+lp5mkHGavMYdOskqTNE3Og15V0F01YPRNm5UMt2qkhtrduF43lNfVFsj2JsbWo/88qXLA==
+"@looker/sdk@^21.4.3":
+  version "21.4.3"
+  resolved "https://registry.yarnpkg.com/@looker/sdk/-/sdk-21.4.3.tgz#0e7a53378699713c934cd66eb3401c5b84a2bebb"
+  integrity sha512-1JCOUqoTDsbzGPylANWzuZ+tOSW3HcVIg30nsfAByte5lrWhfa5oMKZgdDTLFvNFP2029XcpD6FpqA3UfYlHoQ==
   dependencies:
     "@looker/sdk-rtl" "^21.0.12"
     ini "^1.3.8"
