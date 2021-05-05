@@ -22,45 +22,33 @@
  * THE SOFTWARE.
  */
 
-import React from "react";
-import { ILook } from "@looker/sdk";
-import { List, Heading, Box, ListItem, Link, Text } from "@looker/components";
+const commonConfig = require('./webpack.config')
 
-interface LookListProps {
-  looks: ILook[];
-  loading: boolean;
-  selectLook: (look: ILook) => void;
-  currentLookId?: number;
+module.exports = {
+  ...commonConfig,
+  output: {
+    ...commonConfig.output,
+    publicPath: 'http://localhost:8080/',
+  },
+  mode: 'development',
+  module: {
+    rules: [
+      ...commonConfig.module.rules,
+      {
+        test: /\.(js|jsx|ts|tsx)?$/,
+        use: 'react-hot-loader/webpack',
+        include: /node_modules/,
+      },
+    ],
+  },
+  devServer: {
+    index: 'index.html',
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+      'Access-Control-Allow-Headers':
+        'X-Requested-With, content-type, Authorization',
+    },
+  },
+  plugins: [...commonConfig.plugins],
 }
-
-export const LookList: React.FC<LookListProps> = ({
-  looks,
-  selectLook,
-  loading,
-  currentLookId,
-}) => (
-  <Box m="small" width={200}>
-    <Heading as="h3" mb="small">
-      Looks
-    </Heading>
-    {loading ? (
-      <Text mr="large">Loading...</Text>
-    ) : (
-      <List>
-        {looks.map((look) =>
-          look.id !== undefined ? (
-            <ListItem key={look.id} selected={look.id === currentLookId}>
-              <Link onClick={() => selectLook(look)} key={look.id}>
-                {look.title!}
-              </Link>
-            </ListItem>
-          ) : (
-            <Text key="error" color="palette.red500">
-              Failed to load
-            </Text>
-          )
-        )}
-      </List>
-    )}
-  </Box>
-);
