@@ -23,37 +23,37 @@
  */
 
 import React from 'react'
-import {ILook} from '@looker/sdk'
-import {List, Heading, Box, ListItem, Link, Text} from '@looker/components'
+import { ILook } from '@looker/sdk'
+import { List, Heading, Box, ListItem, Link, Text } from '@looker/components'
 
 interface LookListProps {
   looks: ILook[]
   loading: boolean
-  selectLook: (look: ILook) => void
+  selectLook: (lookid: string) => void
+  selectedLookId?: string
 }
 
-export const LookList: React.FC<LookListProps> = (props) => (
-  <Box m='small' width={200}>
-    <Heading as='h3' mb='small'>
+export const LookList: React.FC<LookListProps> = ({
+  looks,
+  loading,
+  selectLook,
+  selectedLookId,
+}) => (
+  <Box m="small" width={200}>
+    <Heading as="h3" mb="small">
       Looks
     </Heading>
-    {props.loading ? (
-      <Text mr='large'>Loading...</Text>
+    {loading ? (
+      <Text mr="large">Loading...</Text>
     ) : (
       <List>
-        {props.looks.map((look) =>
-          look.id !== undefined ? (
-            <ListItem key={look.id}>
-              <Link onClick={() => props.selectLook(look)} key={look.id}>
-                {look.title!}
-              </Link>
-            </ListItem>
-          ) : (
-            <Text key='error' color='palette.red500'>
-              Failed to load
-            </Text>
-          )
-        )}
+        {looks.map((look) => (
+          <ListItem key={look.id} selected={selectedLookId === look.id + ''}>
+            <Link onClick={() => selectLook(look.id + '')} key={look.id}>
+              {look.title!}
+            </Link>
+          </ListItem>
+        ))}
       </List>
     )}
   </Box>

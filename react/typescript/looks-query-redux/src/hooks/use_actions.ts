@@ -22,37 +22,14 @@
  * THE SOFTWARE.
  */
 
-const path = require('path')
+import { useMemo } from 'react'
+import { useDispatch } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { actionCreators } from '../data/actions'
 
-const PATHS = {
-  app: path.join(__dirname, 'src/index.tsx'),
-}
-
-module.exports = {
-  entry: {
-    app: PATHS.app,
-  },
-  output: {
-    path: __dirname + '/dist',
-    filename: 'bundle.js',
-  },
-  mode: 'production',
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx|ts|tsx)$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-        include: /src/,
-        sideEffects: false,
-      },
-      {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
-      },
-    ],
-  },
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
-  },
+export const useActions = () => {
+  const dispatch = useDispatch()
+  return useMemo(() => {
+    return bindActionCreators(actionCreators, dispatch)
+  }, [dispatch])
 }
