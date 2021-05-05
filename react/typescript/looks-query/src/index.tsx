@@ -22,15 +22,15 @@
  * THE SOFTWARE.
  */
 
-import * as React from "react";
-import * as ReactDOM from "react-dom";
-import { Extension } from "./demo/Extension";
-import { ExtensionProvider } from "@looker/extension-sdk-react";
-import { ComponentsProvider, Spinner, Flex } from "@looker/components";
+import * as React from 'react'
+import * as ReactDOM from 'react-dom'
+import { Extension } from './demo/Extension'
+import { ExtensionProvider } from '@looker/extension-sdk-react'
+import { ComponentsProvider, Spinner, Flex } from '@looker/components'
 
-window.addEventListener("DOMContentLoaded", async (event) => {
-  const root = document.createElement("div");
-  document.body.appendChild(root);
+window.addEventListener('DOMContentLoaded', async (event) => {
+  const root = document.createElement('div')
+  document.body.appendChild(root)
 
   ReactDOM.render(
     // ExtensionProvider provides subcomponents access to the Looker Extension SDK
@@ -40,5 +40,5 @@ window.addEventListener("DOMContentLoaded", async (event) => {
       </ComponentsProvider>
     </ExtensionProvider>,
     root
-  );
-});
+  )
+})
