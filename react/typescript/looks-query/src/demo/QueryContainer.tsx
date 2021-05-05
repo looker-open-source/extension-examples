@@ -38,22 +38,22 @@ import {
 
 export interface QueryProps {
   look?: ILook
-  results?: string
+  results?: Record<any, any>[]
   running: boolean
 }
 
-const headings = (results?: any): Array<String> => {
+const headings = (results?: Record<any, any>[]): Array<String> => {
   if (!results || !results.length || results.length === 0) {
     return []
   }
   return Object.keys(results[0]).map((key) => key)
 }
 
-const values = (results?: any): string[][] => {
+const values = (results?: Record<any, any>[]): string[][] => {
   if (!results || !results.length || results.length === 0) {
     return []
   }
-  return results.map((result: string) =>
+  return results.map((result) =>
     Object.keys(result).map((key) => `${(result as any)[key]}`)
   )
 }
