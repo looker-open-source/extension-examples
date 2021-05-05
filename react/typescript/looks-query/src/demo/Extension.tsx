@@ -22,97 +22,97 @@
  * THE SOFTWARE.
  */
 
-import React, { useState, useEffect, useContext } from "react";
-import { hot } from "react-hot-loader/root";
+import React, { useState, useEffect, useContext } from 'react'
+import { hot } from 'react-hot-loader/root'
 import {
   ExtensionContext,
   ExtensionContextData,
-} from "@looker/extension-sdk-react";
-import { LookList } from "./LookList";
-import { QueryContainer } from "./QueryContainer";
-import { MessageBar, Box, Heading, Flex } from "@looker/components";
-import { ILook } from "@looker/sdk";
-import { Switch, Route, useHistory, useRouteMatch } from "react-router-dom";
+} from '@looker/extension-sdk-react'
+import { LookList } from './LookList'
+import { QueryContainer } from './QueryContainer'
+import { MessageBar, Box, Heading, Flex } from '@looker/components'
+import { ILook } from '@looker/sdk'
+import { Switch, Route, useHistory, useRouteMatch } from 'react-router-dom'
 
 export const Extension: React.FC<{}> = hot(() => {
-  const [loadingLooks, setLoadingLooks] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>();
-  const [looks, setLooks] = useState<ILook[]>([]);
-  const [currentLook, setCurrentLook] = useState<ILook>();
-  const [runningQuery, setRunningQuery] = useState<boolean>(false);
-  const [queryResult, setQueryResult] = useState<string>("");
+  const [loadingLooks, setLoadingLooks] = useState<boolean>(false)
+  const [errorMessage, setErrorMessage] = useState<string>()
+  const [looks, setLooks] = useState<ILook[]>([])
+  const [currentLook, setCurrentLook] = useState<ILook>()
+  const [runningQuery, setRunningQuery] = useState<boolean>(false)
+  const [queryResult, setQueryResult] = useState<string>('')
 
-  const extensionContext = useContext<ExtensionContextData>(ExtensionContext);
-  const { core40SDK } = extensionContext;
-  const history = useHistory();
-  const match = useRouteMatch<{ lookid: string }>("/:lookid");
-
-  useEffect(() => {
-    loadLooks();
-  }, []);
+  const extensionContext = useContext<ExtensionContextData>(ExtensionContext)
+  const { core40SDK } = extensionContext
+  const history = useHistory()
+  const match = useRouteMatch<{ lookid: string }>('/:lookid')
 
   useEffect(() => {
-    const lookid = match?.params.lookid;
-    let selectedLook;
+    loadLooks()
+  }, [])
+
+  useEffect(() => {
+    const lookid = match?.params.lookid
+    let selectedLook
     if (lookid && looks.length > 0) {
-      selectedLook = looks.find((look) => look.id + "" === lookid);
+      selectedLook = looks.find((look) => look.id + '' === lookid)
       if (selectedLook && (!currentLook || currentLook.id !== selectedLook)) {
-        setCurrentLook(selectedLook);
+        setCurrentLook(selectedLook)
       } else {
-        setCurrentLook(undefined);
-        setErrorMessage(`Unable to load Look ${lookid}`);
+        setCurrentLook(undefined)
+        setErrorMessage(`Unable to load Look ${lookid}`)
       }
     }
-  }, [match, looks]);
+  }, [match, looks])
 
   useEffect(() => {
     if (currentLook) {
-      runLook();
+      runLook()
     } else {
-      setRunningQuery(false);
-      setQueryResult("");
+      setRunningQuery(false)
+      setQueryResult('')
     }
-  }, [currentLook]);
+  }, [currentLook])
 
   const loadLooks = async () => {
-    setLoadingLooks(true);
-    setErrorMessage(undefined);
+    setLoadingLooks(true)
+    setErrorMessage(undefined)
     try {
-      const result = await core40SDK.ok(core40SDK.all_looks());
-      setLooks(result.slice(0, 9));
-      setLoadingLooks(false);
+      const result = await core40SDK.ok(core40SDK.all_looks())
+      setLooks(result.slice(0, 9))
+      setLoadingLooks(false)
     } catch (error) {
-      setLoadingLooks(false);
-      setErrorMessage("Error loading looks");
+      setLoadingLooks(false)
+      setErrorMessage('Error loading looks')
     }
-  };
+  }
 
   const selectLook = (look: ILook) => {
     if (!currentLook || currentLook.id !== look.id) {
-      history.push("/" + look.id);
+      history.push('/' + look.id)
     }
-  };
+  }
 
   const runLook = async () => {
-    const lookId = currentLook!.id || -1;
+    const lookId = currentLook!.id || -1
     try {
-      setErrorMessage(undefined);
-      setRunningQuery(true);
+      setErrorMessage(undefined)
+      setRunningQuery(true)
       const result = await core40SDK.ok(
         core40SDK.run_look({
           look_id: lookId,
-          result_format: "json",
+          result_format: 'json',
         })
-      );
-      setRunningQuery(false);
-      setQueryResult(result);
-      setErrorMessage(undefined);
+      )
+      setRunningQuery(false)
+      setQueryResult(result)
+      setErrorMessage(undefined)
     } catch (error) {
-      setRunningQuery(false);
-      setQueryResult("");
-      setErrorMessage(`Unable to run look ${lookId}`);
+      setRunningQuery(false)
+      setQueryResult('')
+      setErrorMessage(`Unable to run look ${lookId}`)
     }
-  };
+  }
 
   return (
     <>
@@ -140,5 +140,5 @@ export const Extension: React.FC<{}> = hot(() => {
         </Flex>
       </Box>
     </>
-  );
-});
+  )
+})

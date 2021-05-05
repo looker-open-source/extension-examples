@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import {ILook} from '@looker/sdk'
+import { ILook } from '@looker/sdk'
 import {
   TableDataCell,
   Heading,
@@ -33,7 +33,7 @@ import {
   TableBody,
   Table,
   TableRow,
-  TableHeaderCell
+  TableHeaderCell,
 } from '@looker/components'
 
 export interface QueryProps {
@@ -53,16 +53,22 @@ const values = (results?: any): string[][] => {
   if (!results || !results.length || results.length === 0) {
     return []
   }
-  return results.map((result: string) => Object.keys(result).map((key) => `${(result as any)[key]}`))
+  return results.map((result: string) =>
+    Object.keys(result).map((key) => `${(result as any)[key]}`)
+  )
 }
 
-export const QueryContainer: React.FC<QueryProps> = ({look, results, running}) => (
-  <Box m='small' width='100%'>
-    <Heading as='h3' mb='small'>
+export const QueryContainer: React.FC<QueryProps> = ({
+  look,
+  results,
+  running,
+}) => (
+  <Box m="small" width="100%">
+    <Heading as="h3" mb="small">
       Query:
       {look ? ' ' + look.title : ''}
     </Heading>
-    {running && <Text mr='large'>Running Query ...</Text>}
+    {running && <Text mr="large">Running Query ...</Text>}
     {!running && (
       <Table>
         <TableHead>
@@ -78,7 +84,9 @@ export const QueryContainer: React.FC<QueryProps> = ({look, results, running}) =
             .map((row, rowIndex) => (
               <TableRow key={rowIndex}>
                 {row.map((column, columnIndex) => (
-                  <TableDataCell key={`${rowIndex}-${columnIndex}`}>{column}</TableDataCell>
+                  <TableDataCell key={`${rowIndex}-${columnIndex}`}>
+                    {column}
+                  </TableDataCell>
                 ))}
               </TableRow>
             ))}
