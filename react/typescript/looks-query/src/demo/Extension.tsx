@@ -22,232 +22,123 @@
  * THE SOFTWARE.
  */
 
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { hot } from "react-hot-loader/root";
+import {
+  ExtensionContext,
+  ExtensionContextData,
+} from "@looker/extension-sdk-react";
 import { LookList } from "./LookList";
 import { QueryContainer } from "./QueryContainer";
 import { MessageBar, Box, Heading, Flex } from "@looker/components";
-import { ExtensionContext } from "@looker/extension-sdk-react";
 import { ILook } from "@looker/sdk";
-import {
-  Switch,
-  Route,
-  RouteComponentProps,
-  withRouter,
-  MemoryRouter,
-} from "react-router-dom";
-import { hot } from "react-hot-loader/root";
+import { Switch, Route, useHistory, useRouteMatch } from "react-router-dom";
 
-interface ExtensionState {
-  looks?: ILook[];
-  currentLook?: ILook;
-  selectedLookId?: number;
-  queryResult?: any;
-  runningQuery: boolean;
-  loadingLooks: boolean;
-  errorMessage?: string;
-}
+export const Extension: React.FC<{}> = hot(() => {
+  const [loadingLooks, setLoadingLooks] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>();
+  const [looks, setLooks] = useState<ILook[]>([]);
+  const [currentLook, setCurrentLook] = useState<ILook>();
+  const [runningQuery, setRunningQuery] = useState<boolean>(false);
+  const [queryResult, setQueryResult] = useState<string>("");
 
-class ExtensionInternal extends React.Component<
-  RouteComponentProps,
-  ExtensionState
-> {
-  static contextType = ExtensionContext;
-  context!: React.ContextType<typeof ExtensionContext>;
+  const extensionContext = useContext<ExtensionContextData>(ExtensionContext);
+  const { core40SDK } = extensionContext;
+  const history = useHistory();
+  const match = useRouteMatch<{ lookid: string }>("/:lookid");
 
-  constructor(props: RouteComponentProps) {
-    super(props);
-    this.state = {
-      looks: undefined,
-      selectedLookId: undefined,
-      currentLook: undefined,
-      queryResult: undefined,
-      runningQuery: false,
-      loadingLooks: false,
-    };
-  }
+  useEffect(() => {
+    loadLooks();
+  }, []);
 
-  componentDidMount() {
-    const { initializeError } = this.context;
-    if (initializeError) {
-      return;
-    }
-    this.loadLooks();
-  }
-
-  componentDidUpdate() {
-    const { initializeError } = this.context;
-    if (initializeError) {
-      return;
-    }
-    // Changes to the browser history drives the running of looks.
-    // The look id is part of the URL. Any change to the URL causes
-    // componentDidUpdate to run.
-    // The look id is extracted from the URL. If it is not present
-    // or is not a valid number, the look id of the first loaded
-    // looks is updated in the URL. This is a replace rather than a
-    // push to reduce the number of actions that do nothing when the
-    // browser back button is pressed. Adding the look id to the URL
-    // causes componentDidUpdate to run again. When it runs again
-    // the look is present and valid. At that point the look is run.
-    const { looks, runningQuery, selectedLookId } = this.state;
-    if (looks && looks.length > 0 && !runningQuery) {
-      const { location } = this.props;
-      const path: string[] = location.pathname.split("/");
-      let id: number | undefined;
-      if (path.length > 1 && path[1] !== "") {
-        id = parseInt(path[1], 10);
-      }
-      if (!id || isNaN(id)) {
-        this.props.history.replace("/" + looks[0].id);
+  useEffect(() => {
+    const lookid = match?.params.lookid;
+    let selectedLook;
+    if (lookid && looks.length > 0) {
+      selectedLook = looks.find((look) => look.id + "" === lookid);
+      if (selectedLook && (!currentLook || currentLook.id !== selectedLook)) {
+        setCurrentLook(selectedLook);
       } else {
-        if (id !== selectedLookId) {
-          this.setState({ selectedLookId: id });
-          this.runLook(id);
-        }
+        setCurrentLook(undefined);
+        setErrorMessage(`Unable to load Look ${lookid}`);
       }
     }
-  }
+  }, [match, looks]);
 
-  /*
-  // TEMPLATE CODE FOR RUNNING ANY QUERY
-  async runQuery() {
-      try {
-      const result = await this.context.core40SDK.ok(
-        this.context.core40SDK.run_inline_query({
-          result_format: "json_detail",
-          limit: 10,
-          body: {
-            total: true,
-            model: "thelook",
-            view: "users",
-            fields: ["last_name", "gender"],
-            sorts: [`last_name desc`]
-          }
-        })
-      )
-      this.setState({
-        queryResult: JSON.stringify(result, undefined, 2),
-        runningQuery: false
-      })
-    } catch (error) {
-      this.setState({
-        queryResult: "",
-        runningQuery: false,
-        errorMessage: "Unable to run query"
-      })
+  useEffect(() => {
+    if (currentLook) {
+      runLook();
+    } else {
+      setRunningQuery(false);
+      setQueryResult("");
     }
-  }
-  */
+  }, [currentLook]);
 
-  async runLook(look_id: number) {
-    const look = (this.state.looks || []).find((l) => l.id == look_id);
-    // If no matching Look then return
-    if (look === undefined) {
-      this.setState({
-        selectedLookId: undefined,
-        currentLook: undefined,
-        errorMessage: "Unable to load Look.",
-        queryResult: "",
-        runningQuery: false,
-      });
-      return;
-    }
-
-    // Set Page title
-    this.context.extensionSDK.updateTitle(`Look: ${look.title || "unknown"}`);
-
-    this.setState({
-      currentLook: look,
-      runningQuery: true,
-      errorMessage: undefined,
-    });
-
+  const loadLooks = async () => {
+    setLoadingLooks(true);
+    setErrorMessage(undefined);
     try {
-      const result = await this.context.core40SDK.ok(
-        this.context.core40SDK.run_look({
-          look_id: look_id,
+      const result = await core40SDK.ok(core40SDK.all_looks());
+      setLooks(result.slice(0, 9));
+      setLoadingLooks(false);
+    } catch (error) {
+      setLoadingLooks(false);
+      setErrorMessage("Error loading looks");
+    }
+  };
+
+  const selectLook = (look: ILook) => {
+    if (!currentLook || currentLook.id !== look.id) {
+      history.push("/" + look.id);
+    }
+  };
+
+  const runLook = async () => {
+    const lookId = currentLook!.id || -1;
+    try {
+      setErrorMessage(undefined);
+      setRunningQuery(true);
+      const result = await core40SDK.ok(
+        core40SDK.run_look({
+          look_id: lookId,
           result_format: "json",
         })
       );
-      this.setState({
-        queryResult: result,
-        runningQuery: false,
-      });
+      setRunningQuery(false);
+      setQueryResult(result);
+      setErrorMessage(undefined);
     } catch (error) {
-      this.setState({
-        queryResult: "",
-        runningQuery: false,
-        errorMessage: "Unable to run look",
-      });
+      setRunningQuery(false);
+      setQueryResult("");
+      setErrorMessage(`Unable to run look ${lookId}`);
     }
-  }
+  };
 
-  async loadLooks() {
-    this.setState({ loadingLooks: true, errorMessage: undefined });
-    try {
-      const result = await this.context.core40SDK.ok(
-        this.context.core40SDK.all_looks()
-      );
-      this.setState({
-        // Take up to the first 10 looks
-        looks: result.slice(0, 9),
-        loadingLooks: false,
-      });
-    } catch (error) {
-      this.setState({
-        looks: [],
-        loadingLooks: false,
-        errorMessage: "Error loading looks",
-      });
-    }
-  }
-
-  onLookSelected(look: ILook) {
-    const { currentLook } = this.state;
-    if (!currentLook || currentLook.id !== look.id) {
-      // Update the look id in the URL. This will trigger componentWillUpdate
-      // which will run the look.
-      this.props.history.push("/" + look.id);
-    }
-  }
-
-  render() {
-    if (this.context.initializeError) {
-      return (
-        <MessageBar intent="critical">
-          {this.context.initializeError}
-        </MessageBar>
-      );
-    }
-    return (
-      <>
-        {this.state.errorMessage && (
-          <MessageBar intent="critical">{this.state.errorMessage}</MessageBar>
-        )}
-        <Box m="large">
-          <Heading fontWeight="semiBold">
-            Welcome to the Looker Extension Template
-          </Heading>
-          <Flex width="100%">
-            <LookList
-              loading={this.state.loadingLooks}
-              looks={this.state.looks || []}
-              selectLook={(look: ILook) => this.onLookSelected(look)}
-            />
-            <Switch>
-              <Route path="/:id">
-                <QueryContainer
-                  look={this.state.currentLook}
-                  results={this.state.queryResult}
-                  running={this.state.runningQuery}
-                />
-              </Route>
-            </Switch>
-          </Flex>
-        </Box>
-      </>
-    );
-  }
-}
-
-export const Extension = hot(withRouter(ExtensionInternal));
+  return (
+    <>
+      {errorMessage && (
+        <MessageBar intent="critical">{errorMessage}</MessageBar>
+      )}
+      <Box m="large">
+        <Heading fontWeight="semiBold">Look Query Extension</Heading>
+        <Flex width="100%">
+          <LookList
+            loading={loadingLooks}
+            looks={looks}
+            selectLook={selectLook}
+            currentLookId={currentLook?.id}
+          />
+          <Switch>
+            <Route path="/:id">
+              <QueryContainer
+                look={currentLook}
+                results={queryResult}
+                running={runningQuery}
+              />
+            </Route>
+          </Switch>
+        </Flex>
+      </Box>
+    </>
+  );
+});
