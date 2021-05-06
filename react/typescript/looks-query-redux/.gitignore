@@ -3,3 +3,4 @@ dist
 !dist/index.js
 .cache
 .vscode
+.eslintcache

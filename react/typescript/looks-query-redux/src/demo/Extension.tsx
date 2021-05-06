@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2019 Looker Data Sciences, Inc.
+ * Copyright (c) 2021 Looker Data Sciences, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,8 +24,6 @@
 
 import { useSelector } from 'react-redux'
 import React, { useEffect } from 'react'
-import { LookList } from './LookList'
-import { QueryContainer } from './QueryContainer'
 import { MessageBar, Box, Heading, Flex } from '@looker/components'
 import { hot } from 'react-hot-loader/root'
 import { Switch, Route, useHistory, useRouteMatch } from 'react-router-dom'
@@ -37,8 +35,10 @@ import {
   getCurrentQuery,
 } from '../data'
 import { useActions } from '../hooks'
+import { QueryContainer } from './QueryContainer'
+import { LookList } from './LookList'
 
-export const Extension: React.FC<{}> = hot(() => {
+export const Extension: React.FC = hot(() => {
   const history = useHistory()
   const match = useRouteMatch<{ lookid: string }>('/:lookid')
   const currentLookId = match?.params.lookid
@@ -53,6 +53,7 @@ export const Extension: React.FC<{}> = hot(() => {
 
   useEffect(() => {
     allLooksRequest()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
@@ -63,6 +64,7 @@ export const Extension: React.FC<{}> = hot(() => {
         selectLook(looks[0].id + '')
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentLookId, looks])
 
   const selectLook = (lookid: string) => {
