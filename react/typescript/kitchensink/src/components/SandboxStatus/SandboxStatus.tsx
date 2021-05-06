@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2020 Looker Data Sciences, Inc.
+ * Copyright (c) 2021 Looker Data Sciences, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,27 +22,30 @@
  * THE SOFTWARE.
  */
 
-import React, { useEffect, useState } from "react"
-import { Paragraph } from "@looker/components"
-import { SandboxStatusProps } from "./types"
+import React, { useEffect, useState } from 'react'
+import { Paragraph } from '@looker/components'
+import { SandboxStatusProps } from './types'
 
 export const SandboxStatus: React.FC<SandboxStatusProps> = () => {
-  const [sandboxStatus, setSandboxStatus] = useState("")
+  const [sandboxStatus, setSandboxStatus] = useState('')
 
   useEffect(() => {
     try {
-      const parentWindow:any = (window as any).parent
+      const parentWindow: any = (window as any).parent
       // Attempt to get data from the parent window. This
       // will fail in a sandboxed environment and in most
       // cases we want this to fail.
+      // eslint-disable-next-line no-unused-expressions
       parentWindow.looker?.version
-      setSandboxStatus("NOT")
-    }catch(err) {
-      setSandboxStatus("")
+      setSandboxStatus('NOT')
+    } catch (err) {
+      setSandboxStatus('')
     }
   }, [])
 
   return (
-      <Paragraph my="medium">This extension is <b>{sandboxStatus}</b> sandboxed.</Paragraph>
+    <Paragraph my="medium">
+      This extension is <b>{sandboxStatus}</b> sandboxed.
+    </Paragraph>
   )
 }

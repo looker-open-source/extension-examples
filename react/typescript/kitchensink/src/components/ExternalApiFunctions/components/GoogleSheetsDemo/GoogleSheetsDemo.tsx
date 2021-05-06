@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2020 Looker Data Sciences, Inc.
+ * Copyright (c) 2021 Looker Data Sciences, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -35,12 +35,12 @@ import {
   ExtensionContext2,
   ExtensionContextData2,
 } from '@looker/extension-sdk-react'
-import { GoogleSheetsDemoProps } from './types'
 import { updateErrorMessage, updateSheetData } from '../../data/DataReducer'
-import { GOOGLE_CLIENT_ID, AuthOption } from '../..'
+import { GOOGLE_CLIENT_ID, AuthOption, POSTS_SERVER_URL } from '../..'
 import { handleResponse, handleError } from '../../utils/validate_data_response'
 import { getDataServerFetchProxy } from '../../utils/fetch_proxy'
-import { POSTS_SERVER_URL } from '../..'
+
+import { GoogleSheetsDemoProps } from './types'
 
 /**
  * Demonstrate usage of the google sheets API via the extension sdk fetch proxy

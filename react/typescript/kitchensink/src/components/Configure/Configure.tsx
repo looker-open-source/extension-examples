@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2020 Looker Data Sciences, Inc.
+ * Copyright (c) 2021 Looker Data Sciences, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -40,8 +40,8 @@ import {
   ExtensionContextData2,
 } from '@looker/extension-sdk-react'
 import { SandboxStatus } from '../SandboxStatus'
-import { ConfigureProps } from './types'
 import { ConfigurationData } from '../../types'
+import { ConfigureProps } from './types'
 
 const Configure: React.FC<ConfigureProps> = ({
   canPersistContextData,
@@ -151,12 +151,12 @@ const Configure: React.FC<ConfigureProps> = ({
   }
 
   const getValidationMessages = (): ValidationMessages | undefined => {
-    let validationMessages: ValidationMessages | undefined = undefined
+    let validationMessages: ValidationMessages | undefined
     if (typeof localConfigurationData.dashboardId === 'string') {
       if (!validationMessages) {
         validationMessages = {}
       }
-      validationMessages['dashboardId'] = {
+      validationMessages.dashboardId = {
         type: 'error',
         message: 'dashboard id is not numeric',
       }
@@ -165,7 +165,7 @@ const Configure: React.FC<ConfigureProps> = ({
       if (!validationMessages) {
         validationMessages = {}
       }
-      validationMessages['exploreId'] = {
+      validationMessages.exploreId = {
         type: 'error',
         message: 'explore id is empty',
       }
@@ -174,7 +174,7 @@ const Configure: React.FC<ConfigureProps> = ({
       if (!validationMessages) {
         validationMessages = {}
       }
-      validationMessages['lookId'] = {
+      validationMessages.lookId = {
         type: 'error',
         message: 'look id is not numeric',
       }

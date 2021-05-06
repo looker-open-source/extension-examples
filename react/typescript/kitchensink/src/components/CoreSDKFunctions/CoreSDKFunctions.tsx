@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2019 Looker Data Sciences, Inc.
+ * Copyright (c) 2021 Looker Data Sciences, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,9 +26,9 @@ import isEqual from 'lodash/isEqual'
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Heading, Box, ButtonOutline, TextArea } from '@looker/components'
-import { SandboxStatus } from '../SandboxStatus'
 import { getCoreSDK2 } from '@looker/extension-sdk-react'
 import { Looker40SDK } from '@looker/sdk'
+import { SandboxStatus } from '../SandboxStatus'
 
 const CoreSDKFunctions = () => {
   const [imageData, setImageData] = useState<string>()
