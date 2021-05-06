@@ -30,7 +30,7 @@ It uses [React](https://reactjs.org/) and [Typescript](https://typescriptlang.or
 4. Start the development server
 
    ```
-   yarn develope
+   yarn develop
    ```
 
    Great! Your extension is now running and serving the JavaScript at http://localhost:8080/bundle.js.
