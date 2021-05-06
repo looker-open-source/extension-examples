@@ -1,6 +1,6 @@
 # Looker Extension Example (React/Redux & TypeScript)
 
-This repository serves as aan example for creating a new Looker Extension using React and Redux.
+This repository serves as an example for creating a new Looker Extension using React and Redux.
 
 It uses [React](https://reactjs.org/) and [Typescript](https://typescriptlang.org) for writing your extension, the [React Extension SDK]((https://github.com/looker-open-source/sdk-codegen/tree/main/packages/extension-sdk-react) for interacting with Looker, [Looker Components](https://components.looker.com) for UI, and [Webpack](https://webpack.js.org/) for building your code.
 
