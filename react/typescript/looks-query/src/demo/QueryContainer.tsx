@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2019 Looker Data Sciences, Inc.
+ * Copyright (c) 2021 Looker Data Sciences, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -42,7 +42,7 @@ export interface QueryProps {
   running: boolean
 }
 
-const headings = (results?: Record<any, any>[]): Array<String> => {
+const headings = (results?: Record<any, any>[]): Array<string> => {
   if (!results || !results.length || results.length === 0) {
     return []
   }
