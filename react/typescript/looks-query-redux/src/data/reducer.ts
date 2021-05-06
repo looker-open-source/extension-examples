@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2019 Looker Data Sciences, Inc.
+ * Copyright (c) 2021 Looker Data Sciences, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -57,7 +57,7 @@ export const reducer = (state: State = defaultState, action: Action): State => {
         loading: false,
         looks: action.payload as ILook[],
       }
-    case Actions.RUN_LOOK_SUCCESS:
+    case Actions.RUN_LOOK_SUCCESS: {
       const { lookId, result } = action.payload as RunLookSuccess
       const newState = {
         ...state,
@@ -68,6 +68,7 @@ export const reducer = (state: State = defaultState, action: Action): State => {
         },
       }
       return newState
+    }
     case Actions.ERROR:
       return {
         ...state,

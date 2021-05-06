@@ -21,19 +21,3 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
-import { applyMiddleware, createStore } from 'redux'
-import createSagaMiddleware, { SagaMiddleware } from 'redux-saga'
-import { sagaCallbacks, reducer } from './'
-
-const sagaMiddleware: SagaMiddleware = createSagaMiddleware()
-
-const registerSagas = (callbacks: any[]) => {
-  callbacks.forEach((callback) => sagaMiddleware.run(callback))
-}
-
-export const configureStore = () => {
-  const store: any = createStore(reducer, applyMiddleware(sagaMiddleware))
-  registerSagas([sagaCallbacks])
-  return store
-}

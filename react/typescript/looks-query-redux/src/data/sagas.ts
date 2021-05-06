@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2019 Looker Data Sciences, Inc.
+ * Copyright (c) 2021 Looker Data Sciences, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,6 +25,7 @@
 import { getCore40SDK } from '@looker/extension-sdk-react'
 import { all, call, put, takeEvery, select } from 'redux-saga/effects'
 import { SagaIterator } from 'redux-saga'
+import { ILook } from '@looker/sdk'
 import {
   Actions,
   allLooksSuccess,
@@ -33,7 +34,6 @@ import {
   Action,
   State,
 } from '.'
-import { ILook } from '@looker/sdk'
 
 function* allLooksSaga(): SagaIterator {
   const coreSDK = getCore40SDK()
@@ -68,7 +68,7 @@ function* runLookSaga(action: Action): SagaIterator {
   }
 }
 
-export function* sagaCallbacks() {
+export function* sagaCallbacks(): SagaIterator {
   yield all([
     takeEvery(Actions.ALL_LOOKS_REQUEST, allLooksSaga),
     takeEvery(Actions.RUN_LOOK_REQUEST, runLookSaga),

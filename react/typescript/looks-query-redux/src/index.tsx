@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2019 Looker Data Sciences, Inc.
+ * Copyright (c) 2021 Looker Data Sciences, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,13 +24,13 @@
 
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import { Extension } from './demo/Extension'
 import { ExtensionProvider } from '@looker/extension-sdk-react'
 import { ComponentsProvider } from '@looker/components'
 import { Provider } from 'react-redux'
+import { Extension } from './demo/Extension'
 import { configureStore } from './data/store'
 
-window.addEventListener('DOMContentLoaded', async (event) => {
+window.addEventListener('DOMContentLoaded', async () => {
   const root = document.createElement('div')
   document.body.appendChild(root)
 
