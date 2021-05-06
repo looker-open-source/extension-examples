@@ -4,18 +4,16 @@ This version and versions going forward demonstrate the use of code splitting. Y
 
 To remove code splitting you will need to modify `KitchenSink.tsx`. Instructions are provided in this file to show how to fall back to building a single monolithic JavaScript bundle.
 
-# Looker Extension Kitchensink Template (React & TypeScript)
+# Looker Extension Kitchensink Example (React & TypeScript)
 
 This repository demonstrates functionality that is available to the Extension SDK. It can be used as a starting point for developing
 your own extensions.
 
 It uses [React](https://reactjs.org/) and [TypeScript](https://www.typescriptlang.org/) for writing your extension, the [React Extension SDK](https://github.com/looker-open-source/sdk-codegen/tree/main/packages/extension-sdk-react) for interacting with Looker, and [Webpack](https://webpack.js.org/) for building your code.
 
-This version of the Kitchen sink requires Looker 7.9 or above.
-
 ## Getting Started for Development
 
-1. Clone or download a copy of this template to your development machine, if you haven't already cloned the entire repo.
+1. Clone or download a copy of this repository to your development machine.
 
    ```
    # cd ~/ Optional. your user directory is usually a good place to git clone to.
@@ -43,15 +41,6 @@ This version of the Kitchen sink requires Looker 7.9 or above.
    ```
 
    Great! Your extension is now running and serving the JavaScript at http://localhost:8080/bundle.js.
-
-   > **Note** The webpack development server also supports https. To use, add the parameter --https to the start command
-   > `"start": "webpack serve --disable-host-check --https"`
-   > Should you decide to use https, you should visit the bundle URL you are running as there will likely be a certificate warning. The development server runs with a self-signed SSL certificate, so you will need to accept this to allow your browser to connect to it.
-
-   The default yarn start command runs with hot module replacement working. Some changes will cause a full reload of the extension iframe. When this happens the extension framework connection will break. You will need to do a full page reload of the outer page to restart
-   the extension.
-
-   To run without hot module replacement run `yarn develop --no-hot`
 
 5) Now log in to Looker and create a new project.
 
@@ -101,7 +90,7 @@ The manifest includes a reference to the `oauth2_url https://REPLACE_ME.auth0.co
 
 - Refreshing the extension page will bring in any new code changes from the extension template, although some changes will hot reload.
 
-10. Use with an access key requires a bit more setup. First, create a .env file in the `extension-examples/react/typescript/access-key-demo` directory with the following entries. Use a password generator to create the values. These values should be set prior to starting the development and data servers. **Do NOT store the .env file in your source code repository.**
+10. Use with an access key requires a bit more setup. First, create a .env file in the `extension-examples/react/typescript/kitchensink` directory with the following entries. Use a password generator to create the values. These values should be set prior to starting the development and data servers. **Do NOT store the .env file in your source code repository.**
 
 ```
 CUSTOM_CLIENT_SECRET=
