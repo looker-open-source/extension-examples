@@ -22,55 +22,33 @@
  * THE SOFTWARE.
  */
 
-const fs = require('fs')
-const path = require('path')
-const webpack = require('webpack')
-const dotenv = require('dotenv')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-  .BundleAnalyzerPlugin
-
-// Create .env file if it does not exist
-if (!fs.existsSync('.env')) {
-  fs.copyFileSync('.env_example', '.env')
-}
-dotenv.config()
-
-const PATHS = {
-  app: path.join(__dirname, 'src/index.tsx'),
-}
+const commonConfig = require('./webpack.config')
 
 module.exports = {
-  entry: {
-    app: PATHS.app,
-  },
+  ...commonConfig,
   output: {
-    path: __dirname + '/dist',
-    filename: 'bundle.js',
+    ...commonConfig.output,
+    publicPath: 'http://localhost:8080/',
   },
+  mode: 'development',
   module: {
     rules: [
+      ...commonConfig.module.rules,
       {
-        test: /\.(js|jsx|ts|tsx)$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-        include: /src/,
-        sideEffects: false,
+        test: /\.(js|jsx|ts|tsx)?$/,
+        use: 'react-hot-loader/webpack',
+        include: /node_modules/,
       },
     ],
   },
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
-    fallback: { buffer: false },
+  devServer: {
+    index: 'index.html',
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+      'Access-Control-Allow-Headers':
+        'X-Requested-With, content-type, Authorization',
+    },
   },
-  devtool: 'source-map',
-  plugins: [
-    new BundleAnalyzerPlugin({
-      analyzerMode: process.env.ANALYZE_MODE || 'disabled',
-    }),
-    new webpack.EnvironmentPlugin([
-      'ACCESS_KEY',
-      'JWT_TOKEN_SECRET',
-      'DATA_SERVER_URL',
-    ]),
-  ],
+  plugins: [...commonConfig.plugins],
 }

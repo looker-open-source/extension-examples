@@ -48,12 +48,15 @@ export const ConfigurationScene: React.FC<ConfigurationSceneProps> = ({
   updateCriticalMessage,
   updatePositiveMessage,
   clearMessage,
+  createJwtToken,
 }) => {
   const history = useHistory()
   const location = useLocation()
   const { extensionSDK, core40SDK } = useContext<ExtensionContextData>(
     ExtensionContext
   )
+  const { lookerHostData } = extensionSDK
+  const { extensionId } = lookerHostData || {}
   // Access key state
   const [accessKey, setAccessKey] = useState('')
 
@@ -101,13 +104,15 @@ export const ConfigurationScene: React.FC<ConfigurationSceneProps> = ({
       )
       // Delete it if it does
       if (accessKeyUserAttribute && accessKeyUserAttribute.id) {
-        core40SDK.delete_user_attribute(accessKeyUserAttribute.id)
+        await core40SDK.ok(
+          core40SDK.delete_user_attribute(accessKeyUserAttribute.id)
+        )
       }
       // Add the access key.
       await core40SDK.ok(
         core40SDK.create_user_attribute({
           name: accessKeyName,
-          label: 'APIKEY Demo Access Key',
+          label: `${extensionId} APIKEY Demo Access Key`,
           default_value: accessKey,
           type: 'string',
           hidden_value_domain_whitelist: `${DATA_SERVER_URL}/*`,
@@ -118,6 +123,7 @@ export const ConfigurationScene: React.FC<ConfigurationSceneProps> = ({
       )
       updatePositiveMessage('Access key saved')
       setAccessKey('')
+      createJwtToken()
     } catch (error) {
       updateCriticalMessage('Unexpected error occured')
       console.error(error)

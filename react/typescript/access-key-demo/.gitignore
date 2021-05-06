@@ -1,7 +1,5 @@
 node_modules
 dist
-!dist/index.js
 .cache
 .vscode
-temp_db.json
 .env

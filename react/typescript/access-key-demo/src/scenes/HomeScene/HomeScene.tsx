@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Box, Button, Heading, SpaceVertical } from '@looker/components'
 import {
   ExtensionContext,
@@ -58,6 +58,12 @@ export const HomeScene: React.FC<HomeSceneProps> = ({
   const history = useHistory()
   const location = useLocation()
   const { extensionSDK } = useContext<ExtensionContextData>(ExtensionContext)
+
+  useEffect(() => {
+    if (location.state) {
+      onVerifyTokenClick()
+    }
+  }, [location])
 
   /**
    * On add/update access key button navigate click navigate to access key scene

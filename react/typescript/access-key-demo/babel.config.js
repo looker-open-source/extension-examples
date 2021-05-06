@@ -22,8 +22,7 @@
  * THE SOFTWARE.
  */
 
-
-module.exports = api => {
+module.exports = (api) => {
   api.cache(true)
 
   return {
@@ -32,9 +31,9 @@ module.exports = api => {
         '@babel/env',
         {
           targets: {
-            browsers: 'Last 2 Chrome versions, Firefox ESR',
-            node: '8.9',
+            esmodules: true,
           },
+          modules: false,
         },
       ],
       [
