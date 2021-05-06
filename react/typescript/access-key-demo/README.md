@@ -1,4 +1,4 @@
-# Looker Extension Access Key Demo Template (React & TypeScript)
+# Looker Extension Access Key Demo Example (React & TypeScript)
 
 This repository demonstrates how to write a Looker extension that needs an access key to run. This is useful for building monetized extensions.
 
@@ -7,7 +7,7 @@ This version of the template requires Looker 7.10 or above.
 
 ## Getting Started for Development
 
-1. Clone or download a copy of this template to your development machine, if you haven't already cloned the entire repo.
+1. Clone or download a copy of this repository to your development machine.
 
    ```
    # cd ~/ Optional, your user directory is usually a good place to git clone to.
@@ -31,7 +31,7 @@ This version of the template requires Looker 7.10 or above.
 4. Start the development server
 
    ```
-   yarn start
+   yarn develop
    ```
 
 The extension is now running and serving the JavaScript locally at http://localhost:8080/bundle.js. Nice!
@@ -82,6 +82,7 @@ The extension is now running and serving the JavaScript locally at http://localh
 ```
 ACCESS_KEY=
 JWT_TOKEN_SECRET=
+DATA_SERVER_URL=http://127.0.0.1:3000
 ```
 
 11. This access key demo requires a data server to be running in order to validate the access key. Note that this is just sample code to demonstrate concepts— It is by no means production grade code. To start the demo data server, run the following command from the `extension-examples/react/typescript/access-key-demo` directory:
@@ -114,7 +115,6 @@ The process above requires your local development server to be running to load t
 
 ## Notes
 
-- Webpack's module splitting is not currently supported in this template.
 - This template uses Looker's [component library](https://components.looker.com) and [styled components](https://styled-components.com/). Neither of these libraries are required, and you may remove and replace them with a component library of your own choice or simply build your UI from scratch.
 
 ## Production Implementation Details

@@ -82,13 +82,6 @@ export const ACCESS_KEY_NAME = 'access_key'
  * The acess key demo application
  */
 export const App: React.FC<{}> = hot(() => {
-  const [route, setRoute] = useState('')
-  const [routeState, setRouteState] = useState()
-
-  const onRouteChange = (route: string, routeState?: any) => {
-    setRoute(route)
-    setRouteState(routeState)
-  }
   // Message state, intent and message
   const [intent, setIntent] = useState<'critical' | 'positive'>()
   const [message, setMessage] = useState<string>()
@@ -118,10 +111,7 @@ export const App: React.FC<{}> = hot(() => {
   }
 
   return (
-    <ExtensionProvider
-      onRouteChange={onRouteChange}
-      requiredLookerVersion=">=7.10.0"
-    >
+    <ExtensionProvider>
       <ComponentsProvider>
         {message && intent && (
           <MessageBar intent={intent} onPrimaryClick={clearMessage}>

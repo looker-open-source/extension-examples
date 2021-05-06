@@ -24,4 +24,6 @@
 
 import { MessageHandlerProps } from '../../App'
 
-export interface ConfigurationSceneProps extends MessageHandlerProps {}
+export interface ConfigurationSceneProps extends MessageHandlerProps {
+  createJwtToken: () => void
+}
