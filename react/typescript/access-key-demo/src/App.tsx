@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2019 Looker Data Sciences, Inc.
+ * Copyright (c) 2021 Looker Data Sciences, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,10 +23,10 @@
  */
 
 import React, { useState } from 'react'
-import { AppRouter } from './AppRouter'
 import { ExtensionProvider } from '@looker/extension-sdk-react'
 import { hot } from 'react-hot-loader/root'
 import { ComponentsProvider, MessageBar } from '@looker/components'
+import { AppRouter } from './AppRouter'
 
 /**
  * Extension that implements a simple check to grant access to an extension
@@ -81,7 +81,7 @@ export const ACCESS_KEY_NAME = 'access_key'
 /**
  * The acess key demo application
  */
-export const App: React.FC<{}> = hot(() => {
+export const App: React.FC = hot(() => {
   // Message state, intent and message
   const [intent, setIntent] = useState<'critical' | 'positive'>()
   const [message, setMessage] = useState<string>()

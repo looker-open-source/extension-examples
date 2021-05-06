@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2019 Looker Data Sciences, Inc.
+ * Copyright (c) 2021 Looker Data Sciences, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,11 +28,10 @@ import {
 } from '@looker/extension-sdk-react'
 import React, { useContext, useEffect, useState } from 'react'
 import { Switch, Route, useHistory, useLocation } from 'react-router-dom'
+import { hot } from 'react-hot-loader/root'
 import { ConfigurationScene } from './scenes/ConfigurationScene'
 import { HomeScene } from './scenes/HomeScene'
-import { hot } from 'react-hot-loader/root'
-import { MessageHandlerProps } from './App'
-import { ACCESS_KEY_NAME, DATA_SERVER_URL } from './App'
+import { MessageHandlerProps, ACCESS_KEY_NAME, DATA_SERVER_URL } from './App'
 
 /**
  * Application router code. Checks to see if the configuration scene should
@@ -67,6 +66,7 @@ export const AppRouter: React.FC<AppRouterProps> = hot(
 
     useEffect(() => {
       createJwtToken()
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const createJwtToken = async () => {

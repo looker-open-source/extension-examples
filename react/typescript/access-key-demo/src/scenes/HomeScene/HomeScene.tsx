@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2020 Looker Data Sciences, Inc.
+ * Copyright (c) 2021 Looker Data Sciences, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,11 +28,11 @@ import {
   ExtensionContext,
   ExtensionContextData,
 } from '@looker/extension-sdk-react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { DATA_SERVER_URL } from '../../App'
 import { ROUTES } from '../../AppRouter'
 import { createDataServerFetchProxy } from '../../utils'
 import { HomeSceneProps } from '.'
-import { useHistory, useLocation } from 'react-router-dom'
 
 /**
  * Default scene for the APIKEY demo.
@@ -56,13 +56,14 @@ export const HomeScene: React.FC<HomeSceneProps> = ({
   clearMessage,
 }) => {
   const history = useHistory()
-  const location = useLocation()
+  const location = useLocation<{ jwt_token?: string }>()
   const { extensionSDK } = useContext<ExtensionContextData>(ExtensionContext)
 
   useEffect(() => {
     if (location.state) {
       onVerifyTokenClick()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location])
 
   /**
@@ -84,7 +85,7 @@ export const HomeScene: React.FC<HomeSceneProps> = ({
         location.state
       )
       // Call the data server ping endpoint to validate the token
-      let response = await fetchProxy.fetchProxy(`${DATA_SERVER_URL}/ping`)
+      const response = await fetchProxy.fetchProxy(`${DATA_SERVER_URL}/ping`)
       if (response.ok) {
         updatePositiveMessage('JWT Token is valid')
       } else {
