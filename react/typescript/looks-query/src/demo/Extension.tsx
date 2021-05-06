@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2019 Looker Data Sciences, Inc.
+ * Copyright (c) 2021 Looker Data Sciences, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,19 +28,19 @@ import {
   ExtensionContext,
   ExtensionContextData,
 } from '@looker/extension-sdk-react'
-import { LookList } from './LookList'
-import { QueryContainer } from './QueryContainer'
 import { MessageBar, Box, Heading, Flex } from '@looker/components'
 import { ILook } from '@looker/sdk'
 import { Switch, Route, useHistory, useRouteMatch } from 'react-router-dom'
+import { QueryContainer } from './QueryContainer'
+import { LookList } from './LookList'
 
-export const Extension: React.FC<{}> = hot(() => {
+export const Extension: React.FC = hot(() => {
   const [loadingLooks, setLoadingLooks] = useState<boolean>(false)
   const [errorMessage, setErrorMessage] = useState<string>()
   const [looks, setLooks] = useState<ILook[]>([])
   const [currentLook, setCurrentLook] = useState<ILook>()
   const [runningQuery, setRunningQuery] = useState<boolean>(false)
-  const [queryResult, setQueryResult] = useState<string>('')
+  const [queryResult, setQueryResult] = useState<Record<any, any>[]>([])
 
   const extensionContext = useContext<ExtensionContextData>(ExtensionContext)
   const { core40SDK } = extensionContext
@@ -49,20 +49,25 @@ export const Extension: React.FC<{}> = hot(() => {
 
   useEffect(() => {
     loadLooks()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
     const lookid = match?.params.lookid
-    let selectedLook
-    if (lookid && looks.length > 0) {
-      selectedLook = looks.find((look) => look.id + '' === lookid)
-      if (selectedLook && (!currentLook || currentLook.id !== selectedLook)) {
-        setCurrentLook(selectedLook)
+    if (looks.length > 0) {
+      if (lookid) {
+        const selectedLook = looks.find((look) => look.id + '' === lookid)
+        if (selectedLook && (!currentLook || currentLook.id !== selectedLook)) {
+          setCurrentLook(selectedLook)
+        } else {
+          setCurrentLook(undefined)
+          setErrorMessage(`Unable to load Look ${lookid}`)
+        }
       } else {
-        setCurrentLook(undefined)
-        setErrorMessage(`Unable to load Look ${lookid}`)
+        selectLook(looks[0])
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [match, looks])
 
   useEffect(() => {
@@ -70,8 +75,9 @@ export const Extension: React.FC<{}> = hot(() => {
       runLook()
     } else {
       setRunningQuery(false)
-      setQueryResult('')
+      setQueryResult([])
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentLook])
 
   const loadLooks = async () => {
@@ -94,22 +100,22 @@ export const Extension: React.FC<{}> = hot(() => {
   }
 
   const runLook = async () => {
-    const lookId = currentLook!.id || -1
+    const lookId = currentLook ? currentLook.id || -1 : -1
     try {
       setErrorMessage(undefined)
       setRunningQuery(true)
-      const result = await core40SDK.ok(
+      const result = ((await core40SDK.ok(
         core40SDK.run_look({
           look_id: lookId,
           result_format: 'json',
         })
-      )
+      )) as unknown) as Record<any, any>[]
       setRunningQuery(false)
       setQueryResult(result)
       setErrorMessage(undefined)
     } catch (error) {
       setRunningQuery(false)
-      setQueryResult('')
+      setQueryResult([])
       setErrorMessage(`Unable to run look ${lookId}`)
     }
   }

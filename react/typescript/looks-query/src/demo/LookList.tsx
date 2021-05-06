@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2019 Looker Data Sciences, Inc.
+ * Copyright (c) 2021 Looker Data Sciences, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -51,7 +51,7 @@ export const LookList: React.FC<LookListProps> = ({
           look.id !== undefined ? (
             <ListItem key={look.id} selected={look.id === currentLookId}>
               <Link onClick={() => selectLook(look)} key={look.id}>
-                {look.title!}
+                {look.title}
               </Link>
             </ListItem>
           ) : (

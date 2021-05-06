@@ -21,24 +21,3 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
-import * as React from 'react'
-import * as ReactDOM from 'react-dom'
-import { ExtensionProvider } from '@looker/extension-sdk-react'
-import { ComponentsProvider } from '@looker/components'
-import { Extension } from './demo/Extension'
-
-window.addEventListener('DOMContentLoaded', async () => {
-  const root = document.createElement('div')
-  document.body.appendChild(root)
-
-  ReactDOM.render(
-    // ExtensionProvider provides subcomponents access to the Looker Extension SDK
-    <ExtensionProvider>
-      <ComponentsProvider>
-        <Extension />
-      </ComponentsProvider>
-    </ExtensionProvider>,
-    root
-  )
-})
