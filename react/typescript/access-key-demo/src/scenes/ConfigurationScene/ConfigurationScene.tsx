@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2020 Looker Data Sciences, Inc.
+ * Copyright (c) 2021 Looker Data Sciences, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -35,10 +35,10 @@ import {
   ExtensionContext,
   ExtensionContextData,
 } from '@looker/extension-sdk-react'
-import { ConfigurationSceneProps } from '.'
 import { useHistory, useLocation } from 'react-router-dom'
 import { ACCESS_KEY_NAME, DATA_SERVER_URL } from '../../App'
 import { ROUTES } from '../../AppRouter'
+import { ConfigurationSceneProps } from '.'
 
 /**
  * Configuration scene. Demonstrates how to programatically add or replace an

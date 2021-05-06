@@ -3,3 +3,4 @@ dist
 .cache
 .vscode
 .env
+.eslintcache

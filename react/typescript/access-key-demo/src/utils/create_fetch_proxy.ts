@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2020 Looker Data Sciences, Inc.
+ * Copyright (c) 2021 Looker Data Sciences, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -36,7 +36,7 @@ import {
  */
 export const createDataServerFetchProxy = (
   extensionSDK: ExtensionSDK,
-  locationState?: any
+  locationState?: { jwt_token?: string }
 ): FetchProxy => {
   const init: FetchCustomParameters = {}
   if (locationState && locationState.jwt_token) {
