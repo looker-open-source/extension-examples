@@ -5,3 +5,4 @@ dist
 .vscode
 temp_db.json
 .env
+.eslintcache

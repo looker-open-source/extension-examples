@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2020 Looker Data Sciences, Inc.
+ * Copyright (c) 2021 Looker Data Sciences, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -41,11 +41,11 @@ import {
   ExtensionContext2,
   ExtensionContextData2,
 } from '@looker/extension-sdk-react'
-import { DataServerDemoProps } from './types'
 import { updatePosts, updateTitle } from '../../data/DataReducer'
 import { handleResponse, handleError } from '../../utils/validate_data_response'
 import { getDataServerFetchProxy } from '../../utils/fetch_proxy'
 import { POSTS_SERVER_URL } from '../..'
+import { DataServerDemoProps } from './types'
 
 /**
  * Demonstration of Looker extension SDK external API use, fetchProxy
@@ -98,7 +98,7 @@ export const DataServerDemo: React.FC<DataServerDemoProps> = ({
         extensionSDK,
         location.state
       )
-      let response = await dataServerFetchProxy.fetchProxy(
+      const response = await dataServerFetchProxy.fetchProxy(
         `${POSTS_SERVER_URL}/posts`,
         {
           method: 'POST',
@@ -129,7 +129,7 @@ export const DataServerDemo: React.FC<DataServerDemoProps> = ({
         extensionSDK,
         location.state
       )
-      let response = await dataServerFetchProxy.fetchProxy(
+      const response = await dataServerFetchProxy.fetchProxy(
         `${POSTS_SERVER_URL}/posts/${post.id}`,
         {
           method: 'DELETE',

@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2019 Looker Data Sciences, Inc.
+ * Copyright (c) 2021 Looker Data Sciences, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -35,9 +35,9 @@ import {
 } from '@styled-icons/material'
 import { Link as RouterLink, LinkProps } from 'react-router-dom'
 import styled from 'styled-components'
-import { SidebarProps } from './'
 import omit from 'lodash/omit'
 import { ROUTES } from '../../KitchenSink'
+import { SidebarProps } from './'
 
 export const Sidebar: React.FC<SidebarProps> = ({
   route,

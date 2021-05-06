@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2020 Looker Data Sciences, Inc.
+ * Copyright (c) 2021 Looker Data Sciences, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -40,7 +40,6 @@ import {
   ExtensionContext2,
   ExtensionContextData2,
 } from '@looker/extension-sdk-react'
-import { AuthProps } from './types'
 import {
   AuthOption,
   POSTS_SERVER_URL,
@@ -58,6 +57,7 @@ import {
 } from '../../data/DataReducer'
 import { extractMessageFromError } from '../../../../utils/extract_message_from_error'
 import { getDataServerFetchProxy } from '../../utils/fetch_proxy'
+import { AuthProps } from './types'
 
 /**
  * Authorization component. Monitors whether a user is signed in or not.
@@ -130,7 +130,7 @@ export const Auth: React.FC<AuthProps> = ({ dataState, dataDispatch }) => {
         extensionSDK,
         location.state
       )
-      let response = await dataServerFetchProxy.fetchProxy(
+      const response = await dataServerFetchProxy.fetchProxy(
         `${POSTS_SERVER_URL}/auth`
       )
       return response.ok
