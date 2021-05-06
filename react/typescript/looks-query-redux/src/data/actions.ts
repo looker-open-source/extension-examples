@@ -22,49 +22,58 @@
  * THE SOFTWARE.
  */
 
-import { ILook } from "@looker/sdk"
+import { ILook } from '@looker/sdk'
 
 export const Actions = {
-  ALL_LOOKS_REQUEST:  'ALL_LOOKS_REQUEST',
+  ALL_LOOKS_REQUEST: 'ALL_LOOKS_REQUEST',
   ALL_LOOKS_SUCCESS: 'ALL_LOOKS_SUCCESS',
-  RUN_LOOK_REQUEST:  'RUN_LOOK_REQUEST',
+  RUN_LOOK_REQUEST: 'RUN_LOOK_REQUEST',
   RUN_LOOK_SUCCESS: 'RUN_LOOK_SUCCESS',
-  ERROR: 'ERROR'
+  ERROR: 'ERROR',
 }
 
 export interface RunLookSuccess {
-  lookId: number
-  result: Record<string, any>
+  lookId: string
+  result: Record<any, any>[]
 }
 
 export interface Action {
   type: string
-  payload?: ILook[] | string | number | RunLookSuccess
+  payload?: ILook[] | string | RunLookSuccess
 }
 
-export const allLooksRequest = ():Action => ({
+export const allLooksRequest = (): Action => ({
   type: Actions.ALL_LOOKS_REQUEST,
 })
 
-export const allLooksSuccess = (looks: ILook[]):Action => ({
+export const allLooksSuccess = (looks: ILook[]): Action => ({
   type: Actions.ALL_LOOKS_SUCCESS,
-  payload: looks
+  payload: looks,
 })
 
-export const runLookRequest = (lookId: number):Action => ({
+export const runLookRequest = (lookId: string): Action => ({
   type: Actions.RUN_LOOK_REQUEST,
-  payload: lookId
+  payload: lookId,
 })
 
-export const runLookSuccess = (lookId: number, result: Record<string, any>):Action => ({
+export const runLookSuccess = (
+  lookId: string,
+  result: Record<any, any>[]
+): Action => ({
   type: Actions.RUN_LOOK_SUCCESS,
   payload: {
     lookId,
-    result
-  }
+    result,
+  },
 })
 
-export const error = (error: string):Action => ({
+export const reportError = (error: string): Action => ({
   type: Actions.ERROR,
-  payload: error
+  payload: error,
 })
+
+export const actionCreators = {
+  allLooksRequest,
+  runLookRequest,
+  reportError,
+}

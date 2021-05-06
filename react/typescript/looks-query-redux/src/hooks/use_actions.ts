@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2019 Looker Data Sciences, Inc.
+ * Copyright (c) 2021 Looker Data Sciences, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,26 +22,14 @@
  * THE SOFTWARE.
  */
 
-import * as React from 'react'
-import * as ReactDOM from 'react-dom'
-import { Extension } from './demo/Extension'
-import { ExtensionProvider } from '@looker/extension-sdk-react'
-import { ComponentsProvider } from '@looker/components'
-import { Provider } from 'react-redux'
-import { configureStore } from './data/store'
+import { useMemo } from 'react'
+import { useDispatch } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { actionCreators } from '../data/actions'
 
-window.addEventListener('DOMContentLoaded', async (event) => {
-  const root = document.createElement('div')
-  document.body.appendChild(root)
-
-  ReactDOM.render(
-    <Provider store={configureStore()}>
-      <ExtensionProvider>
-        <ComponentsProvider>
-          <Extension />
-        </ComponentsProvider>
-      </ExtensionProvider>
-    </Provider>,
-    root
-  )
-})
+export const useActions = () => {
+  const dispatch = useDispatch()
+  return useMemo(() => {
+    return bindActionCreators(actionCreators, dispatch)
+  }, [dispatch])
+}

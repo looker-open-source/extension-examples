@@ -22,26 +22,21 @@
  * THE SOFTWARE.
  */
 
-import * as React from 'react'
-import * as ReactDOM from 'react-dom'
-import { Extension } from './demo/Extension'
-import { ExtensionProvider } from '@looker/extension-sdk-react'
-import { ComponentsProvider } from '@looker/components'
-import { Provider } from 'react-redux'
-import { configureStore } from './data/store'
+import { State } from './reducer'
+import { ILook } from '@looker/sdk'
 
-window.addEventListener('DOMContentLoaded', async (event) => {
-  const root = document.createElement('div')
-  document.body.appendChild(root)
+export const getLoading = (state: State): boolean => state.loading
 
-  ReactDOM.render(
-    <Provider store={configureStore()}>
-      <ExtensionProvider>
-        <ComponentsProvider>
-          <Extension />
-        </ComponentsProvider>
-      </ExtensionProvider>
-    </Provider>,
-    root
-  )
-})
+export const getError = (state: State): string | undefined => state.error
+
+export const getLooks = (state: State): ILook[] | undefined => state.looks
+
+export const getCurrentQuery = (currentLookId?: string) => (
+  state: State
+): Record<any, any>[] | undefined =>
+  currentLookId ? state.queries[currentLookId] : undefined
+
+export const getCurrentLook = (currentLookId?: string) => (
+  state: State
+): ILook | undefined =>
+  (state.looks || []).find((look) => look.id + '' === currentLookId)
