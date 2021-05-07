@@ -21,17 +21,3 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
-import React from 'react'
-import { MapIframe } from './MapIframe'
-import { ExtensionProvider2 } from '@looker/extension-sdk-react'
-import { hot } from 'react-hot-loader/root'
-import { Looker40SDK } from '@looker/sdk'
-
-export const App = hot(() => {
-  return (
-    <ExtensionProvider2 type={Looker40SDK}>
-      <MapIframe />
-    </ExtensionProvider2>
-  )
-})
