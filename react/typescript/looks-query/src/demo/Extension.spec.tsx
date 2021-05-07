@@ -28,7 +28,7 @@ import { Extension } from './Extension'
 
 describe('Extension', () => {
   test('it renders', async () => {
-    const ok = (result: { display_name: string }) => result
+    const ok = (result: unknown) => result
     const all_looks = () => [
       { id: 2, title: 'Hello Dolly' },
       { id: 4, title: 'Oklahoma' },

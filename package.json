@@ -1,0 +1,17 @@
+{
+  "license": "MIT",
+  "name": "extension-examples",
+  "version": "0.8.0",
+  "description": "Looker extension examples",
+  "author": "Looker",
+  "private": true,
+  "scripts": {
+    "clean": "lerna run --parallel clean",
+    "build": "lerna run --parallel build",
+    "lint": "lerna run --parallel lint:es",
+    "test": "lerna run --parallel test"
+  },
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
+}
