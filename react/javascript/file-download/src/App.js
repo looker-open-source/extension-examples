@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2020 Looker Data Sciences, Inc.
+ * Copyright (c) 2021 Looker Data Sciences, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,10 +23,10 @@
  */
 
 import React from 'react'
-import { FileDownload } from './FileDownload'
 import { ExtensionProvider2 } from '@looker/extension-sdk-react'
 import { hot } from 'react-hot-loader/root'
 import { Looker40SDK } from '@looker/sdk'
+import { FileDownload } from './FileDownload'
 
 export const App = hot(() => {
   return (
