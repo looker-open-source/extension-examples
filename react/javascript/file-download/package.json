@@ -11,8 +11,7 @@
     "prebuild": "yarn clean",
     "lint:es": "eslint 'src/**/*.js{,x}' --cache",
     "lint:es:fix": "eslint 'src/**/*.js{,x}' --cache --fix",
-    "test": "jest",
-    "server": "nodemon server/index.js"
+    "test": "jest"
   },
   "author": "Looker",
   "license": "MIT",

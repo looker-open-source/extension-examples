@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2019 Looker Data Sciences, Inc.
+ * Copyright (c) 2021 Looker Data Sciences, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,40 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+import React from 'react'
+import { renderWithTheme } from '@looker/components-test-utils'
+import { FileUpload } from './FileUpload'
 
-module.exports = (api) => {
-  const isTest = api.env('test')
-  api.cache(true)
-
-  return {
-    presets: [
-      [
-        '@babel/env',
-        {
-          targets: {
-            esmodules: true,
-          },
-          modules: isTest ? 'auto' : false,
-        },
-      ],
-      [
-        '@babel/preset-react',
-        {
-          development: process.env.BABEL_ENV !== 'build',
-        },
-      ],
-    ],
-    env: {
-      build: {
-        ignore: ['**/*.test.js', '**/*.test.jsx', '__snapshots__', '__tests__'],
-      },
-    },
-    ignore: ['node_modules'],
-    plugins: [
-      '@babel/plugin-proposal-class-properties',
-      '@babel/plugin-proposal-object-rest-spread',
-      '@babel/plugin-transform-runtime',
-      'babel-plugin-styled-components',
-    ],
-  }
-}
+describe('FileUpload', () => {
+  test('it renders', () => {
+    const { getByText } = renderWithTheme(<FileUpload />)
+    getByText('Entitled upload file')
+  })
+})

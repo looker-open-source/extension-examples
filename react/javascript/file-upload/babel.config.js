@@ -23,6 +23,7 @@
  */
 
 module.exports = (api) => {
+  const isTest = api.env('test')
   api.cache(true)
 
   return {
@@ -33,7 +34,7 @@ module.exports = (api) => {
           targets: {
             esmodules: true,
           },
-          modules: false,
+          modules: isTest ? 'auto' : false,
         },
       ],
       [
@@ -45,13 +46,7 @@ module.exports = (api) => {
     ],
     env: {
       build: {
-        ignore: [
-          '**/*.d.ts',
-          '**/*.test.js',
-          '**/*.test.jsx',
-          '__snapshots__',
-          '__tests__',
-        ],
+        ignore: ['**/*.test.js', '**/*.test.jsx', '__snapshots__', '__tests__'],
       },
     },
     ignore: ['node_modules'],
