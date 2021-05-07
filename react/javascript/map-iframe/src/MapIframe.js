@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2020 Looker Data Sciences, Inc.
+ * Copyright (c) 2021 Looker Data Sciences, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -30,7 +30,6 @@ import {
   DataTable,
   DataTableItem,
   DataTableCell,
-  Paragraph,
 } from '@looker/components'
 import capitals from 'country-json/src/country-by-capital-city.json'
 
