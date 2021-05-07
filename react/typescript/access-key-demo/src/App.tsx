@@ -26,7 +26,7 @@ import React, { useState } from 'react'
 import { ExtensionProvider } from '@looker/extension-sdk-react'
 import { hot } from 'react-hot-loader/root'
 import { ComponentsProvider, MessageBar } from '@looker/components'
-import { AppRouter } from './AppRouter'
+import { AccessKeyDemo } from './AccessKeyDemo'
 
 /**
  * Extension that implements a simple check to grant access to an extension
@@ -118,7 +118,7 @@ export const App: React.FC = hot(() => {
             {message}
           </MessageBar>
         )}
-        <AppRouter
+        <AccessKeyDemo
           updateCriticalMessage={updateCriticalMessage}
           updatePositiveMessage={updatePositiveMessage}
           clearMessage={clearMessage}
