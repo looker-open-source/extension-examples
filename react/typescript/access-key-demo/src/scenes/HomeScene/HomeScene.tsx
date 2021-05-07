@@ -30,7 +30,7 @@ import {
 } from '@looker/extension-sdk-react'
 import { useHistory, useLocation } from 'react-router-dom'
 import { DATA_SERVER_URL } from '../../App'
-import { ROUTES } from '../../AppRouter'
+import { ROUTES } from '../../AccessKeyDemo'
 import { createDataServerFetchProxy } from '../../utils'
 import { HomeSceneProps } from '.'
 

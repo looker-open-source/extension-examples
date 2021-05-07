@@ -34,7 +34,7 @@ import { HomeScene } from './scenes/HomeScene'
 import { MessageHandlerProps, ACCESS_KEY_NAME, DATA_SERVER_URL } from './App'
 
 /**
- * Application router code. Checks to see if the configuration scene should
+ * Access key demo. Checks to see if the configuration scene should
  * be displayed by checking the show_configuration_editor user attribute
  * created during the Marketplace installation. In the extension is not
  * loaded through Marketplace, the configuration scene is accessable.
@@ -42,7 +42,7 @@ import { MessageHandlerProps, ACCESS_KEY_NAME, DATA_SERVER_URL } from './App'
  * Note that access to the congiguration scene requires enhanced permissions.
  */
 
-interface AppRouterProps extends MessageHandlerProps {}
+interface AccessKeyDemoProps extends MessageHandlerProps {}
 
 /**
  * Routes for the extension.
@@ -55,7 +55,7 @@ export enum ROUTES {
 /**
  * Extension router
  */
-export const AppRouter: React.FC<AppRouterProps> = hot(
+export const AccessKeyDemo: React.FC<AccessKeyDemoProps> = hot(
   ({ updateCriticalMessage, updatePositiveMessage, clearMessage }) => {
     const [canConfigure, setCanConfigure] = useState<boolean>(false)
     const { extensionSDK, core40SDK } = useContext<ExtensionContextData>(

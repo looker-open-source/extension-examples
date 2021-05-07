@@ -37,7 +37,7 @@ import {
 } from '@looker/extension-sdk-react'
 import { useHistory, useLocation } from 'react-router-dom'
 import { ACCESS_KEY_NAME, DATA_SERVER_URL } from '../../App'
-import { ROUTES } from '../../AppRouter'
+import { ROUTES } from '../../AccessKeyDemo'
 import { ConfigurationSceneProps } from '.'
 
 /**
