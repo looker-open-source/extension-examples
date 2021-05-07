@@ -36,6 +36,7 @@ import {
   ExtensionHostApi,
   ExtensionSDK,
 } from '@looker/extension-sdk'
+import { MemoryRouter } from 'react-router-dom'
 
 const getExtensionSDK = (extensionSDKOverride: Partial<ExtensionSDK>) => {
   const extensionSDK = {
@@ -65,11 +66,13 @@ const withExtensionContext2 = (
   extensionSDKOverride: Partial<ExtensionSDK>,
   contextOverride: Partial<ExtensionContextData2<any>>
 ) => (
-  <ExtensionContext2.Provider
-    value={getExtensionContext2(extensionSDKOverride, contextOverride)}
-  >
-    {component}
-  </ExtensionContext2.Provider>
+  <MemoryRouter>
+    <ExtensionContext2.Provider
+      value={getExtensionContext2(extensionSDKOverride, contextOverride)}
+    >
+      {component}
+    </ExtensionContext2.Provider>
+  </MemoryRouter>
 )
 
 export const renderWithExtensionContext2 = (
@@ -97,11 +100,13 @@ const withExtensionContext = (
   extensionSDKOverride: Partial<ExtensionSDK>,
   contextOverride: Partial<ExtensionContextData>
 ) => (
-  <ExtensionContext.Provider
-    value={getExtensionContext(extensionSDKOverride, contextOverride)}
-  >
-    {component}
-  </ExtensionContext.Provider>
+  <MemoryRouter>
+    <ExtensionContext.Provider
+      value={getExtensionContext(extensionSDKOverride, contextOverride)}
+    >
+      {component}
+    </ExtensionContext.Provider>
+  </MemoryRouter>
 )
 
 export const renderWithExtensionContext = (
