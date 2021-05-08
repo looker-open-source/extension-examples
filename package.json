@@ -6,6 +6,7 @@
   "author": "Looker",
   "private": true,
   "scripts": {
+    "lerna": "lerna",
     "clean": "lerna run --parallel clean",
     "build": "lerna run --parallel build",
     "lint": "lerna run --parallel lint:es",
