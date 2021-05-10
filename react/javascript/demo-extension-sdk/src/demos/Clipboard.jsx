@@ -22,10 +22,11 @@
  * THE SOFTWARE.
  */
 
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Button, MessageBar, SpaceVertical, Tooltip } from '@looker/components'
 import { ExtensionContext2 } from '@looker/extension-sdk-react'
 import { DemoWrapper } from '../components'
+import { useAtLookerVersion } from '../hooks'
 
 const title = 'Clipboard write'
 const description = `Demonstrates how to write to the system clipboard.
@@ -33,7 +34,9 @@ const description = `Demonstrates how to write to the system clipboard.
 The Looker Extension SDK API allows an extension to write to the system
 clipboard.
 
-The \`use_clipboard\` entitlement must be set to write to the clipboard.`
+The \`use_clipboard\` entitlement must be set to write to the clipboard.
+
+The feature requires Looker >=21.8.0.`
 const code = `const { extensionSDK } = useContext(ExtensionContext2)
 await extensionSDK.clipboardWrite(
   'https://trends.google.com/trends/trendingsearches/daily?geo=US'
@@ -44,6 +47,17 @@ export const Clipboard = () => {
   const [intent, setIntent] = useState()
   const [message, setMessage] = useState()
   const { extensionSDK } = useContext(ExtensionContext2)
+  const atLookerVersion = useAtLookerVersion('>=21.8.0')
+  console.log({ atLookerVersion })
+
+  useEffect(() => {
+    if (atLookerVersion === false) {
+      updateMessage(
+        'Copy to clipboard functionality requires Looker version >=21.8.0',
+        'warn'
+      )
+    }
+  }, [atLookerVersion])
 
   const updateMessage = (message, intent = 'inform') => {
     setIntent(intent)
@@ -75,8 +89,12 @@ export const Clipboard = () => {
       codeSourceName={codeSourceName}
     >
       <SpaceVertical width="30%">
-        <Tooltip content="Click to change the current window title. After clicking, title should read 'My Extension Title'">
-          <Button onClick={writeToClipboard} width="100%">
+        <Tooltip content="Click to copy a link to the system clipboard.">
+          <Button
+            onClick={writeToClipboard}
+            width="100%"
+            disabled={!atLookerVersion}
+          >
             Update clipboard
           </Button>
         </Tooltip>
