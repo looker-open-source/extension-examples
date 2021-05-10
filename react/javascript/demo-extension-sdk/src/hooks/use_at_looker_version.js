@@ -21,9 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-export * from './Clipboard'
-export * from './Context'
-export * from './LocalStorage'
-export * from './Navigation'
-export * from './UpdateTitle'
-export * from './UserAttributes'
+import { useContext, useEffect, useState } from 'react'
+import { ExtensionContext2 } from '@looker/extension-sdk-react'
+import { intersects } from 'semver'
+
+export const useAtLookerVersion = (requiredLookerVersion) => {
+  const [atLookerVersion, setAtLookerVersion] = useState()
+  const { extensionSDK } = useContext(ExtensionContext2)
+  const { lookerHostData } = extensionSDK
+  const actualLookerVersion = (lookerHostData || {}).lookerVersion || '7.8.0'
+
+  useEffect(() => {
+    setAtLookerVersion(
+      intersects(requiredLookerVersion, actualLookerVersion, true)
+    )
+  }, [actualLookerVersion])
+
+  return atLookerVersion
+}

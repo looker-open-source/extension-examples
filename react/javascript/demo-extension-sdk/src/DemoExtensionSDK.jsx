@@ -25,6 +25,7 @@
 import React from 'react'
 import { ComponentsProvider, SpaceVertical } from '@looker/components'
 import {
+  Clipboard,
   Context,
   LocalStorage,
   Navigation,
@@ -41,6 +42,7 @@ export const DemoExtensionSDK = () => {
         <LocalStorage />
         <UserAttributes />
         <Context />
+        <Clipboard />
       </SpaceVertical>
     </ComponentsProvider>
   )
