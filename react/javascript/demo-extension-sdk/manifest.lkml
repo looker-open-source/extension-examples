@@ -1,5 +1,5 @@
 project_name: "demo-extension-sdk"
-application: demo {
+application: demo-extension-sdk {
   label: "Demo Extension SDK"
   # use url for development
   url: "http://localhost:8080/bundle.js"

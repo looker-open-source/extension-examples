@@ -69,4 +69,4 @@ The process above describes how to run the extension for development. Once you'r
 
 ## User attribute setup
 
-This extension example demonstrates the use of user attributes. The user attribute must be defined to the Looker instance in order for the user attribute functionality to work. Add a user attribute named `demo_extension_sdk_demo_user_value` to your system (adjust the user attribute name based upon the project and application name defined in your manifest). More details can be found [here](https://docs.looker.com/data-modeling//extension-framework/js-r-extension-examples#user_attributes).
+This extension example demonstrates the use of user attributes. The user attribute must be defined to the Looker instance in order for the user attribute functionality to work. Add a user attribute named `demo_extension_sdk_demo_extension_sdk_user_value` to your system (adjust the user attribute name based upon the project and application name defined in your manifest). More details can be found [here](https://docs.looker.com/data-modeling//extension-framework/js-r-extension-examples#user_attributes).
