@@ -30,7 +30,7 @@ import { hot } from 'react-hot-loader/root'
 
 export const App = hot(() => {
   return (
-    <ExtensionProvider2 type={Looker40SDK}>
+    <ExtensionProvider2 type={Looker40SDK} chattyTimeout={-1}>
       <DemoCoreSDK />
     </ExtensionProvider2>
   )
