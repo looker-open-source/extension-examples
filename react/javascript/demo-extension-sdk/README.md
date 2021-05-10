@@ -45,7 +45,7 @@ This is an example of the Looker Extension SDK using javascript. It does NOT dem
 
 - Add a connection in this model.
 - [Configure the model you created](https://docs.looker.com/data-modeling/getting-started/create-projects#configuring_a_model) so that it has access to the selected connection.
-  We do this because Looker permissions data access via models— In order to grant / limit access to an extension, it must be associated with a model.
+  We do this because Looker permits data access via models— In order to grant / limit access to an extension, it must be associated with a model.
 
 7. Connect the project to Git. This can be done in multiple ways:
 
