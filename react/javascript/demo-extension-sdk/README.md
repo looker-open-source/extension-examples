@@ -1,6 +1,6 @@
 # Demo Extension SDK
 
-This example usage of the Looker Extension SDK using javascript. It does NOT demonstrate how to use the core SDK in an extension.
+This is an example of the Looker Extension SDK using javascript. It does NOT demonstrate how to use the core SDK in an extension.
 
 ## Getting Started for Development
 
