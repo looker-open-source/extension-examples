@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+export * from './Clipboard'
 export * from './Context'
 export * from './LocalStorage'
 export * from './Navigation'
