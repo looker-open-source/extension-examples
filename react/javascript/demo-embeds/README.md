@@ -63,6 +63,6 @@ This example demonstrates using Looker embeds in an extension.
 
 The process above describes how to run the extension for development. Once you're done developing and ready to deploy, the production version of the extension may be deployed as follows:
 
-1. In the extension project directory build the extension by running `yarn develop`.
+1. In the extension project directory build the extension by running `yarn build`.
 2. Drag and drop the generated `dist/bundle.js` file into the Looker project interface
 3. Modify the `manifest.lkml` to use `file` instead of `url`:
