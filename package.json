@@ -6,13 +6,22 @@
   "author": "Looker",
   "private": true,
   "scripts": {
+    "bootstrap": "lerna bootstrap",
     "lerna": "lerna",
     "clean": "lerna run --parallel clean",
     "build": "lerna run --parallel build",
     "lint": "lerna run --parallel lint:es",
-    "test": "lerna run --parallel test"
+    "test": "lerna run --parallel test",
+    "uberext": "ts-node ./scripts/create_uber_extension_project.ts"
   },
   "devDependencies": {
+    "@types/node": "^15.3.0",
+    "@types/yargs": "^16.0.2",
     "lerna": "^4.0.0"
+  },
+  "dependencies": {
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4",
+    "yargs": "^17.0.1"
   }
 }
