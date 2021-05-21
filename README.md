@@ -37,16 +37,39 @@ For those seeking to build monetized or otherwise gated extensions, the [access-
 
 ## Running the examples
 
+### Individual examples
+
 Each example directory has a README.md that details how to run that specific example. You should follow the specific examples for each, but the general workflow is:
 
 0. `git clone git@github.com:looker-open-source/extension-examples.git` to clone this entire repository.
 1. `cd` to the relevant directory.
 2. `yarn install` to get all necessary packages.
-3. `yarn start` to begin serving the bundle
+3. `yarn develop` to begin serving the bundle
 4. Configure a Looker project with a `manifest.lkml` that listens to that bundle.
 5. Open the extension from the Browse menu in your Looker instance.
 
 Again, make sure to read the specific instructions in each directory's README.md.
+
+### Creating an "uber" extension block
+
+This repo contains a script, `yarn uberext`, that will build an extension block that will be populated with compiled versions of all of the examples. Some examples may still require that sample services be ran separately but all extensions will launch. The script provides defaults for all its options but these can be overridden. Run `yarn uberext --help` for more information.
+
+To build the uber extension block follow the following instructions:
+
+1. Create a directory adjacent to the directory this repo resides in called `uberext` (you can use a different directory name but you need to use the `-t` option when running the script).
+2. Run `git init` in the directory.
+3. Create a remote repo and associate the repo created in step 2 with it.
+4. Run `yarn bootstrap` in this repo's root directory. This will initialize all of the example projects.
+5. Run `yarn build` in this repo's root directory. This will build all of the example projects.
+6. Run `yarn uberext` in this repo's root directory. This will create the extension block in the directory created in step 1.
+7. Navigate to the `uberext` directory.
+8. Run `git add .` to stage the files.
+9. Run `git commit -m "init"`to commit the files.
+10. Run `git push` to add the files to the remote repo.
+11. In Looker, create a new project and initialize with the remote repo created in step 3.
+12. Deploy the project.
+
+At this point the extensions will appear in the Looker instance browse menu (you may have to reload the page).
 
 ## Please contribute
 

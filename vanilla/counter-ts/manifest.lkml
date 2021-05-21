@@ -1,6 +1,6 @@
-project_name: "extension-counter"
+project_name: "extension-counter-ts"
 
-application: extension-counter {
+application: extension-counter-ts {
   label: "Extension Counter"
   url: "http://localhost:8081/bundle.js"
   # file: "bundle.js"

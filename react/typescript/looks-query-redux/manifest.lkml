@@ -1,6 +1,6 @@
 project_name: "looks-query-redux"
 
-application: look-runner {
+application: look-runner-redux {
     label: "Look Runner"
     url: "http://localhost:8080/bundle.js"
     # file: "bundle.js
