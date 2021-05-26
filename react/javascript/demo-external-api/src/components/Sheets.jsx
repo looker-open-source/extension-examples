@@ -32,21 +32,35 @@ import {
   Tooltip,
   useConfirm,
 } from '@looker/components'
+import { ExtensionContext2 } from '@looker/extension-sdk-react'
 import { SheetsContext } from './SheetsProvider'
 import { SheetsTable } from './SheetsTable'
 import { SheetsForm } from './SheetsForm'
 
 /**
+ * This is the id of a sample sheet provided by Google. It is used to create
+ * an initial spreadsheet to edit. A new spreadsheet can be created at any
+ * time by pressing the recreate sheet from source button.
+ */
+const sourceSpreadsheetId = '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms'
+/**
+ * Sheets range. See https://developers.google.com/sheets/api for more details.
+ */
+const range = 'Class Data!A2:F'
+
+/**
  * Main sheets component.
  */
 export const Sheets = ({ signOut, token, updateMessage, clearMessage }) => {
+  const { extensionSDK } = useContext(ExtensionContext2)
   const {
-    init,
-    load,
-    remove,
-    move,
-    update,
-    insert,
+    unloadSpreadSheet,
+    copySpreadsheet,
+    loadSpreadSheet,
+    moveRowInSpreadSheet,
+    removeRowFromSpreadSheet,
+    updateRowInSpreadSheet,
+    insertRowInSpreadSheet,
     spreadsheetId,
     rows,
     error,
@@ -58,8 +72,29 @@ export const Sheets = ({ signOut, token, updateMessage, clearMessage }) => {
   const [showForm, setShowForm] = useState()
 
   useEffect(() => {
-    load()
-  }, [token])
+    const initialize = async () => {
+      const contextData = extensionSDK.getContextData()
+      if (contextData) {
+        await loadSpreadSheet(contextData, range)
+      } else {
+        const spreadsheetId = await copySpreadsheet(sourceSpreadsheetId)
+        if (spreadsheetId) {
+          await extensionSDK.saveContextData(spreadsheetId)
+          await loadSpreadSheet(spreadsheetId, range)
+        }
+      }
+    }
+    initialize()
+  }, [token, extensionSDK])
+
+  const recreateFromSource = async () => {
+    unloadSpreadSheet()
+    const spreadsheetId = await copySpreadsheet(sourceSpreadsheetId)
+    if (spreadsheetId) {
+      await extensionSDK.saveContextData(spreadsheetId)
+      await loadSpreadSheet(spreadsheetId, range)
+    }
+  }
 
   const [deleteConfirmDialog, openDeleteConfirmDialog] = useConfirm({
     confirm: 'Yes, delete row from sheet',
@@ -67,7 +102,7 @@ export const Sheets = ({ signOut, token, updateMessage, clearMessage }) => {
     title: 'Delete row from sheet',
     message: `Are you sure you want to delete the row with name ${rowToDeleteName} from the sheet?`,
     onConfirm: (close) => {
-      remove(activeIndex)
+      removeRowFromSpreadSheet(activeIndex)
       close()
     },
     onCancel: (close) => {
@@ -101,10 +136,10 @@ export const Sheets = ({ signOut, token, updateMessage, clearMessage }) => {
   }
 
   // Move a row up one row in the spreadsheet
-  const onRowMoveUp = (index) => move(index, true)
+  const onRowMoveUp = (index) => moveRowInSpreadSheet(index, true)
 
   // Move a row down one row in the spreadsheet
-  const onRowMoveDown = (index) => move(index, false)
+  const onRowMoveDown = (index) => moveRowInSpreadSheet(index, false)
 
   // Delete a row from the spreadsheet.
   const onRowDelete = (index) => {
@@ -122,8 +157,8 @@ export const Sheets = ({ signOut, token, updateMessage, clearMessage }) => {
           </Heading>
         </Space>
         <Tooltip content="Create a new spreadsheet using the contents of a sample spreadsheet provided by google.">
-          <ButtonOutline onClick={init}>
-            Initialize sheet from source
+          <ButtonOutline onClick={recreateFromSource}>
+            Recreate sheet from source
           </ButtonOutline>
         </Tooltip>
       </Space>
@@ -142,7 +177,7 @@ export const Sheets = ({ signOut, token, updateMessage, clearMessage }) => {
         index={activeIndex}
         row={insertRow ? ['', '', '', '', '', ''] : rows[activeIndex]}
         isInsert={insertRow}
-        onRowSave={insertRow ? insert : update}
+        onRowSave={insertRow ? insertRowInSpreadSheet : updateRowInSpreadSheet}
         rows={rows}
       />
     </>

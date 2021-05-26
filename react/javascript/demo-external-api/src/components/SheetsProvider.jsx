@@ -29,20 +29,13 @@ import { OauthContext } from './OauthProvider'
 export const SheetsContext = createContext({})
 
 /**
- * This is the id of a sample sheet provided by Google.
- */
-const originalSpreadsheetId = '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms'
-/**
- * Sheets range. See https://developers.google.com/sheets/api for more details.
- */
-const range = 'Class Data!A2:F'
-
-/**
- * Sheets provider
+ * Sheets provider that exposes a simple wrapper around the Google
+ * sheets restful API.
  */
 export const SheetsProvider = ({ children }) => {
   const { token } = useContext(OauthContext)
   const [spreadsheetId, setSpreadsheetId] = useState()
+  const [range, setRange] = useState()
   const [expired, setExpired] = useState(false)
   const [error, setError] = useState(false)
   const [rows, setRows] = useState([])
@@ -51,6 +44,8 @@ export const SheetsProvider = ({ children }) => {
   /**
    * Low level invocation of the sheets API.
    * Performs primitive error handling.
+   *
+   * This is a private method.
    */
   const invokeSheetsApi = async (url, init) => {
     try {
@@ -70,12 +65,22 @@ export const SheetsProvider = ({ children }) => {
   }
 
   /**
-   * Load rows for a given spreadsheet id.
+   * Unload the currently loaded spreadsheet.
    */
-  const loadRows = async (requestSpreadsheetId) => {
+  const unloadSpreadSheet = () => {
+    setRows([])
+    setSpreadsheetId()
+    setRange()
+  }
+
+  /**
+   * Load the rows for a given spreadsheet id and range.
+   */
+  const loadSpreadSheet = async (requestSpreadsheetId, requestRange) => {
     setSpreadsheetId(requestSpreadsheetId)
+    setRange(requestRange)
     const { ok, body } = await invokeSheetsApi(
-      `https://sheets.googleapis.com/v4/spreadsheets/${requestSpreadsheetId}/values/${range}?access_token=${token}`
+      `https://sheets.googleapis.com/v4/spreadsheets/${requestSpreadsheetId}/values/${requestRange}?access_token=${token}`
     )
     if (ok && body && body.values) {
       setRows(body.values)
@@ -83,17 +88,13 @@ export const SheetsProvider = ({ children }) => {
   }
 
   /**
-   * Initialize sheets data. Reads sheets data from the Google sample and creates a new
-   * sheet using the data. The id of the newly created sheet is stored in the extension
-   * context so it is reloaded the next time the extension is executed.
+   * Create a new spreadsheet from the source spread sheet provided.
    */
-  const init = async () => {
-    setRows([])
+  const copySpreadsheet = async (sourceSpreadsheetId) => {
     let sheetsData
     {
-      // Read the sample sheets data.
       const { ok, body } = await invokeSheetsApi(
-        `https://sheets.googleapis.com/v4/spreadsheets/${originalSpreadsheetId}?includeGridData=true&access_token=${token}`
+        `https://sheets.googleapis.com/v4/spreadsheets/${sourceSpreadsheetId}?includeGridData=true&access_token=${token}`
       )
       sheetsData = ok ? body : undefined
     }
@@ -115,34 +116,15 @@ export const SheetsProvider = ({ children }) => {
         body = response.body
       }
       if (ok) {
-        // Save the sheet id to the extension context
-        await extensionSDK.saveContextData(body.spreadsheetId)
-        // Load the data from the newly created spreadsheet.
-        loadRows(body.spreadsheetId)
+        return body.spreadsheetId
       }
     }
   }
 
   /**
-   * Load the spreadsheet data for the extension. Creates a new spreadsheet if
-   * extension context does not contain a spreadsheet id.
+   * Remove a row from the current spreadsheet.
    */
-  const load = async () => {
-    // Get the spreadsheet id.
-    const contextData = extensionSDK.getContextData()
-    if (contextData) {
-      // Got a spreadsheet id so load the rows
-      loadRows(contextData)
-    } else {
-      // No spreadsheet id so create a new spreadsheet from the Google sample.
-      init()
-    }
-  }
-
-  /**
-   * Remove a row from the spreadsheet.
-   */
-  const remove = async (rowIndex) => {
+  const removeRowFromSpreadSheet = async (rowIndex) => {
     // row index is based on rows shown. Need to adjust for header.
     const sourceIndex = rowIndex + 1
     const { ok } = await invokeSheetsApi(
@@ -174,10 +156,10 @@ export const SheetsProvider = ({ children }) => {
   }
 
   /**
-   * Move a row in the spreadsheet. Either up or down. Only moves the row by an
+   * Move a row in the current spreadsheet. Either up or down. Only moves the row by an
    * offset of one.
    */
-  const move = async (rowIndex, moveUp) => {
+  const moveRowInSpreadSheet = async (rowIndex, moveUp) => {
     // row index is based on rows shown. Need to adjust for header.
     const sourceIndex = rowIndex + 1
     // moving dest index is one less than source index.
@@ -220,8 +202,10 @@ export const SheetsProvider = ({ children }) => {
    * Updates all the rows in the spreadsheet (bit of a brute force approach to update or
    * insert a row in the sheet). There are no doubt more efficient ways to do this but
    * this is a demo app.
+   *
+   * This is a private method.
    */
-  const updateAllRows = async (newRows) => {
+  const updateAllRowsInSpreadSheet = async (newRows) => {
     const { ok } = await invokeSheetsApi(
       `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values:batchUpdate?access_token=${token}`,
       {
@@ -237,24 +221,24 @@ export const SheetsProvider = ({ children }) => {
   }
 
   /**
-   * Update a row in the spreadsheet.
+   * Update a row in the current spreadsheet.
    */
-  const update = (rowIndex, row) => {
+  const updateRowInSpreadSheet = (rowIndex, row) => {
     const newRows = [...rows]
     newRows[rowIndex] = row
-    const ok = updateAllRows(newRows)
+    const ok = updateAllRowsInSpreadSheet(newRows)
     if (ok) {
       setRows(newRows)
     }
   }
 
   /**
-   * Insert a row in the spreadsheet.
+   * Insert a row in the current spreadsheet.
    */
-  const insert = async (rowIndex, row) => {
+  const insertRowInSpreadSheet = async (rowIndex, row) => {
     const newRows = [...rows]
     newRows.splice(rowIndex, 0, row)
-    const ok = updateAllRows(newRows)
+    const ok = updateAllRowsInSpreadSheet(newRows)
     if (ok) {
       setRows(newRows)
     }
@@ -267,12 +251,13 @@ export const SheetsProvider = ({ children }) => {
         expired,
         spreadsheetId,
         rows,
-        init,
-        load,
-        move,
-        remove,
-        update,
-        insert,
+        unloadSpreadSheet,
+        copySpreadsheet,
+        loadSpreadSheet,
+        moveRowInSpreadSheet,
+        removeRowFromSpreadSheet,
+        updateRowInSpreadSheet,
+        insertRowInSpreadSheet,
       }}
     >
       {children}

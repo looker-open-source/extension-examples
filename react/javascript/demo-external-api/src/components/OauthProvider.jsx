@@ -31,16 +31,42 @@ export const OauthContext = createContext({})
 const authUrl = 'https://accounts.google.com/o/oauth2/v2/auth'
 
 /**
- * Oauth provider
+ * Default push state handler.
+ * props object has one or two properties
+ * state - always present and represents current state
+ * token - only present for login and logout
+ *       - login - valid token
+ *       - logout - always undefined
+ * Push state handler gets called on three occassions
+ * 1. to get the current token - no token so get from state
+ * 2. to login - token property present so add token to state
+ * 3. to logout - token property present but undefined - remove from state.
  */
-export const OauthProvider = ({ children, clientId, scopes }) => {
-  const [loggingIn, setLoggingIn] = useState(false)
-  const { state } = useLocation()
-  const history = useHistory()
+const defaultPushStateHandler = (props) => {
+  const { token, state } = props
+  return Object.prototype.hasOwnProperty.call(props, 'token') ? token : state
+}
+
+/**
+ * Oauth provider that stores an OAUTH2 access token in history push state.
+ * This example uses Googles implicit OAUTH2 flow.
+ */
+export const OauthProvider = ({
+  children,
+  clientId,
+  scopes,
+  pushStateHandler = defaultPushStateHandler,
+  loggedInRoute = '/home',
+  loggedOutRoute = '/',
+}) => {
   const { extensionSDK } = useContext(ExtensionContext2)
+  const [loggingIn, setLoggingIn] = useState(false)
+  const history = useHistory()
+  const { state } = useLocation()
+  const token = pushStateHandler({ state })
 
   /**
-   * OAUTH2 authentication
+   * OAUTH2 authentication.
    */
   const signIn = async () => {
     try {
@@ -52,7 +78,10 @@ export const OauthProvider = ({ children, clientId, scopes }) => {
       })
       // eslint-disable-next-line camelcase
       const { access_token } = response
-      history.push('/sheets', access_token)
+      history.push(
+        loggedInRoute,
+        pushStateHandler({ state, token: access_token })
+      )
       return true
     } catch (error) {
       console.error(error)
@@ -63,15 +92,16 @@ export const OauthProvider = ({ children, clientId, scopes }) => {
   }
 
   /**
-   * Clear the token from push state. Note that the token is
+   * Simplistic sign out of the user.
+   * Removes the token from push state. Note that the token is
    * still active if it has not already expired.
    */
   const signOut = () => {
-    history.push('/', undefined)
+    history.push(loggedOutRoute, pushStateHandler({ state, token: undefined }))
   }
 
   return (
-    <OauthContext.Provider value={{ loggingIn, token: state, signIn, signOut }}>
+    <OauthContext.Provider value={{ loggingIn, token, signIn, signOut }}>
       {children}
     </OauthContext.Provider>
   )
@@ -81,4 +111,7 @@ OauthProvider.propTypes = {
   children: PropTypes.object,
   clientId: PropTypes.string.isRequired,
   scopes: PropTypes.string.isRequired,
+  pushStateHandler: PropTypes.func,
+  loggedInRoute: PropTypes.string,
+  loggedOutRoute: PropTypes.string,
 }
