@@ -30,6 +30,8 @@ import {
   ExtensionContext,
 } from '@looker/extension-sdk-react'
 import { registerHostApi } from '@looker/extension-sdk'
+import { OauthContext } from '../components/OauthProvider'
+import { SheetsContext } from '../components/SheetsProvider'
 
 const getExtensionSDK = (extensionSDKOverride) => {
   const extensionSDK = {
@@ -57,7 +59,9 @@ const withExtensionContext2 = (
     <ExtensionContext2.Provider
       value={getExtensionContext(extensionSDKOverride, contextOverride)}
     >
-      {component}
+      <OauthContext.Provider value={{}}>
+        <SheetsContext.Provider value={{}}>{component}</SheetsContext.Provider>
+      </OauthContext.Provider>
     </ExtensionContext2.Provider>
   </MemoryRouter>
 )

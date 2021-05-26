@@ -21,24 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { useContext, useState } from 'react'
+import React, { createContext, useContext, useState } from 'react'
+import PropTypes from 'prop-types'
 import { useHistory, useLocation } from 'react-router-dom'
 import { ExtensionContext2 } from '@looker/extension-sdk-react'
 
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID
-const GOOGLE_SCOPES = 'https://www.googleapis.com/auth/spreadsheets'
+export const OauthContext = createContext({})
+
+const authUrl = 'https://accounts.google.com/o/oauth2/v2/auth'
 
 /**
- * Hook that handles google OAUTH2 authentication. The OAUTH2 token
- * is stored in the browser push state which allows it to survive a
- * page reload.
- *
- * The OAUTH2 token expire. When it does, the token is cleared from
- * push state resulting in the majority of components being hidden.
- * There are more user friendly ways of handling this but this is
- * a demo app so a simple approach has been taken.
+ * Oauth provider
  */
-export const useGoogleAuth = () => {
+export const OauthProvider = ({ children, clientId, scopes }) => {
   const [loggingIn, setLoggingIn] = useState(false)
   const { state } = useLocation()
   const history = useHistory()
@@ -50,14 +45,11 @@ export const useGoogleAuth = () => {
   const signIn = async () => {
     try {
       setLoggingIn(true)
-      const response = await extensionSDK.oauth2Authenticate(
-        'https://accounts.google.com/o/oauth2/v2/auth',
-        {
-          client_id: GOOGLE_CLIENT_ID,
-          scope: GOOGLE_SCOPES,
-          response_type: 'token',
-        }
-      )
+      const response = await extensionSDK.oauth2Authenticate(authUrl, {
+        client_id: clientId,
+        scope: scopes,
+        response_type: 'token',
+      })
       // eslint-disable-next-line camelcase
       const { access_token } = response
       history.push('/sheets', access_token)
@@ -78,5 +70,15 @@ export const useGoogleAuth = () => {
     history.push('/', undefined)
   }
 
-  return { loggingIn, token: state, signIn, signOut }
+  return (
+    <OauthContext.Provider value={{ loggingIn, token: state, signIn, signOut }}>
+      {children}
+    </OauthContext.Provider>
+  )
+}
+
+OauthProvider.propTypes = {
+  children: PropTypes.object,
+  clientId: PropTypes.string.isRequired,
+  scopes: PropTypes.string.isRequired,
 }

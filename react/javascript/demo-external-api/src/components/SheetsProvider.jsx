@@ -21,8 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { useContext, useState } from 'react'
+import React, { createContext, useContext, useState } from 'react'
+import PropTypes from 'prop-types'
 import { ExtensionContext2 } from '@looker/extension-sdk-react'
+import { OauthContext } from './OauthProvider'
+
+export const SheetsContext = createContext({})
 
 /**
  * This is the id of a sample sheet provided by Google.
@@ -34,9 +38,10 @@ const originalSpreadsheetId = '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms'
 const range = 'Class Data!A2:F'
 
 /**
- * A hook for interacting with the google sheets api.
+ * Sheets provider
  */
-export const useGoogleSheets = (token) => {
+export const SheetsProvider = ({ children }) => {
+  const { token } = useContext(OauthContext)
   const [spreadsheetId, setSpreadsheetId] = useState()
   const [expired, setExpired] = useState(false)
   const [error, setError] = useState(false)
@@ -255,16 +260,26 @@ export const useGoogleSheets = (token) => {
     }
   }
 
-  return {
-    error,
-    expired,
-    spreadsheetId,
-    rows,
-    init,
-    load,
-    move,
-    remove,
-    update,
-    insert,
-  }
+  return (
+    <SheetsContext.Provider
+      value={{
+        error,
+        expired,
+        spreadsheetId,
+        rows,
+        init,
+        load,
+        move,
+        remove,
+        update,
+        insert,
+      }}
+    >
+      {children}
+    </SheetsContext.Provider>
+  )
+}
+
+SheetsProvider.propTypes = {
+  children: PropTypes.object,
 }

@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import PropTypes from 'prop-types'
 import {
   ButtonOutline,
@@ -32,7 +32,7 @@ import {
   Tooltip,
   useConfirm,
 } from '@looker/components'
-import { useGoogleSheets } from '../../hooks'
+import { SheetsContext } from './SheetsProvider'
 import { SheetsTable } from './SheetsTable'
 import { SheetsForm } from './SheetsForm'
 
@@ -51,7 +51,7 @@ export const Sheets = ({ signOut, token, updateMessage, clearMessage }) => {
     rows,
     error,
     expired,
-  } = useGoogleSheets(token)
+  } = useContext(SheetsContext)
   const [rowToDeleteName, setRowToDeleteName] = useState()
   const [activeIndex, setActiveIndex] = useState()
   const [insertRow, setInsertRow] = useState()

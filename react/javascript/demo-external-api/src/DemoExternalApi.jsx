@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import {
   Space,
   ComponentsProvider,
@@ -30,16 +30,16 @@ import {
   SpaceVertical,
   MessageBar,
 } from '@looker/components'
-import { Sheets } from './components/Sheets/Sheets'
-import { useGoogleAuth } from './hooks'
+import { Sheets } from './components/Sheets'
+import { OauthContext } from './components/OauthProvider'
 
 /**
  * Application that demonstrates how to create and update a Google
  * spreadsheet.
  */
 export const DemoExternalApi = () => {
+  const { loggingIn, token, signIn, signOut } = useContext(OauthContext)
   const [message, setMessage] = useState()
-  const { loggingIn, token, signIn, signOut } = useGoogleAuth()
 
   const onSignInOutClick = () => {
     if (token) {
