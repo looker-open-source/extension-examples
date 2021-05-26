@@ -41,7 +41,7 @@ This example demonstrates usage of external API in an extension using javascript
 
    Either drag & upload this file into your Looker project, or create a `manifest.lkml` with the same content. Change the `id`, `label`, or `url` as needed.
 
-6. Create a `model` LookML file in your project. The name doesn't matter but the convention is to name it the same as the project, in this case, demo-core-sdk.
+6. Create a `model` LookML file in your project. The name doesn't matter but the convention is to name it the same as the project, in this case, demo-external-api.
 
 - Add a connection in this model.
 - [Configure the model you created](https://docs.looker.com/data-modeling/getting-started/create-projects#configuring_a_model) so that it has access to the selected connection.
