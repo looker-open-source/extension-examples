@@ -13,8 +13,8 @@
     "lint:es:fix": "eslint 'src/**/*.js{,x}' --cache --fix",
     "test": "jest"
   },
-  "author": "yournamehere",
-  "license": "Apache-2.0",
+  "author": "Looker",
+  "license": "MIT",
   "engines": {
     "node": ">=12"
   },
