@@ -30,7 +30,9 @@ module.exports = {
     'sort-keys-fix',
     'testing-library',
   ],
-  rules: {},
+  rules: {
+    camelcase: ['error', { ignoreDestructuring: true, properties: 'never' }],
+  },
   settings: {
     react: {
       version: 'detect',

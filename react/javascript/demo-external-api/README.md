@@ -1,39 +1,52 @@
 # Demo External API
 
-This example demonstrates usage of external API in an extension using javascript. Its uses OAUTH2 to get an access token from Google. It then use that token to create and update a spreadsheet using the Google sheet APIs. The key thing to observe are:
+This example demonstrates usage of external API in an extension using javascript. It uses OAUTH2 to get an access token from Google. It then uses that token to create and update a spreadsheet using the Google sheets APIs. The key things to observe are:
 
 - the OauthProvider which handles interfactions with Googles OAUTH2 identity service. The auth token is stored in the pushRouter state so that it survives a page reload.
 - The SheetsProvider which provides a simple abstraction to calling the Google sheets restful endpoints.
+
+Note that the demo application uses a sample spreadsheet provided by Google (id `1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms`). The contents of this spreadsheet is copied to a new spreadsheet that the application can then update.
 
 ## Prerequisites
 
 This demo requires a project with access to the sheets API and an OAUTH2 client to be setup in the Google console.
 
-1. [Open the Google console](https://console.cloud.google.com/).
+1. [Open the `Google Console`](https://console.cloud.google.com/).
 2. Select `IAM and Admin/Create a project`.
-3. Enter the name of the project and click `create` which navigates you to the project dashboard.
-4. On the project dashboard click `select project` for your newly created project. This displays information about your project and tasks you can do.
-5. In the `Getting started` section click `Explore and enable APIs`.
-6. Click `Libraries` and search for `Sheets`. This brings up a link to the `Google Sheets API`. `Select` it.
-7. Click `Enable` which brings you to the Google Sheets API setup.
-8. Click the `Configure Consent Screen` button.
-9. Select the `User Type` and click Create. You maybe restricted as to the type you can select.
-10. Enter `application information` and click `Save and Continue`. The minimum you need to enter is the `App name`, `User support email` and at least one `developer contact email`.
-11. Click `Save and Continue` until you see the `Back to Dashboard` button. Click the `Back to Dashboard` button.
-12. Click the `Credentials` link in the sidebar.
-13. Click the `Create Credentials` button and select `OAUTH client ID`.
-14. Select `Application Type` of `Web Application`.
-15. `Name` your application.
-16. Add the base url of the Looker instance that will host your extension as an `Authorized JavaScript Origin`. Example `https://myinstance.looker.com`.
-17. Add the base url of the Looker instance that will host your extension appended with `/extensions/oauth2_redirect` as an `Authorized redirect URI`. Example `https://myinstance.looker.com//extensions/oauth2_redirect`.
-18. Click `Create`. This will display the `Client Id` and `Client Secret`. Copy the client id.
-19. Create a `.env` file in the root of your project. Create an entry like this: `GOOGLE_CLIENT_ID=Application OAUTH2 client ID` from the previous step. **Important: Do not add the `.env` file to source control.**
+3. Enter the name of the project and click `create` which eventually will navigate you to the project dashboard. If you are not automatically navigated you may have to manually navigate to the project dashboard.
+4. In the `Getting started` section of the dashboard (first column, last entry), click `Explore and enable APIs`.
+5. Click the `OAuth consent Screen` link in the sidebar.
+6. Select the `User Type` and click Create. You maybe restricted as to the type you can select.
+7. Enter `application information`. The minimum you need to enter is the `App name`, `User support email` and at least one `developer contact email`. Click `Save and Continue`.
+8. Click `Save and continue` on the `Edit app registration - Scopes` page.
+9. If you selected the `External User type` you will need to enter Test users on the`Edit app registration - Test users` page. Click `Save and Continue`.
+10. Click the `Credentials` link in the sidebar.
+11. Click the `Create Credentials` button and select `OAUTH client ID`.
+12. Select `Application Type` of `Web Application`.
+13. Enter a `Name` for your application.
+14. Add the base url of the Looker instance that will host your extension as an `Authorized JavaScript Origin`. Example `https://myinstance.looker.com`.
+15. Add the base url of the Looker instance that will host your extension appended with `/extensions/oauth2_redirect` as an `Authorized redirect URI`. Example `https://myinstance.looker.com/extensions/oauth2_redirect`.
+16. Click `Create`. This will display the `Client Id` and `Client Secret`. Copy the client id.
+17. Create a `.env` file in the root of your project. Create an entry like this: `GOOGLE_CLIENT_ID=Application OAUTH2 client ID` from the previous step. **Important: Do not add the `.env` file to source control.**
+18. Click `Library` in the sidebar which will bring up the `Welcome to the API Library Page`.
+19. Enter `Sheets` in the search filed. This displays a link to the `Google Sheets API`. Click the link.
+20. Click `Enable` which brings you to the Google Sheets API setup.
 
 At this point you should be able use OAUTH2 to login Google and use the Google Sheets API in the Extension.
+
+Should you need to make further updates:
+
+1. Bring up the `Project dashboard` (select from the `Google Console` navigation bar).
+2. In the `Getting started` section of the dashboard (first column, last entry), click `Explore and enable APIs`.
+3. Click `Credentials` in the sidebar to get the `client id`.
+4. Edit the OAUTH2 2.0 Client ID to add or change the `Authorized JavaScript Origin` or `Authorized redirect URI` settings.
+5. Click `OAuth consent screen` to add test users.
 
 Further information on creating a Google console project can be found [here](https://developers.google.com/workspace/guides/create-project).
 
 Information on using the sheets API can be found [here](https://developers.google.com/sheets/api/quickstart/js).
+
+Please read the section **Logging in using Google OAUTH** for further information on the OAUTH login process.
 
 ## Getting Started for Development
 

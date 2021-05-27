@@ -47,11 +47,30 @@ export const SheetsProvider = ({ children }) => {
    *
    * This is a private method.
    */
-  const invokeSheetsApi = async (url, init) => {
+  const invokeSheetsApi = async (pathname, requestBody) => {
     try {
+      const init = requestBody
+        ? {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(requestBody),
+          }
+        : {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+
       setError(false)
       setExpired(false)
-      const { ok, status, body } = await extensionSDK.fetchProxy(url, init)
+      const { ok, status, body } = await extensionSDK.fetchProxy(
+        `https://sheets.googleapis.com/v4/spreadsheets/${pathname}`,
+        init
+      )
       setError(!ok)
       if (status === 401) {
         setExpired(true)
@@ -80,7 +99,7 @@ export const SheetsProvider = ({ children }) => {
     setSpreadsheetId(requestSpreadsheetId)
     setRange(requestRange)
     const { ok, body } = await invokeSheetsApi(
-      `https://sheets.googleapis.com/v4/spreadsheets/${requestSpreadsheetId}/values/${requestRange}?access_token=${token}`
+      `${requestSpreadsheetId}/values/${requestRange}`
     )
     if (ok && body && body.values) {
       setRows(body.values)
@@ -94,7 +113,7 @@ export const SheetsProvider = ({ children }) => {
     let sheetsData
     {
       const { ok, body } = await invokeSheetsApi(
-        `https://sheets.googleapis.com/v4/spreadsheets/${sourceSpreadsheetId}?includeGridData=true&access_token=${token}`
+        `${sourceSpreadsheetId}?includeGridData=true`
       )
       sheetsData = ok ? body : undefined
     }
@@ -105,13 +124,7 @@ export const SheetsProvider = ({ children }) => {
       let body
       {
         // Save sample sheets data to a new sheet.
-        const response = await invokeSheetsApi(
-          `https://sheets.googleapis.com/v4/spreadsheets?access_token=${token}`,
-          {
-            method: 'POST',
-            body: JSON.stringify(sheetsData),
-          }
-        )
+        const response = await invokeSheetsApi('', sheetsData)
         ok = response.ok
         body = response.body
       }
@@ -127,27 +140,20 @@ export const SheetsProvider = ({ children }) => {
   const removeRowFromSpreadSheet = async (rowIndex) => {
     // row index is based on rows shown. Need to adjust for header.
     const sourceIndex = rowIndex + 1
-    const { ok } = await invokeSheetsApi(
-      `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}:batchUpdate?access_token=${token}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          requests: [
-            {
-              deleteDimension: {
-                range: {
-                  sheetId: 0,
-                  dimension: 'ROWS',
-                  startIndex: sourceIndex,
-                  endIndex: sourceIndex + 1,
-                },
-              },
+    const { ok } = await invokeSheetsApi(`${spreadsheetId}:batchUpdate`, {
+      requests: [
+        {
+          deleteDimension: {
+            range: {
+              sheetId: 0,
+              dimension: 'ROWS',
+              startIndex: sourceIndex,
+              endIndex: sourceIndex + 1,
             },
-          ],
-        }),
-      }
-    )
+          },
+        },
+      ],
+    })
     if (ok) {
       const newRows = [...rows]
       newRows.splice(rowIndex, 1)
@@ -166,28 +172,21 @@ export const SheetsProvider = ({ children }) => {
     // moving down, end index is not included in the actual move so
     // add two to get the correct destination index.
     const destIndex = moveUp ? sourceIndex - 1 : sourceIndex + 2
-    const { ok } = await invokeSheetsApi(
-      `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}:batchUpdate?access_token=${token}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          requests: [
-            {
-              moveDimension: {
-                source: {
-                  sheetId: 0,
-                  dimension: 'ROWS',
-                  startIndex: sourceIndex,
-                  endIndex: sourceIndex + 1,
-                },
-                destinationIndex: destIndex,
-              },
+    const { ok } = await invokeSheetsApi(`${spreadsheetId}:batchUpdate`, {
+      requests: [
+        {
+          moveDimension: {
+            source: {
+              sheetId: 0,
+              dimension: 'ROWS',
+              startIndex: sourceIndex,
+              endIndex: sourceIndex + 1,
             },
-          ],
-        }),
-      }
-    )
+            destinationIndex: destIndex,
+          },
+        },
+      ],
+    })
     if (ok) {
       const newRows = [...rows]
       const offset = moveUp ? -1 : 1
@@ -207,14 +206,10 @@ export const SheetsProvider = ({ children }) => {
    */
   const updateAllRowsInSpreadSheet = async (newRows) => {
     const { ok } = await invokeSheetsApi(
-      `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values:batchUpdate?access_token=${token}`,
+      `${spreadsheetId}/values:batchUpdate`,
       {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          valueInputOption: 'RAW',
-          data: { range, majorDimension: 'ROWS', values: newRows },
-        }),
+        valueInputOption: 'RAW',
+        data: { range, majorDimension: 'ROWS', values: newRows },
       }
     )
     return ok

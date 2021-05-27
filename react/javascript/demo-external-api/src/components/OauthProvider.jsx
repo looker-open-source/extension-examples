@@ -76,7 +76,6 @@ export const OauthProvider = ({
         scope: scopes,
         response_type: 'token',
       })
-      // eslint-disable-next-line camelcase
       const { access_token } = response
       history.push(
         loggedInRoute,
