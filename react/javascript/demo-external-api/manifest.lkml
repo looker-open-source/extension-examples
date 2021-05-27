@@ -15,7 +15,7 @@ application: demo-external-api {
     use_embeds: no
     use_downloads: no
     use_iframes: no
-    use_clipboard: yes
+    use_clipboard: no
     core_api_methods: []
     external_api_urls: ["https://*.googleapis.com"]
     oauth2_urls: ["https://accounts.google.com/o/oauth2/v2/auth"]
