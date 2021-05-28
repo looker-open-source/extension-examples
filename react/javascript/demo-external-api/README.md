@@ -29,7 +29,7 @@ This demo requires a project with access to the sheets API and an OAuth client t
 16. Click `Create`. This will display the `Client Id` and `Client Secret`. Copy the client id.
 17. Create a `.env` file in the root of your project. Create an entry like this: `GOOGLE_CLIENT_ID=Application OAuth client ID` from the previous step. **Important: Do not add the `.env` file to source control.**
 18. Click `Library` in the sidebar which will bring up the `Welcome to the API Library Page`.
-19. Enter `Sheets` in the search filed. This displays a link to the `Google Sheets API`. Click the link.
+19. Enter `Sheets` in the search field. This displays a link to the `Google Sheets API`. Click the link.
 20. Click `Enable` which brings you to the Google Sheets API setup.
 
 At this point you should be able use OAuth to login Google and use the Google Sheets API in the Extension.
