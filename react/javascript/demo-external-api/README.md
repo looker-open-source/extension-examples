@@ -1,15 +1,15 @@
 # Demo External API
 
-This example demonstrates usage of external API in an extension using javascript. It uses OAUTH2 to get an access token from Google. It then uses that token to create and update a spreadsheet using the Google sheets APIs. The key things to observe are:
+This example demonstrates usage of external API in an extension using javascript. It uses OAuth to get an access token from Google. It then uses that token to create and update a spreadsheet using the Google sheets APIs. The key things to observe are:
 
-- the OauthProvider which handles interfactions with Googles OAUTH2 identity service. The auth token is stored in the pushRouter state so that it survives a page reload.
+- the OAuthProvider which handles interfactions with Googles OAuth identity service. The auth token is stored in the pushRouter state so that it survives a page reload.
 - The SheetsProvider which provides a simple abstraction to calling the Google sheets restful endpoints.
 
 Note that the demo application uses a sample spreadsheet provided by Google (id `1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms`). The contents of this spreadsheet is copied to a new spreadsheet that the application can then update.
 
 ## Prerequisites
 
-This demo requires a project with access to the sheets API and an OAUTH2 client to be setup in the Google console.
+This demo requires a project with access to the sheets API and an OAuth client to be setup in the Google console.
 
 1. [Open the `Google Console`](https://console.cloud.google.com/).
 2. Select `IAM and Admin/Create a project`.
@@ -21,32 +21,32 @@ This demo requires a project with access to the sheets API and an OAUTH2 client 
 8. Click `Save and continue` on the `Edit app registration - Scopes` page.
 9. If you selected the `External User type` you will need to enter Test users on the`Edit app registration - Test users` page. Click `Save and Continue`.
 10. Click the `Credentials` link in the sidebar.
-11. Click the `Create Credentials` button and select `OAUTH client ID`.
+11. Click the `Create Credentials` button and select `OAuth client ID`.
 12. Select `Application Type` of `Web Application`.
 13. Enter a `Name` for your application.
 14. Add the base url of the Looker instance that will host your extension as an `Authorized JavaScript Origin`. Example `https://myinstance.looker.com`.
-15. Add the base url of the Looker instance that will host your extension appended with `/extensions/oauth2_redirect` as an `Authorized redirect URI`. Example `https://myinstance.looker.com/extensions/oauth2_redirect`.
+15. Add the base url of the Looker instance that will host your extension appended with `/extensions/oauth_redirect` as an `Authorized redirect URI`. Example `https://myinstance.looker.com/extensions/oauth_redirect`.
 16. Click `Create`. This will display the `Client Id` and `Client Secret`. Copy the client id.
-17. Create a `.env` file in the root of your project. Create an entry like this: `GOOGLE_CLIENT_ID=Application OAUTH2 client ID` from the previous step. **Important: Do not add the `.env` file to source control.**
+17. Create a `.env` file in the root of your project. Create an entry like this: `GOOGLE_CLIENT_ID=Application OAuth client ID` from the previous step. **Important: Do not add the `.env` file to source control.**
 18. Click `Library` in the sidebar which will bring up the `Welcome to the API Library Page`.
 19. Enter `Sheets` in the search filed. This displays a link to the `Google Sheets API`. Click the link.
 20. Click `Enable` which brings you to the Google Sheets API setup.
 
-At this point you should be able use OAUTH2 to login Google and use the Google Sheets API in the Extension.
+At this point you should be able use OAuth to login Google and use the Google Sheets API in the Extension.
 
 Should you need to make further updates:
 
 1. Bring up the `Project dashboard` (select from the `Google Console` navigation bar).
 2. In the `Getting started` section of the dashboard (first column, last entry), click `Explore and enable APIs`.
 3. Click `Credentials` in the sidebar to get the `client id`.
-4. Edit the OAUTH2 2.0 Client ID to add or change the `Authorized JavaScript Origin` or `Authorized redirect URI` settings.
+4. Edit the OAuth 2.0 Client ID to add or change the `Authorized JavaScript Origin` or `Authorized redirect URI` settings.
 5. Click `OAuth consent screen` to add test users.
 
 Further information on creating a Google console project can be found [here](https://developers.google.com/workspace/guides/create-project).
 
 Information on using the sheets API can be found [here](https://developers.google.com/sheets/api/quickstart/js).
 
-Please read the section **Logging in using Google OAUTH** for further information on the OAUTH login process.
+Please read the section **Logging in using Google OAuth** for further information on the OAuth login process.
 
 ## Getting Started for Development
 
@@ -107,13 +107,13 @@ Please read the section **Logging in using Google OAUTH** for further informatio
 - The extension will load the JavaScript from the `url` provided in the `application` definition. By default, this is http://localhost:8080/bundle.js. If you change the port your server runs on in the package.json, you will need to also update it in the manifest.lkml.
 - Refreshing the extension page will bring in any new code changes from the extension template, although some changes will hot reload.
 
-## Logging in using Google OAUTH
+## Logging in using Google OAuth
 
-If you selected `External user type` on the `Oauth consent screen` you MAY have to perform additional actions.
+If you selected `External user type` on the `OAuth consent screen` you MAY have to perform additional actions.
 
-You MAY have to add your email as a test user on the `Oauth consent screen`. When you login you MAY get a message `Google hasn't verified this app`. Click `continue`, `allow` and `allow` again.
+You MAY have to add your email as a test user on the `OAuth consent screen`. When you login you MAY get a message `Google hasn't verified this app`. Click `continue`, `allow` and `allow` again.
 
-You MAY also publish your app on the `Oauth consent screen`. In this case any user may access the application but will most likely get the `Google hasn't verified this app` message.
+You MAY also publish your app on the `OAuth consent screen`. In this case any user may access the application but will most likely get the `Google hasn't verified this app` message.
 
 ## Deployment
 
@@ -123,4 +123,4 @@ The process above describes how to run the extension for development. Once you'r
 2. Drag and drop the generated `dist/bundle.js` file into the Looker project interface
 3. Modify the `manifest.lkml` to use `file` instead of `url`.
 
-You will need to perform additional steps to the Google OAUTH and API access ready for production. Please consult Google documentation for information on how to do this.
+You will need to perform additional steps to the Google OAuth and API access ready for production. Please consult Google documentation for information on how to do this.
