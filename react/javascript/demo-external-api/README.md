@@ -25,7 +25,7 @@ This demo requires a project with access to the sheets API and an OAuth client t
 12. Select `Application Type` of `Web Application`.
 13. Enter a `Name` for your application.
 14. Add the base url of the Looker instance that will host your extension as an `Authorized JavaScript Origin`. Example `https://myinstance.looker.com`.
-15. Add the base url of the Looker instance that will host your extension appended with `/extensions/oauth_redirect` as an `Authorized redirect URI`. Example `https://myinstance.looker.com/extensions/oauth_redirect`.
+15. Add the base url of the Looker instance that will host your extension appended with `/extensions/oauth2_redirect` as an `Authorized redirect URI`. Example `https://myinstance.looker.com/extensions/oauth2_redirect`.
 16. Click `Create`. This will display the `Client Id` and `Client Secret`. Copy the client id.
 17. Create a `.env` file in the root of your project. Create an entry like this: `GOOGLE_CLIENT_ID=Application OAuth client ID` from the previous step. **Important: Do not add the `.env` file to source control.**
 18. Click `Library` in the sidebar which will bring up the `Welcome to the API Library Page`.
