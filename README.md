@@ -71,6 +71,11 @@ To build the uber extension block follow the following instructions:
 
 At this point the extensions will appear in the Looker instance browse menu (you may have to reload the page).
 
+## Support
+
+Support is able to help confirm the Extension Framework itself and the Looker SDK endpoints are working as intended; however, the Support team is not equipped to review or comment on the custom code written in your application.
+For any questions beyond the scope of Support, please engage with our [**Looker Community**](https://community.looker.com/).
+
 ## Please contribute
 
 All are welcome to submit examples. Please feel free to submit a PR for any examples you want to share.
