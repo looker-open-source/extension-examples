@@ -16,7 +16,7 @@ application: demo-embeds {
     use_downloads: no
     use_iframes: no
     use_clipboard: no
-    core_api_methods: ["search_dashboards", "search_looks", "all_lookml_models"]
+    core_api_methods: ["all_lookml_models", "all_dashboards", "all_looks"]
     external_api_urls: []
     oauth2_urls: []
     scoped_user_attributes: []

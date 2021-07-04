@@ -21,32 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { useContext } from 'react'
-import { useQuery } from 'react-query'
-import { ExtensionContext2 } from '@looker/extension-sdk-react'
 
-const search = async (coreSDK, criteria) => {
-  try {
-    const data = await coreSDK.ok(
-      coreSDK.search_looks({
-        title: `%${criteria}%`,
-        description: `%${criteria}%`,
-        filter_or: true,
-      })
-    )
-    return data
-  } catch (err) {
-    throw new Error('Error searching looks')
+export const sortByTitle = (a, b) => {
+  if (a.title.toLowerCase() < b.title.toLowerCase()) {
+    return -1
   }
-}
-
-export const useSearchLooks = (criteria = '', embedType) => {
-  const { coreSDK } = useContext(ExtensionContext2)
-  return useQuery(
-    [`search_looks_${embedType}`, criteria],
-    () => search(coreSDK, criteria),
-    {
-      enabled: criteria.trim().length > 0,
-    }
-  )
+  if (a.title.toLowerCase() > b.title.toLowerCase()) {
+    return 1
+  }
+  return 0
 }

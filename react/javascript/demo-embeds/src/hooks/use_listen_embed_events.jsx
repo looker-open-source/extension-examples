@@ -59,7 +59,10 @@ export const useListenEmbedEvents = () => {
       'page:properties:changed',
     ]
     eventTypes.forEach((type) =>
-      embed.on(type, (e) => setEmbedEvents([e, ...embedEventsRef.current]))
+      embed.on(type, (e) => {
+        setEmbedEvents([e, ...embedEventsRef.current])
+        return {}
+      })
     )
   }
 

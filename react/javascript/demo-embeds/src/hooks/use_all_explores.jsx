@@ -21,9 +21,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-export * from './use_current_route'
-export * from './use_navigate'
-export * from './use_all_dashboards'
-export * from './use_all_looks'
-export * from './use_all_explores'
-export * from './use_listen_embed_events'
+import { useContext } from 'react'
+import { useQuery } from 'react-query'
+import { ExtensionContext2 } from '@looker/extension-sdk-react'
+import { sortByTitle } from './utils'
+
+const all = async (coreSDK) => {
+  try {
+    const data = await coreSDK.ok(coreSDK.all_lookml_models())
+    const models = data.filter((lookml) => lookml.explores.length > 0)
+    const explores = []
+    models.forEach((model) => {
+      model.explores.forEach((explore) => {
+        if (!explore.hidden) {
+          const id = `${model.name}::${explore.name}`
+          explores.push({ title: id, id })
+        }
+      })
+    })
+    explores.sort(sortByTitle)
+    return explores
+  } catch (err) {
+    throw new Error('Error retrieving explores')
+  }
+}
+
+export const useAllExplores = () => {
+  const { coreSDK } = useContext(ExtensionContext2)
+  return useQuery(['all_explores'], () => all(coreSDK), {
+    enabled: true,
+    staleTime: Infinity,
+  })
+}

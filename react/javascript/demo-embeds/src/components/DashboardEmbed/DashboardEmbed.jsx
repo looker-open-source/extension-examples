@@ -22,41 +22,57 @@
  * THE SOFTWARE.
  */
 
-import React, { useCallback, useContext, useState, useEffect } from 'react'
+import React, {
+  useCallback,
+  useContext,
+  useState,
+  useEffect,
+  useRef,
+} from 'react'
 import PropTypes from 'prop-types'
 import {
   Button,
+  ButtonOutline,
   Layout,
   Page,
   Aside,
   Section,
+  Space,
   MessageBar,
   Box,
   SpaceVertical,
+  FieldToggleSwitch,
+  Tooltip,
 } from '@looker/components'
 import { ExtensionContext2 } from '@looker/extension-sdk-react'
 import { LookerEmbedSDK } from '@looker/embed-sdk'
-import { useSearchDashboards } from '../../hooks/use_search_dashboards'
-import { useCurrentRoute, useNavigate, useListenEmbedEvents } from '../../hooks'
+import {
+  useAllDashboards,
+  useCurrentRoute,
+  useNavigate,
+  useListenEmbedEvents,
+} from '../../hooks'
 import { Search } from '../Search'
 import { EmbedContainer } from '../EmbedContainer'
 import { EmbedEvents } from '../EmbedEvents'
 
 export const DashboardEmbed = ({ embedType }) => {
-  const { searchCriteria, embedId } = useCurrentRoute(embedType)
-  const { updateSearchCriteria, updateEmbedId } = useNavigate(embedType)
+  const [cancelEvents, setCancelEvents] = useState(true)
+  const cancelEventsRef = useRef()
+  cancelEventsRef.current = cancelEvents
+  const { embedId } = useCurrentRoute(embedType)
+  const { updateEmbedId } = useNavigate(embedType)
   const { extensionSDK } = useContext(ExtensionContext2)
-  const [criteria, setCriteria] = useState(searchCriteria || '')
   const [message, setMessage] = useState()
   const [running, setRunning] = useState()
   const [dashboardId, setDashboardId] = useState()
   const [dashboard, setDashboard] = useState()
-  const { data, isLoading, error } = useSearchDashboards(criteria, embedType)
+  const { embedEvents, listenEmbedEvents } = useListenEmbedEvents()
+  const { data, isLoading, error } = useAllDashboards()
   const results = (data || []).map(({ id, title }) => ({
     id,
     description: title,
   }))
-  const { embedEvents, listenEmbedEvents } = useListenEmbedEvents()
 
   useEffect(() => {
     if (dashboardId !== embedId) {
@@ -71,8 +87,8 @@ export const DashboardEmbed = ({ embedType }) => {
     }
   }, [dashboardId, embedId])
 
-  const maybeCancel = (event) => {
-    return { cancel: !event.modal }
+  const maybeCancel = () => {
+    return { cancel: cancelEventsRef.current }
   }
 
   const updateRunButton = (running) => {
@@ -118,16 +134,15 @@ export const DashboardEmbed = ({ embedType }) => {
     [dashboardId]
   )
 
-  const onSearch = (criteria) => {
-    setCriteria(criteria)
-    updateSearchCriteria(criteria)
-  }
-
   const onSelected = (id) => {
     if (id !== dashboardId) {
       // updateRunButton(true)
       setDashboardId(id)
     }
+  }
+
+  const toggleCancelEvents = async (e) => {
+    setCancelEvents(e.target.checked)
   }
 
   const runDashboard = () => {
@@ -143,9 +158,27 @@ export const DashboardEmbed = ({ embedType }) => {
           <>
             {message && <MessageBar intent="critical">{message}</MessageBar>}
             <Box py="5px">
-              <Button onClick={runDashboard} disabled={!dashboardId || running}>
-                Run Dashboard
-              </Button>
+              <Space>
+                <Button
+                  onClick={runDashboard}
+                  disabled={!dashboardId || running}
+                >
+                  Run Dashboard
+                </Button>
+                <Tooltip content="Unlocks the dashboard search tile if the dashboard run does not complete in a reasonable amount of time.">
+                  <ButtonOutline
+                    onClick={updateRunButton.bind(null, false)}
+                    disabled={!running}
+                  >
+                    Unlock dashboard search
+                  </ButtonOutline>
+                </Tooltip>
+                <FieldToggleSwitch
+                  label="Cancel embed events"
+                  onChange={toggleCancelEvents}
+                  on={cancelEvents}
+                />
+              </Space>
             </Box>
             <EmbedContainer ref={embedCtrRef} />
           </>
@@ -153,13 +186,11 @@ export const DashboardEmbed = ({ embedType }) => {
         <Aside width="25%" height="100%" pr="small">
           <SpaceVertical height="100%">
             <Search
-              onSearch={onSearch}
               onSelected={onSelected}
               loading={isLoading}
               error={error}
               data={results}
               embedRunning={running}
-              searchCriteria={searchCriteria}
             />
             <EmbedEvents events={embedEvents} />
           </SpaceVertical>

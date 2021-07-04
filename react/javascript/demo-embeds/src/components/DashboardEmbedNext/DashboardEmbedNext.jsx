@@ -22,7 +22,13 @@
  * THE SOFTWARE.
  */
 
-import React, { useCallback, useContext, useState, useEffect } from 'react'
+import React, {
+  useCallback,
+  useContext,
+  useState,
+  useEffect,
+  useRef,
+} from 'react'
 import PropTypes from 'prop-types'
 import {
   Button,
@@ -33,30 +39,38 @@ import {
   MessageBar,
   Box,
   SpaceVertical,
+  FieldToggleSwitch,
+  Space,
 } from '@looker/components'
 import { ExtensionContext2 } from '@looker/extension-sdk-react'
 import { LookerEmbedSDK } from '@looker/embed-sdk'
-import { useSearchDashboards } from '../../hooks/use_search_dashboards'
-import { useCurrentRoute, useNavigate, useListenEmbedEvents } from '../../hooks'
+import {
+  useCurrentRoute,
+  useNavigate,
+  useListenEmbedEvents,
+  useAllDashboards,
+} from '../../hooks'
 import { Search } from '../Search'
 import { EmbedContainer } from '../EmbedContainer'
 import { EmbedEvents } from '../EmbedEvents'
 
 export const DashboardEmbedNext = ({ embedType }) => {
-  const { searchCriteria, embedId } = useCurrentRoute(embedType)
-  const { updateSearchCriteria, updateEmbedId } = useNavigate(embedType)
+  const [cancelEvents, setCancelEvents] = useState(true)
+  const cancelEventsRef = useRef()
+  cancelEventsRef.current = cancelEvents
+  const { embedId } = useCurrentRoute(embedType)
+  const { updateEmbedId } = useNavigate(embedType)
   const { extensionSDK } = useContext(ExtensionContext2)
-  const [criteria, setCriteria] = useState(searchCriteria || '')
   const [message, setMessage] = useState()
   const [running, setRunning] = useState(true)
   const [dashboardId, setDashboardId] = useState()
   const [dashboard, setDashboard] = useState()
-  const { data, isLoading, error } = useSearchDashboards(criteria, embedType)
+  const { embedEvents, listenEmbedEvents } = useListenEmbedEvents()
+  const { data, isLoading, error } = useAllDashboards()
   const results = (data || []).map(({ id, title }) => ({
     id,
     description: title,
   }))
-  const { embedEvents, listenEmbedEvents } = useListenEmbedEvents()
 
   useEffect(() => {
     if (dashboardId && dashboardId !== embedId) {
@@ -68,8 +82,8 @@ export const DashboardEmbedNext = ({ embedType }) => {
     }
   }, [dashboardId, embedId, dashboard])
 
-  const maybeCancel = (event) => {
-    return { cancel: !event.modal }
+  const maybeCancel = () => {
+    return { cancel: cancelEventsRef.current }
   }
 
   const updateRunButton = (running) => {
@@ -118,15 +132,14 @@ export const DashboardEmbedNext = ({ embedType }) => {
     }
   }, [])
 
-  const onSearch = (criteria) => {
-    setCriteria(criteria)
-    updateSearchCriteria(criteria)
-  }
-
   const onSelected = (id) => {
     if (id !== dashboardId) {
       setDashboardId(id)
     }
+  }
+
+  const toggleCancelEvents = async (e) => {
+    setCancelEvents(e.target.checked)
   }
 
   const runDashboard = () => {
@@ -142,9 +155,19 @@ export const DashboardEmbedNext = ({ embedType }) => {
           <>
             {message && <MessageBar intent="critical">{message}</MessageBar>}
             <Box py="5px">
-              <Button onClick={runDashboard} disabled={!dashboardId || running}>
-                Run Dashboard
-              </Button>
+              <Space>
+                <Button
+                  onClick={runDashboard}
+                  disabled={!dashboardId || running}
+                >
+                  Run Dashboard
+                </Button>
+                <FieldToggleSwitch
+                  label="Cancel embed events"
+                  onChange={toggleCancelEvents}
+                  on={cancelEvents}
+                />
+              </Space>
             </Box>
             <EmbedContainer ref={embedCtrRef} />
           </>
@@ -152,13 +175,12 @@ export const DashboardEmbedNext = ({ embedType }) => {
         <Aside width="25%" height="100%" pr="small">
           <SpaceVertical height="100%">
             <Search
-              onSearch={onSearch}
               onSelected={onSelected}
               loading={isLoading}
               error={error}
               data={results}
               embedRunning={running}
-              searchCriteria={searchCriteria}
+              embedType={embedType}
             />
             <EmbedEvents events={embedEvents} />
           </SpaceVertical>
