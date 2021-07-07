@@ -30,66 +30,45 @@ import {
   Space,
   List,
   ListItem,
-  Form,
   FieldText,
-  IconButton,
-  Spinner,
 } from '@looker/components'
-import { Search as SearchIcon } from '@styled-icons/material'
+import { useNavigate } from '../../hooks'
 
 export const Search = ({
-  onSearch,
   onSelected,
   data = [],
   error,
   loading,
   embedRunning,
-  searchCriteria,
+  embedType,
 }) => {
   const [criteria, setCriteria] = useState('')
+  const { updateSearchCriteria } = useNavigate(embedType)
 
   useEffect(() => {
-    setCriteria(searchCriteria || '')
-    if (
-      searchCriteria &&
-      searchCriteria.length > 0 &&
-      searchCriteria !== criteria
-    ) {
-      onSearch(searchCriteria)
-    }
-  }, [searchCriteria])
+    updateSearchCriteria(criteria)
+  }, [criteria])
 
-  const onSubmit = (e) => {
-    e.preventDefault()
-    onSearch(criteria.trim())
-  }
+  const selectedData =
+    criteria.length === 0
+      ? data
+      : data.filter(({ description }) =>
+          description.toLowerCase().includes(criteria.trim().toLowerCase())
+        )
 
   return (
     <Box height="33%" width="100%" borderBottom="solid 1px" borderColor="ui2">
-      <Form onSubmit={onSubmit} mb="none">
-        <Space px="small">
-          {error && <MessageBar intent="critical">{error}</MessageBar>}
-          <FieldText
-            placeholder="Enter search criteria"
-            value={criteria}
-            onChange={(e) => setCriteria(e.target.value)}
-            disabled={loading}
-          />
-          {loading ? (
-            <Spinner />
-          ) : (
-            <IconButton
-              type="submit"
-              size="large"
-              label="Search"
-              disabled={criteria.trim().length === 0}
-              icon={<SearchIcon />}
-            />
-          )}
-        </Space>
-      </Form>
+      <Space px="small">
+        {error && <MessageBar intent="critical">{error}</MessageBar>}
+        <FieldText
+          placeholder="Enter search criteria"
+          value={criteria}
+          onChange={(e) => setCriteria(e.target.value)}
+          disabled={loading}
+        />
+      </Space>
       <List mt="none" density={-2} height="85%">
-        {data.map(({ description, id }) => (
+        {selectedData.map(({ description, id }) => (
           <ListItem
             key={id}
             onClick={() => onSelected(id)}
@@ -104,11 +83,10 @@ export const Search = ({
 }
 
 Search.propTypes = {
-  searchCriteria: PropTypes.string,
-  onSearch: PropTypes.func.isRequired,
   onSelected: PropTypes.func.isRequired,
   data: PropTypes.array,
   error: PropTypes.string,
   loading: PropTypes.bool,
   embedRunning: PropTypes.bool,
+  embedType: PropTypes.string,
 }

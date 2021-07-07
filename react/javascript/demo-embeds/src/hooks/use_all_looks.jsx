@@ -21,32 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 import { useContext } from 'react'
 import { useQuery } from 'react-query'
 import { ExtensionContext2 } from '@looker/extension-sdk-react'
+import { sortByTitle } from './utils'
 
-const search = async (coreSDK, criteria) => {
+const all = async (coreSDK) => {
   try {
-    const data = await coreSDK.ok(
-      coreSDK.search_dashboards({
-        title: `%${criteria}%`,
-        description: `%${criteria}%`,
-        filter_or: true,
-      })
-    )
+    const data = await coreSDK.ok(coreSDK.all_looks())
+    data.sort(sortByTitle)
     return data
   } catch (err) {
-    throw new Error('Error searching dashboards')
+    throw new Error('Error retrieving looks')
   }
 }
 
-export const useSearchDashboards = (criteria = '', embedType) => {
+export const useAllLooks = () => {
   const { coreSDK } = useContext(ExtensionContext2)
-  return useQuery(
-    [`search_dashboard_${embedType}`, criteria],
-    () => search(coreSDK, criteria),
-    {
-      enabled: criteria.trim().length > 0,
-    }
-  )
+  return useQuery(['all_looks'], () => all(coreSDK), {
+    enabled: true,
+    staleTime: Infinity,
+  })
 }

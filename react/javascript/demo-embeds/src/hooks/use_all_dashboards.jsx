@@ -24,33 +24,22 @@
 import { useContext } from 'react'
 import { useQuery } from 'react-query'
 import { ExtensionContext2 } from '@looker/extension-sdk-react'
+import { sortByTitle } from './utils'
 
-const search = async (coreSDK, criteria) => {
+const all = async (coreSDK) => {
   try {
-    const data = await coreSDK.ok(coreSDK.all_lookml_models())
-    const models = data.filter((lookml) => lookml.explores.length > 0)
-    const explores = []
-    models.forEach((model) => {
-      model.explores.forEach((explore) => {
-        if (!explore.hidden) {
-          const id = `${model.name}::${explore.name}`
-          explores.push({ description: id, id })
-        }
-      })
-    })
-    return explores.filter((explore) => explore.id.includes(criteria))
+    const data = await coreSDK.ok(coreSDK.all_dashboards())
+    data.sort(sortByTitle)
+    return data
   } catch (err) {
-    throw new Error('Error searching looks')
+    throw new Error('Error retrieving dashboards')
   }
 }
 
-export const useSearchExplores = (criteria = '', embedType) => {
+export const useAllDashboards = () => {
   const { coreSDK } = useContext(ExtensionContext2)
-  return useQuery(
-    [`search_explores_${embedType}`, criteria],
-    () => search(coreSDK, criteria),
-    {
-      enabled: criteria.trim().length > 0,
-    }
-  )
+  return useQuery(['all_dashboards'], () => all(coreSDK), {
+    enabled: true,
+    staleTime: Infinity,
+  })
 }

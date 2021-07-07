@@ -37,26 +37,24 @@ import {
 import { ExtensionContext2 } from '@looker/extension-sdk-react'
 import { LookerEmbedSDK } from '@looker/embed-sdk'
 import {
-  useSearchLooks,
+  useAllLooks,
   useCurrentRoute,
   useNavigate,
   useListenEmbedEvents,
 } from '../../hooks'
-
 import { Search } from '../Search'
 import { EmbedContainer } from '../EmbedContainer'
 import { EmbedEvents } from '../EmbedEvents'
 
 export const LooksEmbed = ({ embedType }) => {
-  const { searchCriteria, embedId } = useCurrentRoute(embedType)
-  const { updateSearchCriteria, updateEmbedId } = useNavigate(embedType)
+  const { embedId } = useCurrentRoute(embedType)
+  const { updateEmbedId } = useNavigate(embedType)
   const { extensionSDK } = useContext(ExtensionContext2)
-  const [criteria, setCriteria] = useState(searchCriteria || '')
   const [message, setMessage] = useState()
   const [running, setRunning] = useState()
   const [lookId, setLookId] = useState()
   const [look, setLook] = useState()
-  const { data, isLoading, error } = useSearchLooks(criteria, embedType)
+  const { data, isLoading, error } = useAllLooks()
   const results = (data || []).map(({ id, title }) => ({
     id,
     description: title,
@@ -115,11 +113,6 @@ export const LooksEmbed = ({ embedType }) => {
     [lookId]
   )
 
-  const onSearch = (criteria) => {
-    setCriteria(criteria)
-    updateSearchCriteria(criteria)
-  }
-
   const onSelected = (id) => {
     if (id !== lookId) {
       setLookId(id)
@@ -149,13 +142,11 @@ export const LooksEmbed = ({ embedType }) => {
         <Aside width="25%" height="100%" pr="small">
           <SpaceVertical height="100%">
             <Search
-              onSearch={onSearch}
               onSelected={onSelected}
               loading={isLoading}
               error={error}
               data={results}
               embedRunning={running}
-              searchCriteria={searchCriteria}
             />
             <EmbedEvents events={embedEvents} />
           </SpaceVertical>
