@@ -21,14 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 export const useListenEmbedEvents = () => {
-  const [embedEvents, _setEmbedEvents] = useState([])
-  const embedEventsRef = useRef(embedEvents)
+  const [embedEvents, setEmbedEvents] = useState([])
 
-  const setEmbedEvents = (events) => {
-    embedEventsRef.current = events
-    _setEmbedEvents(events)
+  const clearEvents = () => {
+    setEmbedEvents([])
   }
 
   const listenEmbedEvents = (embed) => {
@@ -60,11 +58,11 @@ export const useListenEmbedEvents = () => {
     ]
     eventTypes.forEach((type) =>
       embed.on(type, (e) => {
-        setEmbedEvents([e, ...embedEventsRef.current])
+        setEmbedEvents((prev) => [e, ...prev])
         return {}
       })
     )
   }
 
-  return { listenEmbedEvents, embedEvents: embedEventsRef.current }
+  return { listenEmbedEvents, embedEvents, clearEvents }
 }

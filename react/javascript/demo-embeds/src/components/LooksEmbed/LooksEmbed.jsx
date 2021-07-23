@@ -59,7 +59,7 @@ export const LooksEmbed = ({ embedType }) => {
     id,
     description: title,
   }))
-  const { embedEvents, listenEmbedEvents } = useListenEmbedEvents()
+  const { embedEvents, listenEmbedEvents, clearEvents } = useListenEmbedEvents()
 
   useEffect(() => {
     if (lookId !== embedId) {
@@ -148,7 +148,7 @@ export const LooksEmbed = ({ embedType }) => {
               data={results}
               embedRunning={running}
             />
-            <EmbedEvents events={embedEvents} />
+            <EmbedEvents events={embedEvents} clearEvents={clearEvents} />
           </SpaceVertical>
         </Aside>
       </Layout>

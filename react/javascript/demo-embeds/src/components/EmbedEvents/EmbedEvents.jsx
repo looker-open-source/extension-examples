@@ -24,13 +24,20 @@
 
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { Box, List, ListItem } from '@looker/components'
+import { Box, List, ListItem, ButtonOutline } from '@looker/components'
 import { EmbedEvent } from '../EmbedEvent'
 
-export const EmbedEvents = ({ events }) => {
+export const EmbedEvents = ({ events, clearEvents }) => {
   const [selectedEvent, setSelectedEvent] = useState()
+  const onClearEvents = () => {
+    clearEvents()
+    setSelectedEvent()
+  }
   return (
     <>
+      <ButtonOutline width="100%" onClick={onClearEvents}>
+        Clear Events
+      </ButtonOutline>
       <Box
         height="33%"
         width="100%"
@@ -58,4 +65,5 @@ export const EmbedEvents = ({ events }) => {
 
 EmbedEvents.propTypes = {
   events: PropTypes.array,
+  clearEvents: PropTypes.func,
 }

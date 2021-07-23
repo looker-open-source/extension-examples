@@ -55,7 +55,7 @@ export const ExploresEmbed = ({ embedType }) => {
   const [running, setRunning] = useState()
   const [exploreId, setExploreId] = useState()
   const [explore, setExplore] = useState()
-  const { embedEvents, listenEmbedEvents } = useListenEmbedEvents()
+  const { embedEvents, listenEmbedEvents, clearEvents } = useListenEmbedEvents()
   const { data, isLoading, error } = useAllExplores()
   const results = (data || []).map(({ id, title }) => ({
     id,
@@ -150,7 +150,7 @@ export const ExploresEmbed = ({ embedType }) => {
               data={results}
               embedRunning={running}
             />
-            <EmbedEvents events={embedEvents} />
+            <EmbedEvents events={embedEvents} clearEvents={clearEvents} />
           </SpaceVertical>
         </Aside>
       </Layout>

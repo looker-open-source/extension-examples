@@ -65,7 +65,7 @@ export const DashboardEmbedNext = ({ embedType }) => {
   const [running, setRunning] = useState(true)
   const [dashboardId, setDashboardId] = useState()
   const [dashboard, setDashboard] = useState()
-  const { embedEvents, listenEmbedEvents } = useListenEmbedEvents()
+  const { embedEvents, listenEmbedEvents, clearEvents } = useListenEmbedEvents()
   const { data, isLoading, error } = useAllDashboards()
   const results = (data || []).map(({ id, title }) => ({
     id,
@@ -182,7 +182,7 @@ export const DashboardEmbedNext = ({ embedType }) => {
               embedRunning={running}
               embedType={embedType}
             />
-            <EmbedEvents events={embedEvents} />
+            <EmbedEvents events={embedEvents} clearEvents={clearEvents} />
           </SpaceVertical>
         </Aside>
       </Layout>
