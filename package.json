@@ -12,7 +12,8 @@
     "build": "lerna run --parallel build",
     "lint": "lerna run --parallel lint:es",
     "test": "lerna run --parallel test",
-    "uberext": "ts-node ./scripts/create_uber_extension_project.ts"
+    "uberext": "ts-node ./scripts/create_uber_extension_project.ts",
+    "add_uberext": "mkdir -p dist && rm -rf dist/* && cp -R ../uberext/* ."
   },
   "devDependencies": {
     "@types/node": "^15.3.0",
