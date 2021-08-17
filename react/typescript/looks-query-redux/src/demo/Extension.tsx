@@ -49,7 +49,7 @@ export const Extension: React.FC = hot(() => {
   const looks = useSelector(getLooks)
   const { allLooksRequest, runLookRequest } = useActions()
   const loadingLooks = loading && !looks
-  const runningQuery = loading && (!!looks || currentLookId)
+  const runningQuery = loading && (!!looks || currentLookId !== undefined)
 
   useEffect(() => {
     allLooksRequest()

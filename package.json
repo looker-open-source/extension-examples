@@ -11,6 +11,7 @@
     "clean": "lerna run --parallel clean",
     "build": "lerna run --parallel build",
     "lint": "lerna run --parallel lint:es",
+    "tsc": "lerna run --parallel tsc",
     "test": "lerna run --parallel test",
     "uberext": "ts-node ./scripts/create_uber_extension_project.ts"
   },
