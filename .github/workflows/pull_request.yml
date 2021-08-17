@@ -1,5 +1,5 @@
 on: [push]
-name: "CI"
+name: 'CI'
 jobs:
   lint-build-test:
     runs-on: ubuntu-latest
@@ -12,6 +12,7 @@ jobs:
       - run: yarn
       - run: yarn lerna bootstrap
       - run: yarn lint
+      - run: yarn tsc
       - run: yarn clean
       - run: yarn build
       - run: yarn test
