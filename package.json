@@ -13,7 +13,8 @@
     "lint": "lerna run --parallel lint:es",
     "tsc": "lerna run --parallel tsc",
     "test": "lerna run --parallel test",
-    "uberext": "ts-node ./scripts/create_uber_extension_project.ts"
+    "uberext": "ts-node ./scripts/create_uber_extension_project.ts",
+    "dev:demo-embeds": "cd react/javascript/demo-embeds && yarn develop"
   },
   "devDependencies": {
     "@types/node": "^15.3.0",

@@ -100,7 +100,7 @@ export const Dashboards = () => {
           id={id}
           onClick={() =>
             extensionSDK.openBrowserWindow(
-              `/dashboards-next/${id}`,
+              `/dashboards/${id}`,
               '__dashboards__'
             )
           }

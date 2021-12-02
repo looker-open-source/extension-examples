@@ -32,17 +32,18 @@ import {
   useTabs,
 } from '@looker/components'
 import styled from 'styled-components'
-import { useCurrentRoute, useNavigate } from './hooks'
+import { useCurrentRoute, useNavigate, useSpartanLink } from './hooks'
 import { DashboardEmbedNext } from './components/DashboardEmbedNext'
 import { DashboardEmbed } from './components/DashboardEmbed'
 import { ExploresEmbed } from './components/ExploresEmbed'
 import { LooksEmbed } from './components/LooksEmbed'
 
-const tabNames = ['dashboards-next', 'dashboards', 'looks', 'explores']
+const tabNames = ['dashboards', 'dashboards-legacy', 'looks', 'explores']
 
 export const DemoEmbeds = () => {
   const { embedType } = useCurrentRoute()
   const { updateEmbedType } = useNavigate(embedType)
+  const hasSpartanLink = useSpartanLink()
   const tabs = useTabs({
     onChange: (index) => {
       if (tabNames[index] !== embedType) {
@@ -60,6 +61,10 @@ export const DemoEmbeds = () => {
       }
     }
   }, [embedType])
+
+  if (hasSpartanLink) {
+    return <></>
+  }
 
   return (
     <ComponentsProvider>
