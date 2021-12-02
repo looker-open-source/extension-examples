@@ -25,47 +25,53 @@ import { useEffect, useState } from 'react'
 import { useLocation, useHistory } from 'react-router-dom'
 
 /**
- * Spartan link hook.
+ * Target resource hook (for use by spartan extensions but
+ * normal extensions can use it).
  *
  * This hook should be used at the top of the component
  * tree.
  *
  * Handle a link sent from an embed to a spartan user.
  * The link is crafted to go the spartan users home page
- * with the link to re-instantiate the embed as the link
- * parameter in the query string.
+ * with information to re-instantiate the embed from the
+ * target_resource parameter in the query string.
  * The extension is reponsible for mapping the Looker UI
  * formatted URL to the extensions URL (this here hook!).
  *
- * * @returns true if url contains a spartan link.
+ * Note that this is an example for handling the
+ * target_resource parameter and is a simplistic implementation.
+ * It will wipe out any additional parameters in the query
+ * string. An real world implementation should take this
+ * scenario into account.
+ *
+ * @returns true if url contains a target_resource link.
  */
-export const useSpartanLink = () => {
-  const [linkParam, setLinkParam] = useState()
+export const useTargetResource = () => {
+  const [targetResourceParam, setTargetResourceParam] = useState('')
   const { search, pathname } = useLocation()
   const history = useHistory()
 
   useEffect(() => {
     if (search) {
       const searchParams = new URLSearchParams(search)
-      const link = searchParams.get('link')
-      if (link !== linkParam) {
-        setLinkParam(link)
+      const link = searchParams.get('target_resource')
+      if (link !== targetResourceParam) {
+        setTargetResourceParam(link)
       }
     } else {
-      setLinkParam(undefined)
+      setTargetResourceParam(undefined)
     }
   }, [search])
 
   useEffect(() => {
-    if (linkParam) {
+    if (targetResourceParam > '') {
       try {
-        const link = decodeURIComponent(linkParam)
+        const link = decodeURIComponent(targetResourceParam)
         const linkParts = link.split('/')
         console.log({ link, linkParts })
         if (linkParts[1] === 'dashboards') {
           history.replace(`/dashboards//${linkParts[2].split('?')[0]}`)
         } else if (linkParts[1] === 'explore') {
-          console.log({ linkParts })
           history.replace(
             `/explores//${linkParts[2]}::${linkParts[3].split('?')[0]}`
           )
@@ -80,10 +86,11 @@ export const useSpartanLink = () => {
         history.replace(pathname)
       }
     }
-  }, [linkParam])
+  }, [targetResourceParam])
 
   // Return true if a link is present. For the embed demo the rendering
-  // of the UI is delayed until after the link parameter has been processed
-  // and removed from the URL. This avoids and potentential for flicker.
-  return !!linkParam
+  // of the UI is delayed until after the target_resource parameter has
+  // been processed  and removed from the URL. This avoids the potentential
+  // for flicker.
+  return !!targetResourceParam
 }
