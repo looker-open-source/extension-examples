@@ -28,7 +28,7 @@ import { sortByTitle } from './utils'
 
 const all = async (coreSDK) => {
   try {
-    const data = await coreSDK.ok(coreSDK.all_dashboards())
+    const data = await coreSDK.ok(coreSDK.all_dashboards('id,title'))
     data.sort(sortByTitle)
     return data
   } catch (err) {
