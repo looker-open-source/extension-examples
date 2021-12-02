@@ -22,8 +22,7 @@
  * THE SOFTWARE.
  */
 
-import React, { useEffect, useState } from 'react'
-import { useLocation, useHistory } from 'react-router-dom'
+import React, { useEffect } from 'react'
 import {
   ComponentsProvider,
   TabList,
@@ -33,7 +32,7 @@ import {
   useTabs,
 } from '@looker/components'
 import styled from 'styled-components'
-import { useCurrentRoute, useNavigate } from './hooks'
+import { useCurrentRoute, useNavigate, useSpartanLink } from './hooks'
 import { DashboardEmbedNext } from './components/DashboardEmbedNext'
 import { DashboardEmbed } from './components/DashboardEmbed'
 import { ExploresEmbed } from './components/ExploresEmbed'
@@ -42,11 +41,9 @@ import { LooksEmbed } from './components/LooksEmbed'
 const tabNames = ['dashboards', 'dashboards-legacy', 'looks', 'explores']
 
 export const DemoEmbeds = () => {
-  const [linkParam, setLinkParam] = useState()
-  const { search, pathname } = useLocation()
-  const history = useHistory()
   const { embedType } = useCurrentRoute()
   const { updateEmbedType } = useNavigate(embedType)
+  const hasSpartanLink = useSpartanLink()
   const tabs = useTabs({
     onChange: (index) => {
       if (tabNames[index] !== embedType) {
@@ -57,54 +54,6 @@ export const DemoEmbeds = () => {
   const { onSelectTab, selectedIndex } = tabs
 
   useEffect(() => {
-    if (search) {
-      // Spartan demo code.
-      // Handle a link sent from a embed to a spartan user.
-      // The link is crafted to go the spartan users home page
-      // with the link to re-instantiate the embed as the link
-      // parameter. The extension is reponsible for mapping the
-      // Looker UI formatted URL to the extensions URL. This
-      // mapping occurs in the useEffect following.
-      const searchParams = new URLSearchParams(search)
-      const link = searchParams.get('link')
-      if (link !== linkParam) {
-        setLinkParam(link)
-      }
-    } else {
-      setLinkParam(undefined)
-    }
-  }, [search])
-
-  useEffect(() => {
-    if (linkParam) {
-      // Spartan demo code.
-      // Handle a link sent from a dashboard to a spartan user.
-      // The following maps the Looker URL to the extension URL.
-      try {
-        const link = decodeURIComponent(linkParam)
-        const linkParts = link.split('/')
-        console.log({ link, linkParts })
-        if (linkParts[1] === 'dashboards') {
-          history.replace(`/dashboards//${linkParts[2].split('?')[0]}`)
-        } else if (linkParts[1] === 'explore') {
-          console.log({ linkParts })
-          history.replace(
-            `/explores//${linkParts[2]}::${linkParts[3].split('?')[0]}`
-          )
-        } else if (linkParts[1] === 'looks') {
-          history.replace(`/looks//${linkParts[2].split('?')[0]}`)
-        } else {
-          history.replace(pathname)
-        }
-      } catch (err) {
-        // Very simplistic error handling for demo purposes.
-        console.error(err)
-        history.replace(pathname)
-      }
-    }
-  }, [linkParam])
-
-  useEffect(() => {
     if (embedType) {
       const routeTabIndex = tabNames.indexOf(embedType)
       if (routeTabIndex > -1 && embedType !== tabNames[selectedIndex]) {
@@ -113,7 +62,7 @@ export const DemoEmbeds = () => {
     }
   }, [embedType])
 
-  if (linkParam) {
+  if (hasSpartanLink) {
     return <></>
   }
 
