@@ -14,7 +14,9 @@
     "tsc": "lerna run --parallel tsc",
     "test": "lerna run --parallel test",
     "uberext": "ts-node ./scripts/create_uber_extension_project.ts",
-    "dev:demo-embeds": "cd react/javascript/demo-embeds && yarn develop"
+    "dev:demo-embeds": "cd react/javascript/demo-embeds && yarn develop",
+    "dev:file-upload": "cd react/javascript/file-upload && yarn develop",
+    "dev:kitchensink": "cd react/typescript/kitchensink && yarn develop"
   },
   "devDependencies": {
     "@types/node": "^15.3.0",
