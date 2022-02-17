@@ -62,7 +62,7 @@ export const DashboardEmbedNext = ({ embedType }) => {
   const { updateEmbedId } = useNavigate(embedType)
   const { extensionSDK } = useContext(ExtensionContext2)
   const [message, setMessage] = useState()
-  const [running, setRunning] = useState(true)
+  const [running, setRunning] = useState()
   const [dashboardId, setDashboardId] = useState()
   const [dashboard, setDashboard] = useState()
   const { embedEvents, listenEmbedEvents, clearEvents } = useListenEmbedEvents()
