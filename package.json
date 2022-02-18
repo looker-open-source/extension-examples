@@ -5,12 +5,18 @@
   "description": "Looker extension examples",
   "author": "Looker",
   "private": true,
+  "workspaces": [
+    "react/javascript/*",
+    "react/typescript/*",
+    "vanilla/*"
+  ],
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "lerna": "lerna",
     "clean": "lerna run --parallel clean",
     "build": "lerna run --parallel build",
     "lint": "lerna run --parallel lint:es",
+    "lint:fix": "lerna run --parallel lint:es:fix",
     "tsc": "lerna run --parallel tsc",
     "test": "lerna run --parallel test",
     "uberext": "ts-node ./scripts/create_uber_extension_project.ts",

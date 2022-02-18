@@ -49,10 +49,12 @@ export const LookList: React.FC<LookListProps> = ({
       <List>
         {looks.map((look) =>
           look.id !== undefined ? (
-            <ListItem key={look.id} selected={look.id === currentLookId}>
-              <Link onClick={() => selectLook(look)} key={look.id}>
-                {look.title}
-              </Link>
+            <ListItem
+              key={look.id}
+              selected={look.id === String(currentLookId)}
+              onClick={() => selectLook(look)}
+            >
+              {look.title}
             </ListItem>
           ) : (
             <Text key="error" color="palette.red500">

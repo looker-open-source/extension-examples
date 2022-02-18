@@ -24,7 +24,7 @@
 
 import React from 'react'
 import { ILook } from '@looker/sdk'
-import { List, Heading, Box, ListItem, Link, Text } from '@looker/components'
+import { List, Heading, Box, ListItem, Text } from '@looker/components'
 
 interface LookListProps {
   looks: ILook[]
@@ -48,10 +48,12 @@ export const LookList: React.FC<LookListProps> = ({
     ) : (
       <List>
         {looks.map((look) => (
-          <ListItem key={look.id} selected={selectedLookId === look.id + ''}>
-            <Link onClick={() => selectLook(look.id + '')} key={look.id}>
-              {look.title}
-            </Link>
+          <ListItem
+            key={look.id}
+            selected={selectedLookId === look.id + ''}
+            onClick={() => selectLook(look.id + '')}
+          >
+            {look.title}
           </ListItem>
         ))}
       </List>

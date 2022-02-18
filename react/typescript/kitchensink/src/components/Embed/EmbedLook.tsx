@@ -37,9 +37,8 @@ import { EmbedProps } from './types'
 const EmbedLook: React.FC<EmbedProps> = ({ id }) => {
   const [running, setRunning] = React.useState(true)
   const [look, setLook] = React.useState<LookerEmbedLook>()
-  const extensionContext = useContext<ExtensionContextData2<Looker40SDK>>(
-    ExtensionContext2
-  )
+  const extensionContext =
+    useContext<ExtensionContextData2<Looker40SDK>>(ExtensionContext2)
 
   const updateRunButton = (running: boolean) => {
     setRunning(running)

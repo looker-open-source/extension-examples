@@ -22,12 +22,13 @@
  * THE SOFTWARE.
  */
 import React from 'react'
+import { screen } from '@testing-library/react'
 import { renderWithTheme } from '@looker/components-test-utils'
 import { FileDownload } from './FileDownload'
 
 describe('FileDownload', () => {
   test('it renders', () => {
-    const { getByText } = renderWithTheme(<FileDownload />)
-    getByText('Click button to download file')
+    renderWithTheme(<FileDownload />)
+    screen.getByText('Click button to download file')
   })
 })

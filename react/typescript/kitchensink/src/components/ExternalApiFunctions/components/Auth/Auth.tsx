@@ -67,9 +67,8 @@ import { AuthProps } from './types'
  */
 export const Auth: React.FC<AuthProps> = ({ dataState, dataDispatch }) => {
   // Get access to the extension SDK and the looker API SDK.
-  const { extensionSDK, coreSDK } = useContext<
-    ExtensionContextData2<Looker40SDK>
-  >(ExtensionContext2)
+  const { extensionSDK, coreSDK } =
+    useContext<ExtensionContextData2<Looker40SDK>>(ExtensionContext2)
 
   // Dialog state
   const [dialogOpen, setDialogOpen] = useState(false)
@@ -289,10 +288,11 @@ export const Auth: React.FC<AuthProps> = ({ dataState, dataDispatch }) => {
         code: response.code,
         client_secret: extensionSDK.createSecretKeyTag('github_secret_key'),
       }
-      const codeExchangeResponse = await extensionSDK.oauth2ExchangeCodeForToken(
-        'https://github.com/login/oauth/access_token',
-        exchangeParameters
-      )
+      const codeExchangeResponse =
+        await extensionSDK.oauth2ExchangeCodeForToken(
+          'https://github.com/login/oauth/access_token',
+          exchangeParameters
+        )
       const { access_token, error_description } = codeExchangeResponse
       if (!access_token) {
         updateErrorMessage(
@@ -390,15 +390,15 @@ export const Auth: React.FC<AuthProps> = ({ dataState, dataDispatch }) => {
       if (!useCodeChallenge) {
         // Note the client secret is securely stored in the Looker server.
         // Do NOT expose the client secret in the extension code.
-        exchangeRequest.client_secret = extensionSDK.createSecretKeyTag(
-          'auth0_secret_key'
-        )
+        exchangeRequest.client_secret =
+          extensionSDK.createSecretKeyTag('auth0_secret_key')
       }
 
-      const codeExchangeResponse = await extensionSDK.oauth2ExchangeCodeForToken(
-        `${AUTH0_BASE_URL}/login/oauth/token`,
-        exchangeRequest
-      )
+      const codeExchangeResponse =
+        await extensionSDK.oauth2ExchangeCodeForToken(
+          `${AUTH0_BASE_URL}/login/oauth/token`,
+          exchangeRequest
+        )
       const { access_token, expires_in } = codeExchangeResponse
       const { id, name } = await getAuth0UserInfo(access_token)
       const jwtToken = await signinDataServer(

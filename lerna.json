@@ -1,5 +1,6 @@
 {
   "packages": ["react/javascript/*", "react/typescript/*", "vanilla/*"],
   "npmClient": "yarn",
-  "version": "independent"
+  "version": "independent",
+  "useWorkspaces": true
 }

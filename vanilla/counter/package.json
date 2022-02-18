@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/bundle.js",
   "scripts": {
-    "clean": "rm -rf dist",
+    "clean": "rm -rf dist && rm -f .eslintcache",
     "analyze": "export ANALYZE_MODE=static && yarn build",
     "build": "export BABEL_ENV=build && webpack --config webpack.prod.js",
     "develop": "webpack serve --hot --port 8080 --disable-host-check --config webpack.develop.js"
@@ -34,13 +34,6 @@
     "webpack-dev-server": "^3.10.3"
   },
   "babel": {
-    "plugins": [
-      [
-        "@babel/plugin-proposal-class-properties",
-        {
-          "loose": true
-        }
-      ]
-    ]
+    "plugins": []
   }
 }
