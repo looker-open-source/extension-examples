@@ -61,7 +61,7 @@ export const LocalStorage = () => {
   useEffect(() => {
     const loadLocalStorage = async () => {
       const tempData = await extensionSDK.localStorageGetItem(itemId)
-      setData(tempData)
+      setData(tempData || '')
       setMessage('Data loaded from local storage')
     }
     loadLocalStorage()
@@ -81,7 +81,7 @@ export const LocalStorage = () => {
   const restoreLocalStorageData = async () => {
     setMessage(undefined)
     const data = await extensionSDK.localStorageGetItem(itemId)
-    setData(data)
+    setData(data || '')
     setMessage('Data restored from local storage')
   }
 

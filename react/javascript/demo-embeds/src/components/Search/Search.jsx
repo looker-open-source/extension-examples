@@ -67,17 +67,19 @@ export const Search = ({
           disabled={loading}
         />
       </Space>
-      <List mt="none" density={-2} height="85%">
-        {selectedData.map(({ description, id }) => (
-          <ListItem
-            key={id}
-            onClick={() => onSelected(id)}
-            disabled={embedRunning}
-          >
-            {description}
-          </ListItem>
-        ))}
-      </List>
+      <Box overflowY="scroll">
+        <List mt="none" density={-2} height="85%">
+          {selectedData.map(({ description, id }) => (
+            <ListItem
+              key={id}
+              onClick={() => onSelected(id)}
+              disabled={embedRunning}
+            >
+              {description}
+            </ListItem>
+          ))}
+        </List>
+      </Box>
     </Box>
   )
 }
