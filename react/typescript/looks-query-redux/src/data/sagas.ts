@@ -58,7 +58,7 @@ function* runLookSaga(action: Action): SagaIterator {
     }
     const coreSDK = getCore40SDK()
     const result = yield call([coreSDK, coreSDK.run_look], {
-      look_id: parseInt(lookId, 10),
+      look_id: lookId,
       result_format: 'json',
     })
     const json = yield call([coreSDK, coreSDK.ok], result)

@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 import React from 'react'
-import { act, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import { renderWithExtensionContext2 } from './__mocks__/render_with_extension'
 import { DemoEmbeds } from './DemoEmbeds'
 
@@ -30,6 +30,6 @@ describe('DemoEmbeds', () => {
   test('it renders', async () => {
     const ok = (result) => result
     renderWithExtensionContext2(<DemoEmbeds />, {}, { core40SDK: { ok } })
-    await act(async () => screen.findByText('Dashboards Next'))
+    await screen.findByText('Dashboards Next')
   })
 })

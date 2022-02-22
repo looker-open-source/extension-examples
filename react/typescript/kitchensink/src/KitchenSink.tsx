@@ -79,13 +79,17 @@ export const KitchenSink: React.FC<KitchenSinkProps> = ({
   route,
   routeState,
 }) => {
-  const extensionContext =
-    useContext<ExtensionContextData2<Looker40SDK>>(ExtensionContext2)
+  const extensionContext = useContext<ExtensionContextData2<Looker40SDK>>(
+    ExtensionContext2
+  )
   const { extensionSDK } = extensionContext
-  const [canPersistContextData, setCanPersistContextData] =
-    useState<boolean>(false)
-  const [configurationData, setConfigurationData] =
-    useState<ConfigurationData>()
+  const [canPersistContextData, setCanPersistContextData] = useState<boolean>(
+    false
+  )
+  const [
+    configurationData,
+    setConfigurationData,
+  ] = useState<ConfigurationData>()
 
   useEffect(() => {
     const initialize = async () => {

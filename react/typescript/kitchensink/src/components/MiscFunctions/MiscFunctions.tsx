@@ -42,8 +42,9 @@ import { MiscFunctionsProps } from './types'
 
 const MiscFunctions: React.FC<MiscFunctionsProps> = () => {
   const [messages, setMessages] = useState('')
-  const extensionContext =
-    useContext<ExtensionContextData2<Looker40SDK>>(ExtensionContext2)
+  const extensionContext = useContext<ExtensionContextData2<Looker40SDK>>(
+    ExtensionContext2
+  )
   const extensionSDK = extensionContext.extensionSDK as ExtensionHostApi
 
   const updateMessages = (message: string) => {

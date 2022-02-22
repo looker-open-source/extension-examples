@@ -20,9 +20,22 @@
     "tsc": "lerna run --parallel tsc",
     "test": "lerna run --parallel test",
     "uberext": "ts-node ./scripts/create_uber_extension_project.ts",
+    "update_packages": "ts-node ./scripts/update_packages.ts",
+    "dev:demo-core-sdk": "cd react/javascript/demo-core-sdk && yarn develop",
     "dev:demo-embeds": "cd react/javascript/demo-embeds && yarn develop",
+    "dev:demo-extension-sdk": "cd react/javascript/demo-extension-sdk && yarn develop",
+    "dev:demo-external-api": "cd react/javascript/demo-external-api && yarn develop",
+    "dev:file-download": "cd react/javascript/file-download && yarn develop",
     "dev:file-upload": "cd react/javascript/file-upload && yarn develop",
-    "dev:kitchensink": "cd react/typescript/kitchensink && yarn develop"
+    "dev:kitchensink-js": "cd react/javascript/kitchensink-js && yarn develop",
+    "dev:map-iframe": "cd react/javascript/map-iframe && yarn develop",
+    "dev:access-key-demo": "cd react/typescript/access-key-demo && yarn develop",
+    "dev:helloworld-ts": "cd react/typescript/helloworld-ts && yarn develop",
+    "dev:kitchensink": "cd react/typescript/kitchensink && yarn develop",
+    "dev:looks-query": "cd react/typescript/looks-query && yarn develop",
+    "dev:looks-query-redux": "cd react/typescript/looks-query-redux && yarn develop",
+    "dev:counter": "cd react/vanilla/counter && yarn develop",
+    "dev:counter-ts": "cd react/vanilla/counter-ts && yarn develop"
   },
   "devDependencies": {
     "@types/node": "^15.3.0",
@@ -31,7 +44,7 @@
   },
   "dependencies": {
     "ts-node": "^9.1.1",
-    "typescript": "^4.2.4",
+    "typescript": "4.5.2",
     "yargs": "^17.0.1"
   }
 }

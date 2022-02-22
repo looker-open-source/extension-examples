@@ -37,8 +37,9 @@ import { EmbedContainer } from './components/EmbedContainer'
 const EmbedExplore: React.FC<EmbedProps> = ({ id }) => {
   const [running, setRunning] = React.useState(true)
   const [explore, setExplore] = React.useState<LookerEmbedExplore>()
-  const extensionContext =
-    useContext<ExtensionContextData2<Looker40SDK>>(ExtensionContext2)
+  const extensionContext = useContext<ExtensionContextData2<Looker40SDK>>(
+    ExtensionContext2
+  )
 
   const updateRunButton = (running: boolean) => {
     setRunning(running)

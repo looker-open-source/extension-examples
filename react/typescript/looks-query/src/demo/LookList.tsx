@@ -24,13 +24,13 @@
 
 import React from 'react'
 import { ILook } from '@looker/sdk'
-import { List, Heading, Box, ListItem, Link, Text } from '@looker/components'
+import { List, Heading, Box, ListItem, Text } from '@looker/components'
 
 interface LookListProps {
   looks: ILook[]
   loading: boolean
   selectLook: (look: ILook) => void
-  currentLookId?: number
+  currentLookId?: string
 }
 
 export const LookList: React.FC<LookListProps> = ({

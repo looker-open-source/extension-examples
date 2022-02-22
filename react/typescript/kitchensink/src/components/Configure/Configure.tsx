@@ -48,14 +48,17 @@ const Configure: React.FC<ConfigureProps> = ({
   configurationData,
   updateConfigurationData,
 }) => {
-  const [localConfigurationData, setLocalConfigurationData] =
-    useState<ConfigurationData>({
-      dashboardId: '',
-      exploreId: '',
-      lookId: '',
-    } as ConfigurationData)
-  const extensionContext =
-    useContext<ExtensionContextData2<Looker40SDK>>(ExtensionContext2)
+  const [
+    localConfigurationData,
+    setLocalConfigurationData,
+  ] = useState<ConfigurationData>({
+    dashboardId: '',
+    exploreId: '',
+    lookId: '',
+  } as ConfigurationData)
+  const extensionContext = useContext<ExtensionContextData2<Looker40SDK>>(
+    ExtensionContext2
+  )
   const { extensionSDK } = extensionContext
 
   useEffect(() => {
@@ -76,26 +79,22 @@ const Configure: React.FC<ConfigureProps> = ({
   }, [])
 
   const toggleApiFunctions = () => {
-    localConfigurationData.showApiFunctions =
-      !localConfigurationData.showApiFunctions
+    localConfigurationData.showApiFunctions = !localConfigurationData.showApiFunctions
     setLocalConfigurationData({ ...localConfigurationData })
   }
 
   const toggleCoreSdkFunctions = () => {
-    localConfigurationData.showCoreSdkFunctions =
-      !localConfigurationData.showCoreSdkFunctions
+    localConfigurationData.showCoreSdkFunctions = !localConfigurationData.showCoreSdkFunctions
     setLocalConfigurationData({ ...localConfigurationData })
   }
 
   const toggleEmbedDashboard = () => {
-    localConfigurationData.showEmbedDashboard =
-      !localConfigurationData.showEmbedDashboard
+    localConfigurationData.showEmbedDashboard = !localConfigurationData.showEmbedDashboard
     setLocalConfigurationData({ ...localConfigurationData })
   }
 
   const toggleEmbedExplore = () => {
-    localConfigurationData.showEmbedExplore =
-      !localConfigurationData.showEmbedExplore
+    localConfigurationData.showEmbedExplore = !localConfigurationData.showEmbedExplore
     setLocalConfigurationData({ ...localConfigurationData })
   }
 
@@ -105,14 +104,12 @@ const Configure: React.FC<ConfigureProps> = ({
   }
 
   const toggleExternalApiFunctions = () => {
-    localConfigurationData.showExternalApiFunctions =
-      !localConfigurationData.showExternalApiFunctions
+    localConfigurationData.showExternalApiFunctions = !localConfigurationData.showExternalApiFunctions
     setLocalConfigurationData({ ...localConfigurationData })
   }
 
   const toggleMiscFunctions = () => {
-    localConfigurationData.showMiscFunctions =
-      !localConfigurationData.showMiscFunctions
+    localConfigurationData.showMiscFunctions = !localConfigurationData.showMiscFunctions
     setLocalConfigurationData({ ...localConfigurationData })
   }
 

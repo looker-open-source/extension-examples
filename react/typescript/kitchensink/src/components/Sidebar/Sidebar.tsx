@@ -47,13 +47,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
     <Box display="flex" flexDirection="column">
       <MenuList type="none">
         <StyledRouterLink to={ROUTES.HOME_ROUTE}>
-          <MenuItem icon={<HomeIcon />} current={route === ROUTES.HOME_ROUTE}>
+          <MenuItem icon={<HomeIcon />} selected={route === ROUTES.HOME_ROUTE}>
             Home
           </MenuItem>
         </StyledRouterLink>
         {configurationData.showApiFunctions && (
           <StyledRouterLink to={ROUTES.API_ROUTE}>
-            <MenuItem icon={<Api />} current={route === ROUTES.API_ROUTE}>
+            <MenuItem icon={<Api />} selected={route === ROUTES.API_ROUTE}>
               Api Functions
             </MenuItem>
           </StyledRouterLink>
@@ -62,7 +62,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <StyledRouterLink to={ROUTES.CORESDK_ROUTE}>
             <MenuItem
               icon={<SqlRunner />}
-              current={route.startsWith(ROUTES.CORESDK_ROUTE)}
+              selected={route.startsWith(ROUTES.CORESDK_ROUTE)}
             >
               Core SDK Functions
             </MenuItem>
@@ -72,7 +72,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <StyledRouterLink to={ROUTES.EMBED_DASHBOARD}>
             <MenuItem
               icon={<Dashboard />}
-              current={route === ROUTES.EMBED_DASHBOARD}
+              selected={route === ROUTES.EMBED_DASHBOARD}
             >
               Embed Dashboard
             </MenuItem>
@@ -82,7 +82,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <StyledRouterLink to={ROUTES.EMBED_EXPLORE}>
             <MenuItem
               icon={<Explore />}
-              current={route === ROUTES.EMBED_EXPLORE}
+              selected={route === ROUTES.EMBED_EXPLORE}
             >
               Embed Explore
             </MenuItem>
@@ -92,7 +92,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <StyledRouterLink to={ROUTES.EMBED_LOOK}>
             <MenuItem
               icon={<AnalyticsApp />}
-              current={route === ROUTES.EMBED_LOOK}
+              selected={route === ROUTES.EMBED_LOOK}
             >
               Embed Look
             </MenuItem>
@@ -102,7 +102,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <StyledRouterLink to={ROUTES.EXTERNAL_API_ROUTE}>
             <MenuItem
               icon={<Cloud />}
-              current={route.startsWith(ROUTES.EXTERNAL_API_ROUTE)}
+              selected={route.startsWith(ROUTES.EXTERNAL_API_ROUTE)}
             >
               External Api Functions
             </MenuItem>
@@ -110,13 +110,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
         )}
         {configurationData.showMiscFunctions && (
           <StyledRouterLink to={ROUTES.MISC_ROUTE}>
-            <MenuItem icon={<More />} current={route === ROUTES.MISC_ROUTE}>
+            <MenuItem icon={<More />} selected={route === ROUTES.MISC_ROUTE}>
               Miscellaneous Functions
             </MenuItem>
           </StyledRouterLink>
         )}
         <StyledRouterLink to={ROUTES.CONFIG_ROUTE}>
-          <MenuItem icon={<Settings />} current={route === ROUTES.CONFIG_ROUTE}>
+          <MenuItem
+            icon={<Settings />}
+            selected={route === ROUTES.CONFIG_ROUTE}
+          >
             Configure
           </MenuItem>
         </StyledRouterLink>

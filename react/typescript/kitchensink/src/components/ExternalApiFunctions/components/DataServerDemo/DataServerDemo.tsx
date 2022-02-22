@@ -66,8 +66,9 @@ export const DataServerDemo: React.FC<DataServerDemoProps> = ({
   dataState,
 }) => {
   // Get access to the extension SDK and the looker API SDK.
-  const extensionContext =
-    useContext<ExtensionContextData2<Looker40SDK>>(ExtensionContext2)
+  const extensionContext = useContext<ExtensionContextData2<Looker40SDK>>(
+    ExtensionContext2
+  )
   const { extensionSDK } = extensionContext
   // React router location
   const location = useLocation()

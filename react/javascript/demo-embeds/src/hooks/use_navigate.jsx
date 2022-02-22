@@ -26,8 +26,9 @@ import { useCurrentRoute } from '.'
 
 export const useNavigate = (expectedEmbedType) => {
   const history = useHistory()
-  const { searchCriteria, embedType, embedId } =
-    useCurrentRoute(expectedEmbedType)
+  const { searchCriteria, embedType, embedId } = useCurrentRoute(
+    expectedEmbedType
+  )
 
   const updateSearchCriteria = (criteria = '') => {
     const newCriteria = encodeURIComponent(criteria.trim())

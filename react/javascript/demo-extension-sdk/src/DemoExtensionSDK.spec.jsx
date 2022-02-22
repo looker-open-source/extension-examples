@@ -22,13 +22,13 @@
  * THE SOFTWARE.
  */
 import React from 'react'
-import { act, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import { renderWithExtensionContext2 } from './__mocks__/render_with_extension'
 import { DemoExtensionSDK } from './DemoExtensionSDK'
 
 describe('DemoExtensionSDK', () => {
   test('it renders', async () => {
     renderWithExtensionContext2(<DemoExtensionSDK />)
-    await act(async () => screen.findByText('Update Window Title'))
+    await screen.findByText('Update Window Title')
   })
 })

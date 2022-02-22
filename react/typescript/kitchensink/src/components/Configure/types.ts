@@ -22,7 +22,6 @@
  * THE SOFTWARE.
  */
 
-import React from 'react'
 import { ConfigurationData } from '../../types'
 
 export interface ConfigureProps {

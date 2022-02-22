@@ -38,8 +38,9 @@ const EmbedDashboard: React.FC<EmbedProps> = ({ id }) => {
   const [dashboardNext, setDashboardNext] = React.useState(true)
   const [running, setRunning] = React.useState(true)
   const [dashboard, setDashboard] = React.useState<LookerEmbedDashboard>()
-  const extensionContext =
-    useContext<ExtensionContextData2<Looker40SDK>>(ExtensionContext2)
+  const extensionContext = useContext<ExtensionContextData2<Looker40SDK>>(
+    ExtensionContext2
+  )
 
   const toggleDashboard = () => {
     setDashboardNext(!dashboardNext)

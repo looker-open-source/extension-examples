@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 import React from 'react'
-import { act, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import { renderWithExtensionContext2 } from './__mocks__/render_with_extension'
 import { DemoExternalApi } from './DemoExternalApi'
 
@@ -30,6 +30,6 @@ describe('DemoExternalApi', () => {
   test('it renders', async () => {
     const ok = (result) => result
     renderWithExtensionContext2(<DemoExternalApi />, {}, { core40SDK: { ok } })
-    await act(async () => screen.findByText('Signin'))
+    await screen.findByText('Signin')
   })
 })

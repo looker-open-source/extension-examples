@@ -58,8 +58,9 @@ export enum ROUTES {
 export const AccessKeyDemo: React.FC<AccessKeyDemoProps> = hot(
   ({ updateCriticalMessage, updatePositiveMessage, clearMessage }) => {
     const [canConfigure, setCanConfigure] = useState<boolean>(false)
-    const { extensionSDK, core40SDK } =
-      useContext<ExtensionContextData>(ExtensionContext)
+    const { extensionSDK, core40SDK } = useContext<ExtensionContextData>(
+      ExtensionContext
+    )
     const location = useLocation()
     const history = useHistory()
 
