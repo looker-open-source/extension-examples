@@ -104,12 +104,12 @@ export const Extension: React.FC = hot(() => {
     try {
       setErrorMessage(undefined)
       setRunningQuery(true)
-      const result = ((await core40SDK.ok(
+      const result = (await core40SDK.ok(
         core40SDK.run_look({
           look_id: lookId,
           result_format: 'json',
         })
-      )) as unknown) as Record<any, any>[]
+      )) as unknown as Record<any, any>[]
       setRunningQuery(false)
       setQueryResult(result)
       setErrorMessage(undefined)

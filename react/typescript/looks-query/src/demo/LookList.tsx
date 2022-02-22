@@ -51,7 +51,7 @@ export const LookList: React.FC<LookListProps> = ({
           look.id !== undefined ? (
             <ListItem
               key={look.id}
-              selected={look.id === String(currentLookId)}
+              selected={look.id === currentLookId}
               onClick={() => selectLook(look)}
             >
               {look.title}
