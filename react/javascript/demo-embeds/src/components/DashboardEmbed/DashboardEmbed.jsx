@@ -112,6 +112,7 @@ export const DashboardEmbed = ({ embedType }) => {
           if (hostUrl) {
             LookerEmbedSDK.init(hostUrl)
             const embed = LookerEmbedSDK.createDashboardWithId(dashboardId)
+              .withNext('-legacy')
               .appendTo(el)
               .on('dashboard:run:start', updateRunButton.bind(null, true))
               .on('dashboard:run:complete', updateRunButton.bind(null, false))
