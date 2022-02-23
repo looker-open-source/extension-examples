@@ -89,6 +89,7 @@ const packages = {
   '@babel/runtime-corejs3': '^7.16.3',
   '@types/styled-components': '^5.1.13',
   '@types/styled-system': '^5.1.13',
+  axios: '^0.21.2',
 }
 
 const isIgnorable = (fileName: string) => {
