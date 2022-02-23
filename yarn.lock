@@ -2162,24 +2162,24 @@
     eslint-plugin-testing-library "4.11.0"
     typescript "4.4.2"
 
-"@looker/extension-sdk-react@^22.0.0":
-  version "22.0.0"
-  resolved "https://registry.yarnpkg.com/@looker/extension-sdk-react/-/extension-sdk-react-22.0.0.tgz#2d9fbb05c8bcb2021eee4b79a00cb40cd4762543"
-  integrity sha512-O9tbjiyLkUH/afCpOiEGUj/M9R/t5+gfFbVejPEinR9avtujhWY5gC0D1D4j4de+fC3dq9QYtgnlBxE3n8BooQ==
+"@looker/extension-sdk-react@^22.2.0":
+  version "22.2.0"
+  resolved "https://registry.yarnpkg.com/@looker/extension-sdk-react/-/extension-sdk-react-22.2.0.tgz#57bc3d60e8529d2c1f0866ea7037baf68ceae425"
+  integrity sha512-sQMfhD49AyheZcD15pWWQiVgLGTUvEAK7wbxiGIsfXbf0s/KZwvSjJDc748V8Ym7OuQ92rmfg0mt7hGjcJJ0QA==
   dependencies:
-    "@looker/extension-sdk" "^22.0.0"
-    "@looker/sdk" "^22.0.0"
+    "@looker/extension-sdk" "^22.2.0"
+    "@looker/sdk" "^22.2.0"
     "@looker/sdk-rtl" "^21.3.2"
     history "^4.9.0"
     lodash "^4.17.20"
 
-"@looker/extension-sdk@^22.0.0":
-  version "22.0.0"
-  resolved "https://registry.yarnpkg.com/@looker/extension-sdk/-/extension-sdk-22.0.0.tgz#17343ce9f89a143f65c55bdda1aa65ab87e0e190"
-  integrity sha512-uyM34TatVMeVeWwT8fz+W/vnfOBoo6e5xlqYCVK2RN70Gf3Q92Xs6LfavPMBkSnmkw8ERebqtVlSehwWgD6kjQ==
+"@looker/extension-sdk@^22.2.0":
+  version "22.2.0"
+  resolved "https://registry.yarnpkg.com/@looker/extension-sdk/-/extension-sdk-22.2.0.tgz#7c8704d67b1bb08c1b71b01d80cf00018eafbf65"
+  integrity sha512-ZMa2W5VtVm4FqZS4Dhp5PBCKHnAMdWFNJwyH187al/M6nSnN21ZGqFIAk1YCe6q2lLDC03sFlY/6exkzpPHRkA==
   dependencies:
     "@looker/chatty" "^2.3.0"
-    "@looker/sdk" "^22.0.0"
+    "@looker/sdk" "^22.2.0"
     "@looker/sdk-rtl" "^21.3.2"
     deepmerge "^4.2.2"
     readable-stream "^3.4.0"
@@ -2210,7 +2210,7 @@
   dependencies:
     prettier ">=2.2.1"
 
-"@looker/sdk-rtl@^21.0.12", "@looker/sdk-rtl@^21.3.2":
+"@looker/sdk-rtl@^21.3.2":
   version "21.3.2"
   resolved "https://registry.yarnpkg.com/@looker/sdk-rtl/-/sdk-rtl-21.3.2.tgz#b509e1269816873ce697b1820a9d83eedda5c33f"
   integrity sha512-oyVQ5y7o7nBukdOpNY4uJamzgTD3F69aN3FR2FOJGH+V9PwZERnWOIygcXbcijo8/VExDG85zyl4nNR+lCJLIw==
@@ -2220,10 +2220,10 @@
     request "^2.88.0"
     request-promise-native "^1.0.8"
 
-"@looker/sdk@^22.0.0":
-  version "22.0.0"
-  resolved "https://registry.yarnpkg.com/@looker/sdk/-/sdk-22.0.0.tgz#125c76932c87f807cc345e8a5bbe445519c65319"
-  integrity sha512-KODVNNoFKr7Uaj6e4NBcrlNYGiGa9bni5qe8+c5cWVPCBhTxzqnrXkxoKuoDqhS3wp7LrxU8N8Eqb4u7dM89Zg==
+"@looker/sdk@^22.2.0":
+  version "22.2.0"
+  resolved "https://registry.yarnpkg.com/@looker/sdk/-/sdk-22.2.0.tgz#d934fd946f0f20fd4d92b942b0276b8bdcbfdeb3"
+  integrity sha512-jDsFcQwxHskbzz6dSkamfLzGU2H+GKG/VqgecAdw2nJY9fiAPOsnhSyIsgjSRonCdGwqe9WGfY4DeoTeLwNL1Q==
   dependencies:
     "@looker/sdk-rtl" "^21.3.2"
     ini "^1.3.8"
