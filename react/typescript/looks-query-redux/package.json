@@ -17,7 +17,7 @@
   "author": "Looker",
   "license": "MIT",
   "engines": {
-    "node": ">=10"
+    "node": ">=14"
   },
   "dependencies": {
     "@looker/components": "^3.0.1",

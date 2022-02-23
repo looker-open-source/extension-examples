@@ -17,7 +17,7 @@
   "author": "Looker",
   "license": "MIT",
   "engines": {
-    "node": ">=12"
+    "node": ">=14"
   },
   "dependencies": {
     "@looker/components": "^3.0.1",
@@ -33,7 +33,7 @@
     "@styled-icons/material": "^10.28.0",
     "@styled-icons/material-outlined": "^10.34.0",
     "@styled-icons/material-rounded": "^10.34.0",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "date-fns": "^2.12.0",
     "lodash": "^4.17.15",
     "react": "^16.14.0",
