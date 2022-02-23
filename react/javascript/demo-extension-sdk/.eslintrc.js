@@ -12,7 +12,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:testing-library/react',
     'prettier',
-    '@looker/eslint-config/license-header',
+    '@looker/eslint-config-oss',
   ],
   parserOptions: {
     ecmaFeatures: {

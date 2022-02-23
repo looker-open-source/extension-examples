@@ -34,7 +34,7 @@
     "@styled-icons/material-outlined": "^10.34.0",
     "@styled-icons/material-rounded": "^10.34.0",
     "date-fns": "^2.12.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-is": "^16.13.1",
@@ -54,7 +54,7 @@
     "@babel/preset-typescript": "^7.16.0",
     "@babel/runtime": "^7.12.5",
     "@looker/components-test-utils": "^1.1.5",
-    "@looker/eslint-config": "^0.10.4",
+    "@looker/eslint-config-oss": "^1.7.14",
     "@looker/prettier-config": "^0.10.4",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
@@ -112,8 +112,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "@looker/eslint-config",
-      "@looker/eslint-config/license-header"
+      "@looker/eslint-config-oss"
     ],
     "rules": {
       "@typescript-eslint/no-explicit-any": "off",
@@ -129,10 +128,6 @@
       "sort-keys-fix/sort-keys-fix": "off",
       "no-useless-constructor": "off",
       "@typescript-eslint/no-empty-interface": "off",
-      "header/header": [
-        2,
-        "config/license-header.js"
-      ],
       "import/default": "off",
       "sort-keys": "off",
       "spaced-comment": [

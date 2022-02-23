@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2019 Looker Data Sciences, Inc.
+ * Copyright (c) 2022 Looker Data Sciences, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,13 +25,13 @@
 import {
   connectExtensionHost,
   LookerExtensionSDK40,
-} from "@looker/extension-sdk";
+} from '@looker/extension-sdk'
 
-(async () => {
-  const extensionSdk = await connectExtensionHost();
-  const sdk40 = LookerExtensionSDK40.createClient(extensionSdk);
-  const result = await sdk40.me();
-  const name = result.ok ? result.value.display_name : "Unknown";
+;(async () => {
+  const extensionSdk = await connectExtensionHost()
+  const sdk40 = LookerExtensionSDK40.createClient(extensionSdk)
+  const result = await sdk40.me()
+  const name = result.ok ? result.value.display_name : 'Unknown'
   document.write(`
   <style>
     body {
@@ -64,5 +64,5 @@ import {
     <h3>I hope you had fun with this Looker extension.</h3>
     <img width="200" src="https://docs.looker.com/assets/site_images/looker-logo.svg" />
   </div>
-`);
-})();
+`)
+})()
