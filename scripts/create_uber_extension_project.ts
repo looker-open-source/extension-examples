@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2019 Looker Data Sciences, Inc.
+ * Copyright (c) 2022 Looker Data Sciences, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -63,7 +63,7 @@ buildUberExtension(project, target, connection, extensions)
 
 console.log(`${project} extension project built`)
 
-function findExtensions(dirname, extensions: ExtensionInfo[]) {
+function findExtensions(dirname: string, extensions: ExtensionInfo[]) {
   const files = fs.readdirSync(dirname)
   const distPath = `${dirname}/dist`
   const hasDistDir = isValidDirectory(distPath)
@@ -250,7 +250,7 @@ function parseAndValidateArgs() {
   return { source, target, project, connection }
 }
 
-function isValidDirectory(name) {
+function isValidDirectory(name: string) {
   if (!fs.existsSync(name)) {
     return false
   }
@@ -260,7 +260,7 @@ function isValidDirectory(name) {
   return true
 }
 
-function isValidFile(name) {
+function isValidFile(name: string) {
   if (!fs.existsSync(name)) {
     return false
   }

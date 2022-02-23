@@ -1,25 +1,27 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2021 Looker Data Sciences, Inc.
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
+
+ MIT License
+
+ Copyright (c) 2022 Looker Data Sciences, Inc.
+
+ Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+
+ The above copyright notice and this permission notice shall be included in all
+ copies or substantial portions of the Software.
+
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ SOFTWARE.
+
  */
 import React, { createContext, useContext, useState } from 'react'
 import PropTypes from 'prop-types'
@@ -51,18 +53,18 @@ export const SheetsProvider = ({ children }) => {
     try {
       const init = requestBody
         ? {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${token}`,
-            },
             body: JSON.stringify(requestBody),
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+            method: 'POST',
           }
         : {
-            method: 'GET',
             headers: {
               Authorization: `Bearer ${token}`,
             },
+            method: 'GET',
           }
 
       setError(false)
@@ -75,7 +77,7 @@ export const SheetsProvider = ({ children }) => {
       if (status === 401) {
         setExpired(true)
       }
-      return { ok, body, status }
+      return { body, ok, status }
     } catch (error) {
       console.error(error)
       setError(true)
@@ -145,10 +147,10 @@ export const SheetsProvider = ({ children }) => {
         {
           deleteDimension: {
             range: {
-              sheetId: 0,
               dimension: 'ROWS',
-              startIndex: sourceIndex,
               endIndex: sourceIndex + 1,
+              sheetId: 0,
+              startIndex: sourceIndex,
             },
           },
         },
@@ -176,13 +178,13 @@ export const SheetsProvider = ({ children }) => {
       requests: [
         {
           moveDimension: {
-            source: {
-              sheetId: 0,
-              dimension: 'ROWS',
-              startIndex: sourceIndex,
-              endIndex: sourceIndex + 1,
-            },
             destinationIndex: destIndex,
+            source: {
+              dimension: 'ROWS',
+              endIndex: sourceIndex + 1,
+              sheetId: 0,
+              startIndex: sourceIndex,
+            },
           },
         },
       ],
@@ -208,8 +210,8 @@ export const SheetsProvider = ({ children }) => {
     const { ok } = await invokeSheetsApi(
       `${spreadsheetId}/values:batchUpdate`,
       {
+        data: { majorDimension: 'ROWS', range, values: newRows },
         valueInputOption: 'RAW',
-        data: { range, majorDimension: 'ROWS', values: newRows },
       }
     )
     return ok
@@ -242,17 +244,17 @@ export const SheetsProvider = ({ children }) => {
   return (
     <SheetsContext.Provider
       value={{
+        copySpreadsheet,
         error,
         expired,
-        spreadsheetId,
-        rows,
-        unloadSpreadSheet,
-        copySpreadsheet,
+        insertRowInSpreadSheet,
         loadSpreadSheet,
         moveRowInSpreadSheet,
         removeRowFromSpreadSheet,
+        rows,
+        spreadsheetId,
+        unloadSpreadSheet,
         updateRowInSpreadSheet,
-        insertRowInSpreadSheet,
       }}
     >
       {children}
