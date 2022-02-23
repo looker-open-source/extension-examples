@@ -50,6 +50,7 @@
     "yargs": "^17.0.1"
   },
   "resolutions": {
-    "trim": ">= 0.0.3"
+    "trim": ">= 0.0.3",
+    "ansi-regex": "5.0.1"
   }
 }
