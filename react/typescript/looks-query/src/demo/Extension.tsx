@@ -56,7 +56,7 @@ export const Extension: React.FC = hot(() => {
     const lookid = match?.params.lookid
     if (looks.length > 0) {
       if (lookid) {
-        const selectedLook = looks.find((look) => look.id + '' === lookid)
+        const selectedLook = looks.find((look) => look.id === lookid)
         if (selectedLook && (!currentLook || currentLook.id !== selectedLook)) {
           setCurrentLook(selectedLook)
         } else {
@@ -100,16 +100,16 @@ export const Extension: React.FC = hot(() => {
   }
 
   const runLook = async () => {
-    const lookId = currentLook ? currentLook.id || -1 : -1
+    const lookId = currentLook?.id || ''
     try {
       setErrorMessage(undefined)
       setRunningQuery(true)
-      const result = ((await core40SDK.ok(
+      const result = (await core40SDK.ok(
         core40SDK.run_look({
           look_id: lookId,
           result_format: 'json',
         })
-      )) as unknown) as Record<any, any>[]
+      )) as unknown as Record<any, any>[]
       setRunningQuery(false)
       setQueryResult(result)
       setErrorMessage(undefined)

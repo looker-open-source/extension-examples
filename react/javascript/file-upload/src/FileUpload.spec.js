@@ -22,12 +22,13 @@
  * THE SOFTWARE.
  */
 import React from 'react'
+import { screen } from '@testing-library/react'
 import { renderWithTheme } from '@looker/components-test-utils'
 import { FileUpload } from './FileUpload'
 
 describe('FileUpload', () => {
   test('it renders', () => {
-    const { getByText } = renderWithTheme(<FileUpload />)
-    getByText('Entitled upload file')
+    renderWithTheme(<FileUpload />)
+    screen.getByText('Entitled upload file')
   })
 })

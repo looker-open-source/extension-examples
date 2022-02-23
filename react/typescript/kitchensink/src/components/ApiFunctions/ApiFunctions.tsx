@@ -37,9 +37,8 @@ import { ApiFunctionsProps } from './types'
 const ApiFunctions: React.FC<ApiFunctionsProps> = () => {
   const history = useHistory()
   const [messages, setMessages] = useState('')
-  const extensionContext = useContext<ExtensionContextData2<Looker40SDK>>(
-    ExtensionContext2
-  )
+  const extensionContext =
+    useContext<ExtensionContextData2<Looker40SDK>>(ExtensionContext2)
   const { extensionSDK } = extensionContext
 
   const uaName = `${extensionSDK.lookerHostData?.extensionId.replace(
@@ -47,7 +46,7 @@ const ApiFunctions: React.FC<ApiFunctionsProps> = () => {
     '_'
   )}_user_value`
 
-  const updateMessages = (message: string) => {
+  const updateMessages = (message: any) => {
     setMessages((prevMessages) => {
       const maybeLineBreak = prevMessages.length === 0 ? '' : '\n'
       return `${prevMessages}${maybeLineBreak}${message}`

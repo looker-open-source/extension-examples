@@ -28,7 +28,7 @@ import { sortByTitle } from './utils'
 
 const all = async (coreSDK) => {
   try {
-    const data = await coreSDK.ok(coreSDK.all_lookml_models())
+    const data = await coreSDK.ok(coreSDK.all_lookml_models({}))
     const models = data.filter((lookml) => lookml.explores.length > 0)
     const explores = []
     models.forEach((model) => {
@@ -42,6 +42,7 @@ const all = async (coreSDK) => {
     explores.sort(sortByTitle)
     return explores
   } catch (err) {
+    console.error(err)
     throw new Error('Error retrieving explores')
   }
 }

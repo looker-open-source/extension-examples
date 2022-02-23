@@ -24,13 +24,13 @@
 
 import React from 'react'
 import { ILook } from '@looker/sdk'
-import { List, Heading, Box, ListItem, Link, Text } from '@looker/components'
+import { List, Heading, Box, ListItem, Text } from '@looker/components'
 
 interface LookListProps {
   looks: ILook[]
   loading: boolean
   selectLook: (look: ILook) => void
-  currentLookId?: number
+  currentLookId?: string
 }
 
 export const LookList: React.FC<LookListProps> = ({
@@ -49,10 +49,12 @@ export const LookList: React.FC<LookListProps> = ({
       <List>
         {looks.map((look) =>
           look.id !== undefined ? (
-            <ListItem key={look.id} selected={look.id === currentLookId}>
-              <Link onClick={() => selectLook(look)} key={look.id}>
-                {look.title}
-              </Link>
+            <ListItem
+              key={look.id}
+              selected={look.id === currentLookId}
+              onClick={() => selectLook(look)}
+            >
+              {look.title}
             </ListItem>
           ) : (
             <Text key="error" color="palette.red500">

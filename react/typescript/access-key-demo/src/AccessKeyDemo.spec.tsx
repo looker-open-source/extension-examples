@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 import React from 'react'
-import { act, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import { renderWithExtensionContext } from './__mocks__/render_with_extension'
 import { AccessKeyDemo } from './AccessKeyDemo'
 
@@ -53,12 +53,10 @@ describe('AccessKeyDemo', () => {
       { userAttributeGetItem, serverProxy, createSecretKeyTag },
       { core40SDK: { me, ok } }
     )
-    await act(async () => {
-      await screen.findByText('Verify JWT token')
-      await screen.findByText('Configure')
-      expect(userAttributeGetItem).toHaveBeenCalled()
-      expect(createSecretKeyTag).toHaveBeenCalled()
-      expect(serverProxy).toHaveBeenCalled()
-    })
+    await screen.findByText('Verify JWT token')
+    await screen.findByText('Configure')
+    expect(userAttributeGetItem).toHaveBeenCalled()
+    expect(createSecretKeyTag).toHaveBeenCalled()
+    expect(serverProxy).toHaveBeenCalled()
   })
 })

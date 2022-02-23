@@ -52,9 +52,8 @@ export const ConfigurationScene: React.FC<ConfigurationSceneProps> = ({
 }) => {
   const history = useHistory()
   const location = useLocation()
-  const { extensionSDK, core40SDK } = useContext<ExtensionContextData>(
-    ExtensionContext
-  )
+  const { extensionSDK, core40SDK } =
+    useContext<ExtensionContextData>(ExtensionContext)
   const { lookerHostData } = extensionSDK
   const { extensionId } = lookerHostData || {}
   // Access key state

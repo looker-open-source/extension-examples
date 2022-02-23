@@ -44,6 +44,7 @@ export const EmbedEvents = ({ events, clearEvents }) => {
         borderBottom="solid 1px"
         pb="small"
         borderColor="ui2"
+        overflowY="scroll"
       >
         <List mt="none" density={-3} width="100%" height="100%">
           {events.map((event, index) => (

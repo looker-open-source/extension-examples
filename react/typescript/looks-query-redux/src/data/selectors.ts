@@ -31,12 +31,12 @@ export const getError = (state: State): string | undefined => state.error
 
 export const getLooks = (state: State): ILook[] | undefined => state.looks
 
-export const getCurrentQuery = (currentLookId?: string) => (
-  state: State
-): Record<any, any>[] | undefined =>
-  currentLookId ? state.queries[currentLookId] : undefined
+export const getCurrentQuery =
+  (currentLookId?: string) =>
+  (state: State): Record<any, any>[] | undefined =>
+    currentLookId ? state.queries[currentLookId] : undefined
 
-export const getCurrentLook = (currentLookId?: string) => (
-  state: State
-): ILook | undefined =>
-  (state.looks || []).find((look) => look.id + '' === currentLookId)
+export const getCurrentLook =
+  (currentLookId?: string) =>
+  (state: State): ILook | undefined =>
+    (state.looks || []).find((look) => look.id + '' === currentLookId)

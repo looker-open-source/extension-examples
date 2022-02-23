@@ -5,18 +5,39 @@
   "description": "Looker extension examples",
   "author": "Looker",
   "private": true,
+  "workspaces": [
+    "react/javascript/*",
+    "react/typescript/*",
+    "vanilla/*"
+  ],
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "lerna": "lerna",
     "clean": "lerna run --parallel clean",
     "build": "lerna run --parallel build",
     "lint": "lerna run --parallel lint:es",
+    "lint:fix": "lerna run --parallel lint:es:fix",
     "tsc": "lerna run --parallel tsc",
     "test": "lerna run --parallel test",
     "uberext": "ts-node ./scripts/create_uber_extension_project.ts",
-    "dev:demo-embeds": "cd react/javascript/demo-embeds && yarn develop",
-    "dev:file-upload": "cd react/javascript/file-upload && yarn develop",
-    "dev:kitchensink": "cd react/typescript/kitchensink && yarn develop"
+    "update_packages": "ts-node ./scripts/update_packages.ts",
+    "dev:demo-core-sdk": "yarn workspace demo-core-sdk develop",
+    "dev:demo-embeds": "yarn workspace demo-embeds develop",
+    "dev:demo-extension-sdk": "yarn workspace demo-extension-sdk develop",
+    "dev:demo-external-api": "yarn workspace demo-external-api develop",
+    "dev:file-download": "yarn workspace file-download develop",
+    "dev:file-upload": "yarn workspace file-upload develop",
+    "dev:file-upload-server": "yarn workspace file-upload server",
+    "dev:helloworld-js": "yarn workspace helloworld-js develop",
+    "dev:map-iframe": "yarn workspace map-iframe develop",
+    "dev:access-key-demo": "yarn workspace access-key-demo develop",
+    "dev:access-key-demo-server": "yarn workspace access-key-demo start-server",
+    "dev:helloworld-ts": "yarn workspace helloworld-ts develop",
+    "dev:kitchensink": "yarn workspace kitchensink develop",
+    "dev:looks-query": "yarn workspace looks-query develop",
+    "dev:looks-query-redux": "yarn workspace looks-query-redux develop",
+    "dev:counter": "yarn workspace counter develop",
+    "dev:counter-ts": "yarn workspace counter-ts develop"
   },
   "devDependencies": {
     "@types/node": "^15.3.0",
@@ -25,7 +46,7 @@
   },
   "dependencies": {
     "ts-node": "^9.1.1",
-    "typescript": "^4.2.4",
+    "typescript": "^4.5.2",
     "yargs": "^17.0.1"
   }
 }

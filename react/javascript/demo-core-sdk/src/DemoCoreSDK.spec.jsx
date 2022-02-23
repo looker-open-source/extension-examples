@@ -22,14 +22,14 @@
  * THE SOFTWARE.
  */
 import React from 'react'
-import { act, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import { renderWithExtensionContext2 } from './__mocks__/render_with_extension'
 import { DemoCoreSDK } from './DemoCoreSDK'
 
 describe('DemoCoreSDK', () => {
   test('it renders', async () => {
     renderWithExtensionContext2(<DemoCoreSDK />)
-    await act(async () => screen.findByText('Dashboards'))
-    await act(async () => screen.findByText('Look Image'))
+    await screen.findByText('Dashboards')
+    await screen.findByText('Look Image')
   })
 })

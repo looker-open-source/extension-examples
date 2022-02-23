@@ -47,10 +47,8 @@ export const HelloWorld: React.FC = () => {
 
   return (
     <ComponentsProvider>
-      <Space p="xxxxxlarge" width="100%" height="50vh" around>
-        <Text p="xxxxxlarge" fontSize="xxxxxlarge">
-          {message}
-        </Text>
+      <Space around height="50vh">
+        <Text fontSize="xxxxxlarge">{message}</Text>
       </Space>
     </ComponentsProvider>
   )

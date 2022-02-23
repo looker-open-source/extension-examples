@@ -57,7 +57,7 @@ const itemId = 'user_value'
 export const UserAttributes = () => {
   const [intent, setIntent] = useState()
   const [message, setMessage] = useState()
-  const [globalData, setGlobalData] = useState()
+  const [globalData, setGlobalData] = useState('')
   const [data, setData] = useState('')
   const { extensionSDK } = useContext(ExtensionContext2)
 
@@ -74,7 +74,7 @@ export const UserAttributes = () => {
         const tempGlobalData = await extensionSDK.userAttributeGetItem(
           globalItemId
         )
-        setGlobalData(tempGlobalData)
+        setGlobalData(tempGlobalData || '')
       } catch (_) {
         setGlobalData(
           'Failed to load Locale user attribute. Check entitlements.'
@@ -82,7 +82,7 @@ export const UserAttributes = () => {
       }
       try {
         const tempData = await extensionSDK.userAttributeGetItem(itemId)
-        setData(tempData)
+        setData(tempData || '')
         setMessage('User attribute value loaded')
       } catch (_) {
         updateMessage(

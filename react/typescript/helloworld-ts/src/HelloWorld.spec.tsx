@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 import React from 'react'
-import { act, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import { renderWithExtensionContext } from './__mocks__/render_with_extension'
 import { HelloWorld } from './HelloWorld'
 
@@ -33,8 +33,6 @@ describe('HelloWorld', () => {
       display_name: "Rosie O'Grady",
     })
     renderWithExtensionContext(<HelloWorld />, {}, { core40SDK: { me, ok } })
-    await act(async () => {
-      await screen.findByText("Hello, Rosie O'Grady")
-    })
+    await screen.findByText("Hello, Rosie O'Grady")
   })
 })

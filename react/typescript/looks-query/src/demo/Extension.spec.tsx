@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 import React from 'react'
-import { act, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import { renderWithExtensionContext } from '../__mocks__/render_with_extension'
 import { Extension } from './Extension'
 
@@ -30,8 +30,8 @@ describe('Extension', () => {
   test('it renders', async () => {
     const ok = (result: unknown) => result
     const all_looks = () => [
-      { id: 2, title: 'Hello Dolly' },
-      { id: 4, title: 'Oklahoma' },
+      { id: '2', title: 'Hello Dolly' },
+      { id: '4', title: 'Oklahoma' },
     ]
     const run_look = () => [{ stars_count: 3, chorus_count: 50 }]
     renderWithExtensionContext(
@@ -39,9 +39,7 @@ describe('Extension', () => {
       {},
       { core40SDK: { ok, all_looks, run_look } }
     )
-    await act(async () => {
-      await screen.findByText('Oklahoma')
-      await screen.findByText('stars_count')
-    })
+    await screen.findByText('Oklahoma')
+    await screen.findByText('stars_count')
   })
 })

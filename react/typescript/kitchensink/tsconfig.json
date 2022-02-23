@@ -1,12 +1,29 @@
 {
   "compilerOptions": {
-    "jsx": "react",
-    "lib": ["dom", "es2015"],
-    "sourceMap": true,
-    "strict": true,
+    "allowJs": true,
     "esModuleInterop": true,
     "noEmit": true,
-    "skipLibCheck": true
+    "lib": ["ES2019", "dom"],
+    "module": "commonjs",
+    "target": "ES2019",
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "removeComments": true,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noImplicitReturns": true,
+    "strictNullChecks": true,
+    "preserveConstEnums": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "skipLibCheck": true,
+    "suppressImplicitAnyIndexErrors": true
   },
   "exclude": ["node_modules"]
 }
