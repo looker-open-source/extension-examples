@@ -30,14 +30,14 @@
     "dev:file-upload-server": "yarn workspace file-upload server",
     "dev:helloworld-js": "yarn workspace helloworld-js develop",
     "dev:map-iframe": "yarn workspace map-iframe develop",
-    "dev:access-key-demo": "yarn workspace access-key-demo develop",
-    "dev:access-key-demo-server": "yarn workspace access-key-demo start-server",
-    "dev:helloworld-ts": "yarn workspace helloworld-ts develop",
-    "dev:kitchensink": "yarn workspace kitchensink develop",
-    "dev:looks-query": "yarn workspace looks-query develop",
-    "dev:looks-query-redux": "yarn workspace looks-query-redux develop",
-    "dev:counter": "yarn workspace counter develop",
-    "dev:counter-ts": "yarn workspace counter-ts develop"
+    "dev:access-key-demo": "cd react/typescript/access-key-demo && yarn develop",
+    "dev:access-key-demo-server": "cd react/typescript/access-key-demo && yarn start-server",
+    "dev:helloworld-ts": "cd react/typescript/helloworld-ts && yarn develop",
+    "dev:kitchensink": "cd react/typescript/kitchensink && yarn develop",
+    "dev:looks-query": "cd react/typescript/looks-query-redux && yarn develop",
+    "dev:looks-query-redux": "cd react/typescript/looks-query-redux && yarn develop",
+    "dev:counter": "cd vanilla/counter && yarn develop",
+    "dev:counter-ts": "cd vanilla/counter-ts && yarn develop"
   },
   "devDependencies": {
     "@types/node": "^15.3.0",
