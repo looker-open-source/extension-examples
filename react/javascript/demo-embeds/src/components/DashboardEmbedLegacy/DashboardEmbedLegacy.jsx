@@ -58,7 +58,7 @@ import { Search } from '../Search'
 import { EmbedContainer } from '../EmbedContainer'
 import { EmbedEvents } from '../EmbedEvents'
 
-export const DashboardEmbed = ({ embedType }) => {
+export const DashboardEmbedLegacy = ({ embedType }) => {
   const [cancelEvents, setCancelEvents] = useState(true)
   const cancelEventsRef = useRef()
   cancelEventsRef.current = cancelEvents
@@ -112,6 +112,10 @@ export const DashboardEmbed = ({ embedType }) => {
           if (hostUrl) {
             LookerEmbedSDK.init(hostUrl)
             const embed = LookerEmbedSDK.createDashboardWithId(dashboardId)
+              // Note that this force the use of the legacy version of Looker dashboards.
+              // Omitting the following will result in the use of the latest version of
+              // Looker dashboards.
+              .withNext('-legacy')
               .appendTo(el)
               .on('dashboard:run:start', updateRunButton.bind(null, true))
               .on('dashboard:run:complete', updateRunButton.bind(null, false))
@@ -202,6 +206,6 @@ export const DashboardEmbed = ({ embedType }) => {
   )
 }
 
-DashboardEmbed.propTypes = {
+DashboardEmbedLegacy.propTypes = {
   embedType: PropTypes.string.isRequired,
 }

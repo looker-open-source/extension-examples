@@ -36,7 +36,7 @@ import {
 import styled from 'styled-components'
 import { useCurrentRoute, useNavigate, useTargetResource } from './hooks'
 import { DashboardEmbedNext } from './components/DashboardEmbedNext'
-import { DashboardEmbed } from './components/DashboardEmbed'
+import { DashboardEmbedLegacy } from './components/DashboardEmbedLegacy'
 import { ExploresEmbed } from './components/ExploresEmbed'
 import { LooksEmbed } from './components/LooksEmbed'
 
@@ -82,7 +82,7 @@ export const DemoEmbeds = () => {
             <DashboardEmbedNext embedType={tabNames[0]} />
           </TabPanel>
           <TabPanel>
-            <DashboardEmbed embedType={tabNames[1]} />
+            <DashboardEmbedLegacy embedType={tabNames[1]} />
           </TabPanel>
           <TabPanel>
             <LooksEmbed embedType={tabNames[2]} />

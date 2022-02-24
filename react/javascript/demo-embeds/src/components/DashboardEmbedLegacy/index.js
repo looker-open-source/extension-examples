@@ -23,4 +23,4 @@
  SOFTWARE.
 
  */
-export * from './DashboardEmbed'
+export * from './DashboardEmbedLegacy'
