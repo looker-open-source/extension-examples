@@ -32,6 +32,7 @@
     "dev:map-iframe": "yarn workspace map-iframe develop",
     "dev:access-key-demo": "cd react/typescript/access-key-demo && yarn develop",
     "dev:access-key-demo-server": "cd react/typescript/access-key-demo && yarn start-server",
+    "dev:explore-query-merge": "cd react/typescript/explore-query-merge && yarn develop",
     "dev:helloworld-ts": "cd react/typescript/helloworld-ts && yarn develop",
     "dev:kitchensink": "cd react/typescript/kitchensink && yarn develop",
     "dev:looks-query": "cd react/typescript/looks-query-redux && yarn develop",
