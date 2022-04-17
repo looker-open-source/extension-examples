@@ -27,6 +27,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { Space, ComponentsProvider, Text } from '@looker/components'
 import { ExtensionContext } from '@looker/extension-sdk-react'
+import spiral from './images/spirals.png'
 
 export const HelloWorld = () => {
   const { core40SDK } = useContext(ExtensionContext)
@@ -52,6 +53,7 @@ export const HelloWorld = () => {
           <Text p="xxxxxlarge" fontSize="xxxxxlarge">
             {message}
           </Text>
+          <img src={spiral} height={200} width={200} />
         </Space>
       </ComponentsProvider>
     </>
