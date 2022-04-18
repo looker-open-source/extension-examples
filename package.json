@@ -36,6 +36,7 @@
     "dev:kitchensink": "cd react/typescript/kitchensink && yarn develop",
     "dev:looks-query": "cd react/typescript/looks-query-redux && yarn develop",
     "dev:looks-query-redux": "cd react/typescript/looks-query-redux && yarn develop",
+    "dev:firestore": "cd react/typescript/firestore && yarn develop",
     "dev:counter": "cd vanilla/counter && yarn develop",
     "dev:counter-ts": "cd vanilla/counter-ts && yarn develop"
   },
