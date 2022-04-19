@@ -1,0 +1,149 @@
+{
+  "name": "vis-and-filter-components",
+  "version": "1.1.0",
+  "description": "Looker Extension SDK Visualization and Filter Components Demo",
+  "main": "dist/bundle.js",
+  "scripts": {
+    "analyze": "export ANALYZE_MODE=static && yarn build",
+    "build": "export BABEL_ENV=build && webpack --config webpack.prod.js",
+    "clean": "rm -rf dist && rm -f .eslintcache",
+    "develop": "webpack serve --hot --port 8080 --config webpack.develop.js",
+    "prebuild": "yarn clean",
+    "tsc": "tsc",
+    "lint:es": "eslint 'src/**/*.ts{,x}' --cache",
+    "lint:es:fix": "eslint 'src/**/*.ts{,x}' --cache --fix",
+    "test": "jest"
+  },
+  "author": "Looker",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14"
+  },
+  "dependencies": {
+    "@looker/components": "^3.0.3",
+    "@looker/components-data": "^0.1.2",
+    "@looker/extension-sdk": "^22.4.2",
+    "@looker/extension-sdk-react": "^22.4.2",
+    "@looker/filter-components": "^0.10.17",
+    "@looker/sdk": "^22.4.2",
+    "@looker/sdk-rtl": "^21.3.3",
+    "@looker/visualizations": "^0.2.10",
+    "@styled-icons/material": "^10.34.0",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.13.8",
+    "@babel/plugin-transform-react-jsx": "^7.13.12",
+    "@babel/plugin-transform-runtime": "^7.16.4",
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-react": "^7.16.0",
+    "@babel/preset-typescript": "^7.16.0",
+    "@babel/runtime": "^7.12.5",
+    "@looker/components-test-utils": "^1.1.5",
+    "@looker/eslint-config-oss": "^1.7.14",
+    "@looker/prettier-config": "^0.10.4",
+    "@types/readable-stream": "^2.3.13",
+    "babel-loader": "^8.2.2",
+    "babel-loader-exclude-node-modules-except": "^1.1.2",
+    "babel-preset-nano-react-app": "^0.1.0",
+    "eslint": "^7.32.0",
+    "eslint-import-resolver-typescript": "^2.0.0",
+    "eslint-import-resolver-webpack": "^0.12.1",
+    "eslint-plugin-header": "^3.1.1",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-mdx": "^1.16.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "html-webpack-plugin": "^5.5.0",
+    "jest": "^26.6.3",
+    "prettier": "^2.2.1",
+    "react-hot-loader": "^4.12.20",
+    "typescript": "^4.5.2",
+    "webpack": "^5.72.0",
+    "webpack-bundle-analyzer": "^4.5.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.8.1"
+  },
+  "babel": {
+    "presets": [
+      "nano-react-app"
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-proposal-class-properties"
+      ],
+      [
+        "@babel/plugin-transform-react-jsx",
+        {
+          "pragmaFrag": "React.Fragment"
+        }
+      ]
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "@looker/eslint-config-oss"
+    ],
+    "rules": {
+      "@typescript-eslint/no-explicit-any": "off",
+      "camelcase": "off",
+      "@typescript-eslint/interface-name-prefix": "off",
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          "args": "all",
+          "argsIgnorePattern": "^_"
+        }
+      ],
+      "sort-keys-fix/sort-keys-fix": "off",
+      "no-useless-constructor": "off",
+      "@typescript-eslint/no-empty-interface": "off",
+      "import/default": "off",
+      "sort-keys": "off",
+      "spaced-comment": [
+        "error",
+        "always",
+        {
+          "markers": [
+            "#region",
+            "#endregion"
+          ]
+        }
+      ],
+      "no-use-before-define": "off",
+      "no-console": 0
+    },
+    "settings": {
+      "import/resolver": {
+        "typescript": {
+          "project": "./tsconfig.json"
+        }
+      },
+      "import/external-module-folders": [
+        "node_modules",
+        "packages"
+      ]
+    },
+    "overrides": [
+      {
+        "files": [
+          "*.js"
+        ],
+        "rules": {
+          "@typescript-eslint/no-var-requires": "off"
+        }
+      }
+    ]
+  },
+  "prettier": "@looker/prettier-config",
+  "prettierConfig": {
+    "overrides": {
+      "rules": {
+        "trailingComma": "all"
+      }
+    }
+  }
+}
