@@ -15,9 +15,9 @@
     "node": ">=14"
   },
   "dependencies": {
-    "@looker/extension-sdk": "^22.2.0",
-    "@looker/sdk": "^22.2.0",
-    "@looker/sdk-rtl": "^21.3.2"
+    "@looker/extension-sdk": "^22.4.2",
+    "@looker/sdk": "^22.4.2",
+    "@looker/sdk-rtl": "^21.3.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.16.0",
