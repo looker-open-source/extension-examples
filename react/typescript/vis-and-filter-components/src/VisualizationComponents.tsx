@@ -23,7 +23,7 @@
  SOFTWARE.
 
  */
-import type { FormEvent } from 'react'
+import type { FormEvent, FC } from 'react'
 import React, { useContext, useState } from 'react'
 import { ExtensionContext } from '@looker/extension-sdk-react'
 import { Query, Visualization } from '@looker/visualizations'
@@ -31,10 +31,10 @@ import { DataProvider } from '@looker/components-data'
 import { FieldText, SpaceVertical } from '@looker/components'
 import { Filtering } from './Filtering'
 
-/**
- * A simple component that uses the Looker SDK through the extension sdk to display a customized hello message.
+/*
+ * Create an explore-like interface with Query and Filter components.
  */
-export const VisualizationComponents: React.FC = () => {
+export const VisualizationComponents: FC = () => {
   const { core40SDK } = useContext(ExtensionContext)
   const [queryIdentifier, setQueryIdentifier] = useState<
     string | number | undefined
@@ -64,7 +64,7 @@ export const VisualizationComponents: React.FC = () => {
         />
 
         <Query query={queryIdentifier}>
-          <Visualization />
+          <Visualization width={750} height={500} />
         </Query>
       </SpaceVertical>
     </DataProvider>
