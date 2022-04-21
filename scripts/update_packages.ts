@@ -114,7 +114,7 @@ const packages = {
   axios: '^0.21.2',
   '@looker/eslint-config-oss': '^1.7.14',
   lodash: '^4.17.21',
-  'webpack-dev-server': '^4.7.4',
+  'webpack-dev-server': '^4.8.1',
 }
 
 const isIgnorable = (fileName: string) => {
