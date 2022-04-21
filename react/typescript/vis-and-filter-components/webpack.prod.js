@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2019 Looker Data Sciences, Inc.
+ * Copyright (c) 2022 Looker Data Sciences, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,12 +22,12 @@
  * THE SOFTWARE.
  */
 
-const commonConfig = require("./webpack.config");
+const commonConfig = require('./webpack.config')
 
 module.exports = {
   ...commonConfig,
-  mode: "production",
+  mode: 'production',
   optimization: {
-    chunkIds: "named",
+    chunkIds: 'named',
   },
-};
+}

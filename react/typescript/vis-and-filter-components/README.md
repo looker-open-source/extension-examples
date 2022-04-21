@@ -51,6 +51,7 @@ It uses [React](https://reactjs.org/) and [Typescript](https://typescriptlang.or
     label: "Visualization and Filter Components (TypeScript)"
     url: "http://localhost:8080/bundle.js"
       entitlements: {
+         use_form_submit: yes
          core_api_methods: ["all_connections", "all_looks", "create_query", "dashboard", "lookml_model_explore", "query_for_slug", "query", "run_inline_query", "run_look", "run_query", "search_folders", "model_fieldname_suggestions"]
       }
    }
@@ -107,14 +108,11 @@ The process above describes how to run the extension for development. Once you'r
     label: "Visualization and Filter Components (TypeScript)"
     file: "bundle.js"
       entitlements: {
+         use_form_submit: yes
          core_api_methods: ["all_connections", "all_looks", "create_query", "dashboard", "lookml_model_explore", "query_for_slug", "query", "run_inline_query", "run_look", "run_query", "search_folders", "model_fieldname_suggestions"]
       }
    }
    ```
-
-## Notes
-
-- This template uses Looker's [component library](https://components.looker.com) and [styled components](https://styled-components.com/). Neither of these libraries are required, and you may remove and replace them with a component library of your own choice or simply build your UI from scratch.
 
 ## Related Projects
 
