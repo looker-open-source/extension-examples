@@ -20,15 +20,15 @@
     "node": ">=14"
   },
   "dependencies": {
-    "@looker/components": "^3.0.3",
+    "@looker/components": "^3.0.1",
     "@looker/components-data": "^0.1.2",
-    "@looker/extension-sdk": "^22.4.2",
-    "@looker/extension-sdk-react": "^22.4.2",
+    "@looker/extension-sdk": "^22.2.0",
+    "@looker/extension-sdk-react": "^22.2.0",
     "@looker/filter-components": "^0.10.17",
-    "@looker/sdk": "^22.4.2",
-    "@looker/sdk-rtl": "^21.3.3",
+    "@looker/sdk": "^22.2.0",
+    "@looker/sdk-rtl": "^21.3.2",
     "@looker/visualizations": "^0.2.10",
-    "@styled-icons/material": "^10.34.0",
+    "@styled-icons/material": "^10.28.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0"
   },
@@ -47,6 +47,10 @@
     "@looker/eslint-config-oss": "^1.7.14",
     "@looker/prettier-config": "^0.10.4",
     "@types/readable-stream": "^2.3.13",
+    "@types/react-router-dom": "^5.1.5",
+    "@testing-library/jest-dom": "^5.11.6",
+    "@testing-library/react": "^11.2.2",
+    "@testing-library/user-event": "^12.6.0",
     "babel-loader": "^8.2.2",
     "babel-loader-exclude-node-modules-except": "^1.1.2",
     "babel-preset-nano-react-app": "^0.1.0",
@@ -62,10 +66,10 @@
     "prettier": "^2.2.1",
     "react-hot-loader": "^4.12.20",
     "typescript": "^4.5.2",
-    "webpack": "^5.72.0",
+    "webpack": "^5.67.0",
     "webpack-bundle-analyzer": "^4.5.0",
     "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^4.8.1"
+    "webpack-dev-server": "^4.7.4"
   },
   "babel": {
     "presets": [
