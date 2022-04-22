@@ -20,7 +20,7 @@
     "tsc": "lerna run --parallel tsc",
     "test": "lerna run --parallel test",
     "uberext": "ts-node ./scripts/create_uber_extension_project.ts",
-    "update_packages": "ts-node ./scripts/update_packages.ts",
+    "update-packages": "ts-node ./scripts/update_packages.ts",
     "dev:demo-core-sdk": "yarn workspace demo-core-sdk develop",
     "dev:demo-embeds": "yarn workspace demo-embeds develop",
     "dev:demo-extension-sdk": "yarn workspace demo-extension-sdk develop",
@@ -52,6 +52,8 @@
   },
   "resolutions": {
     "trim": ">= 0.0.3",
-    "ansi-regex": "5.0.1"
+    "ansi-regex": "5.0.1",
+    "minimist": ">= 1.2.6",
+    "async": ">= 2.6.4"
   }
 }
