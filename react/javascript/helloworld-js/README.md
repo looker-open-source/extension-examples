@@ -29,7 +29,11 @@ This example demonstrates a bare bones Looker extension using Javascript.
    yarn develop
    ```
 
-   The extension is now running and serving the JavaScript locally at http://localhost:8080/bundle.js.
+   The extension is now running and serving the JavaScript locally at https://localhost:8080/bundle.js. Note that the
+   new extension loading mechanism requires that the development server listen on https as browsers do not support
+   mixed content. When the development extension first loads you may need to authorize the certificate that is generated.
+   This can easily be done by clicking the link that appears in the displayed development information. This will open
+   a new browser window which will allow the certificate to be authorized.
 
 5. Log in to Looker and create a new project.
 
@@ -46,7 +50,7 @@ This example demonstrates a bare bones Looker extension using Javascript.
 
    application: helloworld-js {
      label: "Helloworld (JavaScript)"
-     url: "http://localhost:8080/bundle.js"
+     url: "https://localhost:8080/bundle.js"
      entitlements: {
        core_api_methods: ["me"]
      }

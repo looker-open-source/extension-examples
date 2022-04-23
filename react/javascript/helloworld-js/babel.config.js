@@ -55,6 +55,14 @@ module.exports = (api) => {
       '@babel/plugin-proposal-object-rest-spread',
       '@babel/plugin-transform-runtime',
       'babel-plugin-styled-components',
+      [
+        'file-loader',
+        {
+          publicPath: '/dist',
+          outputPath: '/dist',
+          limit: 66666,
+        },
+      ],
     ],
   }
 }

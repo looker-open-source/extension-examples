@@ -155,33 +155,6 @@ const Configure: React.FC<ConfigureProps> = ({
 
   const getValidationMessages = (): ValidationMessages | undefined => {
     let validationMessages: ValidationMessages | undefined
-    if (typeof localConfigurationData.dashboardId === 'string') {
-      if (!validationMessages) {
-        validationMessages = {}
-      }
-      validationMessages.dashboardId = {
-        type: 'error',
-        message: 'dashboard id is not numeric',
-      }
-    }
-    if (localConfigurationData.exploreId === '') {
-      if (!validationMessages) {
-        validationMessages = {}
-      }
-      validationMessages.exploreId = {
-        type: 'error',
-        message: 'explore id is empty',
-      }
-    }
-    if (typeof localConfigurationData.lookId === 'string') {
-      if (!validationMessages) {
-        validationMessages = {}
-      }
-      validationMessages.lookId = {
-        type: 'error',
-        message: 'look id is not numeric',
-      }
-    }
     return validationMessages
   }
 
