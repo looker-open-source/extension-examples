@@ -2249,12 +2249,12 @@
     eslint-plugin-testing-library "4.11.0"
     typescript "4.4.2"
 
-"@looker/extension-sdk-react@22.4.3-alpha.1523+609dcf92":
-  version "22.4.3-alpha.1523"
-  resolved "https://registry.yarnpkg.com/@looker/extension-sdk-react/-/extension-sdk-react-22.4.3-alpha.1523.tgz#4d3a125095bb128f4fecc17f329a410c30060f3e"
-  integrity sha512-rss+V6OEcj8o0SaPkmavGx9KyE3wH44DY9utqq49MCRM9pAoapzbzV2NcKv61421dvsTsaJMaidCvTrjqgT4dw==
+"@looker/extension-sdk-react@22.4.3-alpha.1524+0be961a6":
+  version "22.4.3-alpha.1524"
+  resolved "https://registry.yarnpkg.com/@looker/extension-sdk-react/-/extension-sdk-react-22.4.3-alpha.1524.tgz#9a6e6f26d0c11292b5d1f9ea517bb1a79950ee25"
+  integrity sha512-8IPVZkpzxktvzPHHXCE2Jr/1hgNx6un4etvqCaqM4UHiTgKmQfOkIwLbmEyZ/Fyk5rRxy0X+3kbjhtP6vTKQCA==
   dependencies:
-    "@looker/extension-sdk" "^22.4.3-alpha.1523+609dcf92"
+    "@looker/extension-sdk" "^22.4.3-alpha.1524+0be961a6"
     "@looker/sdk" "^22.4.2"
     "@looker/sdk-rtl" "^21.3.3"
     history "^4.9.0"
@@ -2271,10 +2271,10 @@
     history "^4.9.0"
     lodash "^4.17.20"
 
-"@looker/extension-sdk@22.4.3-alpha.1523+609dcf92", "@looker/extension-sdk@^22.4.3-alpha.1523+609dcf92":
-  version "22.4.3-alpha.1523"
-  resolved "https://registry.yarnpkg.com/@looker/extension-sdk/-/extension-sdk-22.4.3-alpha.1523.tgz#2a2c09c30c68f1720b89b3fd5f8c3ddba2213592"
-  integrity sha512-8i2v4to6VSdgg7leg109nsg0Z57HOJcSb1+MHYRH6gNrV8LLoliGVyy/JpUmRyqEDASjCcDHqaMyr77h1j54tQ==
+"@looker/extension-sdk@22.4.3-alpha.1524+0be961a6", "@looker/extension-sdk@^22.4.3-alpha.1524+0be961a6":
+  version "22.4.3-alpha.1524"
+  resolved "https://registry.yarnpkg.com/@looker/extension-sdk/-/extension-sdk-22.4.3-alpha.1524.tgz#0f6354f365ca4d13317c62f42167a6939190d5f7"
+  integrity sha512-eJjPvdTCtGoV47z/exdElfrpVsgcpQ9XRD1HnOfj43Fx4A+JhlueDPBs3snBRsXw++lLXBZ9jxJyHzui63AhVA==
   dependencies:
     "@looker/chatty" "^2.3.0"
     "@looker/sdk" "^22.4.2"
