@@ -149,7 +149,7 @@ export const AccessKeyDemo: React.FC<AccessKeyDemoProps> = ({
         updateCriticalMessage('Access key is NOT valid')
       }
     } catch (error) {
-      updateCriticalMessage('Unexpected error occured')
+      updateCriticalMessage('Unexpected error occurred')
       console.error(error)
     }
     history.replace(location.pathname, locationState)
