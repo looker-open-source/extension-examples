@@ -2,7 +2,7 @@ project_name: "demo-extension-sdk"
 application: demo-extension-sdk {
   label: "Demo Extension SDK"
   # use url for development
-  url: "http://localhost:8080/bundle.js"
+  url: "https://localhost:8080/bundle.js"
   # use file for production deployment
   # file: "bundle.js"
   entitlements: {

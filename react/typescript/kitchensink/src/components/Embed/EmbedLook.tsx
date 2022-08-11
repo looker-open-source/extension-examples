@@ -27,9 +27,8 @@
 import React, { useCallback, useContext } from 'react'
 import type { LookerEmbedLook } from '@looker/embed-sdk'
 import { LookerEmbedSDK } from '@looker/embed-sdk'
-import type { Looker40SDK } from '@looker/sdk'
-import type { ExtensionContextData2 } from '@looker/extension-sdk-react'
-import { ExtensionContext2 } from '@looker/extension-sdk-react'
+import type { ExtensionContextData40 } from '@looker/extension-sdk-react'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { Button, Heading } from '@looker/components'
 import { SandboxStatus } from '../SandboxStatus'
 import { EmbedContainer } from './components/EmbedContainer'
@@ -39,7 +38,7 @@ const EmbedLook: React.FC<EmbedProps> = ({ id }) => {
   const [running, setRunning] = React.useState(true)
   const [look, setLook] = React.useState<LookerEmbedLook>()
   const extensionContext =
-    useContext<ExtensionContextData2<Looker40SDK>>(ExtensionContext2)
+    useContext<ExtensionContextData40>(ExtensionContext40)
 
   const updateRunButton = (running: boolean) => {
     setRunning(running)

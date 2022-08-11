@@ -34,12 +34,12 @@ import {
   Tooltip,
   Spinner,
 } from '@looker/components'
-import { ExtensionContext2 } from '@looker/extension-sdk-react'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { DemoWrapper } from '../components'
 
 const title = 'Dashboards'
 const description = 'Demonstrates reading dashboards.'
-const code = `const { extensionSDK } = useContext(ExtensionContext2)
+const code = `const { extensionSDK } = useContext(ExtensionContext40)
 const tempData = await coreSDK.ok(coreSDK.all_dashboards())`
 const codeSourceName = 'Dashboards.jsx'
 
@@ -48,7 +48,7 @@ export const Dashboards = () => {
   const [message, setMessage] = useState()
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState()
-  const { coreSDK, extensionSDK } = useContext(ExtensionContext2)
+  const { coreSDK, extensionSDK } = useContext(ExtensionContext40)
 
   const updateMessage = (message, intent = 'inform') => {
     setIntent(intent)

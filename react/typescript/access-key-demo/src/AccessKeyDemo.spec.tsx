@@ -25,7 +25,7 @@
  */
 import React from 'react'
 import { screen } from '@testing-library/react'
-import { renderWithExtensionContext } from './__mocks__/render_with_extension'
+import { renderWithExtensionContext40 } from './__mocks__/render_with_extension'
 import { AccessKeyDemo } from './AccessKeyDemo'
 
 describe('AccessKeyDemo', () => {
@@ -46,14 +46,14 @@ describe('AccessKeyDemo', () => {
         show_details: true,
       },
     })
-    renderWithExtensionContext(
+    renderWithExtensionContext40(
       <AccessKeyDemo
         updateCriticalMessage={jest.fn()}
         updatePositiveMessage={jest.fn()}
         clearMessage={jest.fn()}
       />,
       { userAttributeGetItem, serverProxy, createSecretKeyTag },
-      { core40SDK: { me, ok } }
+      { coreSDK: { me, ok } }
     )
     await screen.findByText('Verify JWT token')
     await screen.findByText('Configure')

@@ -25,7 +25,7 @@
  */
 import { useContext } from 'react'
 import { useQuery } from 'react-query'
-import { ExtensionContext2 } from '@looker/extension-sdk-react'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { sortByTitle } from './utils'
 
 const all = async (coreSDK) => {
@@ -39,7 +39,7 @@ const all = async (coreSDK) => {
 }
 
 export const useAllDashboards = () => {
-  const { coreSDK } = useContext(ExtensionContext2)
+  const { coreSDK } = useContext(ExtensionContext40)
   return useQuery(['all_dashboards'], () => all(coreSDK), {
     enabled: true,
     staleTime: Infinity,

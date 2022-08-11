@@ -25,20 +25,18 @@
  */
 
 import React from 'react'
-import { ExtensionProvider2 } from '@looker/extension-sdk-react'
-import { hot } from 'react-hot-loader/root'
+import { ExtensionProvider40 } from '@looker/extension-sdk-react'
 import { QueryClient, QueryClientProvider } from 'react-query'
-import { Looker40SDK } from '@looker/sdk'
 import { DemoEmbeds } from './DemoEmbeds'
 
 const queryClient = new QueryClient()
 
-export const App = hot(() => {
+export const App = () => {
   return (
-    <ExtensionProvider2 type={Looker40SDK}>
+    <ExtensionProvider40>
       <QueryClientProvider client={queryClient}>
         <DemoEmbeds />
       </QueryClientProvider>
-    </ExtensionProvider2>
+    </ExtensionProvider40>
   )
-})
+}

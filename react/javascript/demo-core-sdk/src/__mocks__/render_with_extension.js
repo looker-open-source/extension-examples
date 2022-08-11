@@ -26,10 +26,7 @@
 
 import React from 'react'
 import { renderWithTheme } from '@looker/components-test-utils'
-import {
-  ExtensionContext2,
-  ExtensionContext,
-} from '@looker/extension-sdk-react'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { registerHostApi } from '@looker/extension-sdk'
 
 const getExtensionSDK = (extensionSDKOverride) => {
@@ -57,44 +54,23 @@ const getExtensionContext = (extensionSDKOverride, contextOverride) => ({
   ...contextOverride,
 })
 
-const withExtensionContext2 = (
+const withExtensionContext40 = (
   consumer,
   extensionSDKOverride,
   contextOverride
 ) => (
-  <ExtensionContext2.Provider
+  <ExtensionContext40.Provider
     value={getExtensionContext(extensionSDKOverride, contextOverride)}
   >
     {consumer}
-  </ExtensionContext2.Provider>
+  </ExtensionContext40.Provider>
 )
 
-export const renderWithExtensionContext2 = (
+export const renderWithExtensionContext40 = (
   component,
   extensionSDKOverride = {},
   contextOverride = {}
 ) =>
   renderWithTheme(
-    withExtensionContext2(component, extensionSDKOverride, contextOverride)
-  )
-
-const withExtensionContext = (
-  consumer,
-  extensionSDKOverride,
-  contextOverride
-) => (
-  <ExtensionContext.Provider
-    value={getExtensionContext(extensionSDKOverride, contextOverride)}
-  >
-    {consumer}
-  </ExtensionContext.Provider>
-)
-
-export const renderWithExtensionContext = (
-  component,
-  extensionSDKOverride = {},
-  contextOverride = {}
-) =>
-  renderWithTheme(
-    withExtensionContext(component, extensionSDKOverride, contextOverride)
+    withExtensionContext40(component, extensionSDKOverride, contextOverride)
   )

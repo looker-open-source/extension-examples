@@ -27,7 +27,6 @@
 import React, { useEffect, useState, useContext, Suspense } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { intersects } from 'semver'
-import type { Looker40SDK } from '@looker/sdk'
 import {
   ComponentsProvider,
   Layout,
@@ -35,8 +34,8 @@ import {
   Aside,
   Section,
 } from '@looker/components'
-import type { ExtensionContextData2 } from '@looker/extension-sdk-react'
-import { ExtensionContext2 } from '@looker/extension-sdk-react'
+import type { ExtensionContextData40 } from '@looker/extension-sdk-react'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { Sidebar } from './components/Sidebar'
 import type { KitchenSinkProps, ConfigurationData } from './types'
 
@@ -80,7 +79,7 @@ export const KitchenSink: React.FC<KitchenSinkProps> = ({
   routeState,
 }) => {
   const extensionContext =
-    useContext<ExtensionContextData2<Looker40SDK>>(ExtensionContext2)
+    useContext<ExtensionContextData40>(ExtensionContext40)
   const { extensionSDK } = extensionContext
   const [canPersistContextData, setCanPersistContextData] =
     useState<boolean>(false)

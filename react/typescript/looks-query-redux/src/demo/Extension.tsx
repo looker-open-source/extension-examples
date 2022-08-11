@@ -27,7 +27,6 @@
 import { useSelector } from 'react-redux'
 import React, { useEffect } from 'react'
 import { MessageBar, Box, Heading, Flex } from '@looker/components'
-import { hot } from 'react-hot-loader/root'
 import { Switch, Route, useHistory, useRouteMatch } from 'react-router-dom'
 import {
   getLoading,
@@ -40,7 +39,7 @@ import { useActions } from '../hooks'
 import { QueryContainer } from './QueryContainer'
 import { LookList } from './LookList'
 
-export const Extension: React.FC = hot(() => {
+export const Extension: React.FC = () => {
   const history = useHistory()
   const match = useRouteMatch<{ lookid: string }>('/:lookid')
   const currentLookId = match?.params.lookid
@@ -102,4 +101,4 @@ export const Extension: React.FC = hot(() => {
       </Box>
     </>
   )
-})
+}

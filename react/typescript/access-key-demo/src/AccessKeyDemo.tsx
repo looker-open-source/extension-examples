@@ -24,11 +24,10 @@
 
  */
 
-import type { ExtensionContextData } from '@looker/extension-sdk-react'
-import { ExtensionContext } from '@looker/extension-sdk-react'
+import type { ExtensionContextData40 } from '@looker/extension-sdk-react'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import React, { useContext, useEffect, useState } from 'react'
 import { Switch, Route, useHistory, useLocation } from 'react-router-dom'
-import { hot } from 'react-hot-loader/root'
 import { ConfigurationScene } from './scenes/ConfigurationScene'
 import { HomeScene } from './scenes/HomeScene'
 import type { MessageHandlerProps } from './App'
@@ -56,124 +55,126 @@ export enum ROUTES {
 /**
  * Extension router
  */
-export const AccessKeyDemo: React.FC<AccessKeyDemoProps> = hot(
-  ({ updateCriticalMessage, updatePositiveMessage, clearMessage }) => {
-    const [canConfigure, setCanConfigure] = useState<boolean>(false)
-    const { extensionSDK, core40SDK } =
-      useContext<ExtensionContextData>(ExtensionContext)
-    const location = useLocation()
-    const history = useHistory()
+export const AccessKeyDemo: React.FC<AccessKeyDemoProps> = ({
+  updateCriticalMessage,
+  updatePositiveMessage,
+  clearMessage,
+}) => {
+  const [canConfigure, setCanConfigure] = useState<boolean>(false)
+  const { extensionSDK, coreSDK } =
+    useContext<ExtensionContextData40>(ExtensionContext40)
+  const location = useLocation()
+  const history = useHistory()
 
-    useEffect(() => {
-      createJwtToken()
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+  useEffect(() => {
+    createJwtToken()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
-    const createJwtToken = async () => {
-      let showConfigurationEditor
-      try {
-        // Display of configuration editor can be configured using extension
-        // user attributes. This example assumes that the configuration
-        // of the configuration editor only occurs through the marketplace
-        // installation.
-        const userAttribute = await extensionSDK.userAttributeGetItem(
-          'show_configuration_editor'
-        )
-        // User attributes of yesno do NOT return boolean values. They
-        // actually return strings constrained to yes or no (or a null).
-        showConfigurationEditor = userAttribute !== 'no'
-      } catch (error) {
-        // Currently an error is thrown if the user attributes are not defined
-        // which means the extension SDK userAttribute methods wont work if the
-        // extension was not added through the marketplace.
-        // This MAY change in a future release of the SDK.
-        showConfigurationEditor = true
-      }
-
-      let locationState = {}
-      try {
-        // Get information about the current user.
-        const value = await core40SDK.ok(core40SDK.me())
-        // Configuration requires configuration editor to be enabled and the
-        // user to have enhanced permissions
-        if (
-          showConfigurationEditor &&
-          value.can?.index_details &&
-          value.can?.show_details
-        ) {
-          setCanConfigure(true)
-        }
-
-        const name = value.display_name || 'Unknown'
-        const email = value.email || 'Unknown'
-
-        // Prepare to validate the access key. Create secret key tag
-        // creates a specially formatted string that the Looker server
-        // looks for and replaces with secret keys stored in the Looker
-        // server.
-        const access_key = extensionSDK.createSecretKeyTag(ACCESS_KEY_NAME)
-        // Call the data server to validate the access key.
-        // Note the access key remains in the Looker server. Care should be
-        // taken when developing the access token validation endpoint that
-        // it does not return the access token in its response.
-        const response = await extensionSDK.serverProxy(
-          `${DATA_SERVER_URL}/access_check`,
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Accept: 'application/json',
-            },
-            body: JSON.stringify({ access_key, name, email }),
-          }
-        )
-        if (response.ok) {
-          if (response.body) {
-            const { jwt_token } = response.body
-            if (jwt_token) {
-              // Got a jwt token in the response so the access check was good.
-              // Store the jwt token in push state. This allows the jwt token
-              // to be preserved on a page reload. Not needed for this demo
-              // however the token does need to be stored somewhere.
-              locationState = { jwt_token }
-              updatePositiveMessage('Access key is valid')
-            } else {
-              // No jwt token so not valid
-              updateCriticalMessage('Access key is NOT valid')
-            }
-          }
-        } else {
-          // Invalid response so not valid
-          updateCriticalMessage('Access key is NOT valid')
-        }
-      } catch (error) {
-        updateCriticalMessage('Unexpected error occured')
-        console.error(error)
-      }
-      history.replace(location.pathname, locationState)
+  const createJwtToken = async () => {
+    let showConfigurationEditor
+    try {
+      // Display of configuration editor can be configured using extension
+      // user attributes. This example assumes that the configuration
+      // of the configuration editor only occurs through the marketplace
+      // installation.
+      const userAttribute = await extensionSDK.userAttributeGetItem(
+        'show_configuration_editor'
+      )
+      // User attributes of yesno do NOT return boolean values. They
+      // actually return strings constrained to yes or no (or a null).
+      showConfigurationEditor = userAttribute !== 'no'
+    } catch (error) {
+      // Currently an error is thrown if the user attributes are not defined
+      // which means the extension SDK userAttribute methods wont work if the
+      // extension was not added through the marketplace.
+      // This MAY change in a future release of the SDK.
+      showConfigurationEditor = true
     }
 
-    return (
-      <Switch>
-        {canConfigure && (
-          <Route path={ROUTES.CONFIGURATION_ROUTE}>
-            <ConfigurationScene
-              updateCriticalMessage={updateCriticalMessage}
-              updatePositiveMessage={updatePositiveMessage}
-              clearMessage={clearMessage}
-              createJwtToken={createJwtToken}
-            />
-          </Route>
-        )}
-        <Route>
-          <HomeScene
+    let locationState = {}
+    try {
+      // Get information about the current user.
+      const value = await coreSDK.ok(coreSDK.me())
+      // Configuration requires configuration editor to be enabled and the
+      // user to have enhanced permissions
+      if (
+        showConfigurationEditor &&
+        value.can?.index_details &&
+        value.can?.show_details
+      ) {
+        setCanConfigure(true)
+      }
+
+      const name = value.display_name || 'Unknown'
+      const email = value.email || 'Unknown'
+
+      // Prepare to validate the access key. Create secret key tag
+      // creates a specially formatted string that the Looker server
+      // looks for and replaces with secret keys stored in the Looker
+      // server.
+      const access_key = extensionSDK.createSecretKeyTag(ACCESS_KEY_NAME)
+      // Call the data server to validate the access key.
+      // Note the access key remains in the Looker server. Care should be
+      // taken when developing the access token validation endpoint that
+      // it does not return the access token in its response.
+      const response = await extensionSDK.serverProxy(
+        `${DATA_SERVER_URL}/access_check`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({ access_key, name, email }),
+        }
+      )
+      if (response.ok) {
+        if (response.body) {
+          const { jwt_token } = response.body
+          if (jwt_token) {
+            // Got a jwt token in the response so the access check was good.
+            // Store the jwt token in push state. This allows the jwt token
+            // to be preserved on a page reload. Not needed for this demo
+            // however the token does need to be stored somewhere.
+            locationState = { jwt_token }
+            updatePositiveMessage('Access key is valid')
+          } else {
+            // No jwt token so not valid
+            updateCriticalMessage('Access key is NOT valid')
+          }
+        }
+      } else {
+        // Invalid response so not valid
+        updateCriticalMessage('Access key is NOT valid')
+      }
+    } catch (error) {
+      updateCriticalMessage('Unexpected error occured')
+      console.error(error)
+    }
+    history.replace(location.pathname, locationState)
+  }
+
+  return (
+    <Switch>
+      {canConfigure && (
+        <Route path={ROUTES.CONFIGURATION_ROUTE}>
+          <ConfigurationScene
             updateCriticalMessage={updateCriticalMessage}
             updatePositiveMessage={updatePositiveMessage}
             clearMessage={clearMessage}
-            canConfigure={canConfigure}
+            createJwtToken={createJwtToken}
           />
         </Route>
-      </Switch>
-    )
-  }
-)
+      )}
+      <Route>
+        <HomeScene
+          updateCriticalMessage={updateCriticalMessage}
+          updatePositiveMessage={updatePositiveMessage}
+          clearMessage={clearMessage}
+          canConfigure={canConfigure}
+        />
+      </Route>
+    </Switch>
+  )
+}

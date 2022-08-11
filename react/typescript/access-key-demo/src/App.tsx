@@ -25,8 +25,7 @@
  */
 
 import React, { useState } from 'react'
-import { ExtensionProvider } from '@looker/extension-sdk-react'
-import { hot } from 'react-hot-loader/root'
+import { ExtensionProvider40 } from '@looker/extension-sdk-react'
 import { ComponentsProvider, MessageBar } from '@looker/components'
 import { AccessKeyDemo } from './AccessKeyDemo'
 
@@ -83,7 +82,7 @@ export const ACCESS_KEY_NAME = 'access_key'
 /**
  * The acess key demo application
  */
-export const App: React.FC = hot(() => {
+export const App: React.FC = () => {
   // Message state, intent and message
   const [intent, setIntent] = useState<'critical' | 'positive'>()
   const [message, setMessage] = useState<string>()
@@ -113,7 +112,7 @@ export const App: React.FC = hot(() => {
   }
 
   return (
-    <ExtensionProvider>
+    <ExtensionProvider40>
       <ComponentsProvider>
         {message && intent && (
           <MessageBar intent={intent} onPrimaryClick={clearMessage}>
@@ -126,6 +125,6 @@ export const App: React.FC = hot(() => {
           clearMessage={clearMessage}
         />
       </ComponentsProvider>
-    </ExtensionProvider>
+    </ExtensionProvider40>
   )
-})
+}

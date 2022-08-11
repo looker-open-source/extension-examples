@@ -24,9 +24,7 @@
 
  */
 import React from 'react'
-import { ExtensionProvider2 } from '@looker/extension-sdk-react'
-import { hot } from 'react-hot-loader/root'
-import { Looker40SDK } from '@looker/sdk'
+import { ExtensionProvider40 } from '@looker/extension-sdk-react'
 import { DemoExternalApi } from './DemoExternalApi'
 import { OauthProvider } from './components/OauthProvider'
 import { SheetsProvider } from './components/SheetsProvider'
@@ -37,14 +35,14 @@ const GOOGLE_SCOPES = 'https://www.googleapis.com/auth/spreadsheets'
 /**
  * Demo usage of the Extension Framework external API.
  */
-export const App = hot(() => {
+export const App = () => {
   return (
-    <ExtensionProvider2 type={Looker40SDK}>
+    <ExtensionProvider40>
       <OauthProvider clientId={GOOGLE_CLIENT_ID} scopes={GOOGLE_SCOPES}>
         <SheetsProvider>
           <DemoExternalApi />
         </SheetsProvider>
       </OauthProvider>
-    </ExtensionProvider2>
+    </ExtensionProvider40>
   )
-})
+}

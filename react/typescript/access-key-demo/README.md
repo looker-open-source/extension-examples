@@ -34,7 +34,7 @@ This version of the template requires Looker 7.10 or above.
    yarn develop
    ```
 
-The extension is now running and serving the JavaScript locally at http://localhost:8080/bundle.js. Nice!
+The extension is now running and serving the JavaScript locally at https://localhost:8080/bundle.js. Nice!
 
 5. Log in to Looker and create a new project.
 
@@ -50,7 +50,7 @@ The extension is now running and serving the JavaScript locally at http://localh
   project_name: "access_key_demo"
   application: access_key_demo {
     label: "Extension Access Key Demo"
-    url: "http://localhost:8080/bundle.js"
+    url: "https://localhost:8080/bundle.js"
     entitlements: {
       use_form_submit: yes
       core_api_methods: ["me", "all_user_attributes", "delete_user_attribute", "create_user_attribute"]
@@ -74,7 +74,7 @@ The extension is now running and serving the JavaScript locally at http://localh
 
 9. Reload the page and click the `Browse` dropdown menu. You should see the extension in the list.
 
-- The extension will load the JavaScript from the `url` provided in the `application` definition. By default, this is http://localhost:8080/bundle.js. If you change the port your server runs on in the package.json, you will need to also update it in the manifest.lkml.
+- The extension will load the JavaScript from the `url` provided in the `application` definition. By default, this is https://localhost:8080/bundle.js. If you change the port your server runs on in the package.json, you will need to also update it in the manifest.lkml.
 - Refreshing the extension page will bring in any new code changes from the extension template, although some changes will hot reload.
 
 10. Use with an access key requires a bit more setup. First, create a .env file in the `extension-examples/react/typescript/access-key-demo` directory with the following entries. Use a password generator to create the values. These values should be set prior to starting the development and data servers. **Do NOT store the .env file in your source code repository.**

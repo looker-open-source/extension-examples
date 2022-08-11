@@ -28,8 +28,7 @@ import isEqual from 'lodash/isEqual'
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Heading, Box, ButtonOutline, TextArea } from '@looker/components'
-import { getCoreSDK2 } from '@looker/extension-sdk-react'
-import type { Looker40SDK } from '@looker/sdk'
+import { getCore40SDK } from '@looker/extension-sdk-react'
 import { SandboxStatus } from '../SandboxStatus'
 
 const CoreSDKFunctions = () => {
@@ -37,7 +36,7 @@ const CoreSDKFunctions = () => {
   const location = useLocation()
   const [routeData, setRouteData] = useState<any>({})
   const [messages, setMessages] = useState('')
-  const sdk = getCoreSDK2<Looker40SDK>()
+  const sdk = getCore40SDK()
 
   useEffect(() => {
     if (location.search || location.pathname.includes('?')) {

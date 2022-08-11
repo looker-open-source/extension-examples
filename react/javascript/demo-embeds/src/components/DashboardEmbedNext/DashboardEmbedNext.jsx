@@ -44,7 +44,7 @@ import {
   FieldToggleSwitch,
   Space,
 } from '@looker/components'
-import { ExtensionContext2 } from '@looker/extension-sdk-react'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { LookerEmbedSDK } from '@looker/embed-sdk'
 import {
   useCurrentRoute,
@@ -62,7 +62,7 @@ export const DashboardEmbedNext = ({ embedType }) => {
   cancelEventsRef.current = cancelEvents
   const { embedId } = useCurrentRoute(embedType)
   const { updateEmbedId } = useNavigate(embedType)
-  const { extensionSDK } = useContext(ExtensionContext2)
+  const { extensionSDK } = useContext(ExtensionContext40)
   const [message, setMessage] = useState()
   const [running, setRunning] = useState(false)
   const [dashboardId, setDashboardId] = useState()

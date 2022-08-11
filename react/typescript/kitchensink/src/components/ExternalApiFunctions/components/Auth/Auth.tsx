@@ -37,9 +37,8 @@ import {
   SpaceVertical,
   Text,
 } from '@looker/components'
-import type { Looker40SDK } from '@looker/sdk'
-import type { ExtensionContextData2 } from '@looker/extension-sdk-react'
-import { ExtensionContext2 } from '@looker/extension-sdk-react'
+import type { ExtensionContextData40 } from '@looker/extension-sdk-react'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import {
   AuthOption,
   POSTS_SERVER_URL,
@@ -68,7 +67,7 @@ import type { AuthProps } from './types'
 export const Auth: React.FC<AuthProps> = ({ dataState, dataDispatch }) => {
   // Get access to the extension SDK and the looker API SDK.
   const { extensionSDK, coreSDK } =
-    useContext<ExtensionContextData2<Looker40SDK>>(ExtensionContext2)
+    useContext<ExtensionContextData40>(ExtensionContext40)
 
   // Dialog state
   const [dialogOpen, setDialogOpen] = useState(false)

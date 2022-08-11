@@ -33,7 +33,7 @@ It uses [React](https://reactjs.org/) and [Typescript](https://typescriptlang.or
    yarn develop
    ```
 
-   The extension is now running and serving the JavaScript locally at http://localhost:8080/bundle.js.
+   The extension is now running and serving the JavaScript locally at https://localhost:8080/bundle.js.
 
 5) Log in to Looker and create a new project.
 
@@ -49,7 +49,7 @@ It uses [React](https://reactjs.org/) and [Typescript](https://typescriptlang.or
    project_name: "vis-filter-integration"
    application: vis-filter-integration {
     label: "Visualization and Filter Components (TypeScript)"
-    url: "http://localhost:8080/bundle.js"
+    url: "https://localhost:8080/bundle.js"
       entitlements: {
          use_form_submit: yes
          core_api_methods: ["all_connections", "all_looks", "create_query", "dashboard", "lookml_model_explore", "query_for_slug", "query", "run_inline_query", "run_look", "run_query", "search_folders", "model_fieldname_suggestions"]
@@ -72,7 +72,7 @@ It uses [React](https://reactjs.org/) and [Typescript](https://typescriptlang.or
 
 9. Reload the page and click the `Browse` dropdown menu. You will see the extension in the list.
 
-- The extension will load the JavaScript from the `url` provided in the `application` definition. By default, this is http://localhost:8080/bundle.js. If you change the port your server runs on in the package.json, you will need to also update it in the manifest.lkml.
+- The extension will load the JavaScript from the `url` provided in the `application` definition. By default, this is https://localhost:8080/bundle.js. If you change the port your server runs on in the package.json, you will need to also update it in the manifest.lkml.
 - Refreshing the extension page will bring in any new code changes from the extension template, although some changes will hot reload.
 
 ## Extension Entitlements

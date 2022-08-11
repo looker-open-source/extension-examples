@@ -25,19 +25,19 @@
  */
 import React, { useContext, useEffect, useState } from 'react'
 import { ComponentsProvider, Space, Text } from '@looker/components'
-import { ExtensionContext } from '@looker/extension-sdk-react'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 
 /**
  * A simple component that uses the Looker SDK through the extension sdk to display a customized hello message.
  */
 export const HelloWorld: React.FC = () => {
-  const { core40SDK } = useContext(ExtensionContext)
+  const { coreSDK } = useContext(ExtensionContext40)
   const [message, setMessage] = useState('')
 
   useEffect(() => {
     const getMe = async () => {
       try {
-        const me = await core40SDK.ok(core40SDK.me())
+        const me = await coreSDK.ok(coreSDK.me())
         setMessage(`Hello, ${me.display_name}`)
       } catch (error) {
         console.error(error)
@@ -45,7 +45,7 @@ export const HelloWorld: React.FC = () => {
       }
     }
     getMe()
-  }, [core40SDK])
+  }, [coreSDK])
 
   return (
     <ComponentsProvider>

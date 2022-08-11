@@ -25,7 +25,7 @@
  */
 import React from 'react'
 import { screen } from '@testing-library/react'
-import { renderWithExtensionContext } from '../__mocks__/render_with_extension'
+import { renderWithExtensionContext40 } from '../__mocks__/render_with_extension'
 import { Extension } from './Extension'
 
 describe('Extension', () => {
@@ -36,10 +36,10 @@ describe('Extension', () => {
       { id: '4', title: 'Oklahoma' },
     ]
     const run_look = () => [{ stars_count: 3, chorus_count: 50 }]
-    renderWithExtensionContext(
+    renderWithExtensionContext40(
       <Extension />,
       {},
-      { core40SDK: { ok, all_looks, run_look } }
+      { coreSDK: { ok, all_looks, run_look } }
     )
     await screen.findByText('Oklahoma')
     await screen.findByText('stars_count')

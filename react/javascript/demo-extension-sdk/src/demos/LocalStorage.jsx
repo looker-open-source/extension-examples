@@ -32,7 +32,7 @@ import {
   TextArea,
   Tooltip,
 } from '@looker/components'
-import { ExtensionContext2 } from '@looker/extension-sdk-react'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { DemoWrapper } from '../components'
 
 const title = 'Local Storage'
@@ -44,7 +44,7 @@ window’s local storage. Local storage is namespaced to the extension, meaning
 it cannot read local storage created by the parent window or other extensions.
 
 The \`local_storage\` entitlement must be set to interact with local storage.`
-const code = `const { extensionSDK } = useContext(ExtensionContext2)
+const code = `const { extensionSDK } = useContext(ExtensionContext40)
 const localStorageItemId = 'ITEM_DATA'
 const data = await extensionSDK.localStorageGetItem(
   localStorageItemId
@@ -58,7 +58,7 @@ const itemId = 'ITEM_DATA'
 export const LocalStorage = () => {
   const [message, setMessage] = useState()
   const [data, setData] = useState('')
-  const { extensionSDK } = useContext(ExtensionContext2)
+  const { extensionSDK } = useContext(ExtensionContext40)
 
   useEffect(() => {
     const loadLocalStorage = async () => {
