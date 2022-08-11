@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "noEmit": true,
     "allowJs": true,
     "esModuleInterop": true,
     "lib": ["ES2019", "dom"],
