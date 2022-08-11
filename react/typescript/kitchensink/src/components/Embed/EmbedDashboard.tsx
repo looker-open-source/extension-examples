@@ -28,9 +28,8 @@ import React, { useCallback, useContext } from 'react'
 import { Button, Heading, Label, ToggleSwitch } from '@looker/components'
 import type { LookerEmbedDashboard } from '@looker/embed-sdk'
 import { LookerEmbedSDK } from '@looker/embed-sdk'
-import type { Looker40SDK } from '@looker/sdk'
-import type { ExtensionContextData2 } from '@looker/extension-sdk-react'
-import { ExtensionContext2 } from '@looker/extension-sdk-react'
+import type { ExtensionContextData40 } from '@looker/extension-sdk-react'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { SandboxStatus } from '../SandboxStatus'
 import { EmbedContainer } from './components/EmbedContainer'
 import type { EmbedProps } from './types'
@@ -40,7 +39,7 @@ const EmbedDashboard: React.FC<EmbedProps> = ({ id }) => {
   const [running, setRunning] = React.useState(true)
   const [dashboard, setDashboard] = React.useState<LookerEmbedDashboard>()
   const extensionContext =
-    useContext<ExtensionContextData2<Looker40SDK>>(ExtensionContext2)
+    useContext<ExtensionContextData40>(ExtensionContext40)
 
   const toggleDashboard = () => {
     setDashboardNext(!dashboardNext)

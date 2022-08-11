@@ -3,7 +3,7 @@ project_name: "demo-external-api"
 application: demo-external-api {
   label: "demo-external-api"
   # use url for development
-  url: "http://localhost:8080/bundle.js"
+  url: "https://localhost:8080/bundle.js"
   # use file for production deployment
   # file: "bundle.js
   entitlements: {

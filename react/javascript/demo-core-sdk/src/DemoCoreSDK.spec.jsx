@@ -25,12 +25,12 @@
  */
 import React from 'react'
 import { screen } from '@testing-library/react'
-import { renderWithExtensionContext2 } from './__mocks__/render_with_extension'
+import { renderWithExtensionContext40 } from './__mocks__/render_with_extension'
 import { DemoCoreSDK } from './DemoCoreSDK'
 
 describe('DemoCoreSDK', () => {
   test('it renders', async () => {
-    renderWithExtensionContext2(<DemoCoreSDK />)
+    renderWithExtensionContext40(<DemoCoreSDK />)
     await screen.findByText('Dashboards')
     await screen.findByText('Look Image')
   })

@@ -26,7 +26,7 @@
 
 import React, { useContext, useEffect, useState } from 'react'
 import { Button, MessageBar, SpaceVertical, Tooltip } from '@looker/components'
-import { ExtensionContext2 } from '@looker/extension-sdk-react'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { DemoWrapper } from '../components'
 import { useAtLookerVersion } from '../hooks'
 
@@ -39,7 +39,7 @@ clipboard.
 The \`use_clipboard\` entitlement must be set to write to the clipboard.
 
 The feature requires Looker >=21.8.0.`
-const code = `const { extensionSDK } = useContext(ExtensionContext2)
+const code = `const { extensionSDK } = useContext(ExtensionContext40)
 await extensionSDK.clipboardWrite(
   'https://trends.google.com/trends/trendingsearches/daily?geo=US'
 )`
@@ -48,7 +48,7 @@ const codeSourceName = 'Clipboard.jsx'
 export const Clipboard = () => {
   const [intent, setIntent] = useState()
   const [message, setMessage] = useState()
-  const { extensionSDK } = useContext(ExtensionContext2)
+  const { extensionSDK } = useContext(ExtensionContext40)
   const atLookerVersion = useAtLookerVersion('>=21.8.0')
 
   useEffect(() => {

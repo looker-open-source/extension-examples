@@ -32,7 +32,7 @@ import {
   TextArea,
   Tooltip,
 } from '@looker/components'
-import { ExtensionContext2 } from '@looker/extension-sdk-react'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { DemoWrapper } from '../components'
 
 const title = 'Extension Context'
@@ -43,7 +43,7 @@ The context data can be used for data that does not change frequently and that d
 not have special security requirements. Care should be taken when writing the data,
 as there is no data locking and the last write wins. The context data is available
 to the extension immediately upon startup.`
-const code = `const { extensionSDK } = useContext(ExtensionContext2)
+const code = `const { extensionSDK } = useContext(ExtensionContext40)
 const data = extensionSDK.getContextData())
 await extensionSDK.saveContextData(data)
 data = await extensionSDK.refreshContextData()
@@ -53,7 +53,7 @@ const codeSourceName = 'Context.jsx'
 export const Context = () => {
   const [message, setMessage] = useState()
   const [data, setData] = useState('')
-  const { extensionSDK } = useContext(ExtensionContext2)
+  const { extensionSDK } = useContext(ExtensionContext40)
 
   useEffect(() => {
     setData(extensionSDK.getContextData())

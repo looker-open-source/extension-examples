@@ -25,7 +25,7 @@
  */
 import React, { createContext, useContext, useState } from 'react'
 import PropTypes from 'prop-types'
-import { ExtensionContext2 } from '@looker/extension-sdk-react'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { OauthContext } from './OauthProvider'
 
 export const SheetsContext = createContext({})
@@ -41,7 +41,7 @@ export const SheetsProvider = ({ children }) => {
   const [expired, setExpired] = useState(false)
   const [error, setError] = useState(false)
   const [rows, setRows] = useState([])
-  const { extensionSDK } = useContext(ExtensionContext2)
+  const { extensionSDK } = useContext(ExtensionContext40)
 
   /**
    * Low level invocation of the sheets API.

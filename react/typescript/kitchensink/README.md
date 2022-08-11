@@ -40,7 +40,7 @@ It uses [React](https://reactjs.org/) and [TypeScript](https://www.typescriptlan
    yarn develop
    ```
 
-   Great! Your extension is now running and serving the JavaScript at http://localhost:8080/bundle.js.
+   Great! Your extension is now running and serving the JavaScript at https://localhost:8080/bundle.js.
 
 5) Now log in to Looker and create a new project.
 
@@ -55,7 +55,7 @@ It uses [React](https://reactjs.org/) and [TypeScript](https://www.typescriptlan
    ```
    application: kitchensink {
      label: "Kitchen sink"
-     url: "http://localhost:8080/bundle.js"
+     url: "https://localhost:8080/bundle.js"
      entitlements: {
         local_storage: yes
         navigation: yes
@@ -86,7 +86,7 @@ The manifest includes a reference to the `oauth2_url https://REPLACE_ME.auth0.co
 8. Commit your changes and deploy your them to production through the Project UI.
 
 9. Reload the page and click the `Browse` dropdown menu. You should see your extension in the list.
-   - The extension will load the JavaScript from the `url` provided in the `application` definition. By default, this is http://localhost:8080/bundle.js. If you change the port your server runs on in the package.json, you will need to also update it in the manifest.lkml.
+   - The extension will load the JavaScript from the `url` provided in the `application` definition. By default, this is https://localhost:8080/bundle.js. If you change the port your server runs on in the package.json, you will need to also update it in the manifest.lkml.
 
 - Refreshing the extension page will bring in any new code changes from the extension template, although some changes will hot reload.
 
@@ -394,29 +394,27 @@ The following packages now support tree shaking which reduces the size the bundl
 
 Note that the `@looker/components` does not yet support tree shaking but when it does bundle sizes should be reduced even further.
 
-To fully take advantage of tree shaking, the extension should use a single SDK and use `ExtensionProvider2` which only pulls in dependent code for the chosen SDK.
+To fully take advantage of tree shaking, the extension should use a single SDK and use `ExtensionProvider40` which only pulls in dependent code for SDK 4.0.
 
 Example setup (see `App.tsx`):
 
 ```typescript
 return (
-  <ExtensionProvider2 onRouteChange={onRouteChange} type={Looker40SDK}>
+  <ExtensionProvider40 onRouteChange={onRouteChange}>
     <KitchenSink route={route} routeState={routeState} />
-  </ExtensionProvider2>
+  </ExtensionProvider40>
 )
 ```
 
 Example usage:
 
 ```typescript
-const extensionContext = useContext<ExtensionContextData2<Looker40SDK>>(
-  ExtensionContext2
-)
+const extensionContext = useContext<ExtensionContextData40>(ExtensionContext40)
 const { extensionSDK, coreSDK } = extensionContext
 
 OR
 
-const sdk = getCoreSDK2<Looker40SDK>()
+const sdk = getCoreSDK40()
 ```
 
 ## Deployment

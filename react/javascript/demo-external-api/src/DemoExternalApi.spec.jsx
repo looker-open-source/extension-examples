@@ -25,13 +25,13 @@
  */
 import React from 'react'
 import { screen } from '@testing-library/react'
-import { renderWithExtensionContext2 } from './__mocks__/render_with_extension'
+import { renderWithExtensionContext40 } from './__mocks__/render_with_extension'
 import { DemoExternalApi } from './DemoExternalApi'
 
 describe('DemoExternalApi', () => {
   test('it renders', async () => {
     const ok = (result) => result
-    renderWithExtensionContext2(<DemoExternalApi />, {}, { core40SDK: { ok } })
+    renderWithExtensionContext40(<DemoExternalApi />, {}, { core40SDK: { ok } })
     await screen.findByText('Signin')
   })
 })

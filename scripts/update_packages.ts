@@ -30,11 +30,11 @@ const packages = {
   '@looker/components-providers': '^1.5.19',
   '@looker/design-tokens': '^2.7.1',
   '@looker/embed-sdk': '^1.6.1',
-  '@looker/extension-sdk': '^22.4.2',
-  '@looker/extension-sdk-react': '^22.4.2',
+  '@looker/extension-sdk': '^22.10.0',
+  '@looker/extension-sdk-react': '^22.10.0',
   '@looker/icons': '1.5.13',
-  '@looker/sdk': '^22.4.2',
-  '@looker/sdk-rtl': '^21.3.3',
+  '@looker/sdk': '^22.10.0',
+  '@looker/sdk-rtl': '^21.3.4',
   react: '^16.14.0',
   'react-content-loader': '^4.0.1',
   'react-dom': '^16.14.0',
@@ -118,7 +118,16 @@ const packages = {
 }
 
 const isIgnorable = (fileName: string) => {
-  const ignoreDirs = ['node_modules', '.git', '..', '.']
+  const ignoreDirs = [
+    'node_modules',
+    '.git',
+    '..',
+    '.',
+    // Ignore vis-and-filter-components for now as it
+    // is tightly coupled to a specific versopm of the
+    // Looker SDK.
+    'vis-and-filter-components',
+  ]
   return ignoreDirs.includes(fileName)
 }
 

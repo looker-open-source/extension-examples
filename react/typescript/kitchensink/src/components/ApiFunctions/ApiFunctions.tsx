@@ -27,9 +27,8 @@
 import React, { useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Heading, Box, ButtonOutline, TextArea } from '@looker/components'
-import type { Looker40SDK } from '@looker/sdk'
-import type { ExtensionContextData2 } from '@looker/extension-sdk-react'
-import { ExtensionContext2 } from '@looker/extension-sdk-react'
+import type { ExtensionContextData40 } from '@looker/extension-sdk-react'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { SandboxStatus } from '../SandboxStatus'
 import { ROUTES } from '../../KitchenSink'
 import type { ApiFunctionsProps } from './types'
@@ -38,7 +37,7 @@ const ApiFunctions: React.FC<ApiFunctionsProps> = () => {
   const history = useHistory()
   const [messages, setMessages] = useState('')
   const extensionContext =
-    useContext<ExtensionContextData2<Looker40SDK>>(ExtensionContext2)
+    useContext<ExtensionContextData40>(ExtensionContext40)
   const { extensionSDK } = extensionContext
 
   const uaName = `${extensionSDK.lookerHostData?.extensionId.replace(

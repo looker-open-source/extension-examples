@@ -27,10 +27,7 @@
 import React from 'react'
 import { MemoryRouter } from 'react-router-dom'
 import { renderWithTheme } from '@looker/components-test-utils'
-import {
-  ExtensionContext2,
-  ExtensionContext,
-} from '@looker/extension-sdk-react'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { registerHostApi } from '@looker/extension-sdk'
 import { OauthContext } from '../components/OauthProvider'
 import { SheetsContext } from '../components/SheetsProvider'
@@ -54,50 +51,27 @@ const getExtensionContext = (extensionSDKOverride, contextOverride) => ({
   ...contextOverride,
 })
 
-const withExtensionContext2 = (
+const withExtensionContext40 = (
   component,
   extensionSDKOverride,
   contextOverride
 ) => (
   <MemoryRouter>
-    <ExtensionContext2.Provider
+    <ExtensionContext40.Provider
       value={getExtensionContext(extensionSDKOverride, contextOverride)}
     >
       <OauthContext.Provider value={{}}>
         <SheetsContext.Provider value={{}}>{component}</SheetsContext.Provider>
       </OauthContext.Provider>
-    </ExtensionContext2.Provider>
+    </ExtensionContext40.Provider>
   </MemoryRouter>
 )
 
-export const renderWithExtensionContext2 = (
+export const renderWithExtensionContext40 = (
   component,
   extensionSDKOverride = {},
   contextOverride = {}
 ) =>
   renderWithTheme(
-    withExtensionContext2(component, extensionSDKOverride, contextOverride)
-  )
-
-const withExtensionContext = (
-  component,
-  extensionSDKOverride,
-  contextOverride
-) => (
-  <MemoryRouter>
-    <ExtensionContext.Provider
-      value={getExtensionContext(extensionSDKOverride, contextOverride)}
-    >
-      {component}
-    </ExtensionContext.Provider>
-  </MemoryRouter>
-)
-
-export const renderWithExtensionContext = (
-  component,
-  extensionSDKOverride = {},
-  contextOverride = {}
-) =>
-  renderWithTheme(
-    withExtensionContext(component, extensionSDKOverride, contextOverride)
+    withExtensionContext40(component, extensionSDKOverride, contextOverride)
   )

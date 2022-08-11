@@ -28,9 +28,8 @@ import React, { useContext, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import type { DataTableColumns } from '@looker/components'
 import { DataTable, DataTableItem, DataTableCell } from '@looker/components'
-import type { Looker40SDK } from '@looker/sdk'
-import type { ExtensionContextData2 } from '@looker/extension-sdk-react'
-import { ExtensionContext2 } from '@looker/extension-sdk-react'
+import type { ExtensionContextData40 } from '@looker/extension-sdk-react'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { updateErrorMessage, updateSheetData } from '../../data/DataReducer'
 import { GOOGLE_CLIENT_ID, AuthOption, POSTS_SERVER_URL } from '../..'
 import { handleResponse, handleError } from '../../utils/validate_data_response'
@@ -47,7 +46,7 @@ export const GoogleSheetsDemo: React.FC<GoogleSheetsDemoProps> = ({
 }) => {
   // Get access to the extension SDK and the looker API SDK.
   const extensionContext =
-    useContext<ExtensionContextData2<Looker40SDK>>(ExtensionContext2)
+    useContext<ExtensionContextData40>(ExtensionContext40)
   const { extensionSDK } = extensionContext
 
   // React router setup

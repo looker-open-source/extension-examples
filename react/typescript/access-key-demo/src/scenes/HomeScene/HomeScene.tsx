@@ -26,8 +26,8 @@
 
 import React, { useContext, useEffect } from 'react'
 import { Box, Button, Heading, SpaceVertical } from '@looker/components'
-import type { ExtensionContextData } from '@looker/extension-sdk-react'
-import { ExtensionContext } from '@looker/extension-sdk-react'
+import type { ExtensionContextData40 } from '@looker/extension-sdk-react'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { useHistory, useLocation } from 'react-router-dom'
 import { DATA_SERVER_URL } from '../../App'
 import { ROUTES } from '../../AccessKeyDemo'
@@ -57,7 +57,8 @@ export const HomeScene: React.FC<HomeSceneProps> = ({
 }) => {
   const history = useHistory()
   const location = useLocation<{ jwt_token?: string }>()
-  const { extensionSDK } = useContext<ExtensionContextData>(ExtensionContext)
+  const { extensionSDK } =
+    useContext<ExtensionContextData40>(ExtensionContext40)
 
   useEffect(() => {
     if (location.state) {

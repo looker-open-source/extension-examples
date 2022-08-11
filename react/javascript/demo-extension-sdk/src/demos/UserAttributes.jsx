@@ -33,7 +33,7 @@ import {
   TextArea,
   Tooltip,
 } from '@looker/components'
-import { ExtensionContext2 } from '@looker/extension-sdk-react'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { DemoWrapper } from '../components'
 
 const title = 'User Attributes'
@@ -46,7 +46,7 @@ attribute, prefix the attribute name with the extension name. Any dash and the â
 extension name must be replaced by an underscore, since dashes and colons cannot be used in user
 attribute names.
 - Global â€” These are global user attributes and are read only. An example is the locale user attribute.`
-const code = `const { extensionSDK } = useContext(ExtensionContext2)
+const code = `const { extensionSDK } = useContext(ExtensionContext40)
 const itemId = 'user_value'
 const data = await extensionSDK.userAttributeGetItem(itemId)
 await extensionSDK.userAttributeSetItem(itemId, data)
@@ -61,7 +61,7 @@ export const UserAttributes = () => {
   const [message, setMessage] = useState()
   const [globalData, setGlobalData] = useState('')
   const [data, setData] = useState('')
-  const { extensionSDK } = useContext(ExtensionContext2)
+  const { extensionSDK } = useContext(ExtensionContext40)
 
   const updateMessage = (message, intent = 'inform') => {
     setIntent(intent)

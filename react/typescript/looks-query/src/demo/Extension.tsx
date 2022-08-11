@@ -25,16 +25,15 @@
  */
 
 import React, { useState, useEffect, useContext } from 'react'
-import { hot } from 'react-hot-loader/root'
-import type { ExtensionContextData } from '@looker/extension-sdk-react'
-import { ExtensionContext } from '@looker/extension-sdk-react'
+import type { ExtensionContextData40 } from '@looker/extension-sdk-react'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { MessageBar, Box, Heading, Flex } from '@looker/components'
 import type { ILook } from '@looker/sdk'
 import { Switch, Route, useHistory, useRouteMatch } from 'react-router-dom'
 import { QueryContainer } from './QueryContainer'
 import { LookList } from './LookList'
 
-export const Extension: React.FC = hot(() => {
+export const Extension: React.FC = () => {
   const [loadingLooks, setLoadingLooks] = useState<boolean>(false)
   const [errorMessage, setErrorMessage] = useState<string>()
   const [looks, setLooks] = useState<ILook[]>([])
@@ -42,8 +41,9 @@ export const Extension: React.FC = hot(() => {
   const [runningQuery, setRunningQuery] = useState<boolean>(false)
   const [queryResult, setQueryResult] = useState<Record<any, any>[]>([])
 
-  const extensionContext = useContext<ExtensionContextData>(ExtensionContext)
-  const { core40SDK } = extensionContext
+  const extensionContext =
+    useContext<ExtensionContextData40>(ExtensionContext40)
+  const { coreSDK } = extensionContext
   const history = useHistory()
   const match = useRouteMatch<{ lookid: string }>('/:lookid')
 
@@ -84,7 +84,7 @@ export const Extension: React.FC = hot(() => {
     setLoadingLooks(true)
     setErrorMessage(undefined)
     try {
-      const result = await core40SDK.ok(core40SDK.all_looks())
+      const result = await coreSDK.ok(coreSDK.all_looks())
       setLooks(result.slice(0, 9))
       setLoadingLooks(false)
     } catch (error) {
@@ -104,8 +104,8 @@ export const Extension: React.FC = hot(() => {
     try {
       setErrorMessage(undefined)
       setRunningQuery(true)
-      const result = (await core40SDK.ok(
-        core40SDK.run_look({
+      const result = (await coreSDK.ok(
+        coreSDK.run_look({
           look_id: lookId,
           result_format: 'json',
         })
@@ -147,4 +147,4 @@ export const Extension: React.FC = hot(() => {
       </Box>
     </>
   )
-})
+}

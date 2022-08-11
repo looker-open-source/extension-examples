@@ -25,12 +25,12 @@
  */
 import React from 'react'
 import { screen } from '@testing-library/react'
-import { renderWithExtensionContext2 } from './__mocks__/render_with_extension'
+import { renderWithExtensionContext40 } from './__mocks__/render_with_extension'
 import { DemoExtensionSDK } from './DemoExtensionSDK'
 
 describe('DemoExtensionSDK', () => {
   test('it renders', async () => {
-    renderWithExtensionContext2(<DemoExtensionSDK />)
+    renderWithExtensionContext40(<DemoExtensionSDK />)
     await screen.findByText('Update Window Title')
   })
 })

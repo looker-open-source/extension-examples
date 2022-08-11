@@ -29,7 +29,7 @@ This repository demonstrates a file upload Looker extension.
    yarn develop
    ```
 
-   The extension is now running and serving the JavaScript locally at http://localhost:8080/bundle.js.
+   The extension is now running and serving the JavaScript locally at https://localhost:8080/bundle.js.
 
 5. Start the data server. This server recieves the files uploaded by the extension. Note that it is
    for demo purposes only.
@@ -53,7 +53,7 @@ This repository demonstrates a file upload Looker extension.
 
    application: fileupload {
       label: "File upload demo"
-      url: "http://localhost:8080/bundle.js"
+      url: "https://localhost:8080/bundle.js"
       entitlements: {
          external_api_urls: ["http://localhost:3000"]
       }
@@ -75,7 +75,7 @@ This repository demonstrates a file upload Looker extension.
 
 10. Reload the page and click the `Browse` dropdown menu. You will see the extension in the list.
 
-- The extension will load the JavaScript from the `url` provided in the `application` definition. By default, this is http://localhost:8080/bundle.js. If you change the port your server runs on in the package.json, you will need to also update it in the manifest.lkml.
+- The extension will load the JavaScript from the `url` provided in the `application` definition. By default, this is https://localhost:8080/bundle.js. If you change the port your server runs on in the package.json, you will need to also update it in the manifest.lkml.
 - Refreshing the extension page will bring in any new code changes from the extension template, although some changes will hot reload.
 
 ## Deployment

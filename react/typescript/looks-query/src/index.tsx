@@ -26,7 +26,7 @@
 
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import { ExtensionProvider } from '@looker/extension-sdk-react'
+import { ExtensionProvider40 } from '@looker/extension-sdk-react'
 import { ComponentsProvider } from '@looker/components'
 import { Extension } from './demo/Extension'
 
@@ -35,12 +35,11 @@ window.addEventListener('DOMContentLoaded', async () => {
   document.body.appendChild(root)
 
   ReactDOM.render(
-    // ExtensionProvider provides subcomponents access to the Looker Extension SDK
-    <ExtensionProvider>
+    <ExtensionProvider40>
       <ComponentsProvider>
         <Extension />
       </ComponentsProvider>
-    </ExtensionProvider>,
+    </ExtensionProvider40>,
     root
   )
 })

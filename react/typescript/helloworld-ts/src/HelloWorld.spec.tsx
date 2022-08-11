@@ -25,7 +25,7 @@
  */
 import React from 'react'
 import { screen } from '@testing-library/react'
-import { renderWithExtensionContext } from './__mocks__/render_with_extension'
+import { renderWithExtensionContext40 } from './__mocks__/render_with_extension'
 import { HelloWorld } from './HelloWorld'
 
 describe('HelloWorld', () => {
@@ -34,7 +34,7 @@ describe('HelloWorld', () => {
     const me = () => ({
       display_name: "Rosie O'Grady",
     })
-    renderWithExtensionContext(<HelloWorld />, {}, { core40SDK: { me, ok } })
+    renderWithExtensionContext40(<HelloWorld />, {}, { coreSDK: { me, ok } })
     await screen.findByText("Hello, Rosie O'Grady")
   })
 })

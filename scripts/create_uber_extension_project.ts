@@ -55,11 +55,11 @@ interface ExtensionInfo {
   distPath: string
 }
 
-const { source, target, project, connection } = parseAndValidateArgs()
+const { source, target, project, connection, devurl } = parseAndValidateArgs()
 
 const extensions: ExtensionInfo[] = findExtensions(source, [])
 
-buildUberExtension(project, target, connection, extensions)
+buildUberExtension(project, target, connection, extensions, devurl)
 
 console.log(`${project} extension project built`)
 
@@ -98,10 +98,11 @@ function buildUberExtension(
   project: string,
   target: string,
   connection: string,
-  extensions: ExtensionInfo[]
+  extensions: ExtensionInfo[],
+  devurl: boolean
 ) {
   createModelFile(project, target, connection)
-  createManifestFile(project, target, extensions)
+  createManifestFile(project, target, extensions, devurl)
   createTargetDistDir(target)
   extensions.forEach((extension) => copyDistFiles(target, extension))
 }
@@ -117,16 +118,21 @@ function createModelFile(project: string, target: string, connection: string) {
 function createManifestFile(
   project: string,
   target: string,
-  extensions: ExtensionInfo[]
+  extensions: ExtensionInfo[],
+  devurl: boolean
 ) {
   let manifest = `project_name: "${project}"\n`
   extensions.forEach(
-    (extension) => (manifest += extractApplication(project, extension))
+    (extension) => (manifest += extractApplication(project, extension, devurl))
   )
   fs.writeFileSync(`${target}/manifest.lkml`, manifest)
 }
 
-function extractApplication(project: string, extension: ExtensionInfo) {
+function extractApplication(
+  project: string,
+  extension: ExtensionInfo,
+  devurl: boolean
+) {
   const lines = extension.manifest
     .split('\n')
     .filter(
@@ -164,7 +170,14 @@ function extractApplication(project: string, extension: ExtensionInfo) {
         appLines.push(line)
         appStarted = true
         counter = 1
-        appLines.push(`  file: "dist/${extension.applicationName}/bundle.js"`)
+        if (devurl) {
+          appLines.push(
+            `  # file: "dist/${extension.applicationName}/bundle.js"`
+          )
+          appLines.push(`  url: "https://localhost:8080/bundle.js"`)
+        } else {
+          appLines.push(`  file: "dist/${extension.applicationName}/bundle.js"`)
+        }
       }
     }
   })
@@ -174,7 +187,7 @@ function extractApplication(project: string, extension: ExtensionInfo) {
 function createTargetDistDir(target: string) {
   const distDir = `${target}/dist`
   if (isValidDirectory(distDir)) {
-    fs.rmdirSync(distDir, { recursive: true })
+    fs.rmSync(distDir, { recursive: true })
   }
   fs.mkdirSync(distDir)
 }
@@ -230,8 +243,15 @@ function parseAndValidateArgs() {
         required: true,
         alias: 'c',
       },
+      devurl: {
+        description: 'generate development url',
+        type: 'boolean',
+        default: 'false',
+        required: true,
+        alias: 'd',
+      },
     })
-  const { source, target, project, connection } = args.argv
+  const { source, target, project, connection, devurl } = args.argv
   if (!isValidDirectory(source)) {
     args.showHelp()
     console.error(`Invalid directory: source ${source}`)
@@ -247,7 +267,7 @@ function parseAndValidateArgs() {
     console.error(`Invalid project name: project ${project}`)
     process.exit(1)
   }
-  return { source, target, project, connection }
+  return { source, target, project, connection, devurl: Boolean(devurl) }
 }
 
 function isValidDirectory(name: string) {
