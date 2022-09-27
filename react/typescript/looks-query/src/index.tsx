@@ -32,6 +32,7 @@ import { Extension } from './demo/Extension'
 
 window.addEventListener('DOMContentLoaded', async () => {
   const root = document.createElement('div')
+  root.style.height = '100%'
   document.body.appendChild(root)
 
   ReactDOM.render(
