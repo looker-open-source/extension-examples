@@ -78,6 +78,4 @@ For any questions beyond the scope of Support, please engage with our [**Looker 
 
 ## Please contribute
 
-All are welcome to submit examples. Please feel free to submit a PR for any examples you want to share.
-
-If you notice an example that is not working, a package that is out of date, or any other bug, please open an issue and let us know. Thank you!
+All are welcome to submit examples. Please refer to the [CONTRIBUTING.md](https://github.com/looker-open-source/extension-examples/tree/main/CONTRIBUTING.md).
