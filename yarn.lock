@@ -2052,6 +2052,15 @@
     npmlog "^4.1.2"
     write-file-atomic "^3.0.3"
 
+"@looker/chatty@2.3.9":
+  version "2.3.9"
+  resolved "https://registry.yarnpkg.com/@looker/chatty/-/chatty-2.3.9.tgz#d2c65189410c881c81447522c9a68f165f4c964b"
+  integrity sha512-Zrixb6hOcEFjJ342cbrWQd7CMdaP6LmyOuzjUZvAW4l2UxNiUWh3bWN2Fpx+4FKIJhDghEl/fG3cszkFxtur4Q==
+  dependencies:
+    core-js "^3.6.4"
+    debug "^2.2.0"
+    es6-promise "^4.2.8"
+
 "@looker/chatty@^2.3.0":
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@looker/chatty/-/chatty-2.3.0.tgz#380ff86bff34d8866f641fae3e53997266a3de3c"
@@ -2326,14 +2335,14 @@
     history "^4.9.0"
     lodash "^4.17.20"
 
-"@looker/extension-sdk-react@^22.10.0":
-  version "22.10.1"
-  resolved "https://registry.yarnpkg.com/@looker/extension-sdk-react/-/extension-sdk-react-22.10.1.tgz#2ba229a45696d5056fd6b367e60e571afaf278c0"
-  integrity sha512-j+GTD6VZIVqzw6ScY3nuJXIm4lQmnLqqw+f6vTWZYEhOT0ViHiWi1TU1L6N4LogTHVUa4hssay9zk324VQRmLg==
+"@looker/extension-sdk-react@^22.20.1":
+  version "22.20.1"
+  resolved "https://registry.yarnpkg.com/@looker/extension-sdk-react/-/extension-sdk-react-22.20.1.tgz#bd36d5916bb0f53e8d0699d304e93c0e497b4d40"
+  integrity sha512-EeGdeZyYECtGcXpjkcjMfStCFQ4f2fNKlgRmOCLs/jCThxEuUJK96XSPXiok/XFkdCotgPuKVUhz8J+ZL1gA9A==
   dependencies:
-    "@looker/extension-sdk" "^22.10.1"
-    "@looker/sdk" "^22.10.1"
-    "@looker/sdk-rtl" "^21.3.4"
+    "@looker/extension-sdk" "^22.20.1"
+    "@looker/sdk" "^22.20.1"
+    "@looker/sdk-rtl" "^21.5.0"
     history "^4.9.0"
     lodash "^4.17.20"
 
@@ -2351,14 +2360,14 @@
     request-promise-native "^1.0.8"
     semver "^7.3.4"
 
-"@looker/extension-sdk@^22.10.0", "@looker/extension-sdk@^22.10.1":
-  version "22.10.1"
-  resolved "https://registry.yarnpkg.com/@looker/extension-sdk/-/extension-sdk-22.10.1.tgz#8ca48d4b005517620b1998af5c0695d8f5a3257e"
-  integrity sha512-1DxjCkPBARG+QciUZ4FLNND/jHLyDlz/aSkSWcVF8wZXB9XDgPnhHfwq9n5fNbcLsMakukX4OVW0Re6Gfq2agQ==
+"@looker/extension-sdk@^22.20.1":
+  version "22.20.1"
+  resolved "https://registry.yarnpkg.com/@looker/extension-sdk/-/extension-sdk-22.20.1.tgz#97dd2eaf7a36f2f4cbe4de560675353c74b92032"
+  integrity sha512-4xa20f3SrpfAYVFkFGZ+NMG1IKIZKFoTwS0xXBpRB/MmICz+mudtdRmFnnBkBMAKAM33mKJIxzlc3eaB7GLkng==
   dependencies:
-    "@looker/chatty" "^2.3.0"
-    "@looker/sdk" "^22.10.1"
-    "@looker/sdk-rtl" "^21.3.4"
+    "@looker/chatty" "2.3.9"
+    "@looker/sdk" "^22.20.1"
+    "@looker/sdk-rtl" "^21.5.0"
     deepmerge "^4.2.2"
     readable-stream "^3.4.0"
     request "^2.88.0"
@@ -2453,10 +2462,10 @@
     request "^2.88.0"
     request-promise-native "^1.0.8"
 
-"@looker/sdk-rtl@^21.3.4":
-  version "21.3.4"
-  resolved "https://registry.yarnpkg.com/@looker/sdk-rtl/-/sdk-rtl-21.3.4.tgz#668dd89c7835deac60e45c2340d6c42b824fc8a0"
-  integrity sha512-k5iZvkVLaoFxzF0AViVtSA2bvvTyeKTkXxbupa/lPsA0fW1qyF+3BVmtMOK3JaC/ZzIf0VFQHdrbrHbaIEJBxA==
+"@looker/sdk-rtl@^21.5.0":
+  version "21.5.0"
+  resolved "https://registry.yarnpkg.com/@looker/sdk-rtl/-/sdk-rtl-21.5.0.tgz#927615bb61e9b9ddd07b95e3ea27578703d042f9"
+  integrity sha512-q0k/xOuIq2XM6QrkyIUTLMwEN6ToZvApLZ/74VjNTslWZrUOL+/L4LnZhXZfyZZx+YNHQFQgED+8puNYpmwqAw==
   dependencies:
     ini "^1.3.8"
     readable-stream "^3.4.0"
@@ -2474,12 +2483,12 @@
     request "^2.88.0"
     request-promise-native "^1.0.8"
 
-"@looker/sdk@^22.10.0", "@looker/sdk@^22.10.1":
-  version "22.10.1"
-  resolved "https://registry.yarnpkg.com/@looker/sdk/-/sdk-22.10.1.tgz#87e27eb0bc152686715f9148902dd054456bdc27"
-  integrity sha512-yOIveAMa/lMAKn8fTVe5ptFAgqma1T8iw1kC/aefWkPco64DJozUDTycoJBRyEDVmGhGaaug2vk0mPuUfxDYOQ==
+"@looker/sdk@^22.20.1":
+  version "22.20.1"
+  resolved "https://registry.yarnpkg.com/@looker/sdk/-/sdk-22.20.1.tgz#e427be3c736da33f2b635947b6a569427aaa9e5b"
+  integrity sha512-BgHE5FIKeqefu5FF66nSKsOASwYucxGswevHdX2TB379BiILVHL0Ln3NIwmM530b7Ch7YKIa4vrSL4dtM/IwFQ==
   dependencies:
-    "@looker/sdk-rtl" "^21.3.4"
+    "@looker/sdk-rtl" "^21.5.0"
     ini "^1.3.8"
     readable-stream "^3.4.0"
     request "^2.88.0"
