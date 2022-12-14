@@ -177,6 +177,7 @@ function extractApplication(
           appLines.push(`  url: "https://localhost:8080/bundle.js"`)
         } else {
           appLines.push(`  file: "dist/${extension.applicationName}/bundle.js"`)
+          appLines.push(`  # url: "https://localhost:8080/bundle.js"`)
         }
       }
     }
