@@ -33,7 +33,7 @@ It uses [React](https://reactjs.org/) and [Typescript](https://typescriptlang.or
    yarn develop
    ```
 
-   Great! Your extension is now running and serving the JavaScript at http://localhost:8080/bundle.js.
+   Great! Your extension is now running and serving the JavaScript at https://localhost:8080/bundle.js.
 
 5. Now log in to Looker and create a new project.
 
@@ -48,7 +48,7 @@ It uses [React](https://reactjs.org/) and [Typescript](https://typescriptlang.or
    ```
    application: look-runner {
     label: "Look Runner"
-    url: "http://localhost:8080/bundle.js"
+    url: "https://localhost:8080/bundle.js"
     entitlements: {
       core_api_methods: ["run_inline_query", "me", "all_looks", "run_look"]
     }
@@ -68,7 +68,7 @@ It uses [React](https://reactjs.org/) and [Typescript](https://typescriptlang.or
 8. Commit your changes and deploy your them to production through the Project UI.
 
 9. Reload the page and click the `Browse` dropdown menu. You should see your extension in the list.
-   - The extension will load the JavaScript from the `url` provided in the `application` definition. By default, this is http://localhost:8080/bundle.js. If you change the port your server runs on in the package.json, you will need to also update it in the manifest.lkml.
+   - The extension will load the JavaScript from the `url` provided in the `application` definition. By default, this is https://localhost:8080/bundle.js. If you change the port your server runs on in the package.json, you will need to also update it in the manifest.lkml.
 
 - Refreshing the extension page will bring in any new code changes from the extension template, although some changes will hot reload.
 
@@ -83,7 +83,7 @@ The process above requires your local development server to be running to load t
    ```
    application: look-runner {
    label: "Look Runner"
-   url: "http://localhost:8080/bundle.js"
+   url: "https://localhost:8080/bundle.js"
    entitlements: {
      core_api_methods: ["run_inline_query", "me", "all_looks", "run_look"]
    }

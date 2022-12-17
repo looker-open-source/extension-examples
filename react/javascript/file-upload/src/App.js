@@ -25,15 +25,13 @@
  */
 
 import React from 'react'
-import { ExtensionProvider2 } from '@looker/extension-sdk-react'
-import { hot } from 'react-hot-loader/root'
-import { Looker40SDK } from '@looker/sdk'
+import { ExtensionProvider40 } from '@looker/extension-sdk-react'
 import { FileUpload } from './FileUpload'
 
-export const App = hot(() => {
+export const App = () => {
   return (
-    <ExtensionProvider2 type={Looker40SDK}>
+    <ExtensionProvider40>
       <FileUpload />
-    </ExtensionProvider2>
+    </ExtensionProvider40>
   )
-})
+}

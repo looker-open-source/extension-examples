@@ -38,9 +38,8 @@ import {
   Form,
   Text,
 } from '@looker/components'
-import type { Looker40SDK } from '@looker/sdk'
-import type { ExtensionContextData2 } from '@looker/extension-sdk-react'
-import { ExtensionContext2 } from '@looker/extension-sdk-react'
+import type { ExtensionContextData40 } from '@looker/extension-sdk-react'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { updatePosts, updateTitle } from '../../data/DataReducer'
 import { handleResponse, handleError } from '../../utils/validate_data_response'
 import { getDataServerFetchProxy } from '../../utils/fetch_proxy'
@@ -67,7 +66,7 @@ export const DataServerDemo: React.FC<DataServerDemoProps> = ({
 }) => {
   // Get access to the extension SDK and the looker API SDK.
   const extensionContext =
-    useContext<ExtensionContextData2<Looker40SDK>>(ExtensionContext2)
+    useContext<ExtensionContextData40>(ExtensionContext40)
   const { extensionSDK } = extensionContext
   // React router location
   const location = useLocation()

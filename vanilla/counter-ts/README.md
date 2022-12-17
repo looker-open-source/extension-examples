@@ -29,7 +29,7 @@ This repository demonstrates a very basic extension in typescript (no react). Th
    yarn develop
    ```
 
-   The develop server is now running and serving the JavaScript at http://localhost:8080/bundle.js.
+   The develop server is now running and serving the JavaScript at https://localhost:8080/bundle.js.
 
 5. Now log in to Looker and create a new project.
 
@@ -45,7 +45,7 @@ This repository demonstrates a very basic extension in typescript (no react). Th
     project_name: "extension-counter"
     application: extension-counter {
         label: "Extension Counter"
-        url: "http://localhost:8080/bundle.js"
+        url: "https://localhost:8080/bundle.js"
         entitlements: {
           core_api_methods: ["me"]
         }
@@ -70,7 +70,7 @@ This repository demonstrates a very basic extension in typescript (no react). Th
 
 10. Reload the page and click the `Browse` dropdown menu. You should see the extension label in the list.
 
-    - The extension will load the JavaScript from the `url` you provided in the `application` definition. By default, this is http://localhost:8080/bundle.js. If you change the port your server runs on in the package.json, you will need to also update it in the manifest.lkml.
+    - The extension will load the JavaScript from the `url` you provided in the `application` definition. By default, this is https://localhost:8080/bundle.js. If you change the port your server runs on in the package.json, you will need to also update it in the manifest.lkml.
     - Reloading the extension page will bring in any new code changes from the extension template.
 
 ## Deployment

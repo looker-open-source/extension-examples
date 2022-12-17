@@ -26,17 +26,17 @@
 
 import React, { useContext } from 'react'
 import { Button, SpaceVertical, Tooltip } from '@looker/components'
-import { ExtensionContext2 } from '@looker/extension-sdk-react'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { DemoWrapper } from '../components'
 
 const title = 'Update Window Title'
 const description = 'Demonstrates how to update the current window title.'
-const code = `const { extensionSDK } = useContext(ExtensionContext2)
+const code = `const { extensionSDK } = useContext(ExtensionContext40)
 extensionSDK.updateTitle("My Extension Title")`
 const codeSourceName = 'UpdateTitle.jsx'
 
 export const UpdateTitle = () => {
-  const { extensionSDK } = useContext(ExtensionContext2)
+  const { extensionSDK } = useContext(ExtensionContext40)
   const onClick = () => {
     extensionSDK.updateTitle('My Extension Title')
   }

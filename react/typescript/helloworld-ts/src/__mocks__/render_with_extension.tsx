@@ -28,14 +28,8 @@ import type { ReactNode } from 'react'
 import React from 'react'
 import { renderWithTheme } from '@looker/components-test-utils'
 import type { RenderResult } from '@testing-library/react'
-import type {
-  ExtensionContextData2,
-  ExtensionContextData,
-} from '@looker/extension-sdk-react'
-import {
-  ExtensionContext2,
-  ExtensionContext,
-} from '@looker/extension-sdk-react'
+import type { ExtensionContextData40 } from '@looker/extension-sdk-react'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import type { ExtensionHostApi, ExtensionSDK } from '@looker/extension-sdk'
 import { registerHostApi } from '@looker/extension-sdk'
 import { MemoryRouter } from 'react-router-dom'
@@ -52,70 +46,36 @@ const getExtensionSDK = (extensionSDKOverride: Partial<ExtensionSDK>) => {
   return extensionSDK
 }
 
-const getExtensionContext2 = (
+const getExtensionContext40 = (
   extensionSDKOverride: Partial<ExtensionSDK>,
-  contextOverride: Partial<ExtensionContextData2<any>>
-): ExtensionContextData2<any> =>
+  contextOverride: Partial<ExtensionContextData40>
+): ExtensionContextData40 =>
   ({
     extensionSDK: getExtensionSDK(extensionSDKOverride),
     coreSDK: {},
     route: '',
     ...contextOverride,
-  } as ExtensionContextData2<any>)
+  } as ExtensionContextData40)
 
-const withExtensionContext2 = (
+const withExtensionContext40 = (
   component: ReactNode,
   extensionSDKOverride: Partial<ExtensionSDK>,
-  contextOverride: Partial<ExtensionContextData2<any>>
+  contextOverride: Partial<ExtensionContextData40>
 ) => (
   <MemoryRouter>
-    <ExtensionContext2.Provider
-      value={getExtensionContext2(extensionSDKOverride, contextOverride)}
+    <ExtensionContext40.Provider
+      value={getExtensionContext40(extensionSDKOverride, contextOverride)}
     >
       {component}
-    </ExtensionContext2.Provider>
+    </ExtensionContext40.Provider>
   </MemoryRouter>
 )
 
-export const renderWithExtensionContext2 = (
+export const renderWithExtensionContext40 = (
   component: ReactNode,
   extensionSDKOverride = {},
   contextOverride = {}
 ): RenderResult =>
   renderWithTheme(
-    withExtensionContext2(component, extensionSDKOverride, contextOverride)
-  )
-
-const getExtensionContext = (
-  extensionSDKOverride: Partial<ExtensionSDK>,
-  contextOverride: Partial<ExtensionContextData>
-): ExtensionContextData =>
-  ({
-    extensionSDK: getExtensionSDK(extensionSDKOverride),
-    coreSDK: {},
-    route: '',
-    ...contextOverride,
-  } as ExtensionContextData)
-
-const withExtensionContext = (
-  component: ReactNode,
-  extensionSDKOverride: Partial<ExtensionSDK>,
-  contextOverride: Partial<ExtensionContextData>
-) => (
-  <MemoryRouter>
-    <ExtensionContext.Provider
-      value={getExtensionContext(extensionSDKOverride, contextOverride)}
-    >
-      {component}
-    </ExtensionContext.Provider>
-  </MemoryRouter>
-)
-
-export const renderWithExtensionContext = (
-  component: ReactNode,
-  extensionSDKOverride = {},
-  contextOverride = {}
-): RenderResult =>
-  renderWithTheme(
-    withExtensionContext(component, extensionSDKOverride, contextOverride)
+    withExtensionContext40(component, extensionSDKOverride, contextOverride)
   )

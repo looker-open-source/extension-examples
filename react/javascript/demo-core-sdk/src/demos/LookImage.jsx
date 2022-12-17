@@ -26,12 +26,12 @@
 
 import React, { useContext, useState } from 'react'
 import { Button, MessageBar, Spinner, Tooltip } from '@looker/components'
-import { ExtensionContext2 } from '@looker/extension-sdk-react'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { DemoWrapper } from '../components'
 
 const title = 'Look Image'
 const description = 'Demonstrates rendering a Look image.'
-const code = `const { extensionSDK } = useContext(ExtensionContext2)
+const code = `const { extensionSDK } = useContext(ExtensionContext40)
 const looks = await coreSDK.ok(coreSDK.all_looks('id'))
 const rand = Math.floor(Math.random() * looks.length)
 const value = await coreSDK.ok(
@@ -47,7 +47,7 @@ export const LookImage = () => {
   const [message, setMessage] = useState()
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState()
-  const { coreSDK } = useContext(ExtensionContext2)
+  const { coreSDK } = useContext(ExtensionContext40)
 
   const updateMessage = (message, intent = 'inform') => {
     setIntent(intent)

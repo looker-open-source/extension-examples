@@ -36,9 +36,8 @@ import {
   SpaceVertical,
   FieldTextArea,
 } from '@looker/components'
-import type { Looker40SDK } from '@looker/sdk'
-import type { ExtensionContextData2 } from '@looker/extension-sdk-react'
-import { ExtensionContext2 } from '@looker/extension-sdk-react'
+import type { ExtensionContextData40 } from '@looker/extension-sdk-react'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { SandboxStatus } from '../SandboxStatus'
 import type { ConfigurationData } from '../../types'
 import type { ConfigureProps } from './types'
@@ -55,7 +54,7 @@ const Configure: React.FC<ConfigureProps> = ({
       lookId: '',
     } as ConfigurationData)
   const extensionContext =
-    useContext<ExtensionContextData2<Looker40SDK>>(ExtensionContext2)
+    useContext<ExtensionContextData40>(ExtensionContext40)
   const { extensionSDK } = extensionContext
 
   useEffect(() => {

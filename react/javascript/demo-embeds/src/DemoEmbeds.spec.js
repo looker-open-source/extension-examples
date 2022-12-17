@@ -25,13 +25,13 @@
  */
 import React from 'react'
 import { screen } from '@testing-library/react'
-import { renderWithExtensionContext2 } from './__mocks__/render_with_extension'
+import { renderWithExtensionContext40 } from './__mocks__/render_with_extension'
 import { DemoEmbeds } from './DemoEmbeds'
 
 describe('DemoEmbeds', () => {
   test('it renders', async () => {
     const ok = (result) => result
-    renderWithExtensionContext2(<DemoEmbeds />, {}, { core40SDK: { ok } })
+    renderWithExtensionContext40(<DemoEmbeds />, {}, { coreSDK: { ok } })
     await screen.findByText('Dashboards Next')
   })
 })

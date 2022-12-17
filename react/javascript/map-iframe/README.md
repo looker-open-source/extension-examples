@@ -37,7 +37,7 @@ This repository demonstrates using google maps in an IFRAME. The demo uses the [
    yarn develop
    ```
 
-   The extension is now running and serving the JavaScript locally at http://localhost:8080/bundle.js.
+   The extension is now running and serving the JavaScript locally at https://localhost:8080/bundle.js.
 
 6. Log in to Looker and create a new project.
 
@@ -54,7 +54,7 @@ This repository demonstrates using google maps in an IFRAME. The demo uses the [
 
    application: map-iframe {
       label: "Map IFRAME demo"
-      url: "http://localhost:8080/bundle.js"
+      url: "https://localhost:8080/bundle.js"
       entitlements: {
          use_iframes: yes
       }
@@ -76,7 +76,7 @@ This repository demonstrates using google maps in an IFRAME. The demo uses the [
 
 10. Reload the page and click the `Browse` dropdown menu. You will see the extension in the list.
 
-- The extension will load the JavaScript from the `url` provided in the `application` definition. By default, this is http://localhost:8080/bundle.js. If you change the port your server runs on in the package.json, you will need to also update it in the manifest.lkml.
+- The extension will load the JavaScript from the `url` provided in the `application` definition. By default, this is https://localhost:8080/bundle.js. If you change the port your server runs on in the package.json, you will need to also update it in the manifest.lkml.
 - Refreshing the extension page will bring in any new code changes from the extension template, although some changes will hot reload.
 
 ## Deployment

@@ -33,8 +33,8 @@ import {
   Heading,
   SpaceVertical,
 } from '@looker/components'
-import type { ExtensionContextData } from '@looker/extension-sdk-react'
-import { ExtensionContext } from '@looker/extension-sdk-react'
+import type { ExtensionContextData40 } from '@looker/extension-sdk-react'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { useHistory, useLocation } from 'react-router-dom'
 import { ACCESS_KEY_NAME, DATA_SERVER_URL } from '../../App'
 import { ROUTES } from '../../AccessKeyDemo'
@@ -52,8 +52,8 @@ export const ConfigurationScene: React.FC<ConfigurationSceneProps> = ({
 }) => {
   const history = useHistory()
   const location = useLocation()
-  const { extensionSDK, core40SDK } =
-    useContext<ExtensionContextData>(ExtensionContext)
+  const { extensionSDK, coreSDK } =
+    useContext<ExtensionContextData40>(ExtensionContext40)
   const { lookerHostData } = extensionSDK
   const { extensionId } = lookerHostData || {}
   // Access key state
@@ -94,22 +94,20 @@ export const ConfigurationScene: React.FC<ConfigurationSceneProps> = ({
         .replace(/{|}/g, '')
       // Get all of the user attributes (unfortnately user attributes cannot be
       // updated by name)
-      const userAttributes = await core40SDK.ok(
-        core40SDK.all_user_attributes({})
-      )
+      const userAttributes = await coreSDK.ok(coreSDK.all_user_attributes({}))
       // Does the access key already exist?
       const accessKeyUserAttribute = userAttributes.find(
         (userAttribute) => userAttribute.name === accessKeyName
       )
       // Delete it if it does
       if (accessKeyUserAttribute && accessKeyUserAttribute.id) {
-        await core40SDK.ok(
-          core40SDK.delete_user_attribute(accessKeyUserAttribute.id)
+        await coreSDK.ok(
+          coreSDK.delete_user_attribute(accessKeyUserAttribute.id)
         )
       }
       // Add the access key.
-      await core40SDK.ok(
-        core40SDK.create_user_attribute({
+      await coreSDK.ok(
+        coreSDK.create_user_attribute({
           name: accessKeyName,
           label: `${extensionId} APIKEY Demo Access Key`,
           default_value: accessKey,

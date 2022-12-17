@@ -34,7 +34,7 @@ import {
   Tooltip,
   useConfirm,
 } from '@looker/components'
-import { ExtensionContext2 } from '@looker/extension-sdk-react'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { SheetsContext } from './SheetsProvider'
 import { SheetsTable } from './SheetsTable'
 import { SheetsForm } from './SheetsForm'
@@ -54,7 +54,7 @@ const range = 'Class Data!A2:F'
  * Main sheets component.
  */
 export const Sheets = ({ signOut, token, updateMessage, clearMessage }) => {
-  const { extensionSDK } = useContext(ExtensionContext2)
+  const { extensionSDK } = useContext(ExtensionContext40)
   const {
     unloadSpreadSheet,
     copySpreadsheet,

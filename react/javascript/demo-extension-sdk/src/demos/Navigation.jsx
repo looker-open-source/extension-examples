@@ -26,7 +26,7 @@
 
 import React, { useContext } from 'react'
 import { Button, Tooltip, SpaceVertical } from '@looker/components'
-import { ExtensionContext2 } from '@looker/extension-sdk-react'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { DemoWrapper } from '../components'
 
 const title = 'Navigation functions'
@@ -41,7 +41,7 @@ but permission to do so must be requested through entitlements.
 than the current Looker server
 
 `
-const code = `  const { extensionSDK } = useContext(ExtensionContext2)
+const code = `  const { extensionSDK } = useContext(ExtensionContext40)
 
   extensionSDK.updateLocation('/')
 
@@ -55,7 +55,7 @@ const code = `  const { extensionSDK } = useContext(ExtensionContext2)
 const codeSourceName = 'Navigation.jsx'
 
 export const Navigation = () => {
-  const { extensionSDK } = useContext(ExtensionContext2)
+  const { extensionSDK } = useContext(ExtensionContext40)
 
   const navigateHome = () => {
     extensionSDK.updateLocation('/')

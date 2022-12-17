@@ -26,7 +26,7 @@
 
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import { ExtensionProvider } from '@looker/extension-sdk-react'
+import { ExtensionProvider40 } from '@looker/extension-sdk-react'
 import { ComponentsProvider } from '@looker/components'
 import { Provider } from 'react-redux'
 import { Extension } from './demo/Extension'
@@ -34,15 +34,16 @@ import { configureStore } from './data/store'
 
 window.addEventListener('DOMContentLoaded', async () => {
   const root = document.createElement('div')
+  root.style.height = '100%'
   document.body.appendChild(root)
 
   ReactDOM.render(
     <Provider store={configureStore()}>
-      <ExtensionProvider>
+      <ExtensionProvider40>
         <ComponentsProvider>
           <Extension />
         </ComponentsProvider>
-      </ExtensionProvider>
+      </ExtensionProvider40>
     </Provider>,
     root
   )

@@ -33,9 +33,8 @@ import {
   SpaceVertical,
   TextArea,
 } from '@looker/components'
-import type { Looker40SDK } from '@looker/sdk'
-import type { ExtensionContextData2 } from '@looker/extension-sdk-react'
-import { ExtensionContext2 } from '@looker/extension-sdk-react'
+import type { ExtensionContextData40 } from '@looker/extension-sdk-react'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import type { ExtensionHostApi } from '@looker/extension-sdk'
 import { SandboxStatus } from '../SandboxStatus'
 import type { MiscFunctionsProps } from './types'
@@ -43,7 +42,7 @@ import type { MiscFunctionsProps } from './types'
 const MiscFunctions: React.FC<MiscFunctionsProps> = () => {
   const [messages, setMessages] = useState('')
   const extensionContext =
-    useContext<ExtensionContextData2<Looker40SDK>>(ExtensionContext2)
+    useContext<ExtensionContextData40>(ExtensionContext40)
   const extensionSDK = extensionContext.extensionSDK as ExtensionHostApi
 
   const updateMessages = (message: string) => {

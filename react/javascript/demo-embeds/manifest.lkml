@@ -3,7 +3,7 @@ project_name: "demo-embeds"
 application: demo-embeds {
   label: "Demo Embeds"
   # use url for development
-  url: "http://localhost:8080/bundle.js"
+  url: "https://localhost:8080/bundle.js"
   # use file for production deployment
   # file: "bundle.js"
   entitlements: {

@@ -1,7 +1,7 @@
 project_name: "access_key_demo"
 application: access_key_demo {
   label: "Extension Access Key Demo"
-  url: "http://localhost:8080/bundle.js"
+  url: "https://localhost:8080/bundle.js"
   #file: "bundle.js"
   entitlements: {
     use_form_submit: yes

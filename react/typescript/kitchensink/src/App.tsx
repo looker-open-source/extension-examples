@@ -25,12 +25,10 @@
  */
 
 import React, { useState } from 'react'
-import { ExtensionProvider2 } from '@looker/extension-sdk-react'
-import { hot } from 'react-hot-loader/root'
-import { Looker40SDK } from '@looker/sdk'
+import { ExtensionProvider40 } from '@looker/extension-sdk-react'
 import { KitchenSink } from './KitchenSink'
 
-export const App: React.FC = hot(() => {
+export const App: React.FC = () => {
   const [route, setRoute] = useState('')
   const [routeState, setRouteState] = useState()
 
@@ -40,8 +38,8 @@ export const App: React.FC = hot(() => {
   }
 
   return (
-    <ExtensionProvider2 onRouteChange={onRouteChange} type={Looker40SDK}>
+    <ExtensionProvider40 onRouteChange={onRouteChange}>
       <KitchenSink route={route} routeState={routeState} />
-    </ExtensionProvider2>
+    </ExtensionProvider40>
   )
-})
+}

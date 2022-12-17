@@ -26,7 +26,7 @@
 import React, { createContext, useContext, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useHistory, useLocation } from 'react-router-dom'
-import { ExtensionContext2 } from '@looker/extension-sdk-react'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 
 export const OauthContext = createContext({})
 
@@ -61,7 +61,7 @@ export const OauthProvider = ({
   loggedInRoute = '/home',
   loggedOutRoute = '/',
 }) => {
-  const { extensionSDK } = useContext(ExtensionContext2)
+  const { extensionSDK } = useContext(ExtensionContext40)
   const [loggingIn, setLoggingIn] = useState(false)
   const history = useHistory()
   const { state } = useLocation()

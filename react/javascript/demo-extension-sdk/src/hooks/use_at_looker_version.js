@@ -24,12 +24,12 @@
 
  */
 import { useContext, useEffect, useState } from 'react'
-import { ExtensionContext2 } from '@looker/extension-sdk-react'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { intersects } from 'semver'
 
 export const useAtLookerVersion = (requiredLookerVersion) => {
   const [atLookerVersion, setAtLookerVersion] = useState()
-  const { extensionSDK } = useContext(ExtensionContext2)
+  const { extensionSDK } = useContext(ExtensionContext40)
   const { lookerHostData } = extensionSDK
   const actualLookerVersion = (lookerHostData || {}).lookerVersion || '7.8.0'
 

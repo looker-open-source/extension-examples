@@ -37,7 +37,7 @@ import {
   Link,
   SpaceVertical,
 } from '@looker/components'
-import { ExtensionContext2 } from '@looker/extension-sdk-react'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { Markdown } from '.'
 
 const baseUrl =
@@ -50,7 +50,7 @@ export const DemoWrapper = ({
   codeSourceName,
   children,
 }) => {
-  const { extensionSDK } = useContext(ExtensionContext2)
+  const { extensionSDK } = useContext(ExtensionContext40)
   const [codeShowing, setCodeShowing] = useState(false)
 
   const showCodeInGithub = () => {
