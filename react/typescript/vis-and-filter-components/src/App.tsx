@@ -31,7 +31,9 @@ import { VisualizationComponents } from './VisualizationComponents'
 
 export const App = () => (
   <ExtensionProvider>
-    <ComponentsProvider>
+    <ComponentsProvider themeCustomizations={{
+      colors: { key: '#1A73E8' },
+    }}>
       <VisualizationComponents />
     </ComponentsProvider>
   </ExtensionProvider>

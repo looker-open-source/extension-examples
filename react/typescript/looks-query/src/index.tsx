@@ -37,7 +37,9 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   ReactDOM.render(
     <ExtensionProvider40>
-      <ComponentsProvider>
+      <ComponentsProvider themeCustomizations={{
+        colors: { key: '#1A73E8' },
+      }}>
         <Extension />
       </ComponentsProvider>
     </ExtensionProvider40>,

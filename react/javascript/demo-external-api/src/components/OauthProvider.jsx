@@ -23,7 +23,7 @@
  SOFTWARE.
 
  */
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useContext, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useHistory, useLocation } from 'react-router-dom'
 import { ExtensionContext40 } from '@looker/extension-sdk-react'
@@ -66,6 +66,12 @@ export const OauthProvider = ({
   const history = useHistory()
   const { state } = useLocation()
   const token = pushStateHandler({ state })
+
+  useEffect(() => {
+    if (!token) {
+      signIn()
+    }
+  }, [])
 
   /**
    * OAUTH2 authentication.
