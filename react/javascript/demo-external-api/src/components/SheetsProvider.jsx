@@ -35,7 +35,7 @@ export const SheetsContext = createContext({})
  * sheets restful API.
  */
 export const SheetsProvider = ({ children }) => {
-  const { token } = useContext(OauthContext)
+  const { token, oauthProvider } = useContext(OauthContext)
   const [spreadsheetId, setSpreadsheetId] = useState()
   const [range, setRange] = useState()
   const [expired, setExpired] = useState(false)
@@ -100,11 +100,25 @@ export const SheetsProvider = ({ children }) => {
   const loadSpreadSheet = async (requestSpreadsheetId, requestRange) => {
     setSpreadsheetId(requestSpreadsheetId)
     setRange(requestRange)
-    const { ok, body } = await invokeSheetsApi(
-      `${requestSpreadsheetId}/values/${requestRange}`
-    )
-    if (ok && body && body.values) {
-      setRows(body.values)
+    if (oauthProvider === 'auth0') {
+      const { ok, body } = await extensionSDK.fetchProxy(
+        `http://localhost:3000/sheets/${requestSpreadsheetId}/${requestRange}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      if (ok && body && body.values) {
+        setRows(body.values)
+      }
+    } else {
+      const { ok, body } = await invokeSheetsApi(
+        `${requestSpreadsheetId}/values/${requestRange}`
+      )
+      if (ok && body && body.values) {
+        setRows(body.values)
+      }
     }
   }
 
@@ -244,6 +258,7 @@ export const SheetsProvider = ({ children }) => {
   return (
     <SheetsContext.Provider
       value={{
+        canUpdate: oauthProvider === 'google',
         copySpreadsheet,
         error,
         expired,

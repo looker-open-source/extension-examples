@@ -7,7 +7,7 @@ application: demo-external-api {
   # use file for production deployment
   # file: "bundle.js"
   entitlements: {
-    local_storage: no
+    local_storage: yes
     navigation: no
     new_window: no
     new_window_external_urls: []
@@ -19,7 +19,13 @@ application: demo-external-api {
     core_api_methods: []
     external_api_urls: ["https://*.googleapis.com"]
     oauth2_urls: ["https://accounts.google.com/o/oauth2/v2/auth"]
-    scoped_user_attributes: []
+    scoped_user_attributes: ["oauth_provider"]
     global_user_attributes: []
+  }
+  mount_points: {
+    standalone: yes
+    dashboard_tile: yes
+    dashboard_vis:  yes
+    dashboard_tile_popup: yes
   }
 }

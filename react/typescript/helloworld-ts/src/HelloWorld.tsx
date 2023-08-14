@@ -48,9 +48,11 @@ export const HelloWorld: React.FC = () => {
   }, [coreSDK])
 
   return (
-    <ComponentsProvider themeCustomizations={{
-      colors: { key: '#1A73E8' },
-    }}>
+    <ComponentsProvider
+      themeCustomizations={{
+        colors: { key: '#1A73E8' },
+      }}
+    >
       <Space around height="50vh">
         <Text fontSize="xxxxxlarge">{message}</Text>
       </Space>

@@ -64,9 +64,11 @@ export const DemoExternalApi = () => {
   }
 
   return (
-    <ComponentsProvider themeCustomizations={{
-      colors: { key: '#1A73E8' },
-    }}>
+    <ComponentsProvider
+      themeCustomizations={{
+        colors: { key: '#1A73E8' },
+      }}
+    >
       <SpaceVertical>
         <Space reverse>
           <Button onClick={onSignInOutClick} disabled={loggingIn}>

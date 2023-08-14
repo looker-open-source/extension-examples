@@ -25,14 +25,13 @@
 import fs from 'fs'
 
 const packages = {
-  '@looker/components': '^3.0.1',
-  '@looker/components-date': '^2.4.1',
-  '@looker/components-providers': '^1.5.19',
-  '@looker/design-tokens': '^2.7.1',
+  '@looker/components': '^4.1.3',
+  '@looker/components-providers': '^1.5.31',
+  '@looker/design-tokens': '^3.1.1',
   '@looker/embed-sdk': '^1.6.1',
   '@looker/extension-sdk': '23.10.1-alpha.1725',
   '@looker/extension-sdk-react': '23.10.1-alpha.1725',
-  '@looker/icons': '1.5.13',
+  '@looker/icons': '1.5.21',
   '@looker/sdk': '23.10.0',
   '@looker/sdk-rtl': '21.6.1',
   react: '^16.14.0',

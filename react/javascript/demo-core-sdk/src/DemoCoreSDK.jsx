@@ -30,9 +30,11 @@ import { Dashboards, LookImage } from './demos'
 
 export const DemoCoreSDK = () => {
   return (
-    <ComponentsProvider themeCustomizations={{
-      colors: { key: '#1A73E8' },
-    }}>
+    <ComponentsProvider
+      themeCustomizations={{
+        colors: { key: '#1A73E8' },
+      }}
+    >
       <SpaceVertical padding="medium" gap="medium">
         <Dashboards />
         <LookImage />

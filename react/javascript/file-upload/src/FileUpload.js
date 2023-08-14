@@ -70,9 +70,11 @@ export const FileUpload = () => {
   }
 
   return (
-    <ComponentsProvider themeCustomizations={{
-      colors: { key: '#1A73E8' },
-    }}>
+    <ComponentsProvider
+      themeCustomizations={{
+        colors: { key: '#1A73E8' },
+      }}
+    >
       <MessageBar intent={intent}>{message}</MessageBar>
       <Space p="xxxxxlarge" width="100%" height="50vh" around>
         <SpaceVertical width="100%" align="center">

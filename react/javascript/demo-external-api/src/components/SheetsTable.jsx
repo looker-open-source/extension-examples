@@ -43,6 +43,7 @@ export const SheetsTable = ({
   onRowInsert,
   onRowEdit,
   onRowDelete,
+  canUpdate,
 }) => {
   const sheetColumns = [
     {
@@ -84,7 +85,7 @@ export const SheetsTable = ({
   ]
 
   const rowItems = rows.map((row, index) => {
-    const actions = (
+    const actions = canUpdate ? (
       <>
         <DataTableAction onClick={onRowInsert.bind(null, index)}>
           Insert
@@ -108,7 +109,7 @@ export const SheetsTable = ({
           Delete
         </DataTableAction>
       </>
-    )
+    ) : undefined
     const [name, gender, collegeYear, state, major, activity] = row
     return (
       <DataTableItem key={name} id={name} actions={actions}>
@@ -130,6 +131,7 @@ export const SheetsTable = ({
 }
 
 SheetsTable.propTypes = {
+  canUpdate: PropTypes.bool.isRequired,
   onRowDelete: PropTypes.func.isRequired,
   onRowEdit: PropTypes.func.isRequired,
   onRowInsert: PropTypes.func.isRequired,

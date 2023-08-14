@@ -141,9 +141,11 @@ export const KitchenSink: React.FC<KitchenSinkProps> = ({
   return (
     <>
       {configurationData && (
-        <ComponentsProvider themeCustomizations={{
-          colors: { key: '#1A73E8' },
-        }}>
+        <ComponentsProvider
+          themeCustomizations={{
+            colors: { key: '#1A73E8' },
+          }}
+        >
           <Page>
             <Layout hasAside>
               <Aside>

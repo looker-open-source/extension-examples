@@ -113,9 +113,11 @@ export const App: React.FC = () => {
 
   return (
     <ExtensionProvider40>
-      <ComponentsProvider themeCustomizations={{
-        colors: { key: '#1A73E8' },
-      }}>
+      <ComponentsProvider
+        themeCustomizations={{
+          colors: { key: '#1A73E8' },
+        }}
+      >
         {message && intent && (
           <MessageBar intent={intent} onPrimaryClick={clearMessage}>
             {message}

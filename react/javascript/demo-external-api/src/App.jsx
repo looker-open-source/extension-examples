@@ -29,16 +29,13 @@ import { DemoExternalApi } from './DemoExternalApi'
 import { OauthProvider } from './components/OauthProvider'
 import { SheetsProvider } from './components/SheetsProvider'
 
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID
-const GOOGLE_SCOPES = 'https://www.googleapis.com/auth/spreadsheets'
-
 /**
  * Demo usage of the Extension Framework external API.
  */
 export const App = () => {
   return (
     <ExtensionProvider40>
-      <OauthProvider clientId={GOOGLE_CLIENT_ID} scopes={GOOGLE_SCOPES}>
+      <OauthProvider>
         <SheetsProvider>
           <DemoExternalApi />
         </SheetsProvider>

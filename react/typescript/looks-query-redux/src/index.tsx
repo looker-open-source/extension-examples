@@ -40,9 +40,11 @@ window.addEventListener('DOMContentLoaded', async () => {
   ReactDOM.render(
     <Provider store={configureStore()}>
       <ExtensionProvider40>
-        <ComponentsProvider themeCustomizations={{
-          colors: { key: '#1A73E8' },
-        }}>
+        <ComponentsProvider
+          themeCustomizations={{
+            colors: { key: '#1A73E8' },
+          }}
+        >
           <Extension />
         </ComponentsProvider>
       </ExtensionProvider40>

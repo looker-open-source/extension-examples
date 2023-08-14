@@ -67,6 +67,7 @@ export const Sheets = ({ signOut, token, updateMessage, clearMessage }) => {
     rows,
     error,
     expired,
+    canUpdate,
   } = useContext(SheetsContext)
   const [rowToDeleteName, setRowToDeleteName] = useState()
   const [activeIndex, setActiveIndex] = useState()
@@ -79,22 +80,31 @@ export const Sheets = ({ signOut, token, updateMessage, clearMessage }) => {
       if (contextData) {
         await loadSpreadSheet(contextData, range)
       } else {
-        const spreadsheetId = await copySpreadsheet(sourceSpreadsheetId)
-        if (spreadsheetId) {
-          await extensionSDK.saveContextData(spreadsheetId)
-          await loadSpreadSheet(spreadsheetId, range)
+        if (canUpdate) {
+          const spreadsheetId = await copySpreadsheet(sourceSpreadsheetId)
+          if (spreadsheetId) {
+            await extensionSDK.saveContextData(spreadsheetId)
+            await loadSpreadSheet(spreadsheetId, range)
+          }
+        } else {
+          await extensionSDK.saveContextData(sourceSpreadsheetId)
+          await loadSpreadSheet(sourceSpreadsheetId, range)
         }
       }
     }
-    initialize()
+    if (token) {
+      initialize()
+    }
   }, [token, extensionSDK])
 
   const recreateFromSource = async () => {
-    unloadSpreadSheet()
-    const spreadsheetId = await copySpreadsheet(sourceSpreadsheetId)
-    if (spreadsheetId) {
-      await extensionSDK.saveContextData(spreadsheetId)
-      await loadSpreadSheet(spreadsheetId, range)
+    if (canUpdate) {
+      unloadSpreadSheet()
+      const spreadsheetId = await copySpreadsheet(sourceSpreadsheetId)
+      if (spreadsheetId) {
+        await extensionSDK.saveContextData(spreadsheetId)
+        await loadSpreadSheet(spreadsheetId, range)
+      }
     }
   }
 
@@ -125,29 +135,36 @@ export const Sheets = ({ signOut, token, updateMessage, clearMessage }) => {
 
   // Open up a dialog to add a new row to the spread sheet
   const onRowInsert = (index) => {
-    setActiveIndex(index)
-    setInsertRow(true)
-    setShowForm(true)
+    if (canUpdate) {
+      setActiveIndex(index)
+      setInsertRow(true)
+      setShowForm(true)
+    }
   }
 
   // Open up a dialog to update an existing row in the spread sheet
   const onRowEdit = (index) => {
-    setActiveIndex(index)
-    setInsertRow(false)
-    setShowForm(true)
+    if (canUpdate) {
+      setActiveIndex(index)
+      setInsertRow(false)
+      setShowForm(true)
+    }
   }
 
   // Move a row up one row in the spreadsheet
-  const onRowMoveUp = (index) => moveRowInSpreadSheet(index, true)
+  const onRowMoveUp = (index) => canUpdate && moveRowInSpreadSheet(index, true)
 
   // Move a row down one row in the spreadsheet
-  const onRowMoveDown = (index) => moveRowInSpreadSheet(index, false)
+  const onRowMoveDown = (index) =>
+    canUpdate && moveRowInSpreadSheet(index, false)
 
   // Delete a row from the spreadsheet.
   const onRowDelete = (index) => {
-    setActiveIndex(index)
-    setRowToDeleteName(rows[index][0])
-    openDeleteConfirmDialog()
+    if (canUpdate) {
+      setActiveIndex(index)
+      setRowToDeleteName(rows[index][0])
+      openDeleteConfirmDialog()
+    }
   }
 
   return (
@@ -158,11 +175,13 @@ export const Sheets = ({ signOut, token, updateMessage, clearMessage }) => {
             Google Spreadsheet: <Code>{spreadsheetId}</Code>
           </Heading>
         </Space>
-        <Tooltip content="Create a new spreadsheet using the contents of a sample spreadsheet provided by google.">
-          <ButtonOutline onClick={recreateFromSource}>
-            Recreate sheet from source
-          </ButtonOutline>
-        </Tooltip>
+        {canUpdate && (
+          <Tooltip content="Create a new spreadsheet using the contents of a sample spreadsheet provided by google.">
+            <ButtonOutline onClick={recreateFromSource}>
+              Recreate sheet from source
+            </ButtonOutline>
+          </Tooltip>
+        )}
       </Space>
       <SheetsTable
         rows={rows}
@@ -171,17 +190,22 @@ export const Sheets = ({ signOut, token, updateMessage, clearMessage }) => {
         onRowInsert={onRowInsert}
         onRowEdit={onRowEdit}
         onRowDelete={onRowDelete}
+        canUpdate={canUpdate}
       />
       {deleteConfirmDialog}
-      <SheetsForm
-        showForm={showForm}
-        setShowForm={setShowForm}
-        index={activeIndex}
-        row={insertRow ? ['', '', '', '', '', ''] : rows[activeIndex]}
-        isInsert={insertRow}
-        onRowSave={insertRow ? insertRowInSpreadSheet : updateRowInSpreadSheet}
-        rows={rows}
-      />
+      {canUpdate && (
+        <SheetsForm
+          showForm={showForm}
+          setShowForm={setShowForm}
+          index={activeIndex}
+          row={insertRow ? ['', '', '', '', '', ''] : rows[activeIndex]}
+          isInsert={insertRow}
+          onRowSave={
+            insertRow ? insertRowInSpreadSheet : updateRowInSpreadSheet
+          }
+          rows={rows}
+        />
+      )}
     </>
   )
 }

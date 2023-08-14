@@ -67,6 +67,10 @@ module.exports = {
     new BundleAnalyzerPlugin({
       analyzerMode: process.env.ANALYZE_MODE || 'disabled',
     }),
-    new webpack.EnvironmentPlugin(['GOOGLE_CLIENT_ID']),
+    new webpack.EnvironmentPlugin([
+      'GOOGLE_CLIENT_ID',
+      'AUTH0_CLIENT_ID',
+      'AUTH0_BASE_URL',
+    ]),
   ],
 }
