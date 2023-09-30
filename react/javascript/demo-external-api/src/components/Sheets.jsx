@@ -87,6 +87,7 @@ export const Sheets = ({ signOut, token, updateMessage, clearMessage }) => {
       }
     }
     initialize()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, extensionSDK])
 
   const recreateFromSource = async () => {
@@ -121,6 +122,7 @@ export const Sheets = ({ signOut, token, updateMessage, clearMessage }) => {
     } else {
       clearMessage()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [expired, error])
 
   // Open up a dialog to add a new row to the spread sheet

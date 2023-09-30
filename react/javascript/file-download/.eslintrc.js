@@ -30,7 +30,14 @@ module.exports = {
     'sort-keys-fix',
     'testing-library',
   ],
-  rules: {},
+  rules: {
+    'no-console': [
+      'error',
+      {
+        allow: ['info', 'warn', 'error'],
+      },
+    ],
+  },
   settings: {
     react: {
       version: 'detect',

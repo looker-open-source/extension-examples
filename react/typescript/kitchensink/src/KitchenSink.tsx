@@ -121,6 +121,7 @@ export const KitchenSink: React.FC<KitchenSinkProps> = ({
       )
     }
     initialize()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const updateConfigurationData = async (
@@ -132,7 +133,7 @@ export const KitchenSink: React.FC<KitchenSinkProps> = ({
         await extensionSDK.saveContextData(configurationData)
         return true
       } catch (error) {
-        console.log(error)
+        console.error(error)
       }
     }
     return false
@@ -141,7 +142,11 @@ export const KitchenSink: React.FC<KitchenSinkProps> = ({
   return (
     <>
       {configurationData && (
-        <ComponentsProvider>
+        <ComponentsProvider
+          themeCustomizations={{
+            colors: { key: '#1A73E8' },
+          }}
+        >
           <Page>
             <Layout hasAside>
               <Aside>

@@ -63,6 +63,7 @@ export const useTargetResource = () => {
     } else {
       setTargetResourceParam(undefined)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search])
 
   useEffect(() => {
@@ -70,7 +71,6 @@ export const useTargetResource = () => {
       try {
         const link = decodeURIComponent(targetResourceParam)
         const linkParts = link.split('/')
-        console.log({ link, linkParts })
         if (linkParts[1] === 'dashboards') {
           history.replace(`/dashboards//${linkParts[2].split('?')[0]}`)
         } else if (linkParts[1] === 'explore') {
@@ -88,6 +88,7 @@ export const useTargetResource = () => {
         history.replace(pathname)
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [targetResourceParam])
 
   // Return true if a link is present. For the embed demo the rendering

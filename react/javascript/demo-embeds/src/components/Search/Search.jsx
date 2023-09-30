@@ -49,6 +49,7 @@ export const Search = ({
 
   useEffect(() => {
     updateSearchCriteria(criteria)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [criteria])
 
   const selectedData =

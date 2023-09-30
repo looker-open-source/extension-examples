@@ -72,6 +72,7 @@ const Configure: React.FC<ConfigureProps> = ({
     }
     setLocalConfigurationData({ ...configurationData })
     initialize()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const toggleApiFunctions = () => {

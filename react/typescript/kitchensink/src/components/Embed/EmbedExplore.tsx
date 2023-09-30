@@ -64,6 +64,7 @@ const EmbedExplore: React.FC<EmbedProps> = ({ id }) => {
           console.error('Connection error', error)
         })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const runExplore = () => {

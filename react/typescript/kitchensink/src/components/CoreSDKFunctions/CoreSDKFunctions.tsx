@@ -53,6 +53,7 @@ const CoreSDKFunctions = () => {
         )
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location])
 
   const updateMessages = (message: string, error?: any) => {
@@ -80,7 +81,7 @@ const CoreSDKFunctions = () => {
       if (looks.length > 0) {
         const value: any = await sdk.ok(
           sdk.run_look({
-            look_id: looks[0].id!,
+            look_id: looks[0].id || '',
             result_format: 'png',
           })
         )

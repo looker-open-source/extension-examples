@@ -37,7 +37,11 @@ import {
 
 export const DemoExtensionSDK = () => {
   return (
-    <ComponentsProvider>
+    <ComponentsProvider
+      themeCustomizations={{
+        colors: { key: '#1A73E8' },
+      }}
+    >
       <SpaceVertical padding="medium" gap="medium">
         <UpdateTitle />
         <Navigation />

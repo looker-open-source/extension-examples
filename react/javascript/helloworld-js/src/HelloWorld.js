@@ -43,11 +43,16 @@ export const HelloWorld = () => {
       }
     }
     initialize()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
     <>
-      <ComponentsProvider>
+      <ComponentsProvider
+        themeCustomizations={{
+          colors: { key: '#1A73E8' },
+        }}
+      >
         <Space p="xxxxxlarge" width="100%" height="50vh" around>
           <Text p="xxxxxlarge" fontSize="xxxxxlarge">
             {message}

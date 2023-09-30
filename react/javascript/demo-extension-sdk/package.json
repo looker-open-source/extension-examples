@@ -19,16 +19,16 @@
     "node": ">=14"
   },
   "dependencies": {
-    "@looker/components": "^3.0.1",
-    "@looker/components-date": "^2.4.1",
-    "@looker/components-providers": "^1.5.19",
-    "@looker/design-tokens": "^2.7.1",
-    "@looker/embed-sdk": "^1.6.1",
-    "@looker/extension-sdk": "^22.20.1",
-    "@looker/extension-sdk-react": "^22.20.1",
-    "@looker/icons": "1.5.13",
-    "@looker/sdk": "^22.20.1",
-    "@looker/sdk-rtl": "^21.5.0",
+    "@looker/components": "5.0.3",
+    "@looker/components-providers": "1.5.34",
+    "@looker/design-tokens": "3.1.1",
+    "@looker/i18n": "1.0.0",
+    "@looker/embed-sdk": "^1.8.5",
+    "@looker/extension-sdk": "23.16.0",
+    "@looker/extension-sdk-react": "23.16.0",
+    "@looker/icons": "1.5.21",
+    "@looker/sdk": "23.16.0",
+    "@looker/sdk-rtl": "21.6.1",
     "@styled-icons/material": "^10.28.0",
     "@styled-icons/material-outlined": "^10.34.0",
     "@styled-icons/material-rounded": "^10.34.0",
@@ -40,19 +40,19 @@
     "react-markdown": "^6.0.3",
     "react-router-dom": "^5.3.0",
     "semver": "^7.3.5",
-    "styled-components": "^5.3.1"
+    "styled-components": "5.3.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.16.0",
-    "@babel/core": "^7.16.0",
+    "@babel/cli": "7.17.6",
+    "@babel/core": "7.22.1",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
     "@babel/plugin-transform-react-jsx": "^7.12.10",
-    "@babel/plugin-transform-runtime": "^7.16.4",
-    "@babel/preset-env": "^7.16.4",
-    "@babel/preset-react": "^7.16.0",
+    "@babel/plugin-transform-runtime": "7.22.4",
+    "@babel/preset-env": "7.22.4",
+    "@babel/preset-react": "^7.22.3",
     "@babel/runtime": "^7.12.5",
-    "@looker/components-test-utils": "^1.1.5",
+    "@looker/components-test-utils": "1.5.27",
     "@looker/eslint-config-oss": "^1.7.14",
     "@looker/prettier-config": "^0.10.4",
     "@testing-library/jest-dom": "^5.11.6",
@@ -81,11 +81,13 @@
     "jest-styled-components": "^7.0.3",
     "prettier": "^2.2.1",
     "react-hot-loader": "^4.12.20",
-    "react-test-renderer": "^17.0.1",
+    "react-test-renderer": "^16.14.0",
+    "regenerator-runtime": "0.12.1",
+    "resize-observer-polyfill": "^1.5.1",
     "webpack": "^5.67.0",
-    "webpack-bundle-analyzer": "^4.5.0",
-    "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^4.8.1"
+    "webpack-bundle-analyzer": "4.9.0",
+    "webpack-cli": "5.1.4",
+    "webpack-dev-server": "^4.15.1"
   },
   "babel": {
     "presets": [
@@ -102,5 +104,13 @@
         }
       ]
     ]
+  },
+  "resolutions": {
+    "trim": ">= 0.0.3",
+    "ansi-regex": "5.0.1",
+    "minimist": ">= 1.2.6",
+    "async": ">= 2.6.4",
+    "loader-utils": "= 1.4.2",
+    "source-map": "^0.8.0-beta.0"
   }
 }

@@ -41,6 +41,7 @@ module.exports = {
       },
     ],
   },
+  devtool: 'inline-source-map',
   devServer: {
     webSocketServer: 'sockjs',
     host: 'localhost',
@@ -50,6 +51,19 @@ module.exports = {
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
       'Access-Control-Allow-Headers':
         'X-Requested-With, content-type, Authorization',
+    },
+    client: {
+      overlay: {
+        runtimeErrors: (error) => {
+          if (
+            error.message ===
+            'ResizeObserver loop completed with undelivered notifications.'
+          ) {
+            return false
+          }
+          return true
+        },
+      },
     },
   },
   plugins: [...commonConfig.plugins],

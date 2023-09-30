@@ -77,6 +77,7 @@ export const DataServerDemo: React.FC<DataServerDemoProps> = ({
   useEffect(() => {
     // First time in get the posts
     fetchPosts(true)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // Handle creation of a post.
@@ -234,7 +235,6 @@ export const DataServerDemo: React.FC<DataServerDemoProps> = ({
         px="xlarge"
         pt="small"
         border="1px solid"
-        borderColor="palette.charcoal200"
         borderRadius="4px"
       >
         <Form onSubmit={onCreatePostSubmit}>

@@ -25,8 +25,8 @@
  */
 
 import React, { useState } from 'react'
-import { ExtensionProvider40 } from '@looker/extension-sdk-react'
 import { ComponentsProvider, MessageBar } from '@looker/components'
+import { ExtensionProvider40 } from '@looker/extension-sdk-react'
 import { AccessKeyDemo } from './AccessKeyDemo'
 
 /**
@@ -113,7 +113,11 @@ export const App: React.FC = () => {
 
   return (
     <ExtensionProvider40>
-      <ComponentsProvider>
+      <ComponentsProvider
+        themeCustomizations={{
+          colors: { key: '#1A73E8' },
+        }}
+      >
         {message && intent && (
           <MessageBar intent={intent} onPrimaryClick={clearMessage}>
             {message}

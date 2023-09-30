@@ -51,6 +51,19 @@ module.exports = {
       'Access-Control-Allow-Headers':
         'X-Requested-With, content-type, Authorization',
     },
+    client: {
+      overlay: {
+        runtimeErrors: (error) => {
+          if (
+            error.message ===
+            'ResizeObserver loop completed with undelivered notifications.'
+          ) {
+            return false
+          }
+          return true
+        },
+      },
+    },
   },
   plugins: [...commonConfig.plugins],
 }

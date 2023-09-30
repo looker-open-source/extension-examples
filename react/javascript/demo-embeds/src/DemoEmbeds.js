@@ -62,6 +62,7 @@ export const DemoEmbeds = () => {
         onSelectTab(routeTabIndex)
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [embedType])
 
   if (hasTargetResource) {
@@ -69,7 +70,11 @@ export const DemoEmbeds = () => {
   }
 
   return (
-    <ComponentsProvider>
+    <ComponentsProvider
+      themeCustomizations={{
+        colors: { key: '#1A73E8' },
+      }}
+    >
       <View>
         <TabList {...tabs}>
           <Tab>Dashboards Next</Tab>

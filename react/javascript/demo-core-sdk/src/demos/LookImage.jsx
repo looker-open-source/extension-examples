@@ -78,7 +78,7 @@ export const LookImage = () => {
         updateMessage('No looks to render', 'critical')
       }
     } catch (error) {
-      console.log(error)
+      console.error(error)
       updateMessage('Failed to load look data', 'critical')
     } finally {
       setLoading(false)

@@ -58,7 +58,11 @@ export const MapIframe = () => {
   ]
 
   return (
-    <ComponentsProvider>
+    <ComponentsProvider
+      themeCustomizations={{
+        colors: { key: '#1A73E8' },
+      }}
+    >
       <Grid m="large">
         <Box width="100%" height="95vh" overflow="auto">
           <DataTable captions="Countries" columns={columns}>
