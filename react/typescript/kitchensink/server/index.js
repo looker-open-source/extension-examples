@@ -45,8 +45,7 @@ const dotenv = require('dotenv')
 
 // Key for signing JWT tokens. DO NOT DO THIS IN A PRODUCTION APP.
 const JWT_KEY =
-  process.env.JWT_TOKEN_SECRET ||
-  'GV5KspkUq5Ymxkj7ZnBtrsukHySKG6y2puFbP8hGVkDbggQ7DhJFQDJrxQVRPaVv'
+  process.env.JWT_TOKEN_SECRET || 'DUMMY_DUMMY_DUMMY_DEFAULT_DO_NOT_DO_THIS'
 
 dotenv.config()
 const { GOOGLE_API_KEY } = process.env

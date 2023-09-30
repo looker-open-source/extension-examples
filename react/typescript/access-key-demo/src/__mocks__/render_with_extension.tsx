@@ -33,6 +33,10 @@ import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import type { ExtensionHostApi, ExtensionSDK } from '@looker/extension-sdk'
 import { registerHostApi } from '@looker/extension-sdk'
 import { MemoryRouter } from 'react-router-dom'
+import 'regenerator-runtime/runtime'
+import ResizeObserver from 'resize-observer-polyfill'
+
+global.ResizeObserver = ResizeObserver
 
 const getExtensionSDK = (extensionSDKOverride: Partial<ExtensionSDK>) => {
   const extensionSDK = {

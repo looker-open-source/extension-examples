@@ -28,6 +28,10 @@ import React from 'react'
 import { renderWithTheme } from '@looker/components-test-utils'
 import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { registerHostApi } from '@looker/extension-sdk'
+import ResizeObserver from 'resize-observer-polyfill'
+import 'regenerator-runtime/runtime'
+
+global.ResizeObserver = ResizeObserver
 
 const getExtensionSDK = (extensionSDKOverride) => {
   const extensionSDK = {

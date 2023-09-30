@@ -24,17 +24,7 @@
 
  */
 
-const excludeNodeModuleExcept = require('babel-loader-exclude-node-modules-except')
-
-// Our own modules are built as esm to allow for tree shaking.
-const ownModules = [
-  '@looker/components-test-utils',
-  '@looker/components',
-  '@looker/icons',
-  '@looker/design-tokens',
-]
-
-const excludeNodeModulesExceptRegExp = excludeNodeModuleExcept([...ownModules])
+const { excludeNodeModulesExcept } = require('./babel.common')
 
 module.exports = {
   automock: false,
@@ -46,9 +36,7 @@ module.exports = {
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': 'ts-jest',
   },
-  transformIgnorePatterns: [
-    excludeNodeModulesExceptRegExp.toString().slice(1, -2),
-  ],
+  transformIgnorePatterns: [excludeNodeModulesExcept.string],
   testPathIgnorePatterns: [],
   globals: {
     'ts-jest': {

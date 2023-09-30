@@ -91,6 +91,7 @@ export const Filtering: FC<FilteringProps> = ({
     (name: string, expression: string) => {
       setDraftFilters({ ...draftFilters, [name]: expression })
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [JSON.stringify(draftFilters)]
   )
 
@@ -101,11 +102,13 @@ export const Filtering: FC<FilteringProps> = ({
       // reset local state post submit
       setDraftQueryMetadata(undefined)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [draftQueryId, queryId, setQueryIdentifier, setDraftQueryMetadata])
 
   useEffect(() => {
     setDraftFilters(metadata.filters)
     setIsFieldsetOpen(Object.keys(currentFilters || {}).length > 0)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [metadata.filters, currentFilters, setIsFieldsetOpen])
 
   if (!queryId) {

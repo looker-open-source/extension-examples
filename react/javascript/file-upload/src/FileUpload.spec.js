@@ -26,7 +26,11 @@
 import React from 'react'
 import { screen } from '@testing-library/react'
 import { renderWithTheme } from '@looker/components-test-utils'
+import ResizeObserver from 'resize-observer-polyfill'
 import { FileUpload } from './FileUpload'
+import 'regenerator-runtime/runtime'
+
+global.ResizeObserver = ResizeObserver
 
 describe('FileUpload', () => {
   test('it renders', () => {

@@ -64,7 +64,7 @@ export const Dashboards = () => {
       setData(tempData)
       updateMessage('Dashboards loaded')
     } catch (error) {
-      console.log(error)
+      console.error(error)
       updateMessage('Failed to load dashboards', 'critical')
     } finally {
       setLoading(false)

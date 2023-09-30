@@ -75,6 +75,7 @@ export const ExploresEmbed = ({ embedType }) => {
         }
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exploreId, embedId])
 
   const updateRunButton = (running) => {
@@ -113,6 +114,7 @@ export const ExploresEmbed = ({ embedType }) => {
         }
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [exploreId]
   )
 

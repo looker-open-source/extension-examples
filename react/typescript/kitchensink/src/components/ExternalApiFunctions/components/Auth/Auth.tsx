@@ -119,6 +119,7 @@ export const Auth: React.FC<AuthProps> = ({ dataState, dataDispatch }) => {
       }
     }
     initialize()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // Check to see if the users jwt token is still valid
@@ -201,7 +202,7 @@ export const Auth: React.FC<AuthProps> = ({ dataState, dataDispatch }) => {
       const response = await extensionSDK.oauth2Authenticate(
         'https://accounts.google.com/o/oauth2/v2/auth',
         {
-          client_id: GOOGLE_CLIENT_ID!,
+          client_id: GOOGLE_CLIENT_ID,
           scope: GOOGLE_SCOPES,
           response_type: 'token',
         }
@@ -270,7 +271,7 @@ export const Auth: React.FC<AuthProps> = ({ dataState, dataDispatch }) => {
   // Github login
   const githubSignin = async () => {
     const authenticateParameters: Record<string, string> = {
-      client_id: GITHUB_CLIENT_ID!,
+      client_id: GITHUB_CLIENT_ID,
       response_type: 'code',
     }
     try {
@@ -283,7 +284,7 @@ export const Auth: React.FC<AuthProps> = ({ dataState, dataDispatch }) => {
       // Do NOT expose the client secret in the extension code.
       // Note github does not support code challenge.
       const exchangeParameters: Record<string, string> = {
-        client_id: GITHUB_CLIENT_ID!,
+        client_id: GITHUB_CLIENT_ID,
         code: response.code,
         client_secret: extensionSDK.createSecretKeyTag('github_secret_key'),
       }
@@ -363,7 +364,7 @@ export const Auth: React.FC<AuthProps> = ({ dataState, dataDispatch }) => {
   const auth0Signin = async (useCodeChallenge: boolean) => {
     try {
       const authRequest: Record<string, string> = {
-        client_id: AUTH0_CLIENT_ID!,
+        client_id: AUTH0_CLIENT_ID,
         response_type: 'code',
         scope: AUTH0_SCOPES,
       }
@@ -383,7 +384,7 @@ export const Auth: React.FC<AuthProps> = ({ dataState, dataDispatch }) => {
       )
       const exchangeRequest: Record<string, string> = {
         grant_type: 'authorization_code',
-        client_id: AUTH0_CLIENT_ID!,
+        client_id: AUTH0_CLIENT_ID,
         code: response.code,
       }
       if (!useCodeChallenge) {

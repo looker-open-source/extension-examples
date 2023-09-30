@@ -1,11 +1,11 @@
 project_name: "demo-external-api"
 
 application: demo-external-api {
-  label: "demo-external-api"
+  label: "Demo External API"
   # use url for development
   url: "https://localhost:8080/bundle.js"
   # use file for production deployment
-  # file: "bundle.js
+  # file: "bundle.js"
   entitlements: {
     local_storage: no
     navigation: no

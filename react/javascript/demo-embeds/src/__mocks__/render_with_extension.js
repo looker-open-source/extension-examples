@@ -30,6 +30,10 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import { renderWithTheme } from '@looker/components-test-utils'
 import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { registerHostApi } from '@looker/extension-sdk'
+import 'regenerator-runtime/runtime'
+import ResizeObserver from 'resize-observer-polyfill'
+
+global.ResizeObserver = ResizeObserver
 
 const queryClient = new QueryClient()
 

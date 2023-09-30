@@ -52,8 +52,8 @@ export const LookList: React.FC<LookListProps> = ({
         {looks.map((look) => (
           <ListItem
             key={look.id}
-            selected={selectedLookId === look.id!}
-            onClick={() => selectLook(look.id!)}
+            selected={selectedLookId === look.id}
+            onClick={() => selectLook(look.id || '')}
           >
             {look.title}
           </ListItem>

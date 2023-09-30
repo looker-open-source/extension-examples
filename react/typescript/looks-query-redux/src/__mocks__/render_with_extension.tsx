@@ -39,7 +39,11 @@ import { registerHostApi } from '@looker/extension-sdk'
 import { MemoryRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import type { Looker40SDK } from '@looker/sdk'
+import ResizeObserver from 'resize-observer-polyfill'
 import { configureStore } from '../data'
+import 'regenerator-runtime/runtime'
+
+global.ResizeObserver = ResizeObserver
 
 const store = configureStore()
 

@@ -74,6 +74,7 @@ export const LooksEmbed = ({ embedType }) => {
         }
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lookId, embedId])
 
   const updateRunButton = (running) => {
@@ -112,6 +113,7 @@ export const LooksEmbed = ({ embedType }) => {
         }
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [lookId]
   )
 

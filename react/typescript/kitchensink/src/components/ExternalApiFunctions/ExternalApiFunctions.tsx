@@ -72,6 +72,7 @@ const ExternalApiFunctions: React.FC<ExternalApiFunctionsProps> = () => {
     if (tabIndex < 0 || tabIndex > 1) {
       history.push(`${location.pathname}/0`, location.state)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // Tab handling. Current tab is stored in URL so that it can be restored on

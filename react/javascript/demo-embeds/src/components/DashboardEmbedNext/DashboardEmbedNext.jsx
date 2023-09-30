@@ -82,6 +82,7 @@ export const DashboardEmbedNext = ({ embedType }) => {
         setMessage(undefined)
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dashboardId, embedId, dashboard])
 
   const maybeCancel = () => {
@@ -132,6 +133,7 @@ export const DashboardEmbedNext = ({ embedType }) => {
           })
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const onSelected = (id) => {

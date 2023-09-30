@@ -87,6 +87,7 @@ export const DashboardEmbedLegacy = ({ embedType }) => {
         }
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dashboardId, embedId])
 
   const maybeCancel = () => {
@@ -137,6 +138,7 @@ export const DashboardEmbedLegacy = ({ embedType }) => {
         }
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [dashboardId]
   )
 

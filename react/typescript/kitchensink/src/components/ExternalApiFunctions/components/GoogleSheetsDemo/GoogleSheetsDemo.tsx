@@ -107,6 +107,7 @@ export const GoogleSheetsDemo: React.FC<GoogleSheetsDemoProps> = ({
     // useEffect does not support async/await directly. Fake it with
     // a function
     fetchData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const { sheetData } = dataState
