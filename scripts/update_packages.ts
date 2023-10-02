@@ -129,10 +129,6 @@ const isIgnorable = (fileName: string) => {
     '.git',
     '..',
     '.',
-    // Ignore vis-and-filter-components for now as it
-    // is tightly coupled to a specific versopm of the
-    // Looker SDK.
-    'vis-and-filter-components',
   ]
   return ignoreDirs.includes(fileName)
 }
