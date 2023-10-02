@@ -37,8 +37,7 @@
     "dev:looks-query": "cd react/typescript/looks-query-redux && yarn develop",
     "dev:looks-query-redux": "cd react/typescript/looks-query-redux && yarn develop",
     "dev:counter": "cd vanilla/counter && yarn develop",
-    "dev:counter-ts": "cd vanilla/counter-ts && yarn develop",
-    "dev:vis-filter-components": "yarn workspace vis-and-filter-components develop"
+    "dev:counter-ts": "cd vanilla/counter-ts && yarn develop"
   },
   "devDependencies": {
     "@types/node": "^15.3.0",

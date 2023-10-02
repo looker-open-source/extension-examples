@@ -1,6 +1,0 @@
-node_modules
-dist
-.cache
-.vscode
-.env
-.eslintcache
