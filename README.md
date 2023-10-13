@@ -59,7 +59,7 @@ To build the uber extension block follow the following instructions:
 1. Create a directory adjacent to the directory this repo resides in called `uberext` (you can use a different directory name but you need to use the `-t` option when running the script).
 2. Run `git init` in the directory.
 3. Create a remote repo and associate the repo created in step 2 with it.
-4. Run `yarn bootstrap` in this repo's root directory. This will initialize all of the example projects.
+4. Run `yarn` in this repo's root directory. This will initialize all of the example projects.
 5. Run `yarn build` in this repo's root directory. This will build all of the example projects.
 6. Run `yarn uberext` in this repo's root directory. This will create the extension block in the directory created in step 1.
 7. Navigate to the `uberext` directory.

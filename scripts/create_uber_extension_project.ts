@@ -29,7 +29,7 @@
  * of all of the extensions in this repo. To use do the following:
  *
  * 1. Run yarn - to initialize this project.
- * 2. Run yarn bootstrap (to initialize all of the extension projects).
+ * 2. Run yarn (to initialize all of the extension projects).
  * 3. Run yarn build (to compile all of extension projects).
  * 4. Create the target directory, the default is ../uberext.
  * 5. Run yarn uberext (to create the uber extension project).

@@ -11,7 +11,6 @@
     "vanilla/*"
   ],
   "scripts": {
-    "bootstrap": "lerna bootstrap",
     "lerna": "lerna",
     "clean": "lerna run --parallel clean",
     "build": "lerna run --parallel build",
@@ -42,7 +41,7 @@
   "devDependencies": {
     "@types/node": "^15.3.0",
     "@types/yargs": "^16.0.2",
-    "lerna": "^4.0.0"
+    "lerna": "^7.3.0"
   },
   "dependencies": {
     "ts-node": "^9.1.1",
