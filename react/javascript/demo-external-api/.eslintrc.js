@@ -38,6 +38,7 @@ module.exports = {
         allow: ['info', 'warn', 'error'],
       },
     ],
+    '@typescript-eslint/no-empty-function': 'off',
   },
   settings: {
     react: {

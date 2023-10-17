@@ -20,10 +20,10 @@ This version of the template requires Looker 7.10 or above.
    cd extension-examples/react/typescript/access-key-demo
    ```
 
-3. Install the dependencies with [Yarn](https://yarnpkg.com/).
+3. Install the dependencies with `npm`.
 
    ```
-   yarn install
+   npm install
    ```
 
    > You may need to update your Node version or use a [Node version manager](https://github.com/nvm-sh/nvm) to change your Node version.
@@ -31,7 +31,7 @@ This version of the template requires Looker 7.10 or above.
 4. Start the development server
 
    ```
-   yarn develop
+   npm run develop
    ```
 
 The extension is now running and serving the JavaScript locally at https://localhost:8080/bundle.js. Nice!
@@ -88,7 +88,7 @@ DATA_SERVER_URL=http://127.0.0.1:3000
 11. This access key demo requires a data server to be running in order to validate the access key. Note that this is just sample code to demonstrate concepts— It is by no means production grade code. To start the demo data server, run the following command from the `extension-examples/react/typescript/access-key-demo` directory:
 
 ```
-yarn start-server
+npm run start-server
 ```
 
 12. Use the browse menu to navigate to the extension. The access check will fail because it has not yet been configured. Click the Configure button and enter the ACCESS_KEY that you previously set in the .env file. Navigate back to the Home page. The access key check should now work. Click the Verify JWT to validate the JWT token.
@@ -97,7 +97,7 @@ yarn start-server
 
 The process above requires your local development server to be running to load the extension code. To allow other people to use the extension build the JavaScript file and include it in the project directly.
 
-1. In your extension project directory build the extension with `yarn build`.
+1. In your extension project directory build the extension with `npm run build`.
 2. Drag and drop the generated `dist/bundle.js` file into the Looker project interface
 3. Modify your `manifest.lkml` to use `file` instead of `url`:
    ```

@@ -24,8 +24,6 @@
 
  */
 
-const { excludeNodeModulesExcept } = require('./babel.common')
-
 module.exports = {
   automock: false,
   moduleDirectories: ['./node_modules', './packages'],
@@ -36,7 +34,7 @@ module.exports = {
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': 'ts-jest',
   },
-  transformIgnorePatterns: [excludeNodeModulesExcept.string],
+  transformIgnorePatterns: [],
   testPathIgnorePatterns: [],
   globals: {
     'ts-jest': {

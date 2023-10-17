@@ -19,10 +19,10 @@ It uses [React](https://reactjs.org/) and [Typescript](https://typescriptlang.or
    cd extension-examples/react/typescript/looks-query
    ```
 
-3. Install the dependencies with [Yarn](https://yarnpkg.com/).
+3. Install the dependencies with `npm`.
 
    ```
-   yarn install
+   npm install
    ```
 
    > You may need to update your Node version or use a [Node version manager](https://github.com/nvm-sh/nvm) to change your Node version.
@@ -30,7 +30,7 @@ It uses [React](https://reactjs.org/) and [Typescript](https://typescriptlang.or
 4. Start the development server
 
    ```
-   yarn develop
+   npm run develop
    ```
 
    Great! Your extension is now running and serving the JavaScript at https://localhost:8080/bundle.js.
@@ -76,7 +76,7 @@ It uses [React](https://reactjs.org/) and [Typescript](https://typescriptlang.or
 
 The process above requires your local development server to be running to load the extension code. To allow other people to use the extension, we can build the JavaScript file and include it in the project directly.
 
-1. In your extension project directory on your development machine you can build the extension with `yarn build`.
+1. In your extension project directory on your development machine you can build the extension with `npm run build`.
 2. Drag and drop the generated `dist/bundle.js` file into the Looker project interface
 3. Modify your `manifest.lkml` to use `file` instead of `url`:
 

@@ -17,16 +17,16 @@ This repository demonstrates a very basic extension (no react).
    cd extension-examples/vanilla/counter
    ```
 
-3. Install the dependencies with [Yarn](https://yarnpkg.com/).
+3. Install the dependencies with `npm`.
 
    ```
-   yarn install
+   npm install
    ```
 
 4. Start the development server
 
    ```
-   yarn develop
+   npm run develop
    ```
 
    The develop server is now running and serving the JavaScript at https://localhost:8080/bundle.js.
@@ -77,7 +77,7 @@ This repository demonstrates a very basic extension (no react).
 
 The process above requires that the development server to be running to load the extension code. To allow other people to use the extension, build the JavaScript file and include it in the project directly.
 
-1. In your extension project directory on your development machine you can build the extension with `yarn build`.
+1. In your extension project directory on your development machine you can build the extension with `npm run build`.
 2. Drag and drop the generated `dist/bundle.js` file into the Looker project interface
 3. Modify your `manifest.lkml` to use `file` instead of `url`:
 

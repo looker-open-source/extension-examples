@@ -38,7 +38,7 @@ import { updateErrorMessage } from '../data/DataReducer'
 export const handleResponse = (
   response: FetchProxyDataResponse,
   dataDispatch: Dispatch<any>,
-  errorMessage = 'Unexpected error. Has the data server been started? yarn start start-data-server',
+  errorMessage = 'Unexpected error. Has the data server been started? npm run start-data-server',
   firstTime = false
 ): boolean => {
   const { ok, status } = response
@@ -87,7 +87,7 @@ export const handleError = (
   } else if (firstTime) {
     updateErrorMessage(
       dataDispatch,
-      'Has the data server been started? yarn start start-data-server'
+      'Has the data server been started? npm run start-data-server'
     )
   } else {
     updateErrorMessage(

@@ -26,10 +26,10 @@ It uses [React](https://reactjs.org/) and [TypeScript](https://www.typescriptlan
    cd extension-examples/react/typescript/kitchensink
    ```
 
-3. Install the dependencies with [Yarn](https://yarnpkg.com/).
+3. Install the dependencies with `npm`.
 
    ```
-   yarn install
+   npm install
    ```
 
    > You may need to update your Node version or use a [Node version manager](https://github.com/nvm-sh/nvm) to change your Node version.
@@ -37,7 +37,7 @@ It uses [React](https://reactjs.org/) and [TypeScript](https://www.typescriptlan
 4) Start the development server
 
    ```
-   yarn develop
+   npm run develop
    ```
 
    Great! Your extension is now running and serving the JavaScript at https://localhost:8080/bundle.js.
@@ -164,7 +164,7 @@ There are three Embed demonstrations:
 The fetch proxy demonstration requires that a json data server be running. To start the server run the command
 
 ```
-yarn data-server
+npm run data-server
 ```
 
 An error message will be displayed if the server is not running OR if the required entitlements are not defined.
@@ -421,7 +421,7 @@ const sdk = getCoreSDK40()
 
 The process above requires your local development server to be running to load the extension code. To allow other people to use the extension, a production build of the extension needs to be run. As the kitchensink uses code splitting to reduce the size of the initially loaded bundle, multiple JavaScript files are generated.
 
-1. In your extension project directory on your development machine, build the extension by running the command `yarn build`.
+1. In your extension project directory on your development machine, build the extension by running the command `npm run build`.
 2. Drag and drop ALL of the generated JavaScript files contained in the `dist` directory into the Looker project interface.
 3. Modify your `manifest.lkml` to use `file` instead of `url` and point it at the `bundle.js` file:
    ```

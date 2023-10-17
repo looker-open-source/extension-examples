@@ -1,11 +1,12 @@
 {
-  "name": "extension-counter",
+  "name": "counter",
   "version": "0.1.0",
   "description": "",
   "main": "dist/bundle.js",
   "scripts": {
     "clean": "rm -rf dist && rm -f .eslintcache",
-    "analyze": "export ANALYZE_MODE=static && yarn build",
+    "clean:all": "rm -rf node_modules && npm run clean",
+    "analyze": "export ANALYZE_MODE=static && npm run build",
     "build": "export BABEL_ENV=build && webpack --config webpack.prod.js",
     "develop": "webpack serve --hot --server-type https --port 8080 --config webpack.develop.js"
   },
@@ -22,7 +23,6 @@
   "devDependencies": {
     "@babel/cli": "7.17.6",
     "@babel/core": "7.22.1",
-    "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
     "@babel/plugin-transform-runtime": "7.22.4",
     "@babel/preset-env": "7.22.4",

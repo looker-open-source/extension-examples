@@ -81,6 +81,7 @@ export const OauthProvider = ({
       const { access_token } = response
       history.push(
         loggedInRoute,
+        // eslint-disable-next-line camelcase
         pushStateHandler({ state, token: access_token })
       )
       return true
