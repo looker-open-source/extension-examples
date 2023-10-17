@@ -11,7 +11,7 @@
     "vanilla/*"
   ],
   "scripts": {
-    "clean": "run clean --workspaces --if-present",
+    "clean": "npm run clean --workspaces --if-present",
     "clean:all": "rm -rf node_modules && npm run clean:all --workspaces --if-present",
     "build": "npm run build --workspaces --if-present",
     "lint": "npm run lint --workspaces --if-present",
