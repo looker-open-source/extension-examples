@@ -64,7 +64,7 @@ const Home: React.FC<HomeProps> = () => {
           access external APIs from an extension. It also demonstrates how to
           integrate with OAUTH2 providers. Note that a data server is required
           to exercise this functionality. Running{' '}
-          <code>yarn start-data-server</code> from your work space starts the
+          <code>npm run start-data-server</code> from your work space starts the
           data server.
         </Paragraph>
         <Paragraph>

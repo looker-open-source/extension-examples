@@ -28,18 +28,17 @@
  * This script creates an extension project that contains compiled versions
  * of all of the extensions in this repo. To use do the following:
  *
- * 1. Run yarn - to initialize this project.
- * 2. Run yarn bootstrap (to initialize all of the extension projects).
- * 3. Run yarn build (to compile all of extension projects).
- * 4. Create the target directory, the default is ../uberext.
- * 5. Run yarn uberext (to create the uber extension project).
- *    NOTE WELL - this will delete the uberext/dist directory.
- * 6. Run git init on ../uberext
- * 7. Create a repo for it in github (or the git host of your choice)
- * 8. Push the branch to the git repo.
- * 9. Create a project in you Looker instance and point to the repo
+ * 1. Run npm install - to initialize this project.
+ * 2. Run npm run build (to compile all of extension projects).
+ * 3. Create the target directory, the default is `../uberext`.
+ * 4. Run npm run uberext (to create the uber extension project).
+ *    NOTE WELL - this will delete the `uberext/dist` directory.
+ * 5. Run git init on `../uberext`
+ * 6. Create a repo for it in github (or the git host of your choice)
+ * 7. Push the branch to the git repo.
+ * 8. Create a project in you Looker instance and point to the repo
  *    created in step 7.
- * 10. Deploy.
+ * 9. Deploy.
  *
  * At this point, the extensions should be available in your Looker
  * instance.

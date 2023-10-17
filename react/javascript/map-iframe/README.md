@@ -17,10 +17,10 @@ This repository demonstrates using google maps in an IFRAME. The demo uses the [
    cd extension-examples/react/javascript/map-iframe
    ```
 
-3. Install the dependencies with [Yarn](https://yarnpkg.com/).
+3. Install the dependencies with `npm`.
 
    ```
-   yarn install
+   npm install
    ```
 
 4. Set up the Google Maps API key
@@ -34,7 +34,7 @@ This repository demonstrates using google maps in an IFRAME. The demo uses the [
 5. Start the development server
 
    ```
-   yarn develop
+   npm run develop
    ```
 
    The extension is now running and serving the JavaScript locally at https://localhost:8080/bundle.js.
@@ -83,7 +83,7 @@ This repository demonstrates using google maps in an IFRAME. The demo uses the [
 
 The process above describes how to run the extension for development. Once you're done developing and ready to deploy, the production version of the extension may be deployed as follows:
 
-1. In the extension project directory build the extension by running `yarn build`.
+1. In the extension project directory build the extension by running `npm run build`.
 2. Drag and drop the generated `dist/bundle.js` file into the Looker project interface
 3. Modify the `manifest.lkml` to use `file` instead of `url`:
 

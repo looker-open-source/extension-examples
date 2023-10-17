@@ -24,12 +24,10 @@
 
  */
 
-const { excludeNodeModulesExcept } = require('./babel.common')
-
 module.exports = {
   automock: false,
   moduleDirectories: ['./node_modules'],
-  transformIgnorePatterns: [excludeNodeModulesExcept.string],
+  transformIgnorePatterns: [],
   moduleFileExtensions: ['js', 'jsx', 'json'],
   restoreMocks: true,
   testPathIgnorePatterns: [],
