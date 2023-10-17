@@ -129,6 +129,9 @@ const packages = {
   axios: '^0.21.2',
   '@looker/eslint-config-oss': '^1.7.14',
   lodash: '^4.17.21',
+  semver: '^7.5.4',
+  'json-server': '^0.17.4',
+  'jsonwebtoken': '^9.0.2',
 }
 
 const isIgnorable = (fileName: string) => {
