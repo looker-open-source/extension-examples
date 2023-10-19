@@ -29,6 +29,7 @@
     "dev:file-upload-server": "npm run -w=file-upload server",
     "dev:helloworld-js": "npm run -w=helloworld-js develop",
     "dev:map-iframe": "npm run -w=map-iframe develop",
+    "dev:tile-visualization": "npm run -w=tile-visualization develop",
     "dev:access-key-demo": "npm run -w=access-key-demo develop",
     "dev:access-key-demo-server": "npm run -w=access-key-demo start-server",
     "dev:helloworld-ts": "npm run -w=helloworld-ts develop",
