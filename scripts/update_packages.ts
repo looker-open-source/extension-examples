@@ -127,9 +127,11 @@ const packages = {
   '@types/styled-system__props': '^5.1.1',
   '@types/styled-system__should-forward-prop': '^5.1.2',
   axios: '^0.21.2',
+  d3: '^7.8.5',
   '@looker/eslint-config-oss': '^1.7.14',
   lodash: '^4.17.21',
   semver: '^7.5.4',
+  ssf: '^0.11.2',
   'json-server': '^0.17.4',
   'jsonwebtoken': '^9.0.2',
 }
