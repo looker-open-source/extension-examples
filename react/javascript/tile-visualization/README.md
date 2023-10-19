@@ -115,7 +115,7 @@ This example demonstrates an extension that can be mounted as a tile in a dashbo
 
    ```
 
-6. Create a `model` LookML file in your project. The name doesn't matter but the convention is to name it the same as the project— in this case, tile-visualization.
+6. Create a `model` LookML file in your project. The name doesn't matter but the convention is to name it the same as the project — in this case, tile-visualization.
 
 - Add a connection in this model.
 - [Configure the model you created](https://docs.looker.com/data-modeling/getting-started/create-projects#configuring_a_model) so that it has access to the selected connection.
