@@ -119,7 +119,7 @@ This example demonstrates an extension that can be mounted as a tile in a dashbo
 
 - Add a connection in this model.
 - [Configure the model you created](https://docs.looker.com/data-modeling/getting-started/create-projects#configuring_a_model) so that it has access to the selected connection.
-  We do this because Looker permissions data access via models— In order to grant / limit access to an extension, it must be associated with a model.
+  We do this because Looker permissions data access via models — In order to grant / limit access to an extension, it must be associated with a model.
 
 7. Connect the project to Git. This can be done in multiple ways:
 
