@@ -2,7 +2,7 @@
 
  MIT License
 
- Copyright (c) 2022 Looker Data Sciences, Inc.
+ Copyright (c) 2023 Looker Data Sciences, Inc.
 
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@
 
  */
 import React, { useContext, useEffect, useCallback, useMemo } from 'react'
-import { SpaceVertical, Text, Heading } from '@looker/components'
+import { SpaceVertical, Paragraph, Heading } from '@looker/components'
 import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { LiquidFillGaugeViz } from '../LiquidFillGaugeViz/LiquidFillGaugeViz'
 import {
@@ -56,8 +56,9 @@ export const VisualizationTile = () => {
   }, [extensionSDK, visualizationData])
 
   // Note the height of 100% on space vertical. All of the divs that are
-  // parents of the visualization need to be given a height of 100%.
-  // Note a height of 100% is also given to the visualization.
+  // parents of the visualization need to be given a height of 100%
+  // in order for the visualization to utilize for full size of the
+  // IFRAME content window,
   return (
     <SpaceVertical p="xxxxxlarge" width="100%" align="center" height="100%">
       <Heading as="h1">Visualization Tile</Heading>
@@ -71,10 +72,10 @@ export const VisualizationTile = () => {
         />
       )}
       {!value && (
-        <Text>
+        <Paragraph>
           Unfortunately there is not a valid value to render in the
           visualization.
-        </Text>
+        </Paragraph>
       )}
     </SpaceVertical>
   )

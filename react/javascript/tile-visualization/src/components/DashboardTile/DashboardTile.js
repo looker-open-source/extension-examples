@@ -49,10 +49,9 @@ export const DashboardTile = ({ standalone }) => {
   const [value, setValue] = useState()
   const [runningInLineQuery, setRunningInLineQuery] = useState(false)
   const [message, setMessage] = useState()
-  // Standalone extensions do not get the additional CSS
-  // that ensures the container div occupies 100% of the
-  // IFRAME content window. For standalone the height is
-  // based upon the view height.
+  // Standalone extensions do not have height set on the html
+  // and body tags. When running standalonethis component calculates
+  // the height using vh value.
   const height = standalone ? 'calc(100vh - 100px)' : '100%'
 
   useEffect(() => {
@@ -104,8 +103,9 @@ export const DashboardTile = ({ standalone }) => {
   }, [extensionSDK])
 
   // Note the height of 100% on space vertical. All of the divs that are
-  // parents of the visualization need to be given a height of 100%.
-  // Note a height of 100% is also given to the visualization.
+  // parents of the visualization need to be given a height of 100%
+  // in order for the visualization to utilize for full size of the
+  // IFRAME content window,
   return (
     <SpaceVertical p="xxxxxlarge" width="100%" align="center" height={height}>
       <Heading as="h1">Dashboard Tile</Heading>

@@ -2,7 +2,7 @@
 
  MIT License
 
- Copyright (c) 2022 Looker Data Sciences, Inc.
+ Copyright (c) 2023 Looker Data Sciences, Inc.
 
  Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
@@ -29,10 +29,15 @@ import { App } from './App'
 
 window.addEventListener('DOMContentLoaded', (_) => {
   const root = document.createElement('div')
-  // Tile extensions get some additional css that ensures that
-  // the container div occupies 100% of the IFRAME content
-  // window. Set the id as follows to take advantage of this.
-  root.id = 'extension_visualization_container'
+  // Tile extensions get additional css that ensures that
+  // the html and body tag heights are set to 100% of the actual
+  // IFRAME content window.
+  // In order for the visualization to take advantage of this
+  // and occupy the height without calculations or estimates,
+  // the height of the container div is set to 100%. This must
+  // be propagated down to the actual visualization.
+  root.style.height = '100%'
+  root.style.width = 'calc(100% - 0px)'
   document.body.appendChild(root)
   ReactDOM.render(<App />, root)
 })
