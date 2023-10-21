@@ -23,25 +23,13 @@
  SOFTWARE.
 
  */
-import React from 'react'
-import '@testing-library/jest-dom'
-import { screen } from '@testing-library/react'
-import { renderWithExtensionContext40 } from './__mocks__/render_with_extension'
-import { TileExtension } from './TileExtension'
 
-describe('TileExtension', () => {
-  test('it renders', async () => {
-    const ok = (result) => result
-    const run_inline_query = () => [
-      {
-        'order_items.average_sale_price': 62.226985776129474,
-      },
-    ]
-    renderWithExtensionContext40(
-      <TileExtension />,
-      {},
-      { coreSDK: { run_inline_query, ok } }
-    )
-    expect(await screen.findByText('Dashboard Tile')).toBeInTheDocument()
-  })
-})
+module.exports = {
+  automock: false,
+  moduleDirectories: ['./node_modules'],
+  transformIgnorePatterns: [],
+  moduleFileExtensions: ['js', 'jsx', 'json'],
+  restoreMocks: true,
+  testPathIgnorePatterns: [],
+  globals: {},
+}

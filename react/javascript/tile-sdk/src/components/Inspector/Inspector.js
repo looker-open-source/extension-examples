@@ -24,24 +24,23 @@
 
  */
 import React from 'react'
-import '@testing-library/jest-dom'
-import { screen } from '@testing-library/react'
-import { renderWithExtensionContext40 } from './__mocks__/render_with_extension'
-import { TileExtension } from './TileExtension'
+import { SpaceVertical, Box } from '@looker/components'
+import { EventTester } from './components/EventTester/EventTester'
+import { TileHostData } from './components/TileHostData/TileHostData'
+import { VisualizationData } from './components/VisualizationData/VisualizationData'
 
-describe('TileExtension', () => {
-  test('it renders', async () => {
-    const ok = (result) => result
-    const run_inline_query = () => [
-      {
-        'order_items.average_sale_price': 62.226985776129474,
-      },
-    ]
-    renderWithExtensionContext40(
-      <TileExtension />,
-      {},
-      { coreSDK: { run_inline_query, ok } }
-    )
-    expect(await screen.findByText('Dashboard Tile')).toBeInTheDocument()
-  })
-})
+export const Inspector = () => {
+  return (
+    <SpaceVertical gap="small">
+      <Box width="100%">
+        <TileHostData />
+      </Box>
+      <Box width="100%">
+        <EventTester />
+      </Box>
+      <Box width="100%">
+        <VisualizationData />
+      </Box>
+    </SpaceVertical>
+  )
+}

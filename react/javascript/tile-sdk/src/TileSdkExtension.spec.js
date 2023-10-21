@@ -27,21 +27,15 @@ import React from 'react'
 import '@testing-library/jest-dom'
 import { screen } from '@testing-library/react'
 import { renderWithExtensionContext40 } from './__mocks__/render_with_extension'
-import { TileExtension } from './TileExtension'
+import { TileSdkExtension } from './TileSdkExtension'
 
-describe('TileExtension', () => {
+describe('TileSdkExtension', () => {
   test('it renders', async () => {
     const ok = (result) => result
-    const run_inline_query = () => [
-      {
-        'order_items.average_sale_price': 62.226985776129474,
-      },
-    ]
-    renderWithExtensionContext40(
-      <TileExtension />,
-      {},
-      { coreSDK: { run_inline_query, ok } }
-    )
-    expect(await screen.findByText('Dashboard Tile')).toBeInTheDocument()
+    renderWithExtensionContext40(<TileSdkExtension />, {}, { coreSDK: { ok } })
+    expect(screen.getByText('Tile host data')).toBeInTheDocument()
+    expect(
+      screen.getByText('Dashboard id is "42". Element id is "84".')
+    ).toBeInTheDocument()
   })
 })

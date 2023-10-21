@@ -94,7 +94,6 @@ const packages = {
   "eslint-plugin-unicorn": "44.0.2",
   "prettier": "2.8.2",
   "typescript": "4.6.3",
-
   jest: '^26.6.3',
   'jest-axe': '^4.1.0',
   'jest-canvas-mock': '^2.2.0',
@@ -134,6 +133,9 @@ const packages = {
   ssf: '^0.11.2',
   'json-server': '^0.17.4',
   'jsonwebtoken': '^9.0.2',
+  '@testing-library/jest-dom': '^5.16.5',
+  '@testing-library/react': '^11.2.2',
+  '@testing-library/user-event': '^12.6.0',
 }
 
 const isIgnorable = (fileName: string) => {

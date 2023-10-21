@@ -23,25 +23,54 @@
  SOFTWARE.
 
  */
-import React from 'react'
-import '@testing-library/jest-dom'
-import { screen } from '@testing-library/react'
-import { renderWithExtensionContext40 } from './__mocks__/render_with_extension'
-import { TileExtension } from './TileExtension'
 
-describe('TileExtension', () => {
-  test('it renders', async () => {
-    const ok = (result) => result
-    const run_inline_query = () => [
+module.exports = {
+  env: {
+    browser: true,
+    es2021: true,
+    'jest/globals': true,
+  },
+  extends: [
+    'eslint:recommended',
+    'standard',
+    'plugin:jest-dom/recommended',
+    'plugin:prettier/recommended',
+    'plugin:react/recommended',
+    'plugin:testing-library/react',
+    'prettier',
+    '@looker/eslint-config-oss',
+  ],
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 12,
+    sourceType: 'module',
+  },
+  plugins: [
+    'react',
+    'jest',
+    'jest-dom',
+    'prettier',
+    'react-hooks',
+    'sort-keys-fix',
+    'testing-library',
+  ],
+  rules: {
+    'no-console': [
+      'error',
       {
-        'order_items.average_sale_price': 62.226985776129474,
+        allow: ['info', 'warn', 'error'],
       },
-    ]
-    renderWithExtensionContext40(
-      <TileExtension />,
-      {},
-      { coreSDK: { run_inline_query, ok } }
-    )
-    expect(await screen.findByText('Dashboard Tile')).toBeInTheDocument()
-  })
-})
+    ],
+    '@typescript-eslint/no-empty-function': 'off',
+    'react-hooks/exhaustive-deps': 'off',
+    'sort-keys-fix/sort-keys-fix': 'off',
+    camelcase: 'off',
+  },
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
+}
