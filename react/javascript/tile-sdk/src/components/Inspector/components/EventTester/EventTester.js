@@ -131,6 +131,12 @@ export const EventTester = () => {
   }, [tileSDK])
 
   const updateTileClick = useCallback(() => {
+    // For standalone extensions this updates the browser window/tab title.
+    // For dashboard tiles, this updates the tile title if the title is
+    // visible and the the dashboard is not being edited. The title is NOT
+    // persisted to the dashboard configuration. The original title is
+    // displayed when the dashboard is in edit mode.
+    // For extensions displayed in explores this call is ignored.
     extensionSDK.updateTitle(`Update tile title ${new Date().getSeconds()}`)
   }, [extensionSDK])
 
