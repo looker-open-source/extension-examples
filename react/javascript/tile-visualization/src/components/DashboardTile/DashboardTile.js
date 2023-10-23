@@ -42,7 +42,7 @@ import { LiquidFillGaugeViz } from '../LiquidFillGaugeViz/LiquidFillGaugeViz'
  * then the user has clicked the dashboard run button (or the dashboard
  * has been setup to auto refresh).
  */
-export const DashboardTile = ({ standalone }) => {
+export const DashboardTile = ({ standalone, config }) => {
   const { extensionSDK, coreSDK, tileHostData } = useContext(ExtensionContext40)
   const { lastRunStartTime, dashboardRunState } = tileHostData || -1
   const [saveLastRunStartTime, setSaveLastRunStartTime] = useState()
@@ -117,6 +117,7 @@ export const DashboardTile = ({ standalone }) => {
           value={value}
           renderComplete={renderComplete}
           valueFormat={null}
+          config={config}
         />
       )}
     </SpaceVertical>

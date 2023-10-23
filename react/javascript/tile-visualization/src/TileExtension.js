@@ -23,7 +23,7 @@
  SOFTWARE.
 
  */
-import React, { useContext } from 'react'
+import React, { useContext, useMemo } from 'react'
 import styled from 'styled-components'
 import { ComponentsProvider } from '@looker/components'
 import { ExtensionContext40 } from '@looker/extension-sdk-react'
@@ -31,28 +31,43 @@ import { MountPoint } from '@looker/extension-sdk'
 import { VisualizationTile } from './components/VisualizationTile/VisualizationTile'
 import { DashboardTile } from './components/DashboardTile/DashboardTile'
 
-const getDefaultRouteComponent = (mountPoint) => {
+const getDefaultRouteComponent = (mountPoint, isRendering) => {
+  const config = isRendering
+    ? {
+        valueCountUp: false,
+        waveAnimateTime: 0,
+        waveRiseTime: 0,
+        waveAnimate: false,
+        waveRise: false,
+      }
+    : {}
+
   if (mountPoint === MountPoint.dashboardVisualization) {
-    return <VisualizationTile />
+    return <VisualizationTile config={config} />
   }
+
   if (mountPoint === MountPoint.dashboardTile) {
-    return <DashboardTile />
+    return <DashboardTile config={config} />
   }
   // Standalone extensions do not get the additional CSS
   // that ensures the html and body tags occupy 100% of the
   // IFRAME content window. In standalone mode Dashboard tile
   // uses vh to calculate its height.
-  return <DashboardTile standalone={true} />
+  return <DashboardTile standalone={true} config={config} />
 }
 
 export const TileExtension = () => {
   const { lookerHostData } = useContext(ExtensionContext40)
+  const mountPoint = lookerHostData?.mountPoint
+  const isRendering = lookerHostData?.isRendering
+  const component = useMemo(
+    () => getDefaultRouteComponent(mountPoint, isRendering),
+    [mountPoint, isRendering]
+  )
 
   return (
     <ComponentsProviderWrapper>
-      <ComponentsProvider>
-        {getDefaultRouteComponent(lookerHostData?.mountPoint)}
-      </ComponentsProvider>
+      <ComponentsProvider>{component}</ComponentsProvider>
     </ComponentsProviderWrapper>
   )
 }
