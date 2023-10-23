@@ -32,7 +32,7 @@ import {
   getValueAndFormat,
 } from '../LiquidFillGaugeViz/liquid_fill'
 
-export const VisualizationTile = () => {
+export const VisualizationTile = ({ config }) => {
   const { visualizationData, visualizationSDK, extensionSDK } =
     useContext(ExtensionContext40)
 
@@ -69,6 +69,7 @@ export const VisualizationTile = () => {
           value={value}
           renderComplete={renderComplete}
           valueFormat={valueFormat}
+          config={config}
         />
       )}
       {!value && (

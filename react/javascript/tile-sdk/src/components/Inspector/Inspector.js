@@ -23,13 +23,20 @@
  SOFTWARE.
 
  */
-import React from 'react'
+import React, { useCallback, useEffect, useContext } from 'react'
 import { SpaceVertical, Box } from '@looker/components'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { EventTester } from './components/EventTester/EventTester'
 import { TileHostData } from './components/TileHostData/TileHostData'
 import { VisualizationData } from './components/VisualizationData/VisualizationData'
 
 export const Inspector = () => {
+  const { extensionSDK } = useContext(ExtensionContext40)
+
+  useEffect(() => {
+    extensionSDK.rendered()
+  }, [extensionSDK])
+
   return (
     <SpaceVertical gap="small">
       <Box width="100%">
