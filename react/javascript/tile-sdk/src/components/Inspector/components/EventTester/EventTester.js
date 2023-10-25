@@ -102,8 +102,8 @@ export const EventTester = () => {
     (_event) => {
       let event = { pageX: 0, pageY: 0 }
       let links = []
-      if (visualizationData?.queryResponse?.data) {
-        const data = visualizationData?.queryResponse?.data
+      const data = visualizationData?.queryResponse?.data
+      if (data) {
         if (data.length > 0) {
           const row = data[0]
           const column = Array.from(Object.keys(row)).find(
