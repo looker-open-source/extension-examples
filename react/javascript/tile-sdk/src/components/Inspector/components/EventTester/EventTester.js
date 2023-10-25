@@ -103,15 +103,13 @@ export const EventTester = () => {
       let event = { pageX: 0, pageY: 0 }
       let links = []
       const data = visualizationData?.queryResponse?.data
-      if (data) {
-        if (data.length > 0) {
-          const row = data[0]
-          const column = Array.from(Object.keys(row)).find(
-            (column) => row[column].links?.length > 0
-          )
-          if (column) {
-            links = [...row[column].links]
-          }
+      if (data && data.length > 0) {
+        const row = data[0]
+        const column = Array.from(Object.keys(row)).find(
+          (column) => row[column].links?.length > 0
+        )
+        if (column) {
+          links = [...row[column].links]
         }
       }
       if (openDrillMenuButtonRef.current) {
