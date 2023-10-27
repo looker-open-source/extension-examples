@@ -23,7 +23,7 @@
  SOFTWARE.
 
  */
-import React, { useCallback, useContext, useState } from 'react'
+import React, { useCallback, useContext, useState, useRef } from 'react'
 import {
   Space,
   Accordion2,
@@ -40,8 +40,10 @@ export const EventTester = () => {
     extensionSDK,
     tileSDK,
     tileHostData: { dashboardFilters },
+    visualizationData,
   } = useContext(ExtensionContext40)
   const [runDashboard, setRunDashboard] = useState(false)
+  const openDrillMenuButtonRef = useRef()
 
   const addErrorsClick = useCallback(() => {
     tileSDK.addErrors({
@@ -85,11 +87,29 @@ export const EventTester = () => {
   )
 
   const openDrillMenuClick = useCallback(
-    (event) => {
-      // TODO links data needs to be populated
-      tileSDK.openDrillMenu({ links: [] }, event)
+    (_event) => {
+      let event = { pageX: 0, pageY: 0 }
+      let links = []
+      const data = visualizationData?.queryResponse?.data
+      if (data && data.length > 0) {
+        const row = data[0]
+        const column = Array.from(Object.keys(row)).find(
+          (column) => row[column].links?.length > 0
+        )
+        if (column) {
+          links = [...row[column].links]
+        }
+      }
+      if (openDrillMenuButtonRef.current) {
+        const { bottom, left } =
+          openDrillMenuButtonRef.current.getBoundingClientRect()
+        // Add 95px to the x coordinate to shift the menu
+        // under the button.
+        event = { pageX: left + 95, pageY: bottom }
+      }
+      tileSDK.openDrillMenu({ links }, event)
     },
-    [tileSDK]
+    [tileSDK, visualizationData]
   )
 
   const runDashboardClick = useCallback(() => {
@@ -142,7 +162,11 @@ export const EventTester = () => {
             <ButtonOutline onClick={triggerClick} width="100%">
               Test trigger
             </ButtonOutline>
-            <ButtonOutline onClick={openDrillMenuClick} width="100%">
+            <ButtonOutline
+              onClick={openDrillMenuClick}
+              width="100%"
+              ref={openDrillMenuButtonRef}
+            >
               Test open drill menu
             </ButtonOutline>
             <ButtonOutline onClick={toggleCrossFilterClick} width="100%">
