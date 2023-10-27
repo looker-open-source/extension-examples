@@ -23,7 +23,13 @@
  SOFTWARE.
 
  */
-import React, { useCallback, useContext, useState, useRef } from 'react'
+import React, {
+  useCallback,
+  useContext,
+  useState,
+  useRef,
+  useMemo,
+} from 'react'
 import {
   Space,
   Accordion2,
@@ -32,18 +38,75 @@ import {
   Grid,
   ButtonOutline,
   FieldToggleSwitch,
+  Paragraph,
 } from '@looker/components'
 import { ExtensionContext40 } from '@looker/extension-sdk-react'
+import {
+  getDrillLinks,
+  getCrossfilterSelection,
+  CrossfilterSelection,
+} from '../../../../utils/utils'
 
 export const EventTester = () => {
   const {
     extensionSDK,
     tileSDK,
-    tileHostData: { dashboardFilters },
+    tileHostData: {
+      dashboardFilters,
+      isExploring,
+      isDashboardEditing,
+      isDashboardCrossFilteringEnabled,
+    },
     visualizationData,
+    visualizationSDK,
   } = useContext(ExtensionContext40)
   const [runDashboard, setRunDashboard] = useState(false)
   const openDrillMenuButtonRef = useRef()
+  const toggleCrossFilterButtonRef = useRef()
+
+  const currentCrossFiltersSelection = useMemo(() => {
+    if (isDashboardCrossFilteringEnabled && visualizationSDK) {
+      const queryResponse = visualizationSDK.queryResponse
+      if (queryResponse) {
+        let row
+        let pivot
+        if (queryResponse?.data.length > 0) {
+          row = queryResponse?.data[0]
+        }
+        if (queryResponse?.pivot?.length > 0) {
+          pivot = queryResponse?.pivot[0]
+        }
+        return getCrossfilterSelection(row, pivot)
+      }
+    }
+    return undefined
+  }, [isDashboardCrossFilteringEnabled, visualizationSDK, visualizationData])
+
+  const currentCrossFiltersSelectionDesc = useMemo(() => {
+    if (!isExploring) {
+      switch (currentCrossFiltersSelection) {
+        case CrossfilterSelection.NONE: {
+          return 'None'
+        }
+        case CrossfilterSelection.SELECTED: {
+          return 'Selected'
+        }
+        case CrossfilterSelection.UNSELECTED: {
+          return 'Unselected'
+        }
+        default: {
+          return isDashboardCrossFilteringEnabled
+            ? 'Unknown'
+            : 'Cross filtering disabled'
+        }
+      }
+    }
+    return 'Not supported when exploring'
+  }, [
+    currentCrossFiltersSelection,
+    isDashboardCrossFilteringEnabled,
+    isExploring,
+  ])
 
   const addErrorsClick = useCallback(() => {
     tileSDK.addErrors({
@@ -55,6 +118,17 @@ export const EventTester = () => {
   const clearErrorsClick = useCallback(() => {
     tileSDK.clearErrors()
   }, [tileSDK])
+
+  const buildEvent = useCallback((buttonRef) => {
+    let event = { pageX: 0, pageY: 0 }
+    if (buttonRef.current) {
+      const { bottom, left } = buttonRef.current.getBoundingClientRect()
+      // Add 95px to the x coordinate to shift the menu
+      // under the button.
+      event = { pageX: left + 95, pageY: bottom }
+    }
+    return event
+  }, [])
 
   const triggerClick = useCallback(
     (event) => {
@@ -80,34 +154,43 @@ export const EventTester = () => {
 
   const toggleCrossFilterClick = useCallback(
     (event) => {
-      // TODO pivot and row data needs to be populated
-      tileSDK.toggleCrossFilter({ pivot: {}, row: {} }, event)
+      if (isDashboardCrossFilteringEnabled && visualizationSDK) {
+        const queryResponse = visualizationSDK.queryResponse
+        if (queryResponse) {
+          let row
+          let pivot
+          if (queryResponse?.data.length > 0) {
+            row = queryResponse?.data[0]
+          }
+          if (queryResponse?.pivot?.length > 0) {
+            pivot = queryResponse?.pivot[0]
+          }
+          tileSDK.toggleCrossFilter(
+            { pivot, row },
+            buildEvent(toggleCrossFilterButtonRef)
+          )
+        }
+      }
     },
-    [tileSDK]
+    [
+      tileSDK,
+      isDashboardCrossFilteringEnabled,
+      visualizationSDK,
+      visualizationData,
+    ]
   )
 
   const openDrillMenuClick = useCallback(
     (_event) => {
-      let event = { pageX: 0, pageY: 0 }
-      let links = []
-      const data = visualizationData?.queryResponse?.data
-      if (data && data.length > 0) {
-        const row = data[0]
-        const column = Array.from(Object.keys(row)).find(
-          (column) => row[column].links?.length > 0
-        )
-        if (column) {
-          links = [...row[column].links]
-        }
+      const links = getDrillLinks(visualizationData?.queryResponse?.data, 0, 0)
+      if (links.length === 0) {
+        tileSDK.addErrors({
+          title: 'Drilling Error',
+          message: 'No drill links found',
+        })
+      } else {
+        tileSDK.openDrillMenu({ links }, buildEvent(openDrillMenuButtonRef))
       }
-      if (openDrillMenuButtonRef.current) {
-        const { bottom, left } =
-          openDrillMenuButtonRef.current.getBoundingClientRect()
-        // Add 95px to the x coordinate to shift the menu
-        // under the button.
-        event = { pageX: left + 95, pageY: bottom }
-      }
-      tileSDK.openDrillMenu({ links }, event)
     },
     [tileSDK, visualizationData]
   )
@@ -159,7 +242,25 @@ export const EventTester = () => {
             <ButtonOutline onClick={clearErrorsClick} width="100%">
               Test clear errors
             </ButtonOutline>
-            <ButtonOutline onClick={triggerClick} width="100%">
+            <ButtonOutline
+              onClick={runDashboardClick}
+              width="100%"
+              disabled={isExploring}
+            >
+              Test run dashboard
+            </ButtonOutline>
+            <ButtonOutline
+              onClick={stopDashboardClick}
+              width="100%"
+              disabled={isExploring}
+            >
+              Test stop dashboard
+            </ButtonOutline>
+            <ButtonOutline
+              onClick={triggerClick}
+              width="100%"
+              disabled={!visualizationData}
+            >
               Test trigger
             </ButtonOutline>
             <ButtonOutline
@@ -169,26 +270,32 @@ export const EventTester = () => {
             >
               Test open drill menu
             </ButtonOutline>
-            <ButtonOutline onClick={toggleCrossFilterClick} width="100%">
+            <ButtonOutline
+              onClick={toggleCrossFilterClick}
+              width="100%"
+              disabled={!visualizationData || isExploring}
+              ref={toggleCrossFilterButtonRef}
+            >
               Test toggle cross filter
             </ButtonOutline>
-            <ButtonOutline onClick={runDashboardClick} width="100%">
-              Test run dashboard
-            </ButtonOutline>
-            <ButtonOutline onClick={stopDashboardClick} width="100%">
-              Test stop dashboard
-            </ButtonOutline>
             <Space width="100%">
-              <ButtonOutline onClick={updateFiltersClick} width="50%">
-                Test update filters
-              </ButtonOutline>
-              <FieldToggleSwitch
-                label="Run dashboard"
-                onChange={(event) => setRunDashboard(event.target.checked)}
-                on={runDashboard}
-              ></FieldToggleSwitch>
+              <Paragraph width="100%">
+                Cross filter selection: {currentCrossFiltersSelectionDesc}
+              </Paragraph>
             </Space>
-            <ButtonOutline onClick={openScheduleDialogClick} width="100%">
+            <ButtonOutline onClick={updateFiltersClick}>
+              Test update filters
+            </ButtonOutline>
+            <FieldToggleSwitch
+              label="Run dashboard"
+              onChange={(event) => setRunDashboard(event.target.checked)}
+              on={runDashboard}
+            ></FieldToggleSwitch>
+            <ButtonOutline
+              onClick={openScheduleDialogClick}
+              width="100%"
+              disabled={isExploring || isDashboardEditing}
+            >
               Test open schedule dialog
             </ButtonOutline>
             <ButtonOutline onClick={updateTileClick} width="100%">
