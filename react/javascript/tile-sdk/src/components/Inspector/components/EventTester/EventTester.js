@@ -44,25 +44,13 @@ export const EventTester = () => {
   const [runDashboard, setRunDashboard] = useState(false)
 
   const addErrorsClick = useCallback(() => {
-    tileSDK.addErrors(
-      {
-        title: 'Oh no',
-        message: "I've fallen and I can't get up!",
-        group: 'error_group_1',
-      },
-      {
-        title: 'Oh no',
-        message: 'I pressed the wrong button!',
-        group: 'error_group_2',
-      }
-    )
+    tileSDK.addErrors({
+      title: 'Oh no',
+      message: "I've fallen and I can't get up!",
+    })
   }, [tileSDK])
 
-  const partiallyClearErrorsClick = useCallback(() => {
-    tileSDK.clearErrors('error_group_1')
-  }, [tileSDK])
-
-  const clearAllErrorsClick = useCallback(() => {
+  const clearErrorsClick = useCallback(() => {
     tileSDK.clearErrors()
   }, [tileSDK])
 
@@ -148,11 +136,8 @@ export const EventTester = () => {
             <ButtonOutline onClick={addErrorsClick} width="100%">
               Test add errors
             </ButtonOutline>
-            <ButtonOutline onClick={partiallyClearErrorsClick} width="100%">
-              Test partially clear errors
-            </ButtonOutline>
-            <ButtonOutline onClick={clearAllErrorsClick} width="100%">
-              Test clear all errors
+            <ButtonOutline onClick={clearErrorsClick} width="100%">
+              Test clear errors
             </ButtonOutline>
             <ButtonOutline onClick={triggerClick} width="100%">
               Test trigger
