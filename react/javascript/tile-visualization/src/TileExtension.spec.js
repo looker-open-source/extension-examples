@@ -32,6 +32,7 @@ import { TileExtension } from './TileExtension'
 describe('TileExtension', () => {
   test('it renders', async () => {
     const ok = (result) => result
+    const all_lookml_models = () => ['cypress_thelook']
     const run_inline_query = () => [
       {
         'order_items.average_sale_price': 62.226985776129474,
@@ -40,7 +41,7 @@ describe('TileExtension', () => {
     renderWithExtensionContext40(
       <TileExtension />,
       {},
-      { coreSDK: { run_inline_query, ok } }
+      { coreSDK: { all_lookml_models, run_inline_query, ok } }
     )
     expect(await screen.findByText('Dashboard Tile')).toBeInTheDocument()
   })
