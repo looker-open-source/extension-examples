@@ -28,7 +28,7 @@ import { ExtensionProvider40 } from '@looker/extension-sdk-react'
 import { TileSdkExtension } from './TileSdkExtension'
 
 export const App = () => (
-  <ExtensionProvider40>
+  <ExtensionProvider40 hostTracksRoute={false}>
     <TileSdkExtension />
   </ExtensionProvider40>
 )

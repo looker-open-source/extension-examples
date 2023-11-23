@@ -80,7 +80,7 @@ export const EventTester = () => {
       }
     }
     return undefined
-  }, [isDashboardCrossFilteringEnabled, visualizationSDK, visualizationData])
+  }, [isDashboardCrossFilteringEnabled, visualizationData])
 
   const currentCrossFiltersSelectionDesc = useMemo(() => {
     if (!isExploring) {
@@ -113,11 +113,11 @@ export const EventTester = () => {
       title: 'Oh no',
       message: "I've fallen and I can't get up!",
     })
-  }, [tileSDK])
+  }, [])
 
   const clearErrorsClick = useCallback(() => {
     tileSDK.clearErrors()
-  }, [tileSDK])
+  }, [])
 
   const buildEvent = useCallback((buttonRef) => {
     let event = { pageX: 0, pageY: 0 }
@@ -130,27 +130,24 @@ export const EventTester = () => {
     return event
   }, [])
 
-  const triggerClick = useCallback(
-    (event) => {
-      // Taken from custom visualizations 2
-      const defaultColors = {
-        red: '#F36254',
-        green: '#4FBC89',
-        yellow: '#FCF758',
-        white: '#FFFFFF',
-      }
-      tileSDK.trigger(
-        'updateConfig',
-        [
-          { lowColor: defaultColors.red },
-          { midColor: defaultColors.white },
-          { highColor: defaultColors.green },
-        ],
-        event
-      )
-    },
-    [tileSDK]
-  )
+  const triggerClick = useCallback((event) => {
+    // Taken from custom visualizations 2
+    const defaultColors = {
+      red: '#F36254',
+      green: '#4FBC89',
+      yellow: '#FCF758',
+      white: '#FFFFFF',
+    }
+    tileSDK.trigger(
+      'updateConfig',
+      [
+        { lowColor: defaultColors.red },
+        { midColor: defaultColors.white },
+        { highColor: defaultColors.green },
+      ],
+      event
+    )
+  }, [])
 
   const toggleCrossFilterClick = useCallback(
     (event) => {
@@ -172,12 +169,7 @@ export const EventTester = () => {
         }
       }
     },
-    [
-      tileSDK,
-      isDashboardCrossFilteringEnabled,
-      visualizationSDK,
-      visualizationData,
-    ]
+    [isDashboardCrossFilteringEnabled, visualizationData]
   )
 
   const openDrillMenuClick = useCallback(
@@ -197,11 +189,11 @@ export const EventTester = () => {
 
   const runDashboardClick = useCallback(() => {
     tileSDK.runDashboard()
-  }, [tileSDK])
+  }, [])
 
   const stopDashboardClick = useCallback(() => {
     tileSDK.stopDashboard()
-  }, [tileSDK])
+  }, [])
 
   const updateFiltersClick = useCallback(() => {
     const updatedFilter = {}
@@ -215,11 +207,11 @@ export const EventTester = () => {
       }
     })
     tileSDK.updateFilters(updatedFilter, runDashboard)
-  }, [tileSDK, dashboardFilters, runDashboard])
+  }, [dashboardFilters, runDashboard])
 
   const openScheduleDialogClick = useCallback(() => {
     tileSDK.openScheduleDialog()
-  }, [tileSDK])
+  }, [])
 
   const updateTileClick = useCallback(() => {
     // For standalone extensions this updates the browser window/tab title.
@@ -229,7 +221,7 @@ export const EventTester = () => {
     // displayed when the dashboard is in edit mode.
     // For extensions displayed in explores this call is ignored.
     extensionSDK.updateTitle(`Update tile title ${new Date().getSeconds()}`)
-  }, [extensionSDK])
+  }, [])
 
   return (
     <Card>

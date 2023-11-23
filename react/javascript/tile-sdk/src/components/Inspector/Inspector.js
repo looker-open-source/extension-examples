@@ -35,7 +35,7 @@ export const Inspector = () => {
 
   useEffect(() => {
     extensionSDK.rendered()
-  }, [extensionSDK])
+  }, [])
 
   return (
     <SpaceVertical gap="small">
