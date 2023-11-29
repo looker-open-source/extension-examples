@@ -29,6 +29,63 @@ import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { DashboardRunState } from '@looker/extension-sdk'
 import { LiquidFillGaugeViz } from '../LiquidFillGaugeViz/LiquidFillGaugeViz'
 
+const findTheLookModel = async (coreSDK) => {
+  try {
+    const models = await coreSDK.ok(
+      coreSDK.all_lookml_models({ fields: 'name' })
+    )
+    if (models.find((model) => model.name === 'cypress_thelook')) {
+      return { modelName: 'cypress_thelook' }
+    }
+    if (models.find((model) => model.name === 'thelook')) {
+      return { modelName: 'thelook' }
+    }
+    return {
+      error: 'No thelook model was found. Using a random value.',
+    }
+  } catch (error) {
+    console.error(error)
+    return {
+      error:
+        "An error occurred while reading the system's LookML models. Using a random value.",
+    }
+  }
+}
+
+const runInlineQuery = async (coreSDK, modelName) => {
+  try {
+    const response = await coreSDK.ok(
+      coreSDK.run_inline_query({
+        body: {
+          fields: ['users.count_percent_of_total', 'users.state'],
+          sorts: ['users.count_percent_of_total desc 0'],
+          filters: { 'users.country': 'US' },
+          model: modelName,
+          total: false,
+          view: 'users',
+          limit: 500,
+        },
+        result_format: 'json',
+      })
+    )
+    if (
+      response.length > 0 &&
+      typeof response[0]['users.count_percent_of_total'] === 'number'
+    ) {
+      return { value: response[0]['users.count_percent_of_total'] }
+    }
+    return {
+      error: 'Inline query did not return a valid value. Using a random value.',
+    }
+  } catch (error) {
+    console.error(error)
+    return {
+      error:
+        'An error occurred running the inline query. Using a random value.',
+    }
+  }
+}
+
 /**
  * This component demonstrates a dashboard tile that is reponsible for
  * getting its own data. Note the technique for determining whether
@@ -60,27 +117,16 @@ export const DashboardTile = ({ standalone, config }) => {
       if (!runningInLineQuery) {
         setRunningInLineQuery(true)
         setValue(undefined)
-        try {
-          const response = await coreSDK.ok(
-            coreSDK.run_inline_query({
-              body: {
-                fields: ['order_items.average_sale_price'],
-                model: 'thelook',
-                total: false,
-                view: 'order_items',
-              },
-              result_format: 'json',
-            })
-          )
-          setValue(response[0]['order_items.average_sale_price'])
-          setMessage(undefined)
-          setRunningInLineQuery(false)
-        } catch (error) {
-          console.error(error)
-          setValue(undefined)
-          setMessage('Failed to read data')
-          setRunningInLineQuery(false)
+        let result = await findTheLookModel(coreSDK)
+        if (result.modelName) {
+          result = await runInlineQuery(coreSDK, result.modelName)
         }
+        if (!result.value) {
+          result.value = Math.floor(Math.random() * 100)
+        }
+        setMessage(result.error)
+        setValue(result.value)
+        setRunningInLineQuery(false)
       }
     }
     if (
@@ -100,7 +146,7 @@ export const DashboardTile = ({ standalone, config }) => {
 
   const renderComplete = useCallback(() => {
     extensionSDK.rendered()
-  }, [extensionSDK])
+  }, [])
 
   // Note the height of 100% on space vertical. All of the divs that are
   // parents of the visualization need to be given a height of 100%

@@ -24,12 +24,15 @@
 
  */
 
+const transformIgnorePatterns =
+  'node_modules/@looker/extension-sdk-react|node_modules/@looker/extension-sdk|node_modules/@looker/sdk'
+
 module.exports = {
   automock: false,
   moduleDirectories: ['./node_modules'],
   moduleFileExtensions: ['js', 'jsx', 'json'],
   restoreMocks: true,
-  transformIgnorePatterns: [],
+  transformIgnorePatterns: [transformIgnorePatterns],
   testPathIgnorePatterns: [],
   globals: {},
 }

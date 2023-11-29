@@ -41,19 +41,19 @@ export const VisualizationTile = ({ config }) => {
       return getValueAndFormat(visualizationSDK)
     }
     return { value: undefined, valueFormat: null }
-  }, [visualizationData, visualizationSDK])
+  }, [visualizationData])
 
   useEffect(() => {
     if (visualizationSDK) {
       visualizationSDK.configureVisualization(liquidFillDefaultConfig)
     }
-  }, [visualizationSDK])
+  }, [])
 
   const renderComplete = useCallback(() => {
     if (visualizationData) {
       extensionSDK.rendered()
     }
-  }, [extensionSDK, visualizationData])
+  }, [visualizationData])
 
   // Note the height of 100% on space vertical. All of the divs that are
   // parents of the visualization need to be given a height of 100%
