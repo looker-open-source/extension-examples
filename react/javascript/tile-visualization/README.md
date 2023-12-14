@@ -174,7 +174,7 @@ The process above describes how to run the extension for development. Once you'r
       entitlements: {
          local_storage: yes
          use_form_submit: yes
-         core_api_methods: ["run_inline_query"]
+         core_api_methods: ["run_inline_query","all_lookml_models"]
          external_api_urls: []
          oauth2_urls: []
          scoped_user_attributes: []
