@@ -31,16 +31,17 @@ import { MountPoint } from '@looker/extension-sdk'
 import { VisualizationTile } from './components/VisualizationTile/VisualizationTile'
 import { DashboardTile } from './components/DashboardTile/DashboardTile'
 
-const getDefaultRouteComponent = (mountPoint, isRendering) => {
+const getDefaultRouteComponent = (mountPoint, isRendering, visConfig) => {
   const config = isRendering
     ? {
+        ...visConfig,
         valueCountUp: false,
         waveAnimateTime: 0,
         waveRiseTime: 0,
         waveAnimate: false,
         waveRise: false,
       }
-    : {}
+    : visConfig
 
   if (mountPoint === MountPoint.dashboardVisualization) {
     return <VisualizationTile config={config} />
@@ -56,13 +57,23 @@ const getDefaultRouteComponent = (mountPoint, isRendering) => {
   return <DashboardTile standalone={true} config={config} />
 }
 
+const emptyConfig = {}
+
 export const TileExtension = () => {
-  const { lookerHostData } = useContext(ExtensionContext40)
+  const { lookerHostData, visualizationData } = useContext(ExtensionContext40)
+  // The default visualization configuration can be overridden by the explore.
+  // Make the overrides available to the visualization.
+  const visConfig = visualizationData?.visConfig
   const mountPoint = lookerHostData?.mountPoint
   const isRendering = lookerHostData?.isRendering
   const component = useMemo(
-    () => getDefaultRouteComponent(mountPoint, isRendering),
-    [mountPoint, isRendering]
+    () =>
+      getDefaultRouteComponent(
+        mountPoint,
+        isRendering,
+        visConfig || emptyConfig
+      ),
+    [mountPoint, isRendering, visConfig]
   )
 
   return (
