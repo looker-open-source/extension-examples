@@ -60,7 +60,7 @@ export const EventTester = () => {
     visualizationData,
     visualizationSDK,
   } = useContext(ExtensionContext40)
-  const [runDashboard, setRunDashboard] = useState(false)
+  const [run, setRun] = useState(false)
   const openDrillMenuButtonRef = useRef()
   const toggleCrossFilterButtonRef = useRef()
 
@@ -130,23 +130,10 @@ export const EventTester = () => {
     return event
   }, [])
 
-  const triggerClick = useCallback((event) => {
-    // Taken from custom visualizations 2
-    const defaultColors = {
-      red: '#F36254',
-      green: '#4FBC89',
-      yellow: '#FCF758',
-      white: '#FFFFFF',
+  const updateRowLimitClick = useCallback((event) => {
+    if (visualizationSDK) {
+      visualizationSDK.updateRowLimit(50)
     }
-    tileSDK.trigger(
-      'updateConfig',
-      [
-        { lowColor: defaultColors.red },
-        { midColor: defaultColors.white },
-        { highColor: defaultColors.green },
-      ],
-      event
-    )
   }, [])
 
   const toggleCrossFilterClick = useCallback(
@@ -197,17 +184,21 @@ export const EventTester = () => {
 
   const updateFiltersClick = useCallback(() => {
     const updatedFilter = {}
-    Object.entries(dashboardFilters || {}).forEach(([key, value]) => {
-      updatedFilter[key] = value
-      if (key === 'State') {
-        updatedFilter[key] =
-          value === 'California' ? 'Washington' : 'California'
-      } else if (typeof value === 'string') {
-        updatedFilter[key] = value.split('').reverse().join('')
-      }
-    })
-    tileSDK.updateFilters(updatedFilter, runDashboard)
-  }, [dashboardFilters, runDashboard])
+    if (Object.entries(dashboardFilters || {}).length === 0) {
+      updatedFilter['State'] = 'Washington'
+    } else {
+      Object.entries(dashboardFilters || {}).forEach(([key, value]) => {
+        updatedFilter[key] = value
+        if (key === 'State') {
+          updatedFilter[key] =
+            value === 'California' ? 'Washington' : 'California'
+        } else if (typeof value === 'string') {
+          updatedFilter[key] = value.split('').reverse().join('')
+        }
+      })
+    }
+    tileSDK.updateFilters(updatedFilter, run)
+  }, [dashboardFilters, run])
 
   const openScheduleDialogClick = useCallback(() => {
     tileSDK.openScheduleDialog()
@@ -249,11 +240,11 @@ export const EventTester = () => {
               Test stop dashboard
             </ButtonOutline>
             <ButtonOutline
-              onClick={triggerClick}
+              onClick={updateRowLimitClick}
               width="100%"
               disabled={!visualizationData}
             >
-              Test trigger
+              Update row limit
             </ButtonOutline>
             <ButtonOutline
               onClick={openDrillMenuClick}
@@ -279,9 +270,9 @@ export const EventTester = () => {
               Test update filters
             </ButtonOutline>
             <FieldToggleSwitch
-              label="Run dashboard"
-              onChange={(event) => setRunDashboard(event.target.checked)}
-              on={runDashboard}
+              label="Run"
+              onChange={(event) => setRun(event.target.checked)}
+              on={run}
             ></FieldToggleSwitch>
             <ButtonOutline
               onClick={openScheduleDialogClick}
@@ -290,7 +281,11 @@ export const EventTester = () => {
             >
               Test open schedule dialog
             </ButtonOutline>
-            <ButtonOutline onClick={updateTileClick} width="100%">
+            <ButtonOutline
+              onClick={updateTileClick}
+              width="100%"
+              disabled={isExploring}
+            >
               Update title title
             </ButtonOutline>
           </Grid>
