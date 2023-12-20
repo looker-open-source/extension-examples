@@ -185,7 +185,7 @@ export const EventTester = () => {
   const updateFiltersClick = useCallback(() => {
     const updatedFilter = {}
     if (Object.entries(dashboardFilters || {}).length === 0) {
-      updatedFilter['State'] = 'Washington'
+      updatedFilter.State = 'Washington'
     } else {
       Object.entries(dashboardFilters || {}).forEach(([key, value]) => {
         updatedFilter[key] = value
