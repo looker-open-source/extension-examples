@@ -36,7 +36,7 @@
     "@styled-icons/material-outlined": "^10.34.0",
     "@styled-icons/material-rounded": "^10.34.0",
     "axios": "^0.21.2",
-    "body-parser": "^1.19.0",
+    "body-parser": "^1.20.3",
     "cors": "^2.8.5",
     "date-fns": "^2.12.0",
     "dotenv": "^8.2.0",
