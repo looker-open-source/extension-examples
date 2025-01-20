@@ -27,12 +27,12 @@ import {
   LookerExtensionSDK40,
 } from '@looker/extension-sdk'
 
-;(async () => {
-  const extensionSdk = await connectExtensionHost()
-  const sdk40 = LookerExtensionSDK40.createClient(extensionSdk)
-  const result = await sdk40.me()
-  const name = result.ok ? result.value.display_name : 'Unknown'
-  document.write(`
+  ; (async () => {
+    const extensionSdk = await connectExtensionHost()
+    const sdk40 = LookerExtensionSDK40.createClient(extensionSdk)
+    const result = await sdk40.me()
+    const name = result.ok ? result.value.display_name : 'Unknown'
+    document.write(`
   <style>
     body {
       font-family: -apple-system, system-ui, BlinkMacSystemFont;
@@ -59,10 +59,29 @@ import {
     <h1>Looker Counter Extension</h1>
     <h2>Welcome ${name}</h2>
     <h3>This number will increase by one upon every click:</h3>
-    <div class="butt" onclick="event.target.innerHTML = +event.target.innerHTML + (event.shiftKey ? -1 : 1); event.preventDefault
-    ()">0</div>
+    <div class="butt" id="counterButton">0</div>
     <h3>I hope you had fun with this Looker extension.</h3>
-    <img width="200" src="https://docs.looker.com/assets/site_images/looker-logo.svg" />
+    <img width="200" src="https://images.seeklogo.com/logo-png/39/2/google-looker-logo-png_seeklogo-394597.png" />
   </div>
-`)
-})()
+`);
+
+    const counterButton = document.getElementById('counterButton') as HTMLDivElement;
+    if (!counterButton) {
+      console.error('Counter button not found!')
+      return
+    } else {
+      console.log('Counter button found:', counterButton)
+    }
+
+    counterButton.addEventListener('click', (event) => {
+      console.log('Button clicked!')
+      console.log('Current counter value:', counterButton.innerHTML)
+
+      // Update the counter value
+      counterButton.innerHTML = (+counterButton.innerHTML + (event.shiftKey ? -1 : 1)).toString()
+
+      console.log('Updated counter value:', counterButton.innerHTML)
+      event.preventDefault()
+    })
+
+  })()
