@@ -68,7 +68,7 @@ export interface MessageHandlerProps {
  * URL for data server
  */
 export const DATA_SERVER_URL =
-  process.env.DATA_SERVER_URL || 'http://127.0.0.1:3000'
+  process.env.DATA_SERVER_URL || 'http://127.0.0.1:4200'
 
 /**
  * Access key name suffix used to store the access key in

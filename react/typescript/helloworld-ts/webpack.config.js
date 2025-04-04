@@ -31,7 +31,7 @@ if (!process.env.POSTS_SERVER_URL) {
   // webpack 5 is stricter about environment variables. The POSTS_SERVER_URL
   // environment variable was not mentioned in the README so default it for
   // those developers who may have created a .env file without the variable.
-  process.env.POSTS_SERVER_URL = 'http://127.0.0.1:3000'
+  process.env.POSTS_SERVER_URL = 'http://127.0.0.1:4200'
 }
 
 const PATHS = {

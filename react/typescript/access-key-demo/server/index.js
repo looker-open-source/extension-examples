@@ -29,7 +29,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 
 const app = express()
-const port = 3000
+const port = 4200
 
 app.get('/', (req, res) => res.send('Hello World!'))
 

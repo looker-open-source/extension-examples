@@ -160,7 +160,7 @@ server.get('/sheets/:id/:range', async (req, res) => {
 // The json server data routes
 server.use(router)
 
-// Start listening on port 3000
-server.listen(3000, () => {
-  console.log('JSON Server is listening on port 3000')
+// Start listening on port 4200
+server.listen(4200, () => {
+  console.log('JSON Server is listening on port 4200')
 })
