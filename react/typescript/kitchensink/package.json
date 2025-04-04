@@ -25,12 +25,12 @@
     "@looker/components-providers": "1.5.34",
     "@looker/design-tokens": "3.1.1",
     "@looker/i18n": "1.0.0",
-    "@looker/embed-sdk": "^1.8.5",
-    "@looker/extension-sdk": "23.20.1",
-    "@looker/extension-sdk-react": "23.20.1",
+    "@looker/embed-sdk": "^1.8.7",
+    "@looker/extension-sdk": "25.4.0",
+    "@looker/extension-sdk-react": "25.4.0",
     "@looker/icons": "1.5.21",
-    "@looker/sdk": "23.20.1",
-    "@looker/sdk-rtl": "21.6.1",
+    "@looker/sdk": "25.4.0",
+    "@looker/sdk-rtl": "21.6.4",
     "@styled-icons/material": "^10.28.0",
     "@styled-icons/material-outlined": "^10.34.0",
     "@styled-icons/material-rounded": "^10.34.0",
@@ -38,10 +38,10 @@
     "date-fns": "^2.12.0",
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-is": "^16.13.1",
-    "react-router-dom": "^5.3.0",
+    "react-router-dom": "^5.3.4",
     "semver": "^7.5.4",
     "styled-components": "5.3.1"
   },
@@ -61,17 +61,15 @@
     "@typescript-eslint/eslint-plugin": "5.20.0",
     "@types/lodash": "^4.14.165",
     "@types/node": "^14.14.12",
-    "@types/react": "^16.14.2",
-    "@types/react-dom": "^16.9.10",
-    "@types/react-router-dom": "^5.1.5",
+    "@types/react-router-dom": "^5.3.3",
     "@types/readable-stream": "^2.3.5",
     "@types/semver": "^7.3.1",
     "@types/styled-components": "^5.1.13",
     "@types/styled-system": "^5.1.13",
-    "babel-loader": "^8.2.2",
+    "babel-loader": "^8.4.1",
     "babel-preset-nano-react-app": "^0.1.0",
     "dotenv": "^8.2.0",
-    "eslint": "8.13.0",
+    "eslint": "^8.56.0",
     "eslint-import-resolver-typescript": "2.7.1",
     "eslint-config-prettier": "8.5.0",
     "eslint-config-standard": "17.0.0",
@@ -92,25 +90,11 @@
     "nodemon": "^2.0.6",
     "npm-run-all": "^4.1.5",
     "prettier": "2.8.2",
-    "react-hot-loader": "^4.12.20",
-    "typescript": "4.6.3",
+    "typescript": "5.5.4",
     "webpack": "^5.67.0",
     "webpack-bundle-analyzer": "4.9.0",
     "webpack-cli": "5.1.4",
     "webpack-dev-server": "^4.15.1"
-  },
-  "babel": {
-    "presets": [
-      "nano-react-app"
-    ],
-    "plugins": [
-      [
-        "@babel/plugin-transform-react-jsx",
-        {
-          "pragmaFrag": "React.Fragment"
-        }
-      ]
-    ]
   },
   "eslintConfig": {
     "extends": [
@@ -184,7 +168,8 @@
       }
     }
   },
-  "resolutions": {
+  "overrides": {
+    "react": "^17.0.2",
     "trim": ">= 0.0.3",
     "ansi-regex": "5.0.1",
     "minimist": ">= 1.2.6",

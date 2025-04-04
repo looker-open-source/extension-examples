@@ -27,7 +27,6 @@
 import type { ReactNode } from 'react'
 import React from 'react'
 import { renderWithTheme } from '@looker/components-test-utils'
-import type { RenderResult } from '@testing-library/react'
 import type { ExtensionContextData40 } from '@looker/extension-sdk-react'
 import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import type { ExtensionHostApi, ExtensionSDK } from '@looker/extension-sdk'
@@ -79,7 +78,7 @@ export const renderWithExtensionContext40 = (
   component: ReactNode,
   extensionSDKOverride = {},
   contextOverride = {}
-): RenderResult =>
+) =>
   renderWithTheme(
     withExtensionContext40(component, extensionSDKOverride, contextOverride)
   )

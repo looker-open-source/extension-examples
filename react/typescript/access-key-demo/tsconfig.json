@@ -23,7 +23,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "skipLibCheck": true,
-    "suppressImplicitAnyIndexErrors": true
+    "isolatedModules": true
   },
   "exclude": ["node_modules"]
 }

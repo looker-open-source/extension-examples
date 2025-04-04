@@ -36,7 +36,6 @@ module.exports = {
       ...commonConfig.module.rules,
       {
         test: /\.(js|jsx|ts|tsx)?$/,
-        use: 'react-hot-loader/webpack',
         include: /node_modules/,
       },
     ],

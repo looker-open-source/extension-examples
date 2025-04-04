@@ -27,8 +27,8 @@ const path = require('path')
 const webpack = require('webpack')
 const dotenv = require('dotenv')
 
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-  .BundleAnalyzerPlugin
+const BundleAnalyzerPlugin =
+  require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 // Create .env file if it does not exist
 if (!fs.existsSync('.env')) {
@@ -58,7 +58,12 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx|ts|tsx)$/,
-        loader: 'babel-loader',
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          },
+        },
         exclude: /node_modules/,
         include: /src/,
         sideEffects: false,

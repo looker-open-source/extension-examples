@@ -24,10 +24,19 @@
 
  */
 
-const transformIgnorePatterns =
-  'node_modules/@looker/extension-sdk-react|node_modules/@looker/extension-sdk|node_modules/@looker/sdk'
+const transformIgnorePatterns = [
+  'node_modules/@looker/extension-sdk-react',
+  'node_modules/@looker/extension-sdk',
+  'node_modules/@looker/sdk',
+  'node_modules/@looker/components',
+  'node_modules/@looker/components-providers',
+  'node_modules/@looker/icons',
+  'node_modules/@looker/design-tokens',
+  'node_modules/@looker/components-test-utils',
+].join('|')
 
 module.exports = {
+  testEnvironment: 'jsdom',
   automock: false,
   moduleDirectories: ['./node_modules'],
   moduleFileExtensions: ['js', 'jsx', 'json'],
