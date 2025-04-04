@@ -22,29 +22,34 @@
  * THE SOFTWARE.
  */
 
-const fs = require("fs");
-const path = require("path");
+const fs = require('fs')
+const path = require('path')
 
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
-  .BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin =
+  require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 const PATHS = {
-  app: path.join(__dirname, "src/index.ts"),
-};
+  app: path.join(__dirname, 'src/index.ts'),
+}
 
 module.exports = {
   entry: {
     app: PATHS.app,
   },
   output: {
-    path: __dirname + "/dist",
-    filename: "bundle.js",
+    path: __dirname + '/dist',
+    filename: 'bundle.js',
   },
   module: {
     rules: [
       {
         test: /\.(js|ts)$/,
-        loader: "babel-loader",
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          },
+        },
         exclude: /node_modules/,
         include: /src/,
         sideEffects: false,
@@ -52,12 +57,12 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: [ '.ts', '.js'],
+    extensions: ['.ts', '.js'],
     fallback: { buffer: false },
   },
   plugins: [
     new BundleAnalyzerPlugin({
-      analyzerMode: process.env.ANALYZE_MODE || "disabled",
+      analyzerMode: process.env.ANALYZE_MODE || 'disabled',
     }),
   ],
-};
+}

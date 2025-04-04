@@ -25,6 +25,7 @@
  */
 
 module.exports = {
+  testEnvironment: 'jsdom',
   automock: false,
   moduleDirectories: ['./node_modules', './packages'],
   moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'json', 'node'],
@@ -36,10 +37,5 @@ module.exports = {
   },
   transformIgnorePatterns: [],
   testPathIgnorePatterns: [],
-  globals: {
-    'ts-jest': {
-      isolatedModules: true,
-      diagnostics: false,
-    },
-  },
+  globals: {},
 }

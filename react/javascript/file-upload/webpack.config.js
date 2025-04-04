@@ -24,8 +24,8 @@
 
 const path = require('path')
 
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-  .BundleAnalyzerPlugin
+const BundleAnalyzerPlugin =
+  require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 const PATHS = {
   app: path.join(__dirname, 'src/index.js'),
@@ -43,7 +43,12 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        loader: 'babel-loader',
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          },
+        },
         exclude: /node_modules/,
         include: /src/,
         sideEffects: false,

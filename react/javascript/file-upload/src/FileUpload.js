@@ -82,7 +82,7 @@ export const FileUpload = () => {
             <Button
               onClick={uploadFile.bind(
                 null,
-                'http://localhost:3000/fileupload'
+                'http://localhost:4000/fileupload'
               )}
               disabled={!file}
             >
