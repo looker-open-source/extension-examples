@@ -77,7 +77,7 @@ module.exports = {
         '',
         {
           pattern: ' Copyright \\(c\\) 20\\d{2} Looker Data Sciences, Inc.',
-          template: ' Copyright (c) 2023 Looker Data Sciences, Inc.',
+          template: ' Copyright (c) 2025 Looker Data Sciences, Inc.',
         },
         '',
         ' Permission is hereby granted, free of charge, to any person obtaining a copy',
