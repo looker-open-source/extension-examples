@@ -55,7 +55,7 @@ This repository demonstrates a file upload Looker extension.
       label: "File upload demo"
       url: "https://localhost:8080/bundle.js"
       entitlements: {
-         external_api_urls: ["http://localhost:3000"]
+         external_api_urls: ["http://localhost:4200"]
       }
    }
    ```
@@ -93,7 +93,7 @@ The process above describes how to run the extension for development. Once you'r
       label: "File upload demo"
       file: "bundle.js"
       entitlements: {
-         external_api_urls: ["http://localhost:3000"]
+         external_api_urls: ["http://localhost:4200"]
       }
    }
    ```

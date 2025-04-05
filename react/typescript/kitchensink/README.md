@@ -63,7 +63,7 @@ It uses [React](https://reactjs.org/) and [TypeScript](https://www.typescriptlan
         use_form_submit: yes
         use_embeds: yes
         core_api_methods: ["all_connections","search_folders", "run_inline_query", "me", "all_looks", "run_look"]
-        external_api_urls: ["http://127.0.0.1:3000", "http://localhost:3000", "https://*.googleapis.com", "https://*.github.com", "https://REPLACE_ME.auth0.com"]
+        external_api_urls: ["http://127.0.0.1:4200", "http://localhost:4200", "https://*.googleapis.com", "https://*.github.com", "https://REPLACE_ME.auth0.com"]
         oauth2_urls: ["https://accounts.google.com/o/oauth2/v2/auth", "https://github.com/login/oauth/authorize", "https://dev-5eqts7im.auth0.com/authorize", "https://dev-5eqts7im.auth0.com/login/oauth/token", "https://github.com/login/oauth/access_token"]
         scoped_user_attributes: ["user_value"]
         global_user_attributes: ["locale"]
@@ -99,7 +99,7 @@ GOOGLE_API_KEY=
 GITHUB_CLIENT_ID=
 AUTH0_CLIENT_ID=
 AUTH0_BASE_URL=
-POSTS_SERVER_URL=http://127.0.0.1:3000
+POSTS_SERVER_URL=http://127.0.0.1:4200
 ```
 
 POSTS_SERVER_URL is the URL of the data server.
@@ -182,7 +182,7 @@ The custom client secret must also be added to the User attributes in the looker
 - name - `kitchensink_kitchensink_custom_secret_key`
 - user acess - view
 - hide values - yes
-- domain whitelist - http://127.0.0.1:3000/*
+- domain whitelist - http://127.0.0.1:4200/*
 - default value - your secret key
 
 The extension authenticates the user by adding a secret key tag to the authentication request. The secret key tag is replaced by the Looker server with the user attribute value. The authentication endpoint then returns a JWT token that can be used in subsequent requests. The code that does this is found in the `Auth.tsx` file:
@@ -435,7 +435,7 @@ The process above requires your local development server to be running to load t
         use_form_submit: yes
         use_embeds: yes
         core_api_methods: ["all_connections","search_folders", "run_inline_query", "me", "all_looks", "run_look"]
-        external_api_urls: ["http://127.0.0.1:3000", "http://localhost:3000", "https://*.googleapis.com", "https://*.github.com", "https://REPLACE_ME.auth0.com"]
+        external_api_urls: ["http://127.0.0.1:4200", "http://localhost:4200", "https://*.googleapis.com", "https://*.github.com", "https://REPLACE_ME.auth0.com"]
         oauth2_urls: ["https://accounts.google.com/o/oauth2/v2/auth", "https://github.com/login/oauth/authorize", "https://dev-5eqts7im.auth0.com/authorize", "https://dev-5eqts7im.auth0.com/login/oauth/token", "https://github.com/login/oauth/access_token"]
         scoped_user_attributes: ["user_value"]
         global_user_attributes: ["locale"]

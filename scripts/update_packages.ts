@@ -130,7 +130,7 @@ const packages: Record<string, string> = {
   '@types/styled-system': '^5.1.13',
   '@types/styled-system__props': '^5.1.1',
   '@types/styled-system__should-forward-prop': '^5.1.2',
-  axios: '^0.21.2',
+  axios: '^1.8.4',
   d3: '^7.8.5',
   '@looker/eslint-config-oss': '^1.7.14',
   lodash: '^4.17.21',

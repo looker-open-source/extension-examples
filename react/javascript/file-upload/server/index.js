@@ -30,8 +30,8 @@ const app = express()
 app.use(cors({ origin: '*' }))
 app.use(fileUpload())
 
-app.listen(4000, () => {
-  console.log('server listening on port 4000')
+app.listen(4200, () => {
+  console.log('server listening on port 4200')
 })
 
 app.post('/fileupload', (req, res) => {

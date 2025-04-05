@@ -54,7 +54,7 @@ The extension is now running and serving the JavaScript locally at https://local
     entitlements: {
       use_form_submit: yes
       core_api_methods: ["me", "all_user_attributes", "delete_user_attribute", "create_user_attribute"]
-      external_api_urls: ["http://127.0.0.1:3000", "http://localhost:3000"]
+      external_api_urls: ["http://127.0.0.1:4200", "http://localhost:4200"]
     }
   }
 ```
@@ -82,7 +82,7 @@ The extension is now running and serving the JavaScript locally at https://local
 ```
 ACCESS_KEY=
 JWT_TOKEN_SECRET=
-DATA_SERVER_URL=http://127.0.0.1:3000
+DATA_SERVER_URL=http://127.0.0.1:4200
 ```
 
 11. This access key demo requires a data server to be running in order to validate the access key. Note that this is just sample code to demonstrate concepts— It is by no means production grade code. To start the demo data server, run the following command from the `extension-examples/react/typescript/access-key-demo` directory:
@@ -108,7 +108,7 @@ The process above requires your local development server to be running to load t
     entitlements: {
       use_form_submit: yes
       core_api_methods: ["me", "all_user_attributes", "delete_user_attribute", "create_user_attribute"]
-      external_api_urls: ["http://127.0.0.1:3000", "http://localhost:3000"]
+      external_api_urls: ["http://127.0.0.1:4200", "http://localhost:4200"]
     }
    }
    ```
