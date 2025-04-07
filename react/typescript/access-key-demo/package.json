@@ -26,7 +26,6 @@
     "@looker/components-providers": "1.5.34",
     "@looker/design-tokens": "3.1.1",
     "@looker/i18n": "1.0.0",
-    "@looker/embed-sdk": "^1.8.7",
     "@looker/extension-sdk": "25.4.0",
     "@looker/extension-sdk-react": "25.4.0",
     "@looker/icons": "1.5.21",

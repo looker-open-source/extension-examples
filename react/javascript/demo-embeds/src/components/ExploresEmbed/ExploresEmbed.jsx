@@ -37,7 +37,7 @@ import {
   SpaceVertical,
 } from '@looker/components'
 import { ExtensionContext40 } from '@looker/extension-sdk-react'
-import { LookerEmbedSDK } from '@looker/embed-sdk'
+import { getEmbedSDK } from '@looker/embed-sdk'
 import {
   useAllExplores,
   useCurrentRoute,
@@ -55,8 +55,8 @@ export const ExploresEmbed = ({ embedType }) => {
   const { extensionSDK } = useContext(ExtensionContext40)
   const [message, setMessage] = useState()
   const [running, setRunning] = useState()
-  const [exploreId, setExploreId] = useState()
-  const [explore, setExplore] = useState()
+  const [exploreId, setExploreId] = useState('')
+  const [connection, setConnection] = useState()
   const { embedEvents, listenEmbedEvents, clearEvents } = useListenEmbedEvents()
   const { data, isLoading, error } = useAllExplores()
   const results = (data || []).map(({ id, title }) => ({
@@ -66,56 +66,63 @@ export const ExploresEmbed = ({ embedType }) => {
 
   useEffect(() => {
     if (exploreId !== embedId) {
-      if (exploreId && exploreId !== '') {
+      if (connection) {
         updateEmbedId(exploreId)
-        setMessage(undefined)
-      } else {
-        if (embedId && embedId !== '') {
-          setExploreId(embedId)
+        if (exploreId) {
+          connection.loadExplore(exploreId)
+        } else {
+          connection.preload()
         }
+        setMessage(undefined)
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [exploreId, embedId])
+  }, [exploreId, embedId, connection])
 
   const updateRunButton = (running) => {
     setRunning(running)
   }
 
-  const setupExplore = (explore) => {
-    setExplore(explore)
+  const setupConnection = (connection) => {
+    setConnection(connection)
   }
 
   const embedCtrRef = useCallback(
     (el) => {
       setMessage(undefined)
-      if (exploreId) {
-        if (el) {
-          setRunning(true)
-          el.innerHTML = ''
-          const hostUrl = extensionSDK.lookerHostData?.hostUrl
-          if (hostUrl) {
-            LookerEmbedSDK.init(hostUrl)
-            const embed = LookerEmbedSDK.createExploreWithId(exploreId)
-              .appendTo(el)
-              .on('explore:ready', updateRunButton.bind(null, false))
-              .on('explore:run:start', updateRunButton.bind(null, true))
-              .on('explore:run:complete', updateRunButton.bind(null, false))
-            listenEmbedEvents(embed)
-            embed
-              .build()
-              .connect()
-              .then(setupExplore)
-              .catch((error) => {
-                console.error('Connection error', error)
-                setMessage('Error loading embed')
-              })
+      if (el) {
+        setRunning(true)
+        const hostUrl = extensionSDK.lookerHostData?.hostUrl
+        if (hostUrl) {
+          let initialUrl
+          if (embedId) {
+            setExploreId(embedId)
+            initialUrl = `/embed/explore/${embedId.replace('::', '/')}`
+          } else {
+            initialUrl = '/preload'
           }
+          getEmbedSDK().init(hostUrl)
+          const embed = getEmbedSDK()
+            .createWithUrl(initialUrl)
+            .appendTo(el)
+            .on('explore:ready', updateRunButton.bind(null, false))
+            .on('explore:run:start', updateRunButton.bind(null, true))
+            .on('explore:run:complete', updateRunButton.bind(null, false))
+            .on('page:changed', updateRunButton.bind(null, false))
+          listenEmbedEvents(embed)
+          embed
+            .build()
+            .connect()
+            .then(setupConnection)
+            .catch((error) => {
+              console.error('Connection error', error)
+              setMessage('Error loading embed')
+            })
         }
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [exploreId]
+    []
   )
 
   const onSelected = (id) => {
@@ -126,8 +133,8 @@ export const ExploresEmbed = ({ embedType }) => {
   }
 
   const runDashboard = () => {
-    if (explore) {
-      explore.run()
+    if (connection) {
+      connection.run()
     }
   }
 

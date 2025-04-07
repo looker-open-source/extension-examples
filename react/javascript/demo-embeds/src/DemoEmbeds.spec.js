@@ -32,6 +32,6 @@ describe('DemoEmbeds', () => {
   test('it renders', async () => {
     const ok = (result) => result
     renderWithExtensionContext40(<DemoEmbeds />, {}, { coreSDK: { ok } })
-    await screen.findByText('Dashboards Next')
+    await screen.findByText('Dashboards')
   })
 })

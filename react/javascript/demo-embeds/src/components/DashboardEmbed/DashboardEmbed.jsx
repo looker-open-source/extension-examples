@@ -34,31 +34,29 @@ import React, {
 import PropTypes from 'prop-types'
 import {
   Button,
-  ButtonOutline,
   Layout,
   Page,
   Aside,
   Section,
-  Space,
   MessageBar,
   Box,
   SpaceVertical,
   FieldToggleSwitch,
-  Tooltip,
+  Space,
 } from '@looker/components'
 import { ExtensionContext40 } from '@looker/extension-sdk-react'
-import { LookerEmbedSDK } from '@looker/embed-sdk'
+import { getEmbedSDK } from '@looker/embed-sdk'
 import {
-  useAllDashboards,
   useCurrentRoute,
   useNavigate,
   useListenEmbedEvents,
+  useAllDashboards,
 } from '../../hooks'
 import { Search } from '../Search'
 import { EmbedContainer } from '../EmbedContainer'
 import { EmbedEvents } from '../EmbedEvents'
 
-export const DashboardEmbedLegacy = ({ embedType }) => {
+export const DashboardEmbed = ({ embedType }) => {
   const [cancelEvents, setCancelEvents] = useState(true)
   const cancelEventsRef = useRef()
   cancelEventsRef.current = cancelEvents
@@ -66,9 +64,9 @@ export const DashboardEmbedLegacy = ({ embedType }) => {
   const { updateEmbedId } = useNavigate(embedType)
   const { extensionSDK } = useContext(ExtensionContext40)
   const [message, setMessage] = useState()
-  const [running, setRunning] = useState()
+  const [running, setRunning] = useState(false)
   const [dashboardId, setDashboardId] = useState()
-  const [dashboard, setDashboard] = useState()
+  const [connection, setConnection] = useState()
   const { embedEvents, listenEmbedEvents, clearEvents } = useListenEmbedEvents()
   const { data, isLoading, error } = useAllDashboards()
   const results = (data || []).map(({ id, title }) => ({
@@ -77,18 +75,15 @@ export const DashboardEmbedLegacy = ({ embedType }) => {
   }))
 
   useEffect(() => {
-    if (dashboardId !== embedId) {
-      if (dashboardId && dashboardId !== '') {
+    if (dashboardId && dashboardId !== embedId) {
+      if (connection) {
         updateEmbedId(dashboardId)
+        connection.loadDashboard(dashboardId)
         setMessage(undefined)
-      } else {
-        if (embedId && embedId !== '') {
-          setDashboardId(embedId)
-        }
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dashboardId, embedId])
+  }, [dashboardId, embedId, connection])
 
   const maybeCancel = () => {
     return { cancel: cancelEventsRef.current }
@@ -98,53 +93,50 @@ export const DashboardEmbedLegacy = ({ embedType }) => {
     setRunning(running)
   }
 
-  const setupDashboard = (dashboard) => {
-    setDashboard(dashboard)
+  const setupConnection = (connection) => {
+    setConnection(connection)
   }
 
-  const embedCtrRef = useCallback(
-    (el) => {
-      setMessage(undefined)
-      if (dashboardId) {
-        if (el) {
-          setRunning(true)
-          el.innerHTML = ''
-          const hostUrl = extensionSDK.lookerHostData?.hostUrl
-          if (hostUrl) {
-            LookerEmbedSDK.init(hostUrl)
-            const embed = LookerEmbedSDK.createDashboardWithId(dashboardId)
-              // Note that this force the use of the legacy version of Looker dashboards.
-              // Omitting the following will result in the use of the latest version of
-              // Looker dashboards.
-              .withNext('-legacy')
-              .appendTo(el)
-              .on('dashboard:run:start', updateRunButton.bind(null, true))
-              .on('dashboard:run:complete', updateRunButton.bind(null, false))
-              .on('explore:state:changed', updateRunButton.bind(null, false))
-              .on('drillmenu:click', maybeCancel)
-              .on('drillmodal:explore', maybeCancel)
-              .on('dashboard:tile:explore', maybeCancel)
-              .on('dashboard:tile:view', maybeCancel)
-            listenEmbedEvents(embed)
-            embed
-              .build()
-              .connect()
-              .then(setupDashboard)
-              .catch((error) => {
-                console.error('Connection error', error)
-                setMessage('Error loading embed')
-              })
-          }
+  const embedCtrRef = useCallback((el) => {
+    setMessage(undefined)
+    if (el) {
+      setRunning(true)
+      const hostUrl = extensionSDK.lookerHostData?.hostUrl
+      if (hostUrl) {
+        let initialUrl
+        if (embedId) {
+          setDashboardId(embedId)
+          initialUrl = `/embed/dashboards/${embedId}`
+        } else {
+          initialUrl = '/preload'
         }
+        getEmbedSDK().init(hostUrl)
+        const embed = getEmbedSDK()
+          .createWithUrl(initialUrl)
+          .appendTo(el)
+          .on('dashboard:run:start', updateRunButton.bind(null, true))
+          .on('dashboard:run:complete', updateRunButton.bind(null, false))
+          .on('drillmenu:click', maybeCancel)
+          .on('drillmodal:explore', maybeCancel)
+          .on('dashboard:tile:explore', maybeCancel)
+          .on('dashboard:tile:view', maybeCancel)
+          .on('page:changed', updateRunButton.bind(null, false))
+        listenEmbedEvents(embed)
+        embed
+          .build()
+          .connect()
+          .then(setupConnection)
+          .catch((error) => {
+            console.error('Connection error', error)
+            setMessage('Error setting up embed environment')
+          })
       }
-    },
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [dashboardId]
-  )
+  }, [])
 
   const onSelected = (id) => {
     if (id !== dashboardId) {
-      // updateRunButton(true)
       setDashboardId(id)
     }
   }
@@ -154,8 +146,8 @@ export const DashboardEmbedLegacy = ({ embedType }) => {
   }
 
   const runDashboard = () => {
-    if (dashboard) {
-      dashboard.run()
+    if (connection) {
+      connection.run()
     }
   }
 
@@ -173,14 +165,6 @@ export const DashboardEmbedLegacy = ({ embedType }) => {
                 >
                   Run Dashboard
                 </Button>
-                <Tooltip content="Unlocks the dashboard search tile if the dashboard run does not complete in a reasonable amount of time.">
-                  <ButtonOutline
-                    onClick={updateRunButton.bind(null, false)}
-                    disabled={!running}
-                  >
-                    Unlock dashboard search
-                  </ButtonOutline>
-                </Tooltip>
                 <FieldToggleSwitch
                   label="Cancel embed events"
                   onChange={toggleCancelEvents}
@@ -199,6 +183,7 @@ export const DashboardEmbedLegacy = ({ embedType }) => {
               error={error}
               data={results}
               embedRunning={running}
+              embedType={embedType}
             />
             <EmbedEvents events={embedEvents} clearEvents={clearEvents} />
           </SpaceVertical>
@@ -208,6 +193,6 @@ export const DashboardEmbedLegacy = ({ embedType }) => {
   )
 }
 
-DashboardEmbedLegacy.propTypes = {
+DashboardEmbed.propTypes = {
   embedType: PropTypes.string.isRequired,
 }

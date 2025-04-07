@@ -37,7 +37,7 @@ import {
   SpaceVertical,
 } from '@looker/components'
 import { ExtensionContext40 } from '@looker/extension-sdk-react'
-import { LookerEmbedSDK } from '@looker/embed-sdk'
+import { getEmbedSDK, LookerEmbedSDK } from '@looker/embed-sdk'
 import {
   useAllLooks,
   useCurrentRoute,
@@ -54,8 +54,8 @@ export const LooksEmbed = ({ embedType }) => {
   const { extensionSDK } = useContext(ExtensionContext40)
   const [message, setMessage] = useState()
   const [running, setRunning] = useState()
-  const [lookId, setLookId] = useState()
-  const [look, setLook] = useState()
+  const [lookId, setLookId] = useState('')
+  const [connection, setConnection] = useState()
   const { data, isLoading, error } = useAllLooks()
   const results = (data || []).map(({ id, title }) => ({
     description: title,
@@ -65,13 +65,14 @@ export const LooksEmbed = ({ embedType }) => {
 
   useEffect(() => {
     if (lookId !== embedId) {
-      if (lookId) {
-        updateEmbedId(lookId + '')
-        setMessage(undefined)
-      } else {
-        if (embedId && embedId !== '') {
-          setLookId(embedId)
+      if (connection) {
+        updateEmbedId(lookId)
+        if (lookId) {
+          connection.loadLook(lookId)
+        } else {
+          connection.preload()
         }
+        setMessage(undefined)
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -81,40 +82,47 @@ export const LooksEmbed = ({ embedType }) => {
     setRunning(running)
   }
 
-  const setupLook = (look) => {
-    setLook(look)
+  const setupConnection = (look) => {
+    setConnection(look)
   }
 
   const embedCtrRef = useCallback(
     (el) => {
       setMessage(undefined)
-      if (lookId) {
-        if (el) {
-          setRunning(true)
-          el.innerHTML = ''
-          const hostUrl = extensionSDK.lookerHostData?.hostUrl
-          if (hostUrl) {
-            LookerEmbedSDK.init(hostUrl)
-            const embed = LookerEmbedSDK.createLookWithId(lookId)
-              .appendTo(el)
-              .on('look:loaded', updateRunButton.bind(null, false))
-              .on('look:run:start', updateRunButton.bind(null, true))
-              .on('look:run:complete', updateRunButton.bind(null, false))
-            listenEmbedEvents(embed)
-            embed
-              .build()
-              .connect()
-              .then(setupLook)
-              .catch((error) => {
-                console.error('Connection error', error)
-                setMessage('Error loading embed')
-              })
+      if (el) {
+        setRunning(true)
+        el.innerHTML = ''
+        const hostUrl = extensionSDK.lookerHostData?.hostUrl
+        if (hostUrl) {
+          let initialUrl
+          if (embedId) {
+            setLookId(embedId)
+            initialUrl = `/embed/looks/${embedId}`
+          } else {
+            initialUrl = '/preload'
           }
+          getEmbedSDK().init(hostUrl)
+          const embed = getEmbedSDK()
+            .createWithUrl(initialUrl)
+            .appendTo(el)
+            .on('look:loaded', updateRunButton.bind(null, false))
+            .on('look:run:start', updateRunButton.bind(null, true))
+            .on('look:run:complete', updateRunButton.bind(null, false))
+            .on('page:changed', updateRunButton.bind(null, false))
+          listenEmbedEvents(embed)
+          embed
+            .build()
+            .connect()
+            .then(setupConnection)
+            .catch((error) => {
+              console.error('Connection error', error)
+              setMessage('Error loading embed')
+            })
         }
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [lookId]
+    []
   )
 
   const onSelected = (id) => {
@@ -124,8 +132,8 @@ export const LooksEmbed = ({ embedType }) => {
   }
 
   const runLook = () => {
-    if (look) {
-      look.run()
+    if (connection) {
+      connection.run()
     }
   }
 

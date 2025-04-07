@@ -35,12 +35,11 @@ import {
 } from '@looker/components'
 import styled from 'styled-components'
 import { useCurrentRoute, useNavigate, useTargetResource } from './hooks'
-import { DashboardEmbedNext } from './components/DashboardEmbedNext'
-import { DashboardEmbedLegacy } from './components/DashboardEmbedLegacy'
+import { DashboardEmbed } from './components/DashboardEmbed'
 import { ExploresEmbed } from './components/ExploresEmbed'
 import { LooksEmbed } from './components/LooksEmbed'
 
-const tabNames = ['dashboards', 'dashboards-legacy', 'looks', 'explores']
+const tabNames = ['dashboards', 'looks', 'explores']
 
 export const DemoEmbeds = () => {
   const { embedType } = useCurrentRoute()
@@ -77,23 +76,19 @@ export const DemoEmbeds = () => {
     >
       <View>
         <TabList {...tabs}>
-          <Tab>Dashboards Next</Tab>
-          <Tab>Dashboards Legacy</Tab>
+          <Tab>Dashboards</Tab>
           <Tab>Looks</Tab>
           <Tab>Explores</Tab>
         </TabList>
         <TabPanels {...tabs} pt="0">
           <TabPanel>
-            <DashboardEmbedNext embedType={tabNames[0]} />
+            <DashboardEmbed embedType={tabNames[0]} />
           </TabPanel>
           <TabPanel>
-            <DashboardEmbedLegacy embedType={tabNames[1]} />
+            <LooksEmbed embedType={tabNames[1]} />
           </TabPanel>
           <TabPanel>
-            <LooksEmbed embedType={tabNames[2]} />
-          </TabPanel>
-          <TabPanel>
-            <ExploresEmbed embedType={tabNames[3]} />
+            <ExploresEmbed embedType={tabNames[2]} />
           </TabPanel>
         </TabPanels>
       </View>
