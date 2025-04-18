@@ -29,8 +29,13 @@ import * as ReactDOM from 'react-dom'
 import { App } from './App'
 
 window.addEventListener('DOMContentLoaded', (event) => {
+  const body = document.body
+  body.style.display = 'flex'
+  body.style.margin = 0
   const root = document.createElement('div')
-  root.style.height = '100%'
-  document.body.appendChild(root)
+  root.style.display = 'flex'
+  body.style.flex = 1
+  body.style.flexDirection = 'column'
+  body.appendChild(root)
   ReactDOM.render(<App />, root)
 })

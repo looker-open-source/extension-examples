@@ -31,7 +31,11 @@ import { DemoEmbeds } from './DemoEmbeds'
 describe('DemoEmbeds', () => {
   test('it renders', async () => {
     const ok = (result) => result
-    renderWithExtensionContext40(<DemoEmbeds />, {}, { coreSDK: { ok } })
+    renderWithExtensionContext40(
+      <DemoEmbeds />,
+      {},
+      { coreSDK: { all_lookml_models: jest.fn(), all_looks: jest.fn(), ok } }
+    )
     await screen.findByText('Dashboards')
   })
 })

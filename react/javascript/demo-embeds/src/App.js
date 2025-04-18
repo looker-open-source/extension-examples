@@ -25,8 +25,10 @@
  */
 
 import React from 'react'
-import { ExtensionProvider40 } from '@looker/extension-sdk-react'
+
 import { QueryClient, QueryClientProvider } from 'react-query'
+import { ExtensionProvider40 } from '@looker/extension-sdk-react'
+import { ComponentsProvider } from '@looker/components'
 import { DemoEmbeds } from './DemoEmbeds'
 
 const queryClient = new QueryClient()
@@ -35,7 +37,13 @@ export const App = () => {
   return (
     <ExtensionProvider40>
       <QueryClientProvider client={queryClient}>
-        <DemoEmbeds />
+        <ComponentsProvider
+          themeCustomizations={{
+            colors: { key: '#1A73E8' },
+          }}
+        >
+          <DemoEmbeds />
+        </ComponentsProvider>
       </QueryClientProvider>
     </ExtensionProvider40>
   )

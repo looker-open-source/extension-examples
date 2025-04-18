@@ -23,4 +23,31 @@
  SOFTWARE.
 
  */
-export * from './DashboardEmbed'
+import { useContext } from 'react'
+import { useQuery } from 'react-query'
+import { ExtensionContext40 } from '@looker/extension-sdk-react'
+import { sortByTitle } from './utils'
+
+const all = async (coreSDK) => {
+  try {
+    const data = await coreSDK.ok(
+      coreSDK.search_reports({ folder_id: '1', limit: 30, sorts: 'title' })
+    )
+    const dataArray = data.map(({ id, title }) => ({
+      id,
+      title,
+    }))
+    dataArray.sort(sortByTitle)
+    return dataArray
+  } catch (err) {
+    throw new Error('Error retrieving reports')
+  }
+}
+
+export const useSearchReports = () => {
+  const { coreSDK } = useContext(ExtensionContext40)
+  return useQuery(['search_reports'], () => all(coreSDK), {
+    enabled: true,
+    staleTime: Infinity,
+  })
+}

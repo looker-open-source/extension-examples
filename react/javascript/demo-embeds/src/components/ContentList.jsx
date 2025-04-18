@@ -23,32 +23,30 @@
  SOFTWARE.
 
  */
-import { useHistory } from 'react-router-dom'
-import { useCurrentRoute } from '.'
+import React from 'react'
+import { Space, List, ListItem } from '@looker/components'
 
-export const useNavigate = (expectedEmbedType) => {
-  const history = useHistory()
-  const { searchCriteria, embedType, embedId } =
-    useCurrentRoute(expectedEmbedType)
-
-  const updateSearchCriteria = (criteria = '') => {
-    const newCriteria = encodeURIComponent(criteria.trim())
-    if (newCriteria !== searchCriteria) {
-      history.push(`/${embedType}/${newCriteria}/${embedId || ''}`)
-    }
-  }
-
-  const updateEmbedType = (type = '') => {
-    if (type.trim() !== embedType) {
-      history.push(`/${type.trim()}//`)
-    }
-  }
-
-  const updateEmbedId = (id = '') => {
-    if (id.trim() !== embedId) {
-      history.push(`/${embedType}/${searchCriteria}/${id}`)
-    }
-  }
-
-  return { updateEmbedId, updateEmbedType, updateSearchCriteria }
-}
+export const ContentList = ({
+  contentType,
+  selectedId,
+  selectedContentType,
+  onSelected,
+  content = [],
+  running,
+}) => (
+  <Space height="20vh">
+    <List mt="none" density={-2} width="100%" windowing={true}>
+      {content.map(({ title, id }) => (
+        <ListItem
+          truncate
+          key={id}
+          onClick={() => onSelected(contentType, id)}
+          selected={id === selectedId && contentType === selectedContentType}
+          disabled={running}
+        >
+          {title}
+        </ListItem>
+      ))}
+    </List>
+  </Space>
+)

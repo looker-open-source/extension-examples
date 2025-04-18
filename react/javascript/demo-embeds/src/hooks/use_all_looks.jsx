@@ -31,7 +31,7 @@ import { sortByTitle } from './utils'
 
 const all = async (coreSDK) => {
   try {
-    const data = await coreSDK.ok(coreSDK.all_looks('id,title'))
+    const data = (await coreSDK.ok(coreSDK.all_looks('id,title'))) || []
     data.sort(sortByTitle)
     return data
   } catch (error) {

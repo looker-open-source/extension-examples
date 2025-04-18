@@ -23,4 +23,14 @@
  SOFTWARE.
 
  */
-export * from './EmbedContainer'
+
+import styled from 'styled-components'
+
+export const EmbedContainer = styled.div`
+  width: 100%;
+  height: 99%;
+  & > iframe {
+    width: 100%;
+    height: 100%;
+  }
+`
