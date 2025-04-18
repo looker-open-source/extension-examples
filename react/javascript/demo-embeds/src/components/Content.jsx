@@ -24,7 +24,7 @@
 
  */
 import React, { useEffect } from 'react'
-import { Accordion2, SpaceVertical } from '@looker/components'
+import { Accordion2, SpaceVertical, MessageBar } from '@looker/components'
 import {
   useAllDashboards,
   useAllExplores,
@@ -66,6 +66,9 @@ export const Content = ({
   return (
     <SpaceVertical>
       <Accordion2 label="Dashboards" defaultOpen>
+        {dashboardData.error && (
+          <MessageBar intent="critical">Load Error</MessageBar>
+        )}
         <ContentList
           contentType="dashboards"
           selectedContentType={selectedContentType}
@@ -76,6 +79,9 @@ export const Content = ({
         />
       </Accordion2>
       <Accordion2 label="Looks">
+        {dashboardData.error && (
+          <MessageBar intent="critical">Load Error</MessageBar>
+        )}
         <ContentList
           contentType="looks"
           selectedContentType={selectedContentType}
@@ -86,6 +92,9 @@ export const Content = ({
         />
       </Accordion2>
       <Accordion2 label="Explores">
+        {dashboardData.error && (
+          <MessageBar intent="critical">Load Error</MessageBar>
+        )}
         <ContentList
           contentType="explore"
           selectedContentType={selectedContentType}
