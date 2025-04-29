@@ -30,7 +30,7 @@ const packages: Record<string, string> = {
   '@looker/components-test-utils': '1.5.27',
   '@looker/i18n': '1.0.0',
   '@looker/design-tokens': '3.1.1',
-  '@looker/embed-sdk': '2.0.0-beta-3',
+  '@looker/embed-sdk': '^2.0.1',
   '@looker/extension-sdk': '25.4.0',
   '@looker/extension-sdk-react': '25.4.0',
   '@looker/icons': '1.5.21',
