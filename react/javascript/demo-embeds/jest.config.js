@@ -28,6 +28,7 @@ const transformIgnorePatterns = [
   'node_modules/@looker/extension-sdk-react',
   'node_modules/@looker/extension-sdk',
   'node_modules/@looker/sdk',
+  'node_modules/@looker/embed-sdk',
   'node_modules/@looker/components',
   'node_modules/@looker/components-providers',
   'node_modules/@looker/icons',

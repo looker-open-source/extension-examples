@@ -31,8 +31,15 @@ import { sortByTitle } from './utils'
 const all = async (coreSDK) => {
   try {
     const data = await coreSDK.ok(coreSDK.all_dashboards('id,title'))
-    data.sort(sortByTitle)
-    return data
+    const dataMap = new Map()
+    data.forEach((item) => {
+      if (!dataMap.has(item.id)) {
+        dataMap.set(item.id, item)
+      }
+    })
+    const dataArray = Array.from(dataMap, ([_, value]) => value)
+    dataArray.sort(sortByTitle)
+    return dataArray
   } catch (err) {
     throw new Error('Error retrieving dashboards')
   }

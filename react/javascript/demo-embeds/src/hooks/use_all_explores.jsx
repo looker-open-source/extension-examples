@@ -30,13 +30,13 @@ import { sortByTitle } from './utils'
 
 const all = async (coreSDK) => {
   try {
-    const data = await coreSDK.ok(coreSDK.all_lookml_models({}))
+    const data = (await coreSDK.ok(coreSDK.all_lookml_models({}))) || []
     const models = data.filter((lookml) => lookml.explores.length > 0)
     const explores = []
     models.forEach((model) => {
       model.explores.forEach((explore) => {
         if (!explore.hidden) {
-          const id = `${model.name}::${explore.name}`
+          const id = `${model.name}/${explore.name}`
           explores.push({ id, title: id })
         }
       })

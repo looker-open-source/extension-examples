@@ -26,8 +26,8 @@
 
 import React, { useCallback, useContext } from 'react'
 import { Button, Heading } from '@looker/components'
-import type { LookerEmbedExplore } from '@looker/embed-sdk'
-import { LookerEmbedSDK } from '@looker/embed-sdk'
+import type { ILookerConnection } from '@looker/embed-sdk'
+import { getEmbedSDK } from '@looker/embed-sdk'
 import type { ExtensionContextData40 } from '@looker/extension-sdk-react'
 import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { SandboxStatus } from '../SandboxStatus'
@@ -36,7 +36,7 @@ import { EmbedContainer } from './components/EmbedContainer'
 
 const EmbedExplore: React.FC<EmbedProps> = ({ id }) => {
   const [running, setRunning] = React.useState(true)
-  const [explore, setExplore] = React.useState<LookerEmbedExplore>()
+  const [connection, setConnection] = React.useState<ILookerConnection>()
   const extensionContext =
     useContext<ExtensionContextData40>(ExtensionContext40)
 
@@ -44,22 +44,23 @@ const EmbedExplore: React.FC<EmbedProps> = ({ id }) => {
     setRunning(running)
   }
 
-  const setupExplore = (explore: LookerEmbedExplore) => {
-    setExplore(explore)
+  const setupConnection = (connection: ILookerConnection) => {
+    setConnection(connection)
   }
 
   const embedCtrRef = useCallback((el) => {
     const hostUrl = extensionContext?.extensionSDK?.lookerHostData?.hostUrl
     if (el && hostUrl) {
-      LookerEmbedSDK.init(hostUrl)
-      LookerEmbedSDK.createExploreWithId(id as string)
+      getEmbedSDK().init(hostUrl)
+      getEmbedSDK()
+        .createExploreWithId(id as string)
         .appendTo(el)
         .on('explore:ready', updateRunButton.bind(null, false))
         .on('explore:run:start', updateRunButton.bind(null, true))
         .on('explore:run:complete', updateRunButton.bind(null, false))
         .build()
         .connect()
-        .then(setupExplore)
+        .then(setupConnection)
         .catch((error: Error) => {
           console.error('Connection error', error)
         })
@@ -68,8 +69,8 @@ const EmbedExplore: React.FC<EmbedProps> = ({ id }) => {
   }, [])
 
   const runExplore = () => {
-    if (explore) {
-      explore.run()
+    if (connection) {
+      connection.asExploreConnection().run()
     }
   }
 

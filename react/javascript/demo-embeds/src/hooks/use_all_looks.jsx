@@ -31,10 +31,11 @@ import { sortByTitle } from './utils'
 
 const all = async (coreSDK) => {
   try {
-    const data = await coreSDK.ok(coreSDK.all_looks())
+    const data = (await coreSDK.ok(coreSDK.all_looks('id,title'))) || []
     data.sort(sortByTitle)
     return data
-  } catch (err) {
+  } catch (error) {
+    console.error(error)
     throw new Error('Error retrieving looks')
   }
 }

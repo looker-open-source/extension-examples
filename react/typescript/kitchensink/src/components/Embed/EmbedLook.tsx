@@ -25,8 +25,8 @@
  */
 
 import React, { useCallback, useContext } from 'react'
-import type { LookerEmbedLook } from '@looker/embed-sdk'
-import { LookerEmbedSDK } from '@looker/embed-sdk'
+import type { ILookerConnection } from '@looker/embed-sdk'
+import { getEmbedSDK } from '@looker/embed-sdk'
 import type { ExtensionContextData40 } from '@looker/extension-sdk-react'
 import { ExtensionContext40 } from '@looker/extension-sdk-react'
 import { Button, Heading } from '@looker/components'
@@ -36,7 +36,7 @@ import type { EmbedProps } from './types'
 
 const EmbedLook: React.FC<EmbedProps> = ({ id }) => {
   const [running, setRunning] = React.useState(true)
-  const [look, setLook] = React.useState<LookerEmbedLook>()
+  const [connection, setConnection] = React.useState<ILookerConnection>()
   const extensionContext =
     useContext<ExtensionContextData40>(ExtensionContext40)
 
@@ -44,22 +44,23 @@ const EmbedLook: React.FC<EmbedProps> = ({ id }) => {
     setRunning(running)
   }
 
-  const setupLook = (look: LookerEmbedLook) => {
-    setLook(look)
+  const setupConnection = (connection: ILookerConnection) => {
+    setConnection(connection)
   }
 
   const embedCtrRef = useCallback((el) => {
     const hostUrl = extensionContext?.extensionSDK?.lookerHostData?.hostUrl
     if (el && hostUrl) {
-      LookerEmbedSDK.init(hostUrl)
-      LookerEmbedSDK.createLookWithId(id as number)
+      getEmbedSDK().init(hostUrl)
+      getEmbedSDK()
+        .createLookWithId(id)
         .appendTo(el)
         .on('look:loaded', updateRunButton.bind(null, false))
         .on('look:run:start', updateRunButton.bind(null, true))
         .on('look:run:complete', updateRunButton.bind(null, false))
         .build()
         .connect()
-        .then(setupLook)
+        .then(setupConnection)
         .catch((error: Error) => {
           console.error('Connection error', error)
         })
@@ -68,8 +69,8 @@ const EmbedLook: React.FC<EmbedProps> = ({ id }) => {
   }, [])
 
   const runLook = () => {
-    if (look) {
-      look.run()
+    if (connection) {
+      connection.asLookConnection().run()
     }
   }
 
