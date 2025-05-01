@@ -25,13 +25,15 @@
 import {
   connectExtensionHost,
   LookerExtensionSDK40,
-} from '@looker/extension-sdk'
+} from '@looker/extension-sdk';
 
-;(async () => {
+(async () => {
   const extensionSdk = await connectExtensionHost()
   const sdk40 = LookerExtensionSDK40.createClient(extensionSdk)
   const result = await sdk40.me()
   const name = result.ok ? result.value.display_name : 'Unknown'
+
+  // Write the HTML content
   document.write(`
   <style>
     body {
@@ -59,10 +61,32 @@ import {
     <h1>Looker Counter Extension</h1>
     <h2>Welcome ${name}</h2>
     <h3>This number will increase by one upon every click:</h3>
-    <div class="butt" onclick="event.target.innerHTML = +event.target.innerHTML + (event.shiftKey ? -1 : 1); event.preventDefault
-    ()">0</div>
+    <div class="butt" id="counterButton">0</div>
     <h3>I hope you had fun with this Looker extension.</h3>
     <img width="200" src="https://docs.looker.com/assets/site_images/looker-logo.svg" />
   </div>
-`)
+`);
+
+// Set up the click handler directly (without waiting for DOMContentLoaded)
+const counterButton = document.getElementById('counterButton');
+
+if (!counterButton) {
+  console.error('Counter button not found!')
+  return
+} else {
+  console.log('Counter button found:', counterButton)
+}
+
+counterButton.addEventListener('click', (event) => {
+  console.log('Button clicked!')
+  console.log('Current counter value:', counterButton.innerHTML)
+
+  // Update the counter value
+  counterButton.innerHTML = +counterButton.innerHTML + (event.shiftKey ? -1 : 1)
+  
+  console.log('Updated counter value:', counterButton.innerHTML)
+  event.preventDefault()
+});
+
+
 })()
